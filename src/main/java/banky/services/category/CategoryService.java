@@ -39,13 +39,13 @@ public class CategoryService {
 
     public Long createCategory(CategoryRequest request) {
         Category category = new Category();
-        category.setName(request.name());
+        category.setName(request.name().trim());
         return categoryDao.save(category).getId();
     }
 
     public void updateCategory(Long id, CategoryRequest request) {
         Category category = new Category();
-        category.setName(request.name());
+        category.setName(request.name().trim());
         category.setId(id);
         categoryDao.save(category);
     }

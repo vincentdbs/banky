@@ -6,6 +6,7 @@ export type Translations = {
   title: 'Banky',
   // actions
   action: {
+    edit: string,
     back: string,
     cancel: string,
     save: string,
@@ -98,6 +99,10 @@ export type Translations = {
     categories: {
       title: string,
       subTitle: string,
+      table: {
+        name: string,
+        action: string,
+      }
     },
     subCategories: {
       title: string,

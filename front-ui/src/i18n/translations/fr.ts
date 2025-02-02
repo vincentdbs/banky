@@ -4,6 +4,7 @@ const frMessages: Translations = {
   title: 'Banky',
   // actions
   action: {
+    edit: 'Modifier',
     back: 'Retour',
     cancel: 'Annuler',
     save: 'Enregistrer',
@@ -94,6 +95,10 @@ const frMessages: Translations = {
     categories: {
       title: 'Categories',
       subTitle: 'Configuration des catégories',
+      table: {
+        name: 'Nom',
+        action: 'Action',
+      }
     },
     subCategories: {
       title: 'Sous-catégories',
