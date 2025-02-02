@@ -4,8 +4,11 @@
   "private": true,
   "dependencies": {
     "@fontsource/roboto": "^4.5.8",
-    "clsx": "^2.1.0",
+    "@radix-ui/react-slot": "^1.1.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "dayjs": "^1.11.5",
+    "lucide-react": "^0.474.0",
     "micro-observables": "^1.7.2",
     "plume-ts-di": "^1.2.4",
     "react": "^18.2.0",
@@ -15,7 +18,9 @@
     "simple-http-request-builder": "^2.0.1",
     "simple-http-rest-client": "^2.1.1",
     "simple-job-scheduler": "^1.1.2",
-    "simple-logging-system": "^1.1.0"
+    "simple-logging-system": "^1.1.0",
+    "tailwind-merge": "^3.0.1",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@sayari/eslint-plugin": "^0.0.1-rc.4",
