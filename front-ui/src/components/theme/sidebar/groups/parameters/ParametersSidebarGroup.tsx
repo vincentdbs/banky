@@ -30,7 +30,15 @@ export default function ParametersSidebarGroup() {
             <SidebarMenuButton asChild>
               <a>
                 <Tag />
-                <span>{messages.sidebar.parameters.category}</span>
+                <span>{messages.sidebar.parameters.categories}</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <a>
+                <Tag />
+                <span>{messages.sidebar.parameters.subCategories}</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>

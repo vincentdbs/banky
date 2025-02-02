@@ -81,14 +81,29 @@ const frMessages: Translations = {
     },
     parameters: {
       title: 'Paramètres',
-      category: 'Catégories',
       accounts: 'Comptes',
+      categories: 'Catégories',
+      subCategories: 'Sous-catégories',
     },
     evolution: {
       treasury: 'Trésorerie',
       graph: 'Graphiques',
     },
-  }
+  },
+  parameters: {
+    categories: {
+      title: 'Categories',
+      subTitle: 'Configuration des catégories',
+    },
+    subCategories: {
+      title: 'Sous-catégories',
+      subTitle: 'Configuration des sous-catégories',
+    },
+    accounts: {
+      title: 'Comptes',
+      subTitle: 'Configuration des comptes',
+    }
+  },
 } as const;
 
 export default frMessages;

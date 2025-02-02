@@ -81,12 +81,27 @@ export type Translations = {
     },
     parameters: {
       title: string,
-      category: string,
       accounts: string,
+      categories: string,
+      subCategories: string,
     }
     evolution: {
       treasury: string,
       graph: string,
     },
-  }
+  },
+  parameters: {
+    accounts: {
+      title: string,
+      subTitle: string,
+    },
+    categories: {
+      title: string,
+      subTitle: string,
+    },
+    subCategories: {
+      title: string,
+      subTitle: string,
+    },
+  },
 };

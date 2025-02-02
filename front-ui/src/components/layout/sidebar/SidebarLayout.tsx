@@ -25,7 +25,7 @@ export default function SidebarLayout({children}: SidebarLayout) {
         </SidebarContent>
         <SidebarFooter />
       </Sidebar>
-      <main>
+      <main className="flex-1">
         <SidebarTrigger />
         {children}
       </main>
