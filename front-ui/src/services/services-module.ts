@@ -1,9 +1,9 @@
-import { Scheduler } from 'simple-job-scheduler';
+import installCategoriesServices from '@services/categories/categories-services-module';
 import { Injector } from 'plume-ts-di';
-import SampleService from './sample/SampleService';
+import { Scheduler } from 'simple-job-scheduler';
 
 export default function installServicesModule(injector: Injector) {
   injector.registerSingleton(Scheduler);
-  // sample service to delete
-  injector.registerSingleton(SampleService);
+
+  installCategoriesServices(injector);
 }

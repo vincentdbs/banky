@@ -5,6 +5,7 @@ import banky.db.dao.SubCategoryDao;
 import banky.db.generated.Category;
 import banky.db.generated.SubCategory;
 import banky.webservices.api.category.data.CategoryRequest;
+import banky.webservices.api.category.data.CategoryResponse;
 import banky.webservices.api.category.data.SubCategoryRequest;
 import banky.webservices.api.category.data.SubCategoryResponse;
 
@@ -22,6 +23,18 @@ public class CategoryService {
     private CategoryService(CategoryDao categoryDao, SubCategoryDao subCategoryDao) {
         this.categoryDao = categoryDao;
         this.subCategoryDao = subCategoryDao;
+    }
+
+    public List<CategoryResponse> fetchCategories() {
+        return categoryDao.findAll()
+            .stream()
+            .map(
+                category -> new CategoryResponse(
+                    category.getId(),
+                    category.getName()
+                )
+            )
+            .toList();
     }
 
     public Long createCategory(CategoryRequest request) {
