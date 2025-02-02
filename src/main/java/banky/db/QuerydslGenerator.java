@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class QuerydslGenerator {
-	private static final String TABLES_PREFIX = "plm_";
+	private static final String TABLES_PREFIX = "bky_";
 
 	public static void main(String... args) {
 		Configuration configuration = new Configuration(SQLTemplates.DEFAULT);
@@ -50,10 +50,6 @@ public class QuerydslGenerator {
 		exporter.setNamingStrategy(new DefaultNamingStrategy() {
 			@Override
 			public String getClassName(String tableName) {
-				// uncomment if you are using plume file
-//				if("plm_file".equalsIgnoreCase(tableName)) {
-//					return FileEntityQuerydsl.class.getName();
-//				}
 				return super.getClassName(tableName.substring(TABLES_PREFIX.length()));
 			}
 
