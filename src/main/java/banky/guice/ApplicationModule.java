@@ -1,5 +1,7 @@
 package banky.guice;
 
+import com.coreoz.plume.db.guice.DataSourceModule;
+import com.coreoz.plume.db.querydsl.guice.GuiceQuerydslModule;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import banky.jersey.JerseyConfigProvider;
@@ -13,15 +15,15 @@ import com.google.inject.AbstractModule;
  */
 public class ApplicationModule extends AbstractModule {
 
-	@Override
-	protected void configure() {
-		install(new GuiceConfModule());
-		install(new GuiceJacksonWithMetricsModule());
-		// Database & Querydsl installation
-		// install(new GuiceQuerydslModule());
+    @Override
+    protected void configure() {
+        install(new GuiceConfModule());
+        install(new GuiceJacksonWithMetricsModule());
+        install(new GuiceQuerydslModule());
+        install(new DataSourceModule());
 
-		// Prepare Jersey configuration
-		bind(ResourceConfig.class).toProvider(JerseyConfigProvider.class);
-	}
+        // Prepare Jersey configuration
+        bind(ResourceConfig.class).toProvider(JerseyConfigProvider.class);
+    }
 
 }

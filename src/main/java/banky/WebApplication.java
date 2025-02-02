@@ -3,6 +3,7 @@ package banky;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
+import banky.db.DatabaseInitializer;
 import org.glassfish.grizzly.GrizzlyFuture;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -37,7 +38,7 @@ public class WebApplication {
 			ResourceConfig jerseyResourceConfig = injector.getInstance(ResourceConfig.class);
 
 			// Initialize database
-			// injector.getInstance(DatabaseInitializer.class).setup();
+			 injector.getInstance(DatabaseInitializer.class).setup();
 
 			// Enable Jersey to create objects through Guice Injector instance
 			jerseyResourceConfig.register(new JerseyGuiceFeature(injector));
@@ -52,8 +53,6 @@ public class WebApplication {
 
 			// Add a shutdown hook to execute some code when the JVM receive a kill signal before it stops
 			addShutDownListener(httpServer);
-			// If Plume Scheduler / Wisp is used, uncomment next line
-			// addShutDownListener(httpServer, injector.getInstance(Scheduler.class));
 
 			logger.info("Server started in {} ms", System.currentTimeMillis() - startTimestamp);
 		} catch (Throwable e) {
