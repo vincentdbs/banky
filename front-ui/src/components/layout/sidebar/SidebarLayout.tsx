@@ -1,14 +1,14 @@
-import ParametersSidebarGroup from '@components/theme/sidebar/parameters/ParametersSidebarGroup';
-import DashboardSidebarGroup from '@components/theme/sidebar/dashboard/DashboardSidebarGroup';
+import ParametersSidebarGroup from '@components/theme/sidebar/groups/parameters/ParametersSidebarGroup';
+import DashboardSidebarGroup from '@components/theme/sidebar/groups/dashboard/DashboardSidebarGroup';
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarHeader,
   SidebarProvider,
   SidebarTrigger,
 } from '@lib/shadcn/sidebar';
 import React, { ReactNode } from 'react';
+import SidebarHeader from '@/components/theme/sidebar/header/SidebarHeader';
 
 export type SidebarLayout = {
   children: ReactNode;

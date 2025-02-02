@@ -3,6 +3,7 @@ export interface ErrorFunction {
 }
 
 export type Translations = {
+  title: 'Banky',
   // actions
   action: {
     back: string,

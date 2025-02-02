@@ -1,6 +1,7 @@
 import { Translations } from './Translations';
 
 const frMessages: Translations = {
+  title: 'Banky',
   // actions
   action: {
     back: 'Retour',
