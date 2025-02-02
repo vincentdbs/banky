@@ -2,6 +2,7 @@ package banky.webservices.api.category;
 
 import banky.services.category.CategoryService;
 import banky.webservices.api.category.data.CategoryRequest;
+import banky.webservices.api.category.data.CategoryResponse;
 import banky.webservices.api.category.data.SubCategoryRequest;
 import banky.webservices.api.category.data.SubCategoryResponse;
 import com.coreoz.plume.jersey.errors.Validators;
@@ -42,6 +43,12 @@ public class CategoryWs {
     public long createCategory(CategoryRequest request) {
         Validators.checkRequired("name", request.name());
         return categoryService.createCategory(request);
+    }
+
+    @GET
+    @Operation(description = "Fetch all categories")
+    public List<CategoryResponse> fetchCategories() {
+        return categoryService.fetchCategories();
     }
 
     @PUT
