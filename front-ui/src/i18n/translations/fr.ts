@@ -74,6 +74,20 @@ const frMessages: Translations = {
     FIELD_REQUIRED: (fieldName: string) => `Le champ '${fieldName}' est requis`,
     MESSAGE: (message: string) => message,
   },
+  sidebar: {
+    dashboard: {
+      title: 'Dashboard',
+    },
+    parameters: {
+      title: 'Paramètres',
+      category: 'Catégories',
+      accounts: 'Comptes',
+    },
+    evolution: {
+      treasury: 'Trésorerie',
+      graph: 'Graphiques',
+    },
+  }
 } as const;
 
 export default frMessages;

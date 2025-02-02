@@ -1,17 +1,15 @@
-import { observable, WritableObservable } from 'micro-observables';
-import { HttpError } from 'simple-http-rest-client';
-import { Locale } from '@lib/locale-resolver/LocaleResolver';
-import { Translations } from '@i18n/translations/Translations';
 import LocaleService from '@i18n/locale/LocaleService';
 import frMessages from '@i18n/translations/fr';
-import enMessages from '@i18n/translations/en';
+import { Translations } from '@i18n/translations/Translations';
+import { Locale } from '@lib/locale-resolver/LocaleResolver';
+import { observable, WritableObservable } from 'micro-observables';
+import { HttpError } from 'simple-http-rest-client';
 
 export default class MessageService {
   private messages: WritableObservable<Translations>;
 
   private static translations: Map<Locale, Translations> = new Map<Locale, Translations>([
     [LocaleService.LOCALE_FR, frMessages],
-    [LocaleService.LOCALE_EN, enMessages],
   ]);
 
   constructor(localeService: LocaleService) {

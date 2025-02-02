@@ -1,18 +1,13 @@
+import ParametersSidebarGroup from '@components/theme/sidebar/parameters/ParametersSidebarGroup';
+import DashboardSidebarGroup from '@components/theme/sidebar/dashboard/DashboardSidebarGroup';
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
   SidebarProvider,
   SidebarTrigger,
 } from '@lib/shadcn/sidebar';
-import { Calendar } from 'lucide-react';
 import React, { ReactNode } from 'react';
 
 export type SidebarLayout = {
@@ -25,21 +20,8 @@ export default function SidebarLayout({children}: SidebarLayout) {
       <Sidebar>
         <SidebarHeader />
         <SidebarContent>
-          <SidebarGroup>
-            <SidebarGroupLabel>Application</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild>
-                    <a>
-                      <Calendar />
-                      <span>Test</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
+          <DashboardSidebarGroup />
+          <ParametersSidebarGroup />
         </SidebarContent>
         <SidebarFooter />
       </Sidebar>

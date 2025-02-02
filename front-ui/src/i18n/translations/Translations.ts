@@ -74,4 +74,18 @@ export type Translations = {
     FIELD_REQUIRED: (fieldName: string) => string,
     MESSAGE: (message: string) => string,
   },
+  sidebar: {
+    dashboard: {
+      title: string,
+    },
+    parameters: {
+      title: string,
+      category: string,
+      accounts: string,
+    }
+    evolution: {
+      treasury: string,
+      graph: string,
+    },
+  }
 };
