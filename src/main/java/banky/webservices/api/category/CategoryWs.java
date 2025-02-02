@@ -71,7 +71,7 @@ public class CategoryWs {
     }
 
     @PUT
-    @Path("{id}/sub-category/{categoryId}")
+    @Path("/{id}/sub-category/{categoryId}")
     @Operation(description = "Update an existing subcategory")
     public void updateSubCategory(
         @PathParam("id") Long id,
@@ -83,11 +83,18 @@ public class CategoryWs {
     }
 
     @GET
-    @Path("{id}/sub-categories")
+    @Path("/{id}/sub-categories")
     @Operation(description = "Fetch subcategories by category id")
     public List<SubCategoryResponse> fetchSubCategoriesByCategoryId(
         @QueryParam("id") Long id
     ) {
         return categoryService.fetchSubCategoriesByCategoryId(id);
+    }
+
+    @GET
+    @Path("/sub-categories")
+    @Operation(description = "Fetch subcategories")
+    public List<SubCategoryResponse> fetchSubCategories() {
+        return categoryService.fetchSubCategories();
     }
 }

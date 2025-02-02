@@ -8,6 +8,7 @@ public record SubCategoryResponse(
     Long id,
     @JsonSerialize(using = ToStringSerializer.class)
     Long categoryId,
-    String name
+    String name,
+    String category
 ) {
 }

@@ -68,4 +68,8 @@ public class CategoryService {
     public List<SubCategoryResponse> fetchSubCategoriesByCategoryId(Long categoryId) {
         return subCategoryDao.fetchSubCategoriesByCategoryId(categoryId);
     }
+
+    public List<SubCategoryResponse> fetchSubCategories() {
+        return subCategoryDao.fetchSubCategories();
+    }
 }

@@ -92,6 +92,10 @@ const frMessages: Translations = {
     },
   },
   parameters: {
+    accounts: {
+      title: 'Comptes',
+      subTitle: 'Configuration des comptes',
+    },
     categories: {
       title: 'Categories',
       subTitle: 'Configuration des catégories',
@@ -103,11 +107,12 @@ const frMessages: Translations = {
     subCategories: {
       title: 'Sous-catégories',
       subTitle: 'Configuration des sous-catégories',
+      table: {
+        name: 'Nom',
+        categoryName: 'Nom de la catégorie',
+        action: 'Action',
+      }
     },
-    accounts: {
-      title: 'Comptes',
-      subTitle: 'Configuration des comptes',
-    }
   },
 } as const;
 

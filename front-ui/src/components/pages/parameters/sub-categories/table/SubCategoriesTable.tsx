@@ -1,15 +1,15 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/lib/shadcn/table';
-import { CategoryResponse } from '@api/categories/CategoriesTypes';
+import { CategoryResponse, SubCategoryResponse } from '@api/categories/CategoriesTypes';
 import useMessages from '@i18n/hooks/messagesHook';
 import { Button } from '@lib/shadcn/button';
 import { Pencil } from 'lucide-react';
 import React from 'react';
 
 type CategoriesTableProps = {
-  categories: CategoryResponse[];
+  subCategories: SubCategoryResponse[];
 }
 
-export default function CategoriesTable({ categories }: CategoriesTableProps) {
+export default function SubCategoriesTable({ subCategories }: CategoriesTableProps) {
   const { messages } = useMessages();
 
   return (
@@ -17,18 +17,22 @@ export default function CategoriesTable({ categories }: CategoriesTableProps) {
       <TableHeader>
         <TableRow>
           <TableHead >
-            {messages.parameters.categories.table.name}
+            {messages.parameters.subCategories.table.name}
+          </TableHead>
+          <TableHead >
+            {messages.parameters.subCategories.table.categoryName}
           </TableHead>
           <TableHead className="text-right">
-            {messages.parameters.categories.table.action}
+            {messages.parameters.subCategories.table.action}
           </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {
-          categories.map((category: CategoryResponse) => (
-            <TableRow key={category.id}>
-              <TableCell>{category.name}</TableCell>
+          subCategories.map((subCategory: SubCategoryResponse) => (
+            <TableRow key={subCategory.id}>
+              <TableCell>{subCategory.name}</TableCell>
+              <TableCell>{subCategory.category}</TableCell>
               <TableCell className="text-right">
                 <Button type="button" variant="outline">
                   <Pencil />

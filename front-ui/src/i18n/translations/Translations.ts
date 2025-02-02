@@ -107,6 +107,11 @@ export type Translations = {
     subCategories: {
       title: string,
       subTitle: string,
+      table: {
+        name: string,
+        categoryName: string,
+        action: string,
+      }
     },
   },
 };

@@ -18,7 +18,6 @@ export default function Categories() {
       .fetchCategories()
       .then(setCategories)
       .catch(httpError);
-
   });
 
   return (

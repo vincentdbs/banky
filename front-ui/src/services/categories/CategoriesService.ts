@@ -1,5 +1,5 @@
 import CategoriesApi from '@api/categories/CategoriesApi';
-import { CategoryResponse } from '@api/categories/CategoriesTypes';
+import { CategoryResponse, SubCategoryResponse } from '@api/categories/CategoriesTypes';
 import { HttpPromise } from 'simple-http-rest-client';
 
 export default class CategoriesService {
@@ -8,5 +8,9 @@ export default class CategoriesService {
 
   fetchCategories(): HttpPromise<CategoryResponse[]> {
     return this.categoriesApi.fetchCategories();
+  }
+
+  fetchSubCategories(): HttpPromise<SubCategoryResponse[]> {
+    return this.categoriesApi.fetchSubCategories();
   }
 }
