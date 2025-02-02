@@ -1,4 +1,4 @@
-import Layout from '@components/layout/Layout';
+import AppLayout from '@components/layout/app/AppLayout';
 import React from 'react';
 import { isRouteErrorResponse, Link, useRouteError } from 'react-router-dom';
 import { Logger } from 'simple-logging-system';
@@ -13,12 +13,12 @@ export default function ErrorPage() {
 
   if (isRouteErrorResponse(error) && error.status === 404) {
     return (
-      <Layout>
+      <AppLayout>
         <div>
           <h2>Page not found</h2>
           <div><span>Sorry, we didn&apos;t find this page.&nbsp;</span><Link to={HOME}>Go to the home page</Link></div>
         </div>
-      </Layout>
+      </AppLayout>
     );
   }
 
