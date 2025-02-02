@@ -4,7 +4,7 @@ import { HttpMethod } from 'simple-http-request-builder';
 import { HttpPromise } from 'simple-http-rest-client';
 
 export default class CategoriesApi {
-  private static BASE_PATH = '/categories';
+  private static BASE_PATH: string = '/categories';
 
   constructor(private apiHttpClient: ApiHttpClient) {
   }

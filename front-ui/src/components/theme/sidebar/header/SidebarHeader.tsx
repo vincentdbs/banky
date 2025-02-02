@@ -17,8 +17,14 @@ export default function SidebarHeader() {
         <SidebarMenuItem>
           <SidebarMenuButton size="lg" asChild>
             <div>
-              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                <Landmark className="size-4"/>
+              <div
+                className="
+                  flex aspect-square size-8
+                  items-center justify-center rounded-lg bg-sidebar-primary
+                  text-sidebar-primary-foreground
+                "
+              >
+                <Landmark className="size-4" />
               </div>
               <div className="flex flex-col gap-0.5 leading-none">
                 <span className="font-semibold">{messages.title}</span>

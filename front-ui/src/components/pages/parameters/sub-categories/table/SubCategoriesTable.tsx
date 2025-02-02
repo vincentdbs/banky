@@ -1,13 +1,15 @@
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/lib/shadcn/table';
 import { CategoryResponse, SubCategoryResponse } from '@api/categories/CategoriesTypes';
 import useMessages from '@i18n/hooks/messagesHook';
 import { Button } from '@lib/shadcn/button';
 import { Pencil } from 'lucide-react';
 import React from 'react';
+import {
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
+} from '@/lib/shadcn/table';
 
 type CategoriesTableProps = {
-  subCategories: SubCategoryResponse[];
-}
+  subCategories: SubCategoryResponse[],
+};
 
 export default function SubCategoriesTable({ subCategories }: CategoriesTableProps) {
   const { messages } = useMessages();

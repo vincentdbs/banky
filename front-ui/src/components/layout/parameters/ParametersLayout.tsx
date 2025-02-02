@@ -1,8 +1,8 @@
-import { Separator } from '@/lib/shadcn/separator';
 import MainSection from '@components/theme/sections/MainSection';
 import Caption from '@components/theme/typography/Caption';
 import H1 from '@components/theme/typography/H1';
 import React, { ReactNode } from 'react';
+import { Separator } from '@/lib/shadcn/separator';
 
 type ParametersLayoutProps = {
   children: ReactNode,

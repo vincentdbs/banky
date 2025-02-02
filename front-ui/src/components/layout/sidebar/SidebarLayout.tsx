@@ -10,11 +10,11 @@ import {
 import React, { ReactNode } from 'react';
 import SidebarHeader from '@/components/theme/sidebar/header/SidebarHeader';
 
-export type SidebarLayout = {
-  children: ReactNode;
-}
+export type SidebarLayoutProps = {
+  children: ReactNode,
+};
 
-export default function SidebarLayout({children}: SidebarLayout) {
+export default function SidebarLayout({ children }: SidebarLayoutProps) {
   return (
     <SidebarProvider>
       <Sidebar>

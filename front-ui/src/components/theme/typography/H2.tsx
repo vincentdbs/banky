@@ -2,7 +2,7 @@ import React from 'react';
 
 type Props = {
   children: string,
-}
+};
 
 export default function H2({ children }: Props) {
   return (

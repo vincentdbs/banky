@@ -102,7 +102,7 @@ const frMessages: Translations = {
       table: {
         name: 'Nom',
         action: 'Action',
-      }
+      },
     },
     subCategories: {
       title: 'Sous-catégories',
@@ -111,7 +111,7 @@ const frMessages: Translations = {
         name: 'Nom',
         categoryName: 'Nom de la catégorie',
         action: 'Action',
-      }
+      },
     },
   },
 } as const;

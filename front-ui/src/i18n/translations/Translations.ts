@@ -85,7 +85,7 @@ export type Translations = {
       accounts: string,
       categories: string,
       subCategories: string,
-    }
+    },
     evolution: {
       treasury: string,
       graph: string,
@@ -102,7 +102,7 @@ export type Translations = {
       table: {
         name: string,
         action: string,
-      }
+      },
     },
     subCategories: {
       title: string,
@@ -111,7 +111,7 @@ export type Translations = {
         name: string,
         categoryName: string,
         action: string,
-      }
+      },
     },
   },
 };
