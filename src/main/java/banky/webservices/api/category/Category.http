@@ -1,0 +1,39 @@
+@baseUrl = http://localhost:8080/api
+
+### Create a new category
+POST {{baseUrl}}/categories
+Content-Type: application/json
+
+{
+  "name": "Electronics"
+}
+
+### Update an existing category (replace {id} with actual category ID)
+PUT {{baseUrl}}/categories/1
+Content-Type: application/json
+
+{
+  "name": "Updated Electronics"
+}
+
+### Create a new subcategory
+POST {{baseUrl}}/categories/sub-category
+Content-Type: application/json
+
+{
+  "name": "Smartphones",
+  "categoryId": 1
+}
+
+### Update an existing subcategory (replace {id} with actual subcategory ID)
+PUT {{baseUrl}}/categories/sub-category/1
+Content-Type: application/json
+
+{
+  "name": "Updated Smartphones",
+  "categoryId": 1
+}
+
+### Get subcategories by category ID
+GET {{baseUrl}}/categories/sub-categories?categoryId=1
+Accept: application/json
