@@ -1,3 +1,9 @@
+import {
+  PARAMETERS,
+  PARAMETERS_ACCOUNTS,
+  PARAMETERS_CATEGORY,
+  PARAMETERS_SUB_CATEGORY,
+} from '@components/Routes';
 import useMessages from '@i18n/hooks/messagesHook';
 import {
   SidebarGroup,
@@ -9,6 +15,7 @@ import {
 } from '@lib/shadcn/sidebar';
 import { CreditCard, Tag } from 'lucide-react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function ParametersSidebarGroup() {
   const { messages } = useMessages();
@@ -20,26 +27,26 @@ export default function ParametersSidebarGroup() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <a>
+              <Link to={`${PARAMETERS}${PARAMETERS_ACCOUNTS}`}>
                 <CreditCard />
                 <span>{messages.sidebar.parameters.accounts}</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <a>
+              <Link to={`${PARAMETERS}${PARAMETERS_CATEGORY}`}>
                 <Tag />
                 <span>{messages.sidebar.parameters.categories}</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <a>
+              <Link to={`${PARAMETERS}${PARAMETERS_SUB_CATEGORY}`}>
                 <Tag />
                 <span>{messages.sidebar.parameters.subCategories}</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
