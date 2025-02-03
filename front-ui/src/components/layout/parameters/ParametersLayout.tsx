@@ -21,7 +21,7 @@ export default function ParametersLayout(
     <MainSection>
       <H1>{title}</H1>
       <Caption>{subTitle}</Caption>
-      <Separator className="mt-5" />
+      <Separator className="mt-5 mb-7" />
       {children}
     </MainSection>
   );
