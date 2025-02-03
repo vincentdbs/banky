@@ -2,7 +2,7 @@ package banky.webservices.api.accounts.data;
 
 import java.math.BigDecimal;
 
-public record AccountsRequest(
+public record AccountRequest(
     String name,
     String shortName,
     String colorCode,

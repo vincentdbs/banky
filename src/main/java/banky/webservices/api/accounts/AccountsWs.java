@@ -2,7 +2,7 @@ package banky.webservices.api.accounts;
 
 import banky.services.accounts.AccountsService;
 import banky.webservices.api.accounts.data.AccountResponse;
-import banky.webservices.api.accounts.data.AccountsRequest;
+import banky.webservices.api.accounts.data.AccountRequest;
 import com.coreoz.plume.jersey.errors.Validators;
 import com.coreoz.plume.jersey.security.permission.PublicApi;
 import io.swagger.v3.oas.annotations.Operation;
@@ -43,7 +43,7 @@ public class AccountsWs {
 
     @POST
     @Operation(description = "Create a new account")
-    public long createAccount(AccountsRequest request) {
+    public long createAccount(AccountRequest request) {
         Validators.checkRequired("name", request.name());
         Validators.checkRequired("shortName", request.shortName());
         Validators.checkRequired("initialAmount", request.initialAmount());
@@ -55,7 +55,7 @@ public class AccountsWs {
     @PUT
     @Path("/{id}")
     @Operation(description = "Update an existing category")
-    public void updateAccount(@PathParam("id") Long id, AccountsRequest request) {
+    public void updateAccount(@PathParam("id") Long id, AccountRequest request) {
         Validators.checkRequired("name", request.name());
         Validators.checkRequired("shortName", request.shortName());
         Validators.checkRequired("initialAmount", request.initialAmount());

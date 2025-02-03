@@ -4,7 +4,7 @@ import banky.db.dao.AccountDao;
 import banky.db.generated.Accounts;
 import banky.services.accounts.enums.AccountType;
 import banky.webservices.api.accounts.data.AccountResponse;
-import banky.webservices.api.accounts.data.AccountsRequest;
+import banky.webservices.api.accounts.data.AccountRequest;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
@@ -37,7 +37,7 @@ public class AccountsService {
             .toList();
     }
 
-    public Long createAccount(AccountsRequest request) {
+    public Long createAccount(AccountRequest request) {
         Accounts account = new Accounts();
         account.setName(request.name().trim());
         account.setShortName(request.shortName().trim());
@@ -47,7 +47,7 @@ public class AccountsService {
         return accountDao.save(account).getId();
     }
 
-    public void updateAccount(Long id, AccountsRequest request) {
+    public void updateAccount(Long id, AccountRequest request) {
         Accounts account = new Accounts();
         account.setName(request.name().trim());
         account.setShortName(request.shortName().trim());
