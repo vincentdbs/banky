@@ -120,6 +120,25 @@ const frMessages: Translations = {
       },
     },
   },
+  operations: {
+    transactions: {
+      title: 'Transactions',
+      subTitle: 'Liste des transactions',
+      table: {
+        date: 'Date',
+        inBankDate: 'Réconciliation',
+        amount: 'Montant',
+        accountName: 'Compte',
+        categoryName: 'Catégorie',
+        subCategoryName: 'Sous-catégorie',
+        comment: 'Commentaire',
+        tag: 'Tag',
+        side: 'Débit/Crédit',
+        fromToPersonName: 'De/À',
+        action: 'Action',
+      },
+    },
+  },
 } as const;
 
 export default frMessages;

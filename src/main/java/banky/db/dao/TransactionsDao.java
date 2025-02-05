@@ -25,23 +25,31 @@ public class TransactionsDao extends CrudDaoQuerydsl<Transactions> {
         return this.transactionManager
             .selectQuery()
             .select(
-                QTransactions.transactions,
+                QTransactions.transactions.id,
+                QTransactions.transactions.date,
+                QTransactions.transactions.inBankDate,
+                QTransactions.transactions.amount,
                 QAccounts.accounts.id,
                 QAccounts.accounts.name,
+                QCategory.category.id,
+                QCategory.category.name,
                 QSubCategory.subCategory.id,
                 QSubCategory.subCategory.name,
-                QCategory.category.id,
-                QCategory.category.name
+                QTransactions.transactions.comment,
+                QTransactions.transactions.tag,
+                QTransactions.transactions.side,
+                QTransactions.transactions.fromToPersonName
             )
+            .from(QTransactions.transactions)
             .innerJoin(QAccounts.accounts)
             .on(QTransactions.transactions.accountId.eq(QAccounts.accounts.id))
             .innerJoin(QSubCategory.subCategory)
             .on(QTransactions.transactions.subCategoryId.eq(QSubCategory.subCategory.id))
             .innerJoin(QCategory.category)
             .on(QSubCategory.subCategory.categoryId.eq(QCategory.category.id))
-            .from(QTransactions.transactions)
             .offset(page * size)
             .limit(size)
+            .orderBy(QTransactions.transactions.date.desc())
             .fetch()
             .stream()
             .map(

@@ -120,4 +120,23 @@ export type Translations = {
       },
     },
   },
+  operations: {
+    transactions: {
+      title: string,
+      subTitle: string,
+      table: {
+        date: string,
+        inBankDate: string,
+        amount: string,
+        accountName: string,
+        categoryName: string,
+        subCategoryName: string,
+        comment: string,
+        tag: string,
+        side: string,
+        fromToPersonName: string,
+        action: string,
+      }
+    }
+  }
 };

@@ -1,3 +1,4 @@
+import Transactions from '@components/pages/operations/transactions/Transactions';
 import {
   OPERATIONS_ORDERS,
   OPERATIONS_TRANSACTIONS,
@@ -12,7 +13,7 @@ export default function OperationsRouter() {
     [
       {
         path: OPERATIONS_TRANSACTIONS,
-        element: (<p>TODO</p>),
+        element: <Transactions />,
       },
       {
         path: OPERATIONS_ORDERS,
