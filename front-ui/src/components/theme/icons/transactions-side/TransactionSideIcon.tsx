@@ -4,8 +4,8 @@ import { LogIn, LogOut } from 'lucide-react';
 import React from 'react';
 
 type TransactionsSideIconProps = {
-  side: TransactionSide;
-}
+  side: TransactionSide,
+};
 
 export default function TransactionsSideIcon({ side }: TransactionsSideIconProps) {
   return (

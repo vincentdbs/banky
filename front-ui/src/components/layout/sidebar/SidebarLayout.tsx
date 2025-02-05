@@ -1,4 +1,3 @@
-import SidebarHeader from '@/components/theme/sidebar/header/SidebarHeader';
 import DashboardSidebarGroup
   from '@components/theme/sidebar/groups/dashboard/DashboardSidebarGroup';
 import OperationsSidebarGroup
@@ -13,6 +12,7 @@ import {
   SidebarTrigger,
 } from '@lib/shadcn/sidebar';
 import React, { ReactNode } from 'react';
+import SidebarHeader from '@/components/theme/sidebar/header/SidebarHeader';
 
 export type SidebarLayoutProps = {
   children: ReactNode,

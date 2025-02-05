@@ -1,4 +1,4 @@
-import { CategoryResponse, SubCategoryResponse } from '@api/categories/CategoriesTypes';
+import { SubCategoryResponse } from '@api/categories/CategoriesTypes';
 import useMessages from '@i18n/hooks/messagesHook';
 import { Button } from '@lib/shadcn/button';
 import { Pencil } from 'lucide-react';

@@ -35,7 +35,12 @@ export default function AccountsCard(
   }: AccountsCardProps,
 ) {
   return (
-    <Card className="grid grid-cols-[auto_auto_1fr] auto-rows-[1fr] items-center justify-between gap-4 flex-[400px] flex-grow-0 py-2 px-4">
+    <Card
+      className="
+        grid grid-cols-[auto_auto_1fr] auto-rows-[1fr] items-center justify-between
+        gap-4 flex-[400px] flex-grow-0 py-2 px-4
+      "
+    >
       <ColoredIconsWrapper backgroundColorInlineStyle={`#${color}`}>
         <AccountTypeLogo type={type} />
       </ColoredIconsWrapper>

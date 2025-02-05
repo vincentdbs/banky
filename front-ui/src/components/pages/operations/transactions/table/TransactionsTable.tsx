@@ -1,12 +1,14 @@
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/lib/shadcn/table';
-import { formatToLocalDateOrPlaceholder } from '@/utils/dates/DatesUtils';
-import { formatEuroDecimalPrice } from '@/utils/number/NumberUtils';
 import { TransactionResponse } from '@api/transactions/TransactionsTypes';
 import TransactionsSideIcon from '@components/theme/icons/transactions-side/TransactionSideIcon';
 import useMessages from '@i18n/hooks/messagesHook';
 import { Button } from '@lib/shadcn/button';
 import { Pencil } from 'lucide-react';
 import React from 'react';
+import { formatEuroDecimalPrice } from '@/utils/number/NumberUtils';
+import { formatToLocalDateOrPlaceholder } from '@/utils/dates/DatesUtils';
+import {
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
+} from '@/lib/shadcn/table';
 
 type CategoriesTableProps = {
   transactions: TransactionResponse[],
@@ -19,13 +21,10 @@ export default function TransactionsTable({ transactions }: CategoriesTableProps
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>
-            {messages.operations.transactions.table.side}
-          </TableHead>
-          <TableHead>
+          <TableHead className="w-[150px]">
             {messages.operations.transactions.table.date}
           </TableHead>
-          <TableHead>
+          <TableHead className="w-[70px]">
             {messages.operations.transactions.table.amount}
           </TableHead>
           <TableHead>
@@ -53,17 +52,19 @@ export default function TransactionsTable({ transactions }: CategoriesTableProps
           transactions.map((transaction: TransactionResponse) => (
             <TableRow key={transaction.id}>
               <TableCell>
-                <TransactionsSideIcon side={transaction.side} />
+                <div className={'flex items-center gap-2'}>
+                  <TransactionsSideIcon side={transaction.side} />
+                  <div>
+                    <p>
+                      {formatToLocalDateOrPlaceholder(transaction.date)}
+                    </p>
+                    <p className="text-muted-foreground text-xs">
+                      {formatToLocalDateOrPlaceholder(transaction.inBankDate)}
+                    </p>
+                  </div>
+                </div>
               </TableCell>
-              <TableCell>
-                <p>
-                  {formatToLocalDateOrPlaceholder(transaction.date)}
-                </p>
-                <p className="text-muted-foreground text-xs">
-                  {formatToLocalDateOrPlaceholder(transaction.inBankDate)}
-                </p>
-              </TableCell>
-              <TableCell className="text-right">
+              <TableCell className={'text-right'}>
                 {formatEuroDecimalPrice(transaction.amount)}
               </TableCell>
               <TableCell>

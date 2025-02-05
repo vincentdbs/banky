@@ -9,6 +9,7 @@ import {
 } from '@lib/shadcn/sidebar';
 import { LayoutDashboard } from 'lucide-react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function DashboardSidebarGroup() {
   const { messages } = useMessages();
@@ -20,10 +21,10 @@ export default function DashboardSidebarGroup() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <a>
+              <Link to="/">
                 <LayoutDashboard />
                 <span>{messages.sidebar.dashboard.title}</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

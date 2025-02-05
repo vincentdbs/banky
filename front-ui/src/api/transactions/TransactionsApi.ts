@@ -15,7 +15,7 @@ export default class TransactionsApi {
         [
           ['page', page],
           ['size', size],
-        ]
+        ],
       )
       .execute();
   }

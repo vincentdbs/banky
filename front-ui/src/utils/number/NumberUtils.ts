@@ -13,6 +13,6 @@ export const formatDecimalPrice = (price: number, numberOfDecimals: number = 2):
   return decimalPart !== undefined ? `${integerPart},${decimalPart}` : integerPart;
 };
 
-export const formatEuroDecimalPrice = (price: number, numberOfDecimals: number = 2): string => {
-  return `${formatDecimalPrice(price, numberOfDecimals)} €`;
-};
+export const formatEuroDecimalPrice = (price: number, numberOfDecimals: number = 2): string => (
+  `${formatDecimalPrice(price, numberOfDecimals)} €`
+);

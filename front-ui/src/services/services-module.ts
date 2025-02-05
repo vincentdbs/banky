@@ -9,5 +9,5 @@ export default function installServicesModule(injector: Injector) {
 
   installCategoriesServices(injector);
   installAccountsServices(injector);
-  installTransactionsService(injector)
+  installTransactionsService(injector);
 }

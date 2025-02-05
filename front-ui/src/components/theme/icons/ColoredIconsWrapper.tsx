@@ -2,11 +2,11 @@ import { cn } from '@lib/shadcn/utils';
 import React, { PropsWithChildren } from 'react';
 
 export type ColoredIconsWrapperProps = PropsWithChildren<{
-  colorClassName?: string;
-  backgroundColorInlineStyle?: string;
+  colorClassName?: string,
+  backgroundColorInlineStyle?: string,
 }>;
 
-export const ICON_SIZE = 'size-5';
+export const ICON_SIZE: string = 'size-5';
 
 export default function ColoredIconsWrapper(
   {

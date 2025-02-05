@@ -131,7 +131,6 @@ const frMessages: Translations = {
         subCategoryName: 'Sous-catégorie',
         comment: 'Commentaire',
         tag: 'Tag',
-        side: 'Débit/Crédit',
         fromToPersonName: 'De/À',
         action: 'Action',
       },

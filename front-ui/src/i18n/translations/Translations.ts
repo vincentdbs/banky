@@ -131,10 +131,9 @@ export type Translations = {
         subCategoryName: string,
         comment: string,
         tag: string,
-        side: string,
         fromToPersonName: string,
         action: string,
-      }
-    }
-  }
+      },
+    },
+  },
 };
