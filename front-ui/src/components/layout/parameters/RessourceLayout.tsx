@@ -10,7 +10,7 @@ type ParametersLayoutProps = {
   subTitle: string,
 };
 
-export default function ParametersLayout(
+export default function RessourceLayout(
   {
     children,
     title,

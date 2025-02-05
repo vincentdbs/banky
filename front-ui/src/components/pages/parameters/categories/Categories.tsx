@@ -1,5 +1,5 @@
 import { CategoryResponse } from '@api/categories/CategoriesTypes';
-import ParametersLayout from '@components/layout/parameters/ParametersLayout';
+import RessourceLayout from '@components/layout/parameters/RessourceLayout';
 import CategoriesTable from '@components/pages/parameters/categories/table/CategoriesTable';
 import useMessages from '@i18n/hooks/messagesHook';
 import { useOnComponentMounted } from '@lib/react-hooks-alias/ReactHooksAlias';
@@ -21,11 +21,11 @@ export default function Categories() {
   });
 
   return (
-    <ParametersLayout
+    <RessourceLayout
       title={messages.parameters.categories.title}
       subTitle={messages.parameters.categories.subTitle}
     >
       <CategoriesTable categories={categories} />
-    </ParametersLayout>
+    </RessourceLayout>
   );
 }

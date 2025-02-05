@@ -1,5 +1,5 @@
 import { AccountResponse } from '@api/accounts/AccountsTypes';
-import ParametersLayout from '@components/layout/parameters/ParametersLayout';
+import RessourceLayout from '@components/layout/parameters/RessourceLayout';
 import AccountCards from '@components/pages/parameters/accounts/cards/AccountCards';
 import useMessages from '@i18n/hooks/messagesHook';
 import { useOnComponentMounted } from '@lib/react-hooks-alias/ReactHooksAlias';
@@ -21,11 +21,11 @@ export default function Accounts() {
   });
 
   return (
-    <ParametersLayout
+    <RessourceLayout
       title={messages.parameters.accounts.title}
       subTitle={messages.parameters.accounts.subTitle}
     >
       <AccountCards accounts={accounts} />
-    </ParametersLayout>
+    </RessourceLayout>
   );
 }

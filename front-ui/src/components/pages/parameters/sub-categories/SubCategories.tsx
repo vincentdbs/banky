@@ -1,5 +1,5 @@
 import { SubCategoryResponse } from '@api/categories/CategoriesTypes';
-import ParametersLayout from '@components/layout/parameters/ParametersLayout';
+import RessourceLayout from '@components/layout/parameters/RessourceLayout';
 import useMessages from '@i18n/hooks/messagesHook';
 import { useOnComponentMounted } from '@lib/react-hooks-alias/ReactHooksAlias';
 import CategoriesService from '@services/categories/CategoriesService';
@@ -21,11 +21,11 @@ export default function SubCategories() {
   });
 
   return (
-    <ParametersLayout
+    <RessourceLayout
       title={messages.parameters.subCategories.title}
       subTitle={messages.parameters.subCategories.subTitle}
     >
       <SubCategoriesTable subCategories={subCategories} />
-    </ParametersLayout>
+    </RessourceLayout>
   );
 }
