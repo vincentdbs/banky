@@ -22,7 +22,7 @@ export default function OperationsSidebarGroup() {
 
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>{messages.sidebar.parameters.title}</SidebarGroupLabel>
+      <SidebarGroupLabel>{messages.sidebar.operations.title}</SidebarGroupLabel>
       <SidebarGroupContent>
         <SidebarMenu>
           <SidebarMenuItem>
