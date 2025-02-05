@@ -1,5 +1,8 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/lib/shadcn/table';
+import { formatToLocalDateOrPlaceholder } from '@/utils/dates/DatesUtils';
+import { formatEuroDecimalPrice } from '@/utils/number/NumberUtils';
 import { TransactionResponse } from '@api/transactions/TransactionsTypes';
+import TransactionsSideIcon from '@components/theme/icons/transactions-side/TransactionSideIcon';
 import useMessages from '@i18n/hooks/messagesHook';
 import { Button } from '@lib/shadcn/button';
 import { Pencil } from 'lucide-react';
@@ -17,10 +20,10 @@ export default function TransactionsTable({ transactions }: CategoriesTableProps
       <TableHeader>
         <TableRow>
           <TableHead>
-            {messages.operations.transactions.table.date}
+            {messages.operations.transactions.table.side}
           </TableHead>
           <TableHead>
-            {messages.operations.transactions.table.inBankDate}
+            {messages.operations.transactions.table.date}
           </TableHead>
           <TableHead>
             {messages.operations.transactions.table.amount}
@@ -29,7 +32,7 @@ export default function TransactionsTable({ transactions }: CategoriesTableProps
             {messages.operations.transactions.table.accountName}
           </TableHead>
           <TableHead>
-            {messages.operations.transactions.table.categoryName}
+            {messages.operations.transactions.table.fromToPersonName}
           </TableHead>
           <TableHead>
             {messages.operations.transactions.table.subCategoryName}
@@ -40,12 +43,6 @@ export default function TransactionsTable({ transactions }: CategoriesTableProps
           <TableHead>
             {messages.operations.transactions.table.tag}
           </TableHead>
-          <TableHead>
-            {messages.operations.transactions.table.side}
-          </TableHead>
-          <TableHead>
-            {messages.operations.transactions.table.fromToPersonName}
-          </TableHead>
           <TableHead className="text-right">
             {messages.operations.transactions.table.action}
           </TableHead>
@@ -53,18 +50,31 @@ export default function TransactionsTable({ transactions }: CategoriesTableProps
       </TableHeader>
       <TableBody>
         {
-          transactions.map((category: TransactionResponse) => (
-            <TableRow key={category.id}>
-              <TableCell>{category.date}</TableCell>
-              <TableCell>{category.inBankDate}</TableCell>
-              <TableCell>{category.amount}</TableCell>
-              <TableCell>{category.accountName}</TableCell>
-              <TableCell>{category.categoryName}</TableCell>
-              <TableCell>{category.subCategoryName}</TableCell>
-              <TableCell>{category.comment}</TableCell>
-              <TableCell>{category.tag}</TableCell>
-              <TableCell>{category.side}</TableCell>
-              <TableCell>{category.fromToPersonName}</TableCell>
+          transactions.map((transaction: TransactionResponse) => (
+            <TableRow key={transaction.id}>
+              <TableCell>
+                <TransactionsSideIcon side={transaction.side} />
+              </TableCell>
+              <TableCell>
+                <p>
+                  {formatToLocalDateOrPlaceholder(transaction.date)}
+                </p>
+                <p className="text-muted-foreground text-xs">
+                  {formatToLocalDateOrPlaceholder(transaction.inBankDate)}
+                </p>
+              </TableCell>
+              <TableCell className="text-right">
+                {formatEuroDecimalPrice(transaction.amount)}
+              </TableCell>
+              <TableCell>
+                <p className="font-bold" style={{ color: `#${transaction.accountColor}` }}>
+                  {transaction.accountName}
+                </p>
+              </TableCell>
+              <TableCell>{transaction.fromToPersonName}</TableCell>
+              <TableCell>{transaction.subCategoryName}</TableCell>
+              <TableCell>{transaction.comment}</TableCell>
+              <TableCell>{transaction.tag}</TableCell>
               <TableCell className="text-right">
                 <Button type="button" variant="outline">
                   <Pencil />

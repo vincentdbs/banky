@@ -126,10 +126,8 @@ export type Translations = {
       subTitle: string,
       table: {
         date: string,
-        inBankDate: string,
         amount: string,
         accountName: string,
-        categoryName: string,
         subCategoryName: string,
         comment: string,
         tag: string,

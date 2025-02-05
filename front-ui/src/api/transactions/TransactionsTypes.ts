@@ -5,6 +5,7 @@ export type TransactionResponse =  {
   amount: number;
   accountId: number;
   accountName: string;
+  accountColor: string;
   categoryId: number;
   categoryName: string;
   subCategoryId: number;

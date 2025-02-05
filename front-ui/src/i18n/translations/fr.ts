@@ -126,10 +126,8 @@ const frMessages: Translations = {
       subTitle: 'Liste des transactions',
       table: {
         date: 'Date',
-        inBankDate: 'Réconciliation',
         amount: 'Montant',
         accountName: 'Compte',
-        categoryName: 'Catégorie',
         subCategoryName: 'Sous-catégorie',
         comment: 'Commentaire',
         tag: 'Tag',
