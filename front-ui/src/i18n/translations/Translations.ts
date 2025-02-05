@@ -86,6 +86,12 @@ export type Translations = {
       categories: string,
       subCategories: string,
     },
+    operations: {
+      title: string,
+      transactions: string,
+      orders: string,
+      transfert: string,
+    },
     evolution: {
       treasury: string,
       graph: string,

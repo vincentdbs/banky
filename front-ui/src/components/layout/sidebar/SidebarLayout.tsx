@@ -1,5 +1,10 @@
-import ParametersSidebarGroup from '@components/theme/sidebar/groups/parameters/ParametersSidebarGroup';
-import DashboardSidebarGroup from '@components/theme/sidebar/groups/dashboard/DashboardSidebarGroup';
+import SidebarHeader from '@/components/theme/sidebar/header/SidebarHeader';
+import DashboardSidebarGroup
+  from '@components/theme/sidebar/groups/dashboard/DashboardSidebarGroup';
+import OperationsSidebarGroup
+  from '@components/theme/sidebar/groups/operations/OperationsSidebarGroup';
+import ParametersSidebarGroup
+  from '@components/theme/sidebar/groups/parameters/ParametersSidebarGroup';
 import {
   Sidebar,
   SidebarContent,
@@ -8,7 +13,6 @@ import {
   SidebarTrigger,
 } from '@lib/shadcn/sidebar';
 import React, { ReactNode } from 'react';
-import SidebarHeader from '@/components/theme/sidebar/header/SidebarHeader';
 
 export type SidebarLayoutProps = {
   children: ReactNode,
@@ -21,6 +25,7 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
         <SidebarHeader />
         <SidebarContent>
           <DashboardSidebarGroup />
+          <OperationsSidebarGroup />
           <ParametersSidebarGroup />
         </SidebarContent>
         <SidebarFooter />

@@ -86,6 +86,12 @@ const frMessages: Translations = {
       categories: 'Catégories',
       subCategories: 'Sous-catégories',
     },
+    operations: {
+      title: 'Opérations',
+      transactions: 'Transactions',
+      orders: 'Ordres',
+      transfert: 'Transfert',
+    },
     evolution: {
       treasury: 'Trésorerie',
       graph: 'Graphiques',

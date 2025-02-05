@@ -1,7 +1,8 @@
 import AppLayout from '@components/layout/app/AppLayout';
 import ErrorPage from '@components/pages/error/ErrorPage';
 import Home from '@components/pages/home/Home';
-import { PARAMETERS } from '@components/Routes';
+import { OPERATIONS, PARAMETERS } from '@components/Routes';
+import OperationsRouter from '@components/routes/operations/OperationsRouter';
 import ParametersRouter from '@components/routes/parameters/ParametersRouter';
 import React, { useMemo } from 'react';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
@@ -19,6 +20,10 @@ export default function App() {
         {
           index: true,
           element: <Home />,
+        },
+        {
+          path: `${OPERATIONS}/*`,
+          element: <OperationsRouter />,
         },
         {
           path: `${PARAMETERS}/*`,
