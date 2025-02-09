@@ -4,6 +4,7 @@ import banky.db.generated.Category;
 import banky.db.generated.QCategory;
 import banky.db.generated.QSubCategory;
 import banky.db.generated.SubCategory;
+import banky.webservices.api.category.data.SubCategoryNamesResponse;
 import banky.webservices.api.category.data.SubCategoryResponse;
 import com.coreoz.plume.db.querydsl.crud.CrudDaoQuerydsl;
 import com.coreoz.plume.db.querydsl.transaction.TransactionManagerQuerydsl;
@@ -64,6 +65,25 @@ public class SubCategoryDao extends CrudDaoQuerydsl<SubCategory> {
                 tuple.get(QSubCategory.subCategory.categoryId),
                 tuple.get(QSubCategory.subCategory.name),
                 tuple.get(QCategory.category.name)
+            ))
+            .toList();
+    }
+
+    public List<SubCategoryNamesResponse> fetchSubCategoryNames() {
+        return transactionManager
+            .selectQuery()
+            .select(
+                QSubCategory.subCategory.id,
+                QSubCategory.subCategory.categoryId,
+                QSubCategory.subCategory.name
+            )
+            .from(QSubCategory.subCategory)
+            .fetch()
+            .stream()
+            .map(tuple -> new SubCategoryNamesResponse(
+                tuple.get(QSubCategory.subCategory.id),
+                tuple.get(QSubCategory.subCategory.categoryId),
+                tuple.get(QSubCategory.subCategory.name)
             ))
             .toList();
     }

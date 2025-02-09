@@ -6,6 +6,7 @@ import banky.db.generated.Category;
 import banky.db.generated.SubCategory;
 import banky.webservices.api.category.data.CategoryRequest;
 import banky.webservices.api.category.data.CategoryResponse;
+import banky.webservices.api.category.data.SubCategoryNamesResponse;
 import banky.webservices.api.category.data.SubCategoryRequest;
 import banky.webservices.api.category.data.SubCategoryResponse;
 
@@ -69,7 +70,7 @@ public class CategoryService {
         return subCategoryDao.fetchSubCategoriesByCategoryId(categoryId);
     }
 
-    public List<SubCategoryResponse> fetchSubCategories() {
-        return subCategoryDao.fetchSubCategories();
+    public List<SubCategoryNamesResponse> fetchSubCategoryNames() {
+        return subCategoryDao.fetchSubCategoryNames();
     }
 }

@@ -3,6 +3,7 @@ package banky.webservices.api.category;
 import banky.services.category.CategoryService;
 import banky.webservices.api.category.data.CategoryRequest;
 import banky.webservices.api.category.data.CategoryResponse;
+import banky.webservices.api.category.data.SubCategoryNamesResponse;
 import banky.webservices.api.category.data.SubCategoryRequest;
 import banky.webservices.api.category.data.SubCategoryResponse;
 import com.coreoz.plume.jersey.errors.Validators;
@@ -92,9 +93,9 @@ public class CategoryWs {
     }
 
     @GET
-    @Path("/sub-categories")
-    @Operation(description = "Fetch subcategories")
-    public List<SubCategoryResponse> fetchSubCategories() {
-        return categoryService.fetchSubCategories();
+    @Path("/sub-categories/names")
+    @Operation(description = "Fetch subcategories names")
+    public List<SubCategoryNamesResponse> fetchSubCategoryNames() {
+        return categoryService.fetchSubCategoryNames();
     }
 }
