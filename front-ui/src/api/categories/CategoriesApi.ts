@@ -1,5 +1,9 @@
 import ApiHttpClient from '@api/ApiHttpClient';
-import { CategoryResponse, SubCategoryResponse } from '@api/categories/CategoriesTypes';
+import {
+  CategoryResponse,
+  SubCategoryNamesResponse,
+  SubCategoryResponse,
+} from '@api/categories/CategoriesTypes';
 import { HttpMethod } from 'simple-http-request-builder';
 import { HttpPromise } from 'simple-http-rest-client';
 
@@ -18,6 +22,12 @@ export default class CategoriesApi {
   fetchSubCategories(): HttpPromise<SubCategoryResponse[]> {
     return this.apiHttpClient
       .restRequest<SubCategoryResponse[]>(HttpMethod.GET, `${CategoriesApi.BASE_PATH}/sub-categories`)
+      .execute();
+  }
+
+  fetchSubCategoryNames(): HttpPromise<SubCategoryNamesResponse[]> {
+    return this.apiHttpClient
+      .restRequest<SubCategoryNamesResponse[]>(HttpMethod.GET, `${CategoriesApi.BASE_PATH}/sub-categories/names`)
       .execute();
   }
 }

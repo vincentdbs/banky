@@ -1,3 +1,4 @@
+import { TransactionSide } from '@/api/transactions/TransactionsTypes';
 import {
   TransactionFields,
 } from '@components/pages/operations/transactions/form/fields/TransactionsFormFields';
@@ -30,39 +31,14 @@ const frMessages: Translations = {
     unsaved_data: 'Des modifications n\'ont pas été enregistrées. '
       + 'Si vous voulez enregistrer ces modifications, cliquez sur le bouton "Rester sur la page"',
     confirm_delete: 'Pour confirmer la suppression, cliquez sur le bouton "Supprimer"',
-  },
-  // navigation
-  nav: {
-    home: 'Accueil',
-    users: 'Gestion des utilisateurs',
-    user_list: 'Utilisateurs',
-  },
-  // home
-  home: {
-    title: 'Page d\'accueil',
-  },
-  login: {
-    title: 'Se connecter',
-  },
-  // users
-  users: {
-    userName: 'Nom d\'utilisateur',
-    password: 'Mot de passe',
-    email: 'E-mail',
-    firstName: 'Prénom',
-    lastName: 'Nom',
-    role: 'Rôle',
-  },
-  // pages users
-  user: {
-    title_list: 'Liste des utilisateurs',
-    title_create: 'Création d\'un utilisateur',
-    title_edit: 'Modification d\'un utilisateur',
-    password_confirm: 'Confirmation du mot de passe',
-    error_passwords_different: 'Le mot de passe et sa confirmation sont différents',
+    side: {
+      [TransactionSide.DEBIT]: 'Dépense',
+      [TransactionSide.CREDIT]: 'Gain',
+    }
   },
   // errors
   error: {
+    unknownChoice: 'Choix inconnu',
     field: {
       required: 'Le champ est requis',
       email_wrong_format: 'L\'adresse e-mail saisie semble être incorrecte',
@@ -141,8 +117,10 @@ const frMessages: Translations = {
         title: 'Transaction',
         description: 'Ajout d\'une transaction',
         fields: {
-          [TransactionFields.DATE]: 'Date',
-          [TransactionFields.IN_BANK_DATE]: 'Date de valeur',
+          from: 'De',
+          to: 'Vers',
+          [TransactionFields.DATE]: 'Le',
+          [TransactionFields.IN_BANK_DATE]: 'Réconcilié le',
           [TransactionFields.AMOUNT]: 'Montant',
           [TransactionFields.ACCOUNT]: 'Compte',
           [TransactionFields.SIDE]: 'Débit/Crédit',

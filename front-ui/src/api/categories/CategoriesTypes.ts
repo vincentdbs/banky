@@ -10,6 +10,12 @@ export type SubCategoryResponse = {
   category: string,
 };
 
+export type SubCategoryNamesResponse = {
+  id: string,
+  categoryId: string,
+  name: string,
+};
+
 export type CategoryRequest = {
   name: string,
 };

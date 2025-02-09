@@ -1,5 +1,5 @@
 import ApiHttpClient from '@api/ApiHttpClient';
-import { AccountResponse, AccountRequest } from '@api/accounts/AccountsTypes';
+import { AccountResponse, AccountRequest, AccountNamesResponse } from '@api/accounts/AccountsTypes';
 import { HttpMethod } from 'simple-http-request-builder';
 import { HttpPromise } from 'simple-http-rest-client';
 
@@ -11,6 +11,12 @@ export default class AccountsApi {
   fetchAccounts(): HttpPromise<AccountResponse[]> {
     return this.apiHttpClient
       .restRequest<AccountResponse[]>(HttpMethod.GET, AccountsApi.BASE_PATH)
+      .execute();
+  }
+
+  fetchAccountNames(): HttpPromise<AccountNamesResponse[]> {
+    return this.apiHttpClient
+      .restRequest<AccountNamesResponse[]>(HttpMethod.GET, `${AccountsApi.BASE_PATH}/names`)
       .execute();
   }
 

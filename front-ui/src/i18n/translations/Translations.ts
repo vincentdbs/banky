@@ -1,3 +1,4 @@
+import { TransactionSide } from '@api/transactions/TransactionsTypes';
 import {
   TransactionFields,
 } from '@components/pages/operations/transactions/form/fields/TransactionsFormFields';
@@ -32,39 +33,11 @@ export type Translations = {
     changes_saved: string,
     unsaved_data: string,
     confirm_delete: string,
-  },
-  // navigation
-  nav: {
-    home: string,
-    users: string,
-    user_list: string,
-  },
-  // home
-  home: {
-    title: string,
-  },
-  login: {
-    title: string,
-  },
-  // users
-  users: {
-    userName: string,
-    password: string,
-    email: string,
-    firstName: string,
-    lastName: string,
-    role: string,
-  },
-  // pages users
-  user: {
-    title_list: string,
-    title_create: string,
-    title_edit: string,
-    password_confirm: string,
-    error_passwords_different: string,
+    side: Record<TransactionSide, string>
   },
   // errors
   error: {
+    unknownChoice: string,
     field: {
       required: string,
       email_wrong_format: string,
@@ -141,7 +114,10 @@ export type Translations = {
       form: {
         title: string
         description: string,
-        fields: Record<TransactionFields, string>,
+        fields: Record<TransactionFields, string> & {
+          from: string,
+          to: string,
+        },
       },
     },
   },

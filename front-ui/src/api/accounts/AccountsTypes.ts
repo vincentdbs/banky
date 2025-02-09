@@ -7,6 +7,11 @@ export type AccountResponse = {
   type: AccountType,
 };
 
+export type AccountNamesResponse = {
+  id: string,
+  name: string,
+};
+
 export type AccountRequest = {
   name: string,
   shortName: string,
