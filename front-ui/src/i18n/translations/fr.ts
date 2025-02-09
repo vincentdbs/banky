@@ -1,3 +1,6 @@
+import {
+  TransactionFields,
+} from '@components/pages/operations/transactions/form/fields/TransactionsFormFields';
 import { Translations } from './Translations';
 
 const frMessages: Translations = {
@@ -133,6 +136,21 @@ const frMessages: Translations = {
         tag: 'Tag',
         fromToPersonName: 'De/À',
         action: 'Action',
+      },
+      form: {
+        title: 'Transaction',
+        description: 'Ajout d\'une transaction',
+        fields: {
+          [TransactionFields.DATE]: 'Date',
+          [TransactionFields.IN_BANK_DATE]: 'Date de valeur',
+          [TransactionFields.AMOUNT]: 'Montant',
+          [TransactionFields.ACCOUNT]: 'Compte',
+          [TransactionFields.SIDE]: 'Débit/Crédit',
+          [TransactionFields.SUBCATEGORY]: 'Sous-catégorie',
+          [TransactionFields.FROM_TO_PERSON]: 'De/À',
+          [TransactionFields.COMMENT]: 'Commentaire',
+          [TransactionFields.TAG]: 'Tag',
+        },
       },
     },
   },

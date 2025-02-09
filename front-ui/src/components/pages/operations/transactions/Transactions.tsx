@@ -1,5 +1,7 @@
 import { TransactionResponse } from '@api/transactions/TransactionsTypes';
 import RessourceLayout from '@components/layout/parameters/RessourceLayout';
+import TransactionsFormModal
+  from '@components/pages/operations/transactions/modal/TransactionsFormModal';
 import TransactionsTable from '@components/pages/operations/transactions/table/TransactionsTable';
 import useMessages from '@i18n/hooks/messagesHook';
 import { useOnComponentMounted } from '@lib/react-hooks-alias/ReactHooksAlias';
@@ -25,6 +27,7 @@ export default function Transactions() {
       title={messages.operations.transactions.title}
       subTitle={messages.operations.transactions.subTitle}
     >
+      <TransactionsFormModal />
       <TransactionsTable transactions={transactions} />
     </RessourceLayout>
   );

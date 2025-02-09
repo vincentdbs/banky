@@ -1,3 +1,7 @@
+import {
+  TransactionFields,
+} from '@components/pages/operations/transactions/form/fields/TransactionsFormFields';
+
 export interface ErrorFunction {
   (...args: string[]): string,
 }
@@ -61,7 +65,7 @@ export type Translations = {
   },
   // errors
   error: {
-    field : {
+    field: {
       required: string,
       email_wrong_format: string,
     },
@@ -133,6 +137,11 @@ export type Translations = {
         tag: string,
         fromToPersonName: string,
         action: string,
+      },
+      form: {
+        title: string
+        description: string,
+        fields: Record<TransactionFields, string>,
       },
     },
   },
