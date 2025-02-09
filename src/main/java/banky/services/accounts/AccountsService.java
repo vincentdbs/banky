@@ -3,6 +3,7 @@ package banky.services.accounts;
 import banky.db.dao.AccountDao;
 import banky.db.generated.Accounts;
 import banky.services.accounts.enums.AccountType;
+import banky.webservices.api.accounts.data.AccountNamesResponse;
 import banky.webservices.api.accounts.data.AccountResponse;
 import banky.webservices.api.accounts.data.AccountRequest;
 import jakarta.inject.Inject;
@@ -35,6 +36,10 @@ public class AccountsService {
                 )
             )
             .toList();
+    }
+
+    public List<AccountNamesResponse> fetchAccountNames(AccountType type) {
+        return accountDao.fetchAccountNames(type);
     }
 
     public Long createAccount(AccountRequest request) {

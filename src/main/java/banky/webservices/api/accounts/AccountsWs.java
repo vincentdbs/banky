@@ -1,8 +1,10 @@
 package banky.webservices.api.accounts;
 
 import banky.services.accounts.AccountsService;
-import banky.webservices.api.accounts.data.AccountResponse;
+import banky.services.accounts.enums.AccountType;
+import banky.webservices.api.accounts.data.AccountNamesResponse;
 import banky.webservices.api.accounts.data.AccountRequest;
+import banky.webservices.api.accounts.data.AccountResponse;
 import com.coreoz.plume.jersey.errors.Validators;
 import com.coreoz.plume.jersey.security.permission.PublicApi;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,6 +18,7 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
 import java.util.List;
@@ -39,6 +42,14 @@ public class AccountsWs {
     @Operation(description = "Fetch all accounts")
     public List<AccountResponse> fetchAccounts() {
         return categoryService.fetchAccounts();
+    }
+
+    @GET
+    @Operation(description = "Fetch all accounts names")
+    public List<AccountNamesResponse> fetchAccountNames(
+        @QueryParam("type") AccountType type
+    ) {
+        return categoryService.fetchAccountNames(type);
     }
 
     @POST
