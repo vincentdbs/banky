@@ -7,6 +7,7 @@ export type ColoredIconsWrapperProps = PropsWithChildren<{
 }>;
 
 export const ICON_SIZE: string = 'size-5';
+export const ICON_SIZE_BIG: string = 'size-8';
 
 export default function ColoredIconsWrapper(
   {

@@ -12,7 +12,13 @@ export default function AccountCards(
   }: AccountCardsProps,
 ) {
   return (
-    <div className="flex flex-wrap gap-5 justify-center">
+    <div
+      className="
+        grid grid-cols-[repeat(1,1fr)]
+        sm:grid-cols-[repeat(2,1fr)]
+        lg:grid-cols-[repeat(3,1fr)]
+        xl:grid-cols-[repeat(4,1fr)] gap-5"
+    >
       {
         accounts.map((account: AccountResponse) => (
           <AccountCard

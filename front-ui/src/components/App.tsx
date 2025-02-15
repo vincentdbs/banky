@@ -1,7 +1,8 @@
 import AppLayout from '@components/layout/app/AppLayout';
+import Dashboard from '@components/pages/dashboard/Dashboard';
 import ErrorPage from '@components/pages/error/ErrorPage';
 import Home from '@components/pages/home/Home';
-import { OPERATIONS, PARAMETERS } from '@components/Routes';
+import { DASHBOARD, OPERATIONS, PARAMETERS } from '@components/Routes';
 import OperationsRouter from '@components/routes/operations/OperationsRouter';
 import ParametersRouter from '@components/routes/parameters/ParametersRouter';
 import React, { useMemo } from 'react';
@@ -20,6 +21,10 @@ export default function App() {
         {
           index: true,
           element: <Home />,
+        },
+        {
+          path: `${DASHBOARD}/*`,
+          element: <Dashboard />,
         },
         {
           path: `${OPERATIONS}/*`,

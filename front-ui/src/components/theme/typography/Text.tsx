@@ -1,10 +1,6 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
-type Props = {
-  children: string,
-};
-
-export default function Text({ children }: Props) {
+export default function Text({ children }: PropsWithChildren) {
   return (
     <p className="leading-7 [&:not(:first-child)]:mt-6">
       {children}

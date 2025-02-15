@@ -16,6 +16,13 @@ export type Translations = {
       required_field: string,
     },
   },
+  common: {
+    treasury: string,
+    incomes: string,
+    expenses: string,
+    savings: string,
+    accounts: string,
+  },
   // actions
   action: {
     edit: string,
@@ -128,4 +135,9 @@ export type Translations = {
       },
     },
   },
+  dashboard: {
+    cards: {
+      fromLastMonth: string,
+    }
+  }
 };

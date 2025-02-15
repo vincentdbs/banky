@@ -1,10 +1,6 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
-type Props = {
-  children: string,
-};
-
-export default function Caption({ children }: Props) {
+export default function Caption({ children }: PropsWithChildren) {
   return (
     <p className="text-xl text-muted-foreground">
       {children}

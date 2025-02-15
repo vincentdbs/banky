@@ -13,6 +13,13 @@ const frMessages: Translations = {
       required_field: 'Le champ est requis',
     },
   },
+  common: {
+    treasury: 'Trésorerie',
+    incomes: 'Revenus',
+    expenses: 'Dépenses',
+    savings: 'Épargnes',
+    accounts: 'Comptes',
+  },
   // actions
   action: {
     edit: 'Modifier',
@@ -139,6 +146,11 @@ const frMessages: Translations = {
       },
     },
   },
+  dashboard: {
+    cards: {
+      fromLastMonth: 'depuis le mois dernier',
+    }
+  }
 } as const;
 
 export default frMessages;

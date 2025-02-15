@@ -1,4 +1,7 @@
 export const HOME: string = '/';
+
+export const DASHBOARD: string = '/dashboard';
+
 export const OPERATIONS: string = '/operations';
 export const OPERATIONS_TRANSACTIONS: string = '/transactions';
 export const OPERATIONS_ORDERS: string = '/ordres';

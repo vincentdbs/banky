@@ -1,3 +1,4 @@
+import { DASHBOARD } from '@components/Routes';
 import useMessages from '@i18n/hooks/messagesHook';
 import {
   SidebarGroup,
@@ -21,7 +22,7 @@ export default function DashboardSidebarGroup() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <Link to="/">
+              <Link to={DASHBOARD}>
                 <LayoutDashboard />
                 <span>{messages.sidebar.dashboard.title}</span>
               </Link>
