@@ -1,19 +1,22 @@
-import { Button } from '@/lib/shadcn/button';
-import { Calendar } from '@/lib/shadcn/calendar';
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/lib/shadcn/form';
-import { Popover, PopoverContent, PopoverTrigger } from '@/lib/shadcn/popover';
-import { cn } from '@/lib/shadcn/utils';
-import { formatToLocaleDate } from '@/utils/dates/DatesUtils';
 import dayjs from 'dayjs';
 import { CalendarIcon } from 'lucide-react';
 import React from 'react';
 import { Control, FieldValues, Path } from 'react-hook-form';
+import { Button } from '@/lib/shadcn/button';
+import { Calendar } from '@/lib/shadcn/calendar';
+import {
+  FormControl, FormField, FormItem, FormLabel, FormMessage,
+} from '@/lib/shadcn/form';
+import { Popover, PopoverContent, PopoverTrigger } from '@/lib/shadcn/popover';
+import { cn } from '@/lib/shadcn/utils';
+import { formatToLocaleDate } from '@/utils/dates/DatesUtils';
 
 type DatePickerProps<T extends FieldValues> = {
   control: Control<T>,
   name: Path<T>,
   label: string,
-}
+};
+
 export default function DatePicker<T extends FieldValues>(
   {
     control,
@@ -65,8 +68,7 @@ export default function DatePicker<T extends FieldValues>(
                       field.onChange(dayjs(date));
                     }
                   }}
-                  disabled={(date: Date) =>
-                    date > new Date() || date < new Date('1900-01-01')
+                  disabled={(date: Date) => date > new Date() || date < new Date('1900-01-01')
                   }
                 />
               </PopoverContent>

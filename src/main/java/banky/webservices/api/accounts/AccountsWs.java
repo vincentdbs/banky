@@ -45,6 +45,7 @@ public class AccountsWs {
     }
 
     @GET
+    @Path("/names")
     @Operation(description = "Fetch all accounts names")
     public List<AccountNamesResponse> fetchAccountNames(
         @QueryParam("type") AccountType type

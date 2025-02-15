@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 type UseFetchSubCategoryNamesChoices = {
   choices: Choice[],
-}
+};
 
 export default function useFetchSubCategoryNamesChoices(): UseFetchSubCategoryNamesChoices {
   const categoriesService: CategoriesService = getGlobalInstance(CategoriesService);
@@ -17,14 +17,12 @@ export default function useFetchSubCategoryNamesChoices(): UseFetchSubCategoryNa
   useOnComponentMounted(() => {
     categoriesService.fetchSubCategoryNames()
       .then((names: SubCategoryNamesResponse[]) => setSubcategoryNameChoices(
-        names.map((name: SubCategoryNamesResponse) => {
-          return (
-            {
-              label: name.name,
-              value: name.id,
-            }
-          );
-        }),
+        names.map((name: SubCategoryNamesResponse) => (
+          {
+            label: name.name,
+            value: name.id,
+          }
+        )),
       ));
   });
 

@@ -1,3 +1,4 @@
+import React, { PropsWithChildren } from 'react';
 import { Button } from '@/lib/shadcn/button';
 import {
   Dialog,
@@ -7,7 +8,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/lib/shadcn/dialog';
-import React, { PropsWithChildren } from 'react';
 
 export type ModalProps = {
   title: string,
@@ -15,7 +15,9 @@ export type ModalProps = {
   openModalLabel: string,
 };
 
-export default function Modal({ children, openModalLabel, title, description }: PropsWithChildren<ModalProps>) {
+export default function Modal({
+  children, openModalLabel, title, description,
+}: PropsWithChildren<ModalProps>) {
   return (
     <Dialog>
       <DialogTrigger asChild>

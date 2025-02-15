@@ -9,6 +9,13 @@ export interface ErrorFunction {
 
 export type Translations = {
   title: 'Banky',
+  form: {
+    validation: {
+      invalid_date: string,
+      positive_amount: string,
+      required_field: string,
+    },
+  },
   // actions
   action: {
     edit: string,
@@ -33,7 +40,7 @@ export type Translations = {
     changes_saved: string,
     unsaved_data: string,
     confirm_delete: string,
-    side: Record<TransactionSide, string>
+    side: Record<TransactionSide, string>,
   },
   // errors
   error: {
@@ -112,7 +119,7 @@ export type Translations = {
         action: string,
       },
       form: {
-        title: string
+        title: string,
         description: string,
         fields: Record<TransactionFields, string> & {
           from: string,

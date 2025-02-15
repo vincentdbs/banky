@@ -6,7 +6,7 @@ import TransactionsForm from '../form/TransactionsForm';
 export default function TransactionsFormModal() {
   const { messages } = useMessages();
 
-  return(
+  return (
     <Modal
       title={messages.operations.transactions.form.title}
       description={messages.operations.transactions.form.description}
@@ -14,5 +14,5 @@ export default function TransactionsFormModal() {
     >
       <TransactionsForm />
     </Modal>
-  )
+  );
 }

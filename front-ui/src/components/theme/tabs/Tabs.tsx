@@ -5,7 +5,7 @@ type TabsTestProps = {
   rightLabel: string,
   onClickLeft: () => void,
   onClickRight: () => void,
-}
+};
 
 export default function TabsTest(
   {
@@ -29,8 +29,13 @@ export default function TabsTest(
 
   return (
     <div
-      role="tablist" aria-orientation="horizontal"
-      className="h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground grid w-full grid-cols-2"
+      role="tablist"
+      aria-orientation="horizontal"
+      className="
+        h-9 items-center
+        justify-center rounded-lg bg-muted
+        p-1 text-muted-foreground grid w-full grid-cols-2
+      "
       tabIndex={0} data-orientation="horizontal"
       style={{ outline: 'none' }}
     >
@@ -39,7 +44,13 @@ export default function TabsTest(
         type="button" role="tab"
         aria-selected={isLeftActive ? 'true' : 'false'}
         data-state={isLeftActive ? 'active' : 'inactive'}
-        className="inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow"
+        className="
+          inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1
+          text-sm font-medium ring-offset-background transition-all focus-visible:outline-none
+          focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+          disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background
+          data-[state=active]:text-foreground data-[state=active]:shadow
+        "
         tabIndex={-1}
         data-orientation="horizontal"
         data-radix-collection-item=""
@@ -52,7 +63,15 @@ export default function TabsTest(
         role="tab"
         aria-selected={isLeftActive ? 'false' : 'true'}
         data-state={isLeftActive ? 'inactive' : 'active'}
-        className="inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow"
+        className="
+          inline-flex items-center
+          justify-center whitespace-nowrap rounded-md px-3 py-1
+          text-sm font-medium ring-offset-background transition-all
+          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
+          focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50
+          data-[state=active]:bg-background data-[state=active]:text-foreground
+          data-[state=active]:shadow
+        "
         tabIndex={0}
         data-orientation="horizontal"
         data-radix-collection-item=""

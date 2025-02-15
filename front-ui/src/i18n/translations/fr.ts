@@ -1,11 +1,18 @@
-import { TransactionSide } from '@/api/transactions/TransactionsTypes';
 import {
   TransactionFields,
 } from '@components/pages/operations/transactions/form/fields/TransactionsFormFields';
+import { TransactionSide } from '@/api/transactions/TransactionsTypes';
 import { Translations } from './Translations';
 
 const frMessages: Translations = {
   title: 'Banky',
+  form: {
+    validation: {
+      invalid_date: 'La date est invalide',
+      positive_amount: 'Le montant doit être un nombre positif',
+      required_field: 'Le champ est requis',
+    },
+  },
   // actions
   action: {
     edit: 'Modifier',
@@ -34,7 +41,7 @@ const frMessages: Translations = {
     side: {
       [TransactionSide.DEBIT]: 'Dépense',
       [TransactionSide.CREDIT]: 'Gain',
-    }
+    },
   },
   // errors
   error: {

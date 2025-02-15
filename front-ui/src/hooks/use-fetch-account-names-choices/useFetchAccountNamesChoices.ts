@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 type UseFetchAccountNamesChoices = {
   choices: Choice[],
-}
+};
 
 export default function useFetchAccountNamesChoices(): UseFetchAccountNamesChoices {
   const accountsService: AccountsService = getGlobalInstance(AccountsService);
@@ -17,14 +17,12 @@ export default function useFetchAccountNamesChoices(): UseFetchAccountNamesChoic
   useOnComponentMounted(() => {
     accountsService.fetchAccountNames()
       .then((names: AccountNamesResponse[]) => setAccountNameChoices(
-        names.map((name: AccountNamesResponse) => {
-          return (
-            {
-              label: name.name,
-              value: name.id,
-            }
-          );
-        }),
+        names.map((name: AccountNamesResponse) => (
+          {
+            label: name.name,
+            value: name.id,
+          }
+        )),
       ));
   });
 
