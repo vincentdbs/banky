@@ -1,7 +1,7 @@
-import useMessages from '@/i18n/hooks/messagesHook';
+import useMessages from '@i18n/hooks/messagesHook';
 import { AccountType } from '@api/accounts/AccountsTypes';
 import MoneyRecapAccount
-  from '@components/pages/dashboard/money-recap-cards/accounts/account/MoneyRecapAccount';
+  from '@components/pages/dashboard/accounts/account/MoneyRecapAccount';
 import { Card, CardContent, CardHeader, CardTitle } from '@lib/shadcn/card';
 import React from 'react';
 

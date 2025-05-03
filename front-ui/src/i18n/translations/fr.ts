@@ -149,6 +149,9 @@ const frMessages: Translations = {
   dashboard: {
     cards: {
       fromLastMonth: 'depuis le mois dernier',
+    },
+    charts: {
+      title: 'Évolution total par mois',
     }
   }
 } as const;

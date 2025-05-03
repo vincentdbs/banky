@@ -138,6 +138,9 @@ export type Translations = {
   dashboard: {
     cards: {
       fromLastMonth: string,
+    },
+    charts: {
+      title: string,
     }
   }
 };
