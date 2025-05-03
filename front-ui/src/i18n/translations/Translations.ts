@@ -94,6 +94,7 @@ export type Translations = {
       transfert: string,
     },
     evolution: {
+      title: string,
       treasury: string,
       graph: string,
       monthlyBudget: string,
