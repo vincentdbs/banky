@@ -1,4 +1,4 @@
-package banky.db.dao.evolution;
+package banky.db.dao;
 
 import banky.webservices.api.evolution.responses.TotalByAccountAndMonthResponse;
 import com.coreoz.plume.db.querydsl.transaction.TransactionManagerQuerydsl;
@@ -14,13 +14,11 @@ import java.util.Map;
  * Provides methods to fetch data for treasury evolution reports.
  */
 @Singleton
-public class EvolutionDao {
-    
-    private final TransactionManagerQuerydsl transactionManager;
+public class EvolutionDao extends  TotalByAccountDao{
     
     @Inject
     private EvolutionDao(TransactionManagerQuerydsl transactionManager) {
-        this.transactionManager = transactionManager;
+        super(transactionManager);
     }
     
     /**

@@ -1,6 +1,6 @@
 package banky.services.evolution;
 
-import banky.db.dao.evolution.EvolutionDao;
+import banky.db.dao.EvolutionDao;
 import banky.webservices.api.evolution.responses.AnnualTotalResponse;
 import banky.webservices.api.evolution.responses.TotalByAccountAndMonthResponse;
 import jakarta.inject.Inject;
