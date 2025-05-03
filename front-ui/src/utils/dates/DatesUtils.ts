@@ -7,3 +7,7 @@ export const formatToIsoDate = (date: Dayjs | string): string => dayjs(date).for
 export const formatToLocalDateOrPlaceholder = (date?: Dayjs | string): string => (
   date ? formatToLocaleDate(date) : '-'
 );
+
+export const getMonthName = (month: string): string => {
+  return dayjs(month).format('MMMM');
+}

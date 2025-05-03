@@ -9,7 +9,7 @@ import {
 } from '@/lib/shadcn/form';
 import { Popover, PopoverContent, PopoverTrigger } from '@/lib/shadcn/popover';
 import { cn } from '@/lib/shadcn/utils';
-import { formatToLocaleDate } from '@/utils/dates/DatesUtils';
+import { formatToLocaleDate } from '@utils/dates/DatesUtils';
 
 type DatePickerProps<T extends FieldValues> = {
   control: Control<T>,
