@@ -10,6 +10,7 @@ import banky.webservices.api.dashboard.data.DashboardMarketAccountResponse;
 import banky.webservices.api.dashboard.data.DashboardSavingAccountResponse;
 import com.coreoz.plume.db.querydsl.transaction.TransactionManagerQuerydsl;
 import com.querydsl.core.types.Projections;
+import com.querydsl.sql.SQLQuery;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
@@ -55,22 +56,8 @@ public class DashboardDao {
                     accounts.color,
                     // Total amount calculation
                     accounts.initialAmount
-                        .add(
-                            // Add CREDIT transactions
-                            transactionManager
-                                .selectQuery()
-                                .select(transactions.amount.sum().coalesce(BigDecimal.ZERO))
-                                .from(transactions)
-                                .where(transactions.side.eq(TransactionSide.CREDIT.name()).and(transactions.accountId.eq(accounts.id)))
-                        )
-                        .subtract(
-                            // Subtract DEBIT transactions
-                            transactionManager
-                                .selectQuery()
-                                .select(transactions.amount.sum().coalesce(BigDecimal.ZERO))
-                                .from(transactions)
-                                .where(transactions.side.eq(TransactionSide.DEBIT.name()).and(transactions.accountId.eq(accounts.id)))
-                        )
+                        .add(totalCreditTransactionsQuery(transactions, accounts))
+                        .subtract(totalDebitTransactionsQuery(transactions, accounts))
                         .add(
                             // Add incoming transfers
                             transactionManager
@@ -144,38 +131,38 @@ public class DashboardDao {
      * @return List of savings accounts with dashboard-specific data
      */
     public List<DashboardSavingAccountResponse> getSavingsAccountData() {
-//        QAccounts accounts = QAccounts.accounts;
-//        QTransactions transactions = QTransactions.transactions;
-//
-//        return transactionManager
-//            .selectQuery()
-//            .select(
-//                Projections.constructor(
-//                    DashboardSavingAccountResponse.class,
-//                    accounts.id,
-//                    accounts.name,
-//                    accounts.shortName,
-//                    accounts.color,
-//                    // Total amount
-//                    accounts.initialAmount.add(
-//                        transactionManager
-//                            .selectQuery()
-//                            .select(transactions.amount.sum().coalesce(BigDecimal.ZERO))
-//                            .from(transactions)
-//                            .where(transactions.accountId.eq(accounts.id))
-//                    ),
-//                    // Interest amount
-//                    transactionManager
-//                        .selectQuery()
-//                        .select(transactions.amount.sum().coalesce(BigDecimal.ZERO))
-//                        .from(transactions)
-//                        .where(transactions.accountId.eq(accounts.id).and(transactions.isInterest.isTrue()))
-//                )
-//            )
-//            .from(accounts)
-//            .where(accounts.type.eq(AccountType.SAVINGS.name()))
-//            .groupBy(accounts.id)
-//            .fetch();
+        QAccounts accounts = QAccounts.accounts;
+        QTransactions transactions = QTransactions.transactions;
+
+        return transactionManager
+            .selectQuery()
+            .select(
+                Projections.constructor(
+                    DashboardSavingAccountResponse.class,
+                    accounts.id,
+                    accounts.name,
+                    accounts.shortName,
+                    accounts.color,
+                    // Total amount
+                    accounts.initialAmount.add(
+                        transactionManager
+                            .selectQuery()
+                            .select(transactions.amount.sum().coalesce(BigDecimal.ZERO))
+                            .from(transactions)
+                            .where(transactions.accountId.eq(accounts.id))
+                    ),
+                    // Interest amount
+                    transactionManager
+                        .selectQuery()
+                        .select(transactions.amount.sum().coalesce(BigDecimal.ZERO))
+                        .from(transactions)
+                        .where(transactions.accountId.eq(accounts.id).and(transactions.isInterest.isTrue()))
+                )
+            )
+            .from(accounts)
+            .where(accounts.type.eq(AccountType.SAVINGS.name()))
+            .groupBy(accounts.id)
+            .fetch();
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
@@ -212,5 +199,55 @@ public class DashboardDao {
 //            .groupBy(accounts.id)
 //            .fetch();
         throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    private SQLQuery<BigDecimal> totalDebitTransactionsQuery(QTransactions transactions, QAccounts accounts) {
+        // Add CREDIT transactions
+        return transactionManager
+            .selectQuery()
+            .select(transactions.amount.sum().coalesce(BigDecimal.ZERO))
+            .from(transactions)
+            .where(
+                transactions.side.eq(TransactionSide.CREDIT.name())
+                    .and(transactions.accountId.eq(accounts.id))
+            );
+    }
+
+    private SQLQuery<BigDecimal> totalCreditTransactionsQuery(QTransactions transactions, QAccounts accounts) {
+        // Add DEBIT transactions
+        return transactionManager
+            .selectQuery()
+            .select(transactions.amount.sum().coalesce(BigDecimal.ZERO))
+            .from(transactions)
+            .where(
+                transactions.side.eq(TransactionSide.DEBIT.name())
+                    .and(transactions.accountId.eq(accounts.id))
+            );
+    }
+
+    private SQLQuery<BigDecimal> totalInBankCreditTransactionsQuery(QTransactions transactions, QAccounts accounts) {
+        return totalCreditTransactionsQuery(transactions, accounts)
+            .where(transactions.inBankDate.isNotNull());
+    }
+
+    private SQLQuery<BigDecimal> totalInBankDebitTransactionsQuery(QTransactions transactions, QAccounts accounts) {
+        return totalDebitTransactionsQuery(transactions, accounts)
+            .where(transactions.inBankDate.isNotNull());
+    }
+
+    private SQLQuery<BigDecimal> totalTransfersInQuery(QTransfert transferts, QAccounts accounts) {
+        return transactionManager
+            .selectQuery()
+            .select(transferts.amount.sum().coalesce(BigDecimal.ZERO))
+            .from(transferts)
+            .where(transferts.toAccountId.eq(accounts.id));
+    }
+
+    private SQLQuery<BigDecimal> totalTransfersOutQuery(QTransfert transferts, QAccounts accounts) {
+        return transactionManager
+            .selectQuery()
+            .select(transferts.amount.sum().coalesce(BigDecimal.ZERO))
+            .from(transferts)
+            .where(transferts.fromAccountId.eq(accounts.id));
     }
 }
