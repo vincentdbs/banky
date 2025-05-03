@@ -1,5 +1,5 @@
-import useMessages from '@/i18n/hooks/messagesHook';
 import { AnnualTotal, YearSummary } from '@api/evolution/TreasuryEvolutionTypes';
+import MainSection from '@components/theme/sections/MainSection';
 import dayjs from 'dayjs';
 import React from 'react';
 import EvolutionAnnualTable from './components/EvolutionAnnualTable';
@@ -19,7 +19,7 @@ export default function EvolutionAnnual(
     year = dayjs().year(),
     annualTotal = {},
     yearSummary = { total: 0, gainLoss: 0, interest: 0 },
-  }: EvolutionAnnualProps
+  }: EvolutionAnnualProps,
 ) {
   const createMonthDates = (year: number): string[] => {
     return Array.from({ length: 12 }, (_, i: number) => {
@@ -31,16 +31,14 @@ export default function EvolutionAnnual(
   const monthDates: string[] = createMonthDates(year);
 
   return (
-    <div className="w-full overflow-auto">
-      <div className="min-w-[1200px] rounded-md border">
-        <div className="text-sm grid">
-          <EvolutionAnnualTable
-            year={year}
-            monthDates={monthDates}
-            annualTotal={annualTotal}
-          />
-        </div>
+    <MainSection>
+      <div className="w-full min-w-[1200px] rounded-md border text-sm grid overflow-auto">
+        <EvolutionAnnualTable
+          year={year}
+          monthDates={monthDates}
+          annualTotal={annualTotal}
+        />
       </div>
-    </div>
+    </MainSection>
   );
 }
