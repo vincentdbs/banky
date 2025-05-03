@@ -20,6 +20,7 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src"),
       '@api': path.resolve(__dirname, 'ts-built/api'),
+      '@utils': path.resolve(__dirname, 'ts-built/utils'),
       '@components': path.resolve(__dirname, 'ts-built/components'),
       '@i18n': path.resolve(__dirname, 'ts-built/i18n'),
       '@lib': path.resolve(__dirname, 'ts-built/lib'),

@@ -289,7 +289,9 @@ const frMessages: Translations = {
   },
   evolution: {
     annual: {
+      subTotal: 'Sous-total',
       recap: 'Récapitulatif',
+      amount: 'Montant',
       shortName: 'Identifiant',
       name: 'Compte',
       total: 'Total',

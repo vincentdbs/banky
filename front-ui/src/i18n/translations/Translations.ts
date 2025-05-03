@@ -219,6 +219,8 @@ export type Translations = {
   evolution: {
     annual: {
       recap: string,
+      subTotal: string,
+      amount: string,
       shortName: string,
       name: string,
       total: string,
