@@ -1,6 +1,6 @@
 package banky.database.dao;
 
-import banky.db.dao.DashboardDao;
+import banky.db.dao.DashboardAccountsDao;
 import banky.guice.TestModule;
 import banky.webservices.api.dashboard.data.DashboardSavingAccountResponse;
 import banky.webservices.serializer.ThreeDecimalToStringSerializer;
@@ -18,10 +18,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Tests the accuracy of dashboard data calculations for different account types.
  */
 @GuiceTest(TestModule.class)
-public class DashboardDaoFetchAmountsBySavingAccountTest {
+public class DashboardAccountsDaoFetchAmountsBySavingAccountTest {
 
     @Inject
-    private DashboardDao dashboardDao;
+    private DashboardAccountsDao dashboardDao;
 
     /**
      * Tests the fetchAmountsBySavingAccount method of DashboardDao.

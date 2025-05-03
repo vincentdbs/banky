@@ -1,6 +1,6 @@
 package banky.services.dashboard;
 
-import banky.db.dao.DashboardDao;
+import banky.db.dao.DashboardAccountsDao;
 import banky.webservices.api.dashboard.data.DashboardAccountsResponse;
 import banky.webservices.api.dashboard.data.DashboardCheckingAccountResponse;
 import banky.webservices.api.dashboard.data.DashboardMarketAccountResponse;
@@ -16,13 +16,13 @@ import java.util.List;
  * for presentation on the dashboard.
  */
 @Singleton
-public class DashboardService {
+public class DashboardAccountsService {
 
-    private final DashboardDao dashboardDao;
+    private final DashboardAccountsDao dashboardAccountsDao;
 
     @Inject
-    public DashboardService(DashboardDao dashboardDao) {
-        this.dashboardDao = dashboardDao;
+    public DashboardAccountsService(DashboardAccountsDao dashboardAccountsDao) {
+        this.dashboardAccountsDao = dashboardAccountsDao;
     }
 
     /**
@@ -50,7 +50,7 @@ public class DashboardService {
      * @return List of checking accounts with dashboard-specific data
      */
     private List<DashboardCheckingAccountResponse> fetchCheckingAccountData() {
-        return dashboardDao.fetchAmountsByCheckingAccount();
+        return dashboardAccountsDao.fetchAmountsByCheckingAccount();
     }
 
     /**
@@ -60,7 +60,7 @@ public class DashboardService {
      * @return List of savings accounts with dashboard-specific data
      */
     private List<DashboardSavingAccountResponse> fetchSavingsAccountData() {
-        return dashboardDao.fetchAmountsBySavingAccount();
+        return dashboardAccountsDao.fetchAmountsBySavingAccount();
     }
 
     /**
@@ -70,6 +70,6 @@ public class DashboardService {
      * @return List of market accounts with dashboard-specific data
      */
     private List<DashboardMarketAccountResponse> fetchMarketAccountData() {
-        return dashboardDao.getMarketAccountData();
+        return dashboardAccountsDao.fetchAmountsByMarketAccount();
     }
 }

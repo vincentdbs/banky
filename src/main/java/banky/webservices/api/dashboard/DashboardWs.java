@@ -1,10 +1,7 @@
 package banky.webservices.api.dashboard;
 
-import banky.services.dashboard.DashboardService;
+import banky.services.dashboard.DashboardAccountsService;
 import banky.webservices.api.dashboard.data.DashboardAccountsResponse;
-import banky.webservices.api.dashboard.data.DashboardCheckingAccountResponse;
-import banky.webservices.api.dashboard.data.DashboardMarketAccountResponse;
-import banky.webservices.api.dashboard.data.DashboardSavingAccountResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.inject.Inject;
@@ -14,8 +11,6 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
-
-import java.util.List;
 
 /**
  * Web service providing API endpoints to retrieve dashboard data.
@@ -28,10 +23,10 @@ import java.util.List;
 @Singleton
 public class DashboardWs {
     
-    private final DashboardService dashboardService;
+    private final DashboardAccountsService dashboardService;
     
     @Inject
-    private DashboardWs(DashboardService dashboardService) {
+    private DashboardWs(DashboardAccountsService dashboardService) {
         this.dashboardService = dashboardService;
     }
     

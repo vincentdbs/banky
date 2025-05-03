@@ -23,12 +23,12 @@ import java.util.List;
  * Handles database queries to retrieve specialized data for different account types to be displayed on the dashboard.
  */
 @Singleton
-public class DashboardDao {
+public class DashboardAccountsDao {
 
     private final TransactionManagerQuerydsl transactionManager;
 
     @Inject
-    private DashboardDao(TransactionManagerQuerydsl transactionManager) {
+    private DashboardAccountsDao(TransactionManagerQuerydsl transactionManager) {
         this.transactionManager = transactionManager;
     }
 
@@ -116,7 +116,7 @@ public class DashboardDao {
      *
      * @return List of market accounts with dashboard-specific data
      */
-    public List<DashboardMarketAccountResponse> getMarketAccountData() {
+    public List<DashboardMarketAccountResponse> fetchAmountsByMarketAccount() {
         QAccounts accounts = QAccounts.accounts;
         QTransactions transactions = QTransactions.transactions;
 

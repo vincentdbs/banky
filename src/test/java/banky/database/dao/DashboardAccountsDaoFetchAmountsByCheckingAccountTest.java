@@ -1,6 +1,6 @@
 package banky.database.dao;
 
-import banky.db.dao.DashboardDao;
+import banky.db.dao.DashboardAccountsDao;
 import banky.guice.TestModule;
 import banky.webservices.api.dashboard.data.DashboardCheckingAccountResponse;
 import banky.webservices.serializer.ThreeDecimalToStringSerializer;
@@ -18,10 +18,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Tests the accuracy of dashboard data calculations for different account types.
  */
 @GuiceTest(TestModule.class)
-public class DashboardDaoFetchAmountsByCheckingAccountTest {
+public class DashboardAccountsDaoFetchAmountsByCheckingAccountTest {
 
     @Inject
-    private DashboardDao dashboardDao;
+    private DashboardAccountsDao dashboardAccountsDao;
 
     /**
      * Tests the fetchAmountsByCheckingAccount method of DashboardDao.
@@ -38,7 +38,7 @@ public class DashboardDaoFetchAmountsByCheckingAccountTest {
     @Test
     public void fetchAmountsByCheckingAccount__response_must_be_correct() {
         // When fetching checking accounts data
-        List<DashboardCheckingAccountResponse> checkingAccounts = dashboardDao.fetchAmountsByCheckingAccount();
+        List<DashboardCheckingAccountResponse> checkingAccounts = dashboardAccountsDao.fetchAmountsByCheckingAccount();
         
         // Then all checking accounts should be returned
         assertThat(checkingAccounts).hasSize(5); // 5 checking accounts in the test data
