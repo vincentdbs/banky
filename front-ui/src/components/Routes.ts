@@ -17,12 +17,16 @@ export const PARAMETERS_SUB_CATEGORY: string = '/sub-categories';
 export const PARAMETERS_TICKERS: string = '/tickers';
 export const WILD_CARD: string = '*';
 
+export const EVOLUTION: string = '/evolution';
+export const EVOLUTION_ANNUAL: string = '/annual';
+
 export enum Routes {
   ROUTE_DASHBOARD = '/dashboard',
   ROUTE_OPERATIONS_TRANSACTIONS = '/operations/transactions',
   ROUTE_OPERATIONS_ORDERS = '/operations/ordres',
   ROUTE_OPERATIONS_TRANSFERT = '/operations/transfert',
   ROUTE_EVOLUTION_MONTHLY_BUDGET = '/evolution/monthly-budget',
+  ROUTE_EVOLUTION_annual = '/evolution/annual',
   ROUTE_PARAMETERS_ACCOUNTS = '/parameters/accounts',
   ROUTE_PARAMETERS_CATEGORY = '/parameters/categories',
   ROUTE_PARAMETERS_SUB_CATEGORY = '/parameters/sub-categories',

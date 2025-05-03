@@ -24,6 +24,7 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
         <SidebarHeader />
         <SidebarContent>
           <DashboardSidebarGroup />
+          <EvolutionSidebarGroup />
           <OperationsSidebarGroup />
           <EvolutionSidebarGroup />
           <ParametersSidebarGroup />

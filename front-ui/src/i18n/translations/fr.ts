@@ -145,6 +145,7 @@ const frMessages: Translations = {
       transfert: 'Transfert',
     },
     evolution: {
+      title: 'Évolution',
       treasury: 'Trésorerie',
       graph: 'Graphiques',
       monthlyBudget: 'Budget mensuel',
