@@ -2,6 +2,12 @@ const priceRegex: RegExp = /\B(?=(\d{3})+(?!\d))/g;
 
 export const FIRST_YEAR: 2021 = 2021;
 
+/**
+ * Formats a number as a decimal price with the specified number of decimal places
+ * @param price - The price to format
+ * @param numberOfDecimals - Number of decimal places to display (default: 2)
+ * @returns The formatted price string
+ */
 export const formatDecimalPrice = (price: number, numberOfDecimals: number = 2): string => {
   if (numberOfDecimals < 0) {
     throw new Error('Number of decimals cannot be negative');
@@ -15,6 +21,12 @@ export const formatDecimalPrice = (price: number, numberOfDecimals: number = 2):
   return decimalPart !== undefined ? `${integerPart},${decimalPart}` : integerPart;
 };
 
+/**
+ * Formats a number as a Euro price with the specified number of decimal places
+ * @param price - The price to format
+ * @param numberOfDecimals - Number of decimal places to display (default: 2)
+ * @returns The formatted price string with Euro symbol
+ */
 export const formatEuroDecimalPrice = (price: number, numberOfDecimals: number = 2): string => (
   `${formatDecimalPrice(price, numberOfDecimals)} €`
 );
@@ -38,6 +50,33 @@ export const formatEuroDecimalPriceFromString = (priceString: string, numberOfDe
   const numericValue: number = parseInt(priceString, 10) / divisor;
 
   return formatEuroDecimalPrice(numericValue, numberOfDecimals);
+};
+
+/**
+ * Formats a number as a currency string using the French locale and Euro currency
+ * @param amount - The amount to format
+ * @returns The formatted currency string
+ */
+export const formatCurrency = (amount: number): string => {
+  return new Intl.NumberFormat('fr-FR', {
+    style: 'currency',
+    currency: 'EUR',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(amount);
+};
+
+/**
+ * Formats a number as a percentage string using the French locale
+ * @param percentage - The percentage value to format (0.01 = 1%)
+ * @returns The formatted percentage string
+ */
+export const formatPercentage = (percentage: number): string => {
+  return new Intl.NumberFormat('fr-FR', {
+    style: 'percent',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(percentage / 100);
 };
 
 /**
