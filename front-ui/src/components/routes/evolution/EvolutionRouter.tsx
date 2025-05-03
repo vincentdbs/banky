@@ -1,3 +1,4 @@
+import { getMockAnnualEvolutionData } from '@components/pages/evolution/annual/annual-mock-data';
 import MonthlyBudget from '@components/pages/evolution/monthly-budget/MonthlyBudget';
 import {
   EVOLUTION_MONTHLY_BUDGET,
@@ -13,11 +14,17 @@ import { Navigate, useRoutes } from 'react-router';
  * Handles routing to Treasury, Graph, and Monthly Budget pages
  */
 export default function EvolutionRouter() {
+  const mockData = getMockAnnualEvolutionData();
+
   return useRoutes(
     [
       {
         path: EVOLUTION_ANNUAL,
-        element: <EvolutionAnnual />,
+        element: <EvolutionAnnual
+          year={mockData.year}
+          annualTotal={mockData.annualTotal}
+          yearSummary={mockData.yearSummary}
+        />,
       },
       {
         path: EVOLUTION_MONTHLY_BUDGET,

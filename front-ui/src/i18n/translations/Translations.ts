@@ -100,6 +100,7 @@ export type Translations = {
       treasury: string,
       graph: string,
       monthlyBudget: string,
+      annual: string,
     },
   },
   parameters: {
@@ -213,6 +214,20 @@ export type Translations = {
     },
     charts: {
       title: string,
+    }
+  },
+  evolution: {
+    annual: {
+      recap: string,
+      shortName: string,
+      name: string,
+      total: string,
+      gainLoss: string,
+      percentage: string,
+      interest: string,
+      checking: string,
+      savings: string,
+      market: string,
     },
   },
 };

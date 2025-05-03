@@ -149,6 +149,7 @@ const frMessages: Translations = {
       treasury: 'Trésorerie',
       graph: 'Graphiques',
       monthlyBudget: 'Budget mensuel',
+      annual: 'Récapitulatif annuel',
     },
   },
   parameters: {
@@ -284,6 +285,20 @@ const frMessages: Translations = {
     },
     charts: {
       title: 'Évolution total par mois',
+    }
+  },
+  evolution: {
+    annual: {
+      recap: 'Récapitulatif',
+      shortName: 'Identifiant',
+      name: 'Compte',
+      total: 'Total',
+      gainLoss: 'Gain/Perte',
+      percentage: '%',
+      interest: 'Intérêts',
+      checking: 'Comptes courants',
+      savings: 'Épargnes',
+      market: 'Investissements',
     },
   },
 } as const;
