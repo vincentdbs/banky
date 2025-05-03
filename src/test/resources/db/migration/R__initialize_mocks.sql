@@ -138,6 +138,11 @@ INSERT INTO bky_transactions (id, account_id, amount, comment, date, in_bank_dat
 VALUES 
     (1021, 6, 50.00, 'Debit Transaction Livret A', '2025-01-25', '2025-01-26', 'DEBIT', 20, '');
 
+-- Interest transaction for account ID 6 (Livret A)
+INSERT INTO bky_transactions (id, account_id, amount, comment, date, in_bank_date, side, sub_category_id, from_to_person_name)
+VALUES 
+    (1022, 6, 152.24, 'Interest Transaction Livret A', '2025-02-10', '2025-02-10', 'CREDIT', 27, '');
+
 -- Transfers from account ID 1 to account ID 6
 INSERT INTO bky_transfert (id, from_account_id, to_account_id, amount, date)
 VALUES 

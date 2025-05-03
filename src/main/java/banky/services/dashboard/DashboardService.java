@@ -60,7 +60,7 @@ public class DashboardService {
      * @return List of savings accounts with dashboard-specific data
      */
     private List<DashboardSavingAccountResponse> fetchSavingsAccountData() {
-        return dashboardDao.getSavingsAccountData();
+        return dashboardDao.fetchAmountsBySavingAccount();
     }
 
     /**

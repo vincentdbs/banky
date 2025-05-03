@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Tests the accuracy of dashboard data calculations for different account types.
  */
 @GuiceTest(TestModule.class)
-public class DashboardTest {
+public class DashboardDaoFetchAmountsByCheckingAccountTest {
 
     @Inject
     private DashboardDao dashboardDao;
