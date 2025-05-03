@@ -41,6 +41,7 @@ CREATE TABLE bky_transfert
     from_account_id   bigint(11),
     to_account_id     bigint(11),
     amount DECIMAL(15, 3) NOT NULL,
+    date   DATE           NOT NULL,
     FOREIGN KEY (from_account_id) REFERENCES bky_accounts (id),
     FOREIGN KEY (to_account_id) REFERENCES bky_accounts (id)
 );

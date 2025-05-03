@@ -50,7 +50,7 @@ public class DashboardService {
      * @return List of checking accounts with dashboard-specific data
      */
     private List<DashboardCheckingAccountResponse> fetchCheckingAccountData() {
-        return dashboardDao.getCheckingAccountData();
+        return dashboardDao.fetchAmountsByCheckingAccount();
     }
 
     /**

@@ -31,7 +31,7 @@ public class DashboardWs {
     private final DashboardService dashboardService;
     
     @Inject
-    public DashboardWs(DashboardService dashboardService) {
+    private DashboardWs(DashboardService dashboardService) {
         this.dashboardService = dashboardService;
     }
     

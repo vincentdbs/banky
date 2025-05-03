@@ -1,5 +1,6 @@
 package banky.webservices.api.dashboard.data;
 
+import banky.webservices.serializer.ThreeDecimalToStringSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
@@ -15,7 +16,9 @@ public record DashboardSavingAccountResponse(
     String name,
     String shortName,
     String colorCode,
+    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
     BigDecimal totalAmount,
+    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
     BigDecimal interestAmount
 ) {
 }

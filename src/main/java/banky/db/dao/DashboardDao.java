@@ -36,7 +36,7 @@ public class DashboardDao {
      *
      * @return List of checking accounts with dashboard-specific data
      */
-    public List<DashboardCheckingAccountResponse> getCheckingAccountData() {
+    public List<DashboardCheckingAccountResponse> fetchAmountsByCheckingAccount() {
         QAccounts accounts = QAccounts.accounts;
         QTransactions transactions = QTransactions.transactions;
         QTransfert transferts = QTransfert.transfert;
@@ -61,7 +61,7 @@ public class DashboardDao {
                                 .selectQuery()
                                 .select(transactions.amount.sum().coalesce(BigDecimal.ZERO))
                                 .from(transactions)
-                                .where(transactions.side.eq("CREDIT").and(transactions.accountId.eq(accounts.id)))
+                                .where(transactions.side.eq(TransactionSide.CREDIT.name()).and(transactions.accountId.eq(accounts.id)))
                         )
                         .subtract(
                             // Subtract DEBIT transactions
@@ -69,7 +69,7 @@ public class DashboardDao {
                                 .selectQuery()
                                 .select(transactions.amount.sum().coalesce(BigDecimal.ZERO))
                                 .from(transactions)
-                                .where(transactions.side.eq("DEBIT").and(transactions.accountId.eq(accounts.id)))
+                                .where(transactions.side.eq(TransactionSide.DEBIT.name()).and(transactions.accountId.eq(accounts.id)))
                         )
                         .add(
                             // Add incoming transfers
@@ -95,9 +95,10 @@ public class DashboardDao {
                                 .selectQuery()
                                 .select(transactions.amount.sum().coalesce(BigDecimal.ZERO))
                                 .from(transactions)
-                                .where(transactions.side.eq(TransactionSide.DEBIT.name())
-                                    .and(transactions.accountId.eq(accounts.id))
-                                    .and(transactions.inBankDate.isNotNull())
+                                .where(
+                                    transactions.side.eq(TransactionSide.CREDIT.name())
+                                        .and(transactions.accountId.eq(accounts.id))
+                                        .and(transactions.inBankDate.isNotNull())
                                 )
                         )
                         .subtract(
@@ -106,9 +107,10 @@ public class DashboardDao {
                                 .selectQuery()
                                 .select(transactions.amount.sum().coalesce(BigDecimal.ZERO))
                                 .from(transactions)
-                                .where(transactions.side.eq(TransactionSide.DEBIT.name())
-                                    .and(transactions.accountId.eq(accounts.id))
-                                    .and(transactions.inBankDate.isNotNull())
+                                .where(
+                                    transactions.side.eq(TransactionSide.DEBIT.name())
+                                        .and(transactions.accountId.eq(accounts.id))
+                                        .and(transactions.inBankDate.isNotNull())
                                 )
                         )
                         .add(
