@@ -13,6 +13,9 @@ public class Transfert extends com.coreoz.plume.db.querydsl.crud.CrudEntityQuery
     @Column("amount")
     private java.math.BigDecimal amount;
 
+    @Column("date")
+    private java.time.LocalDate date;
+
     @JsonSerialize(using=com.fasterxml.jackson.databind.ser.std.ToStringSerializer.class)
     @Column("from_account_id")
     private Long fromAccountId;
@@ -31,6 +34,14 @@ public class Transfert extends com.coreoz.plume.db.querydsl.crud.CrudEntityQuery
 
     public void setAmount(java.math.BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public java.time.LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(java.time.LocalDate date) {
+        this.date = date;
     }
 
     public Long getFromAccountId() {

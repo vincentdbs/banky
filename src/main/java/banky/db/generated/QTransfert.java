@@ -26,6 +26,8 @@ public class QTransfert extends com.querydsl.sql.RelationalPathBase<Transfert> {
 
     public final NumberPath<java.math.BigDecimal> amount = createNumber("amount", java.math.BigDecimal.class);
 
+    public final DatePath<java.time.LocalDate> date = createDate("date", java.time.LocalDate.class);
+
     public final NumberPath<Long> fromAccountId = createNumber("fromAccountId", Long.class);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
@@ -65,6 +67,7 @@ public class QTransfert extends com.querydsl.sql.RelationalPathBase<Transfert> {
 
     public void addMetadata() {
         addMetadata(amount, ColumnMetadata.named("amount").withIndex(4).ofType(Types.DECIMAL).withSize(15).withDigits(3).notNull());
+        addMetadata(date, ColumnMetadata.named("date").withIndex(5).ofType(Types.DATE).withSize(10).notNull());
         addMetadata(fromAccountId, ColumnMetadata.named("from_account_id").withIndex(2).ofType(Types.BIGINT).withSize(19));
         addMetadata(id, ColumnMetadata.named("id").withIndex(1).ofType(Types.BIGINT).withSize(19).notNull());
         addMetadata(toAccountId, ColumnMetadata.named("to_account_id").withIndex(3).ofType(Types.BIGINT).withSize(19));
