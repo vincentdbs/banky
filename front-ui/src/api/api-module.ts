@@ -1,5 +1,6 @@
 import installAccountsApi from '@api/accounts/accounts-api-module';
 import installCategoriesApi from '@api/categories/categories-api-module';
+import installDashboardApi from '@api/dashboard/dashboard-api-module';
 import installTransactionsApi from '@api/transactions/transactions-api-module';
 import { Injector } from 'plume-ts-di';
 import ApiHttpClient from './ApiHttpClient';
@@ -9,4 +10,5 @@ export default function installApiModule(injector: Injector) {
   installCategoriesApi(injector);
   installAccountsApi(injector);
   installTransactionsApi(injector);
+  installDashboardApi(injector);
 }
