@@ -23,7 +23,7 @@ export default function MoneyRecapAccounts(
           name="Account Name"
           shortName="AN"
           amount={100}
-          inBankAmount={150}
+          subAmount={150}
           type={AccountType.CHECKING}
         />
         <MoneyRecapAccount
@@ -31,7 +31,7 @@ export default function MoneyRecapAccounts(
           name="Account Name"
           shortName="AN"
           amount={100}
-          inBankAmount={150}
+          subAmount={150}
           type={AccountType.CHECKING}
         />
       </CardContent>

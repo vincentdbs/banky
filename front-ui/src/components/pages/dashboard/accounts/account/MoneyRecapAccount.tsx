@@ -9,7 +9,7 @@ type MoneyRecapAccountProps = {
   name: string,
   shortName: string,
   amount: number,
-  inBankAmount: number,
+  subAmount: number,
   type: AccountType,
 };
 
@@ -19,7 +19,7 @@ export default function MoneyRecapAccount(
     name,
     shortName,
     amount,
-    inBankAmount,
+    subAmount,
     type,
   }: MoneyRecapAccountProps,
 ) {
@@ -40,7 +40,7 @@ export default function MoneyRecapAccount(
       <div>
         <div>
           <p className="text-right">{formatEuroDecimalPrice(amount)}</p>
-          <p className="text-xs text-right text-muted-foreground">{formatEuroDecimalPrice(inBankAmount)}</p>
+          <p className="text-xs text-right text-muted-foreground">{formatEuroDecimalPrice(subAmount)}</p>
         </div>
       </div>
     </div>
