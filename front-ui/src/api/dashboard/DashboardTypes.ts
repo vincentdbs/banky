@@ -8,8 +8,8 @@ export type DashboardCheckingAccountResponse = {
   name: string,
   shortName: string,
   colorCode: string,
-  totalAmount: string,
-  inBankAmount: string,
+  totalAmount: string, // 1123.320 => 1123320
+  inBankAmount: string, // 1123.320 => 1123320
 };
 
 /**
@@ -20,8 +20,8 @@ export type DashboardSavingAccountResponse = {
   name: string,
   shortName: string,
   colorCode: string,
-  totalAmount: string,
-  interestAmount: string,
+  totalAmount: string, // 1123.320 => 1123320
+  interestAmount: string, // 1123.320 => 1123320
 };
 
 /**
@@ -32,7 +32,7 @@ export type DashboardMarketAccountResponse = {
   name: string,
   shortName: string,
   colorCode: string,
-  totalAmount: string,
+  totalAmount: string, // 1123.320 => 1123320
 };
 
 /**

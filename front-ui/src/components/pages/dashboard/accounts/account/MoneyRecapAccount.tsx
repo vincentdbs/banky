@@ -1,4 +1,5 @@
-import { formatEuroDecimalPrice } from '@/utils/number/NumberUtils';
+import { formatEuroDecimalPriceFromString } from '@/utils/number/NumberUtils';
+import { isNotNullish } from '@/utils/types/TypesUtils';
 import { AccountType } from '@api/accounts/AccountsTypes';
 import AccountTypeLogo from '@components/theme/icons/account-type/AccountTypeIcon';
 import ColoredIconsWrapper from '@components/theme/icons/ColoredIconsWrapper';
@@ -8,8 +9,8 @@ type MoneyRecapAccountProps = {
   color: string,
   name: string,
   shortName: string,
-  amount: number,
-  subAmount: number,
+  amount: string,
+  subAmount?: string,
   type: AccountType,
 };
 
@@ -39,8 +40,15 @@ export default function MoneyRecapAccount(
       </div>
       <div>
         <div>
-          <p className="text-right">{formatEuroDecimalPrice(amount)}</p>
-          <p className="text-xs text-right text-muted-foreground">{formatEuroDecimalPrice(subAmount)}</p>
+          <p className="text-right">{formatEuroDecimalPriceFromString(amount)}</p>
+          {
+            isNotNullish(subAmount)
+            && (
+              <p className="text-xs text-muted-foreground text-right">
+                {formatEuroDecimalPriceFromString(subAmount)}
+              </p>
+            )
+          }
         </div>
       </div>
     </div>

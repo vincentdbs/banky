@@ -2,6 +2,7 @@ package banky.webservices.api.dashboard;
 
 import banky.services.dashboard.DashboardAccountsService;
 import banky.webservices.api.dashboard.data.DashboardAccountsResponse;
+import com.coreoz.plume.jersey.security.permission.PublicApi;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.inject.Inject;
@@ -21,6 +22,7 @@ import jakarta.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Singleton
+@PublicApi
 public class DashboardWs {
     
     private final DashboardAccountsService dashboardService;

@@ -1,4 +1,6 @@
 import DashboardApi from '@api/dashboard/DashboardApi';
+import { DashboardAccountsResponse } from '@api/dashboard/DashboardTypes';
+import { HttpPromise } from 'simple-http-rest-client';
 
 /**
  * Service that manages dashboard-related business logic.
@@ -10,9 +12,9 @@ export default class DashboardService {
 
   /**
    * Fetches all dashboard account data from the API.
-   * Updates the observable state with loading status, results, and any errors.
+   * Returns a promise containing the dashboard accounts response.
    */
-  fetchDashboardAccounts(): void {
-    this.dashboardApi.fetchDashboardAccounts();
+  fetchDashboardAccounts(): HttpPromise<DashboardAccountsResponse> {
+    return this.dashboardApi.fetchDashboardAccounts();
   }
 }
