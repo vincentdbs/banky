@@ -1,5 +1,6 @@
 package banky.webservices.api.evolution.responses;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -7,8 +8,8 @@ import java.util.List;
  * Corresponds to the TotalByCategory type in the frontend
  */
 public record TotalByCategoryResponse(
-    double total,
-    double gainLoss,
-    double gainLossPercentage,
+    BigDecimal total,
+    BigDecimal gainLoss,
+    BigDecimal gainLossPercentage,
     List<TotalByAccountResponse> totalByAccount
 ) {}

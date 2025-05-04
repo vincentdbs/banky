@@ -2,6 +2,7 @@ package banky.webservices.api.evolution.responses;
 
 import banky.services.accounts.enums.AccountType;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 /**
@@ -9,8 +10,8 @@ import java.util.Map;
  * Corresponds to the TotalByAccountAndMonth type in the frontend
  */
 public record TotalByAccountAndMonthResponse(
-    double total,
-    double gainLoss,
-    double gainLossPercentage,
+    BigDecimal total,
+    BigDecimal gainLoss,
+    BigDecimal gainLossPercentage,
     Map<AccountType, TotalByCategoryResponse> totalByCategory
 ) {}
