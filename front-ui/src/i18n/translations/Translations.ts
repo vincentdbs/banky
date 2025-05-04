@@ -67,6 +67,9 @@ export type Translations = {
     FIELD_REQUIRED: (fieldName: string) => string,
     MESSAGE: (message: string) => string,
   },
+  pagination: {
+    pageInfo: (currentPage: number, totalPage: number) => string,
+  },
   sidebar: {
     dashboard: {
       title: string,

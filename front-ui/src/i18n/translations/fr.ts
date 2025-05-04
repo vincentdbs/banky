@@ -69,6 +69,9 @@ const frMessages: Translations = {
     FIELD_REQUIRED: (fieldName: string) => `Le champ '${fieldName}' est requis`,
     MESSAGE: (message: string) => message,
   },
+  pagination: {
+    pageInfo: (currentPage: number, totalPage: number) => `${currentPage}/${totalPage}`,
+  },
   sidebar: {
     dashboard: {
       title: 'Dashboard',

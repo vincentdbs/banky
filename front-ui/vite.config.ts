@@ -24,6 +24,7 @@ export default defineConfig({
       '@i18n': path.resolve(__dirname, 'ts-built/i18n'),
       '@lib': path.resolve(__dirname, 'ts-built/lib'),
       '@services': path.resolve(__dirname, 'ts-built/services'),
+      '@hooks': path.resolve(__dirname, 'ts-built/hooks'),
     },
   },
 });

@@ -1,6 +1,7 @@
 package banky.webservices.api.transactions;
 
 import banky.services.transactions.TransactionsService;
+import banky.webservices.data.pagination.PaginatedResponse;
 import banky.webservices.api.transactions.requests.TransactionRequest;
 import banky.webservices.api.transactions.responses.TransactionResponse;
 import com.coreoz.plume.jersey.errors.Validators;
@@ -17,7 +18,8 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
-import java.util.List;
+import static banky.webservices.data.pagination.PaginationHelper.DEFAULT_PAGE;
+import static banky.webservices.data.pagination.PaginationHelper.DEFAULT_PAGE_SIZE;
 
 @Path("/transactions")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -35,12 +37,15 @@ public class TransactionsWs {
     }
 
     @GET
-    @Operation(description = "Fetch all transactions")
-    public List<TransactionResponse> fetchTransactions(
-        @QueryParam("page") Long page,
-        @QueryParam("size") Long size
+    @Operation(description = "Fetch transactions with pagination")
+    public PaginatedResponse<TransactionResponse> fetchTransactions(
+        @QueryParam("page") Integer page,
+        @QueryParam("size") Integer size
     ) {
-        return transactionsService.fetchTransactions(page, size);
+        int pageSize = size != null ? size : DEFAULT_PAGE_SIZE;
+        int pageNumber = page != null ? page : DEFAULT_PAGE;
+        
+        return transactionsService.fetchTransactions(pageNumber, pageSize);
     }
 
     @POST
