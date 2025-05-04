@@ -81,7 +81,7 @@ export default function TransactionsForm() {
           accountsChoices={accountsChoices}
           subCategoryChoices={subCategoryChoices}
         />
-        <Button disabled={!form.formState.isValid} className="w-full" type="submit">Submit</Button>
+        <Button disabled={!form.formState.isValid} className="w-full" type="submit">{messages.action.save}</Button>
       </form>
     </Form>
   );

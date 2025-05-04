@@ -1,7 +1,7 @@
+import { TransactionSide } from '@/api/transactions/TransactionsTypes';
 import {
   TransactionFields,
 } from '@components/pages/operations/transactions/form/fields/TransactionsFormFields';
-import { TransactionSide } from '@/api/transactions/TransactionsTypes';
 import { Translations } from './Translations';
 
 const frMessages: Translations = {
@@ -145,6 +145,27 @@ const frMessages: Translations = {
         },
       },
     },
+    transferts: {
+      title: 'Transferts',
+      subTitle: 'Liste des transferts entre comptes',
+      table: {
+        date: 'Date',
+        amount: 'Montant',
+        fromAccountName: 'Source',
+        toAccountName: 'Destination',
+        action: 'Action',
+      },
+      form: {
+        title: 'Transfert',
+        description: 'Ajout d\'un transfert entre comptes',
+        fromAccount: 'Source',
+        toAccount: 'Destination',
+        amount: 'Montant',
+        date: 'Date',
+        selectAccount: 'Sélectionner un compte',
+        pickDate: 'Choisir une date',
+      },
+    },
   },
   dashboard: {
     cards: {
@@ -152,8 +173,8 @@ const frMessages: Translations = {
     },
     charts: {
       title: 'Évolution total par mois',
-    }
-  }
+    },
+  },
 } as const;
 
 export default frMessages;

@@ -1,4 +1,5 @@
 import Transactions from '@components/pages/operations/transactions/Transactions';
+import Transferts from '@components/pages/operations/transferts/Transferts';
 import {
   OPERATIONS_ORDERS,
   OPERATIONS_TRANSACTIONS,
@@ -21,7 +22,7 @@ export default function OperationsRouter() {
       },
       {
         path: OPERATIONS_TRANSFERT,
-        element: (<p>TODO</p>),
+        element: <Transferts />,
       },
       {
         path: WILD_CARD,
