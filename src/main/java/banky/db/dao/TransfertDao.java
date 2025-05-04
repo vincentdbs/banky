@@ -37,8 +37,10 @@ public class TransfertDao extends CrudDaoQuerydsl<Transfert> {
                 QTransfert.transfert.id,
                 QTransfert.transfert.fromAccountId,
                 fromAccount.name,
+                fromAccount.color,
                 QTransfert.transfert.toAccountId,
                 toAccount.name,
+                toAccount.color,
                 QTransfert.transfert.amount,
                 QTransfert.transfert.date
             )
@@ -55,8 +57,10 @@ public class TransfertDao extends CrudDaoQuerydsl<Transfert> {
                     transfert.get(QTransfert.transfert.id),
                     transfert.get(QTransfert.transfert.fromAccountId),
                     transfert.get(fromAccount.name),
+                    transfert.get(fromAccount.color),
                     transfert.get(QTransfert.transfert.toAccountId),
                     transfert.get(toAccount.name),
+                    transfert.get(toAccount.color),
                     transfert.get(QTransfert.transfert.amount),
                     transfert.get(QTransfert.transfert.date)
                 )

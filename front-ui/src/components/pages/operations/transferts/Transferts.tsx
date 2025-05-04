@@ -1,23 +1,40 @@
-import { TransactionResponse } from '@api/transactions/TransactionsTypes';
+import { TransfertResponse } from '@api/transferts/TransfertTypes';
 import RessourceLayout from '@components/layout/parameters/RessourceLayout';
-import TransactionsFormModal
-  from '@components/pages/operations/transactions/modal/TransactionsFormModal';
-import TransactionsTable from '@components/pages/operations/transactions/table/TransactionsTable';
 import useMessages from '@i18n/hooks/messagesHook';
+import useLoader from '@lib/plume-http-react-hook-loader/promiseLoaderHook';
 import { useOnComponentMounted } from '@lib/react-hooks-alias/ReactHooksAlias';
-import TransactionsService from '@services/transactions/TransactionsService';
+import TransfertsService from '@services/transferts/TransfertsService';
 import { getGlobalInstance } from 'plume-ts-di';
 import React, { useState } from 'react';
+import TransfertsFormModal from './modal/TransfertsFormModal';
+import TransfertsTable from './table/TransfertsTable';
 
-export default function Transactions() {
+/**
+ * Transferts page component that displays a list of transferts between accounts
+ * and provides a way to create new ones
+ */
+export default function Transferts() {
+  const transfertsService: TransfertsService = getGlobalInstance(TransfertsService);
+
+  const [transferts, setTransferts] = useState<TransfertResponse[]>([]);
+  const { messages } = useMessages();
+
+  const loader = useLoader();
+
+  useOnComponentMounted(() => {
+    loader.monitor(
+      transfertsService.fetchTransferts()
+        .then(setTransferts),
+    );
+  });
 
   return (
     <RessourceLayout
       title={messages.operations.transferts.title}
       subTitle={messages.operations.transferts.subTitle}
     >
-      <TransactionsFormModal />
-      <TransactionsTable transactions={transactions} />
+      <TransfertsFormModal />
+      <TransfertsTable transferts={transferts} />
     </RessourceLayout>
   );
 }

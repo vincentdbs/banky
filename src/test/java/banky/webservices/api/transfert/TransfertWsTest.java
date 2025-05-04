@@ -34,8 +34,16 @@ class TransfertWsTest {
     void fetchTransferts_shouldReturnTransfertsList() {
         // Arrange
         List<TransfertResponse> expectedTransferts = List.of(
-            new TransfertResponse(1L, 10L, "Checking", 20L, "Savings",
-                new BigDecimal("100.00"), LocalDate.of(2025, 5, 1))
+            new TransfertResponse(
+                1L,
+                10L,
+                "Checking",
+                "FFFFFF",
+                20L,
+                "Savings",
+                "000000",
+                new BigDecimal("100.00"),
+                LocalDate.of(2025, 5, 1))
         );
         when(transfertService.fetchTransferts()).thenReturn(expectedTransferts);
 
@@ -50,7 +58,10 @@ class TransfertWsTest {
     void createTransfert_shouldReturnNewId_whenRequestIsValid() {
         // Arrange
         TransfertRequest request = new TransfertRequest(
-            10L, 20L, new BigDecimal("100.00"), LocalDate.of(2025, 5, 1)
+            10L,
+            20L,
+            new BigDecimal("100.00"),
+            LocalDate.of(2025, 5, 1)
         );
         when(transfertService.createTransfert(request)).thenReturn(1L);
 

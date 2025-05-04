@@ -2,10 +2,8 @@ package banky.services.transfert;
 
 import banky.db.dao.TransfertDao;
 import banky.db.generated.Transfert;
-import banky.guice.TestModule;
 import banky.webservices.api.transfert.requests.TransfertRequest;
 import banky.webservices.api.transfert.responses.TransfertResponse;
-import com.coreoz.test.GuiceTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -36,8 +34,17 @@ class TransfertServiceTest {
     void fetchTransferts_shouldReturnListFromDao() {
         // Arrange
         List<TransfertResponse> expectedTransferts = List.of(
-            new TransfertResponse(1L, 10L, "Checking", 20L, "Savings",
-                new BigDecimal("100.00"), LocalDate.of(2025, 5, 1))
+            new TransfertResponse(
+                1L,
+                10L,
+                "Checking",
+                "FFFFFF",
+                20L,
+                "Savings",
+                "000000",
+                new BigDecimal("100.00"),
+                LocalDate.of(2025, 5, 1)
+            )
         );
         when(transfertDao.fetchTransferts()).thenReturn(expectedTransferts);
 

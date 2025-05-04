@@ -1,5 +1,6 @@
 package banky.webservices.api.transfert.responses;
 
+import banky.webservices.serializer.ThreeDecimalToStringSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
@@ -14,9 +15,11 @@ public record TransfertResponse(
     Long id,
     Long fromAccountId,
     String fromAccountName,
+    String fromAccountColor,
     Long toAccountId,
     String toAccountName,
-    @JsonSerialize(using = ToStringSerializer.class)
+    String toAccountColor,
+    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
     BigDecimal amount,
     LocalDate date
 ) {}

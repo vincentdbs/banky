@@ -134,6 +134,27 @@ export type Translations = {
         },
       },
     },
+    transferts: {
+      title: string,
+      subTitle: string,
+      table: {
+        date: string,
+        amount: string,
+        fromAccountName: string,
+        toAccountName: string,
+        action: string,
+      },
+      form: {
+        title: string,
+        description: string,
+        fromAccount: string,
+        toAccount: string,
+        amount: string,
+        date: string,
+        selectAccount: string,
+        pickDate: string,
+      },
+    },
   },
   dashboard: {
     cards: {
