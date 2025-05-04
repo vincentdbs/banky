@@ -23,11 +23,15 @@ public class TransfertDao extends CrudDaoQuerydsl<Transfert> {
     }
 
     /**
-     * Fetches all transfers with account details
-     *
-     * @return List of transfers with source and destination account information
+     * Fetches transfers with pagination support
+     * 
+     * @param page The page number (1-based)
+     * @param size The number of items per page
+     * @return A list of transfers for the requested page
      */
-    public List<TransfertResponse> fetchTransferts() {
+    public List<TransfertResponse> fetchTransfertsPaginated(int page, int size) {
+        int offset = (page - 1) * size; // Convert to 0-based for database query
+        
         QAccounts fromAccount = new QAccounts("from_account");
         QAccounts toAccount = new QAccounts("to_account");
 
@@ -49,6 +53,8 @@ public class TransfertDao extends CrudDaoQuerydsl<Transfert> {
             .on(QTransfert.transfert.fromAccountId.eq(fromAccount.id))
             .innerJoin(toAccount)
             .on(QTransfert.transfert.toAccountId.eq(toAccount.id))
+            .offset(offset)
+            .limit(size)
             .orderBy(QTransfert.transfert.date.desc())
             .fetch()
             .stream()
@@ -66,5 +72,18 @@ public class TransfertDao extends CrudDaoQuerydsl<Transfert> {
                 )
             )
             .toList();
+    }
+    
+    /**
+     * Count the total number of transfers in the database
+     * 
+     * @return The total count of transfers
+     */
+    public long countTransferts() {
+        return this.transactionManager
+            .selectQuery()
+            .select(QTransfert.transfert.count())
+            .from(QTransfert.transfert)
+            .fetchOne();
     }
 }

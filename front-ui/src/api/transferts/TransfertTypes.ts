@@ -1,3 +1,5 @@
+import { PaginatedResponse } from '@/utils/types/PaginationTypes';
+
 /**
  * Types for transfert API interactions
  */
@@ -19,3 +21,8 @@ export type TransfertRequest = {
   amount: number,
   date: string,
 };
+
+/**
+ * Type for paginated transfert responses
+ */
+export type PaginatedTransfertsResponse = PaginatedResponse<TransfertResponse>;

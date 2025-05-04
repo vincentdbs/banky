@@ -4,6 +4,7 @@ import banky.db.dao.TransfertDao;
 import banky.db.generated.Transfert;
 import banky.webservices.api.transfert.requests.TransfertRequest;
 import banky.webservices.api.transfert.responses.TransfertResponse;
+import banky.webservices.data.pagination.PaginatedResponse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 /**
@@ -31,7 +33,7 @@ class TransfertServiceTest {
     private TransfertService transfertService;
 
     @Test
-    void fetchTransferts_shouldReturnListFromDao() {
+    void fetchPaginatedTransferts_shouldReturnPaginatedResponse() {
         // Arrange
         List<TransfertResponse> expectedTransferts = List.of(
             new TransfertResponse(
@@ -46,13 +48,18 @@ class TransfertServiceTest {
                 LocalDate.of(2025, 5, 1)
             )
         );
-        when(transfertDao.fetchTransferts()).thenReturn(expectedTransferts);
+        when(transfertDao.countTransferts()).thenReturn(1L);
+        when(transfertDao.fetchTransfertsPaginated(anyInt(), anyInt())).thenReturn(expectedTransferts);
 
         // Act
-        List<TransfertResponse> actualTransferts = transfertService.fetchTransferts();
+        PaginatedResponse<TransfertResponse> paginatedResponse = transfertService.fetchPaginatedTransferts(1, 20);
 
         // Assert
-        assertThat(actualTransferts).isEqualTo(expectedTransferts);
+        assertThat(paginatedResponse.content()).isEqualTo(expectedTransferts);
+        assertThat(paginatedResponse.pagination().currentPage()).isEqualTo(1);
+        assertThat(paginatedResponse.pagination().totalPages()).isEqualTo(1);
+        assertThat(paginatedResponse.pagination().totalElements()).isEqualTo(1);
+        assertThat(paginatedResponse.pagination().size()).isEqualTo(20);
     }
 
     @Test

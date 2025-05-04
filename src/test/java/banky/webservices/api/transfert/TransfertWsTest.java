@@ -3,6 +3,8 @@ package banky.webservices.api.transfert;
 import banky.services.transfert.TransfertService;
 import banky.webservices.api.transfert.requests.TransfertRequest;
 import banky.webservices.api.transfert.responses.TransfertResponse;
+import banky.webservices.data.pagination.PaginatedResponse;
+import banky.webservices.data.pagination.PaginationMeta;
 import com.coreoz.plume.jersey.errors.WsException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,7 +33,7 @@ class TransfertWsTest {
     private TransfertWs transfertWs;
 
     @Test
-    void fetchTransferts_shouldReturnTransfertsList() {
+    void fetchTransferts_shouldReturnPaginatedTransferts_withDefaultPagination() {
         // Arrange
         List<TransfertResponse> expectedTransferts = List.of(
             new TransfertResponse(
@@ -45,13 +47,51 @@ class TransfertWsTest {
                 new BigDecimal("100.00"),
                 LocalDate.of(2025, 5, 1))
         );
-        when(transfertService.fetchTransferts()).thenReturn(expectedTransferts);
+        PaginationMeta paginationMeta = new PaginationMeta(1, 1, 1, 20);
+        PaginatedResponse<TransfertResponse> expectedResponse = 
+            new PaginatedResponse<>(expectedTransferts, paginationMeta);
+            
+        when(transfertService.fetchPaginatedTransferts(1, 20)).thenReturn(expectedResponse);
 
         // Act
-        List<TransfertResponse> actualTransferts = transfertWs.fetchTransferts();
+        PaginatedResponse<TransfertResponse> actualResponse = transfertWs.fetchTransferts(null, null);
 
         // Assert
-        assertThat(actualTransferts).isEqualTo(expectedTransferts);
+        assertThat(actualResponse).isEqualTo(expectedResponse);
+        assertThat(actualResponse.content()).isEqualTo(expectedTransferts);
+        assertThat(actualResponse.pagination().currentPage()).isEqualTo(1);
+        assertThat(actualResponse.pagination().size()).isEqualTo(20);
+    }
+    
+    @Test
+    void fetchTransferts_shouldReturnPaginatedTransferts_withCustomPagination() {
+        // Arrange
+        List<TransfertResponse> expectedTransferts = List.of(
+            new TransfertResponse(
+                1L,
+                10L,
+                "Checking",
+                "FFFFFF",
+                20L,
+                "Savings",
+                "000000",
+                new BigDecimal("100.00"),
+                LocalDate.of(2025, 5, 1))
+        );
+        PaginationMeta paginationMeta = new PaginationMeta(2, 5, 42, 10);
+        PaginatedResponse<TransfertResponse> expectedResponse = 
+            new PaginatedResponse<>(expectedTransferts, paginationMeta);
+            
+        when(transfertService.fetchPaginatedTransferts(2, 10)).thenReturn(expectedResponse);
+
+        // Act
+        PaginatedResponse<TransfertResponse> actualResponse = transfertWs.fetchTransferts(2, 10);
+
+        // Assert
+        assertThat(actualResponse).isEqualTo(expectedResponse);
+        assertThat(actualResponse.content()).isEqualTo(expectedTransferts);
+        assertThat(actualResponse.pagination().currentPage()).isEqualTo(2);
+        assertThat(actualResponse.pagination().size()).isEqualTo(10);
     }
 
     @Test

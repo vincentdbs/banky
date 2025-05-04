@@ -3,13 +3,13 @@ package banky.webservices.api.transfert;
 import banky.guice.TestModule;
 import banky.webservices.api.transfert.requests.TransfertRequest;
 import banky.webservices.api.transfert.responses.TransfertResponse;
+import banky.webservices.data.pagination.PaginatedResponse;
 import com.coreoz.test.GuiceTest;
 import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,13 +26,33 @@ class TransfertWsIntegrationTest {
     );
 
     @Test
-    void fetchTransferts_shouldReturnValidResponse() {
+    void fetchTransferts_shouldReturnValidResponse_withDefaultPagination() {
         // Act
-        List<TransfertResponse> response = transfertWs.fetchTransferts();
+        PaginatedResponse<TransfertResponse> response = transfertWs.fetchTransferts(null, null);
 
         // Assert
         assertThat(response).isNotNull();
-        assertThat(response).hasSize(8);
+        assertThat(response.content()).isNotNull();
+        assertThat(response.pagination()).isNotNull();
+        assertThat(response.pagination().currentPage()).isEqualTo(1);
+        assertThat(response.pagination().size()).isEqualTo(20);
+    }
+    
+    @Test
+    void fetchTransferts_shouldReturnValidResponse_withCustomPagination() {
+        // Arrange
+        Integer page = 2;
+        Integer size = 5;
+        
+        // Act
+        PaginatedResponse<TransfertResponse> response = transfertWs.fetchTransferts(page, size);
+
+        // Assert
+        assertThat(response).isNotNull();
+        assertThat(response.content()).isNotNull();
+        assertThat(response.pagination()).isNotNull();
+        assertThat(response.pagination().currentPage()).isEqualTo(page);
+        assertThat(response.pagination().size()).isEqualTo(size);
     }
 
     @Test
