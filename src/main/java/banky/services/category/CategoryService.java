@@ -73,4 +73,13 @@ public class CategoryService {
     public List<SubCategoryNamesResponse> fetchSubCategoryNames() {
         return subCategoryDao.fetchSubCategoryNames();
     }
+
+    /**
+     * Fetches all subcategories regardless of parent category
+     * 
+     * @return List of all subcategories with their details
+     */
+    public List<SubCategoryResponse> fetchSubCategories() {
+        return subCategoryDao.fetchSubCategories();
+    }
 }
