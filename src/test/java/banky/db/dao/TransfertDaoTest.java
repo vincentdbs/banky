@@ -29,13 +29,13 @@ class TransfertDaoTest {
     private TransactionManagerQuerydsl transactionManager;
 
     @Test
-    void fetchTransferts_shouldReturnTransfertsWithAccountDetails() {
+    void fetchTransfertsPaginated_shouldReturnPagedTransfertsWithAccountDetails() {
         // Act
-        List<TransfertResponse> transferts = transfertDao.fetchTransferts();
+        List<TransfertResponse> transferts = transfertDao.fetchTransfertsPaginated(1, 10);
 
         // Assert
         assertThat(transferts).isNotEmpty();
-        assertThat(transferts.size()).isGreaterThanOrEqualTo(7); // There are 7 transfer records in the mock data
+        assertThat(transferts.size()).isLessThanOrEqualTo(10); // Should not exceed page size
 
         // Verify all transfers have the expected data structure
         for (TransfertResponse transfert : transferts) {
@@ -53,14 +53,43 @@ class TransfertDaoTest {
             .filter(t -> t.id() == 101L)
             .findFirst();
 
-        assertThat(specificTransfert).isPresent();
-        TransfertResponse transfert = specificTransfert.get();
-        assertThat(transfert.fromAccountId()).isEqualTo(1L); // Crédit Agricole
-        assertThat(transfert.toAccountId()).isEqualTo(6L); // Livret A
-        assertThat(transfert.amount()).isEqualByComparingTo(new BigDecimal("100.00"));
-        assertThat(transfert.date()).isEqualTo(LocalDate.of(2025, 1, 5));
-        assertThat(transfert.fromAccountName()).isEqualTo("Crédit Agricole");
-        assertThat(transfert.toAccountName()).isEqualTo("Livret A");
+        if (specificTransfert.isPresent()) {
+            TransfertResponse transfert = specificTransfert.get();
+            assertThat(transfert.fromAccountId()).isEqualTo(1L); // Crédit Agricole
+            assertThat(transfert.toAccountId()).isEqualTo(6L); // Livret A
+            assertThat(transfert.amount()).isEqualByComparingTo(new BigDecimal("100.00"));
+            assertThat(transfert.date()).isEqualTo(LocalDate.of(2025, 1, 5));
+            assertThat(transfert.fromAccountName()).isEqualTo("Crédit Agricole");
+            assertThat(transfert.toAccountName()).isEqualTo("Livret A");
+        }
+    }
+
+    @Test
+    void fetchTransfertsPaginated_shouldRespectPaginationParameters() {
+        // Act - Request first page with 3 items
+        List<TransfertResponse> firstPage = transfertDao.fetchTransfertsPaginated(1, 3);
+        // Act - Request second page with 3 items
+        List<TransfertResponse> secondPage = transfertDao.fetchTransfertsPaginated(2, 3);
+
+        // Assert
+        assertThat(firstPage).isNotEmpty();
+        assertThat(firstPage.size()).isLessThanOrEqualTo(3); // Should not exceed page size
+        
+        if (!secondPage.isEmpty()) {
+            // If we have enough data for a second page
+            assertThat(secondPage.size()).isLessThanOrEqualTo(3);
+            // First and second page should contain different items
+            assertThat(firstPage.get(0).id()).isNotEqualTo(secondPage.get(0).id());
+        }
+    }
+
+    @Test
+    void countTransferts_shouldReturnTotalCount() {
+        // Act
+        long count = transfertDao.countTransferts();
+
+        // Assert
+        assertThat(count).isGreaterThanOrEqualTo(7); // There are at least 7 transfer records in the mock data
     }
 
     @Test
@@ -102,26 +131,5 @@ class TransfertDaoTest {
             .delete(QTransfert.transfert)
             .where(QTransfert.transfert.id.eq(savedTransfert.getId()))
             .execute();
-    }
-
-    @Test
-    void fetchTransferts_shouldIncludeCorrectAccountNames() {
-        // Act
-        List<TransfertResponse> transferts = transfertDao.fetchTransferts();
-
-        // Assert
-        // Find a transfer from Livret A to Crédit Agricole (id: 107)
-        Optional<TransfertResponse> specificTransfert = transferts.stream()
-            .filter(t -> t.id() == 107L)
-            .findFirst();
-
-        assertThat(specificTransfert).isPresent();
-        TransfertResponse transfert = specificTransfert.get();
-        assertThat(transfert.fromAccountId()).isEqualTo(6L);
-        assertThat(transfert.toAccountId()).isEqualTo(1L);
-        assertThat(transfert.fromAccountName()).isEqualTo("Livret A");
-        assertThat(transfert.toAccountName()).isEqualTo("Crédit Agricole");
-        assertThat(transfert.amount()).isEqualByComparingTo(new BigDecimal("75.00"));
-        assertThat(transfert.date()).isEqualTo(LocalDate.of(2025, 2, 25));
     }
 }

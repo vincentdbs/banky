@@ -1,32 +1,29 @@
 import { TransfertResponse } from '@api/transferts/TransfertTypes';
 import RessourceLayout from '@components/layout/parameters/RessourceLayout';
 import useMessages from '@i18n/hooks/messagesHook';
-import useLoader from '@lib/plume-http-react-hook-loader/promiseLoaderHook';
-import { useOnComponentMounted } from '@lib/react-hooks-alias/ReactHooksAlias';
 import TransfertsService from '@services/transferts/TransfertsService';
 import { getGlobalInstance } from 'plume-ts-di';
-import React, { useState } from 'react';
+import React from 'react';
 import TransfertsFormModal from './modal/TransfertsFormModal';
 import TransfertsTable from './table/TransfertsTable';
+import PaginationLayout from '@components/theme/pagination/PaginationLayout';
+import useHandlePagination from '@hooks/use-handle-pagination/useHandlePagination';
 
 /**
  * Transferts page component that displays a list of transferts between accounts
- * and provides a way to create new ones
+ * and provides a way to create new ones. Supports pagination for better user experience.
  */
 export default function Transferts() {
   const transfertsService: TransfertsService = getGlobalInstance(TransfertsService);
+  const { messages, httpError } = useMessages();
 
-  const [transferts, setTransferts] = useState<TransfertResponse[]>([]);
-  const { messages } = useMessages();
-
-  const loader = useLoader();
-
-  useOnComponentMounted(() => {
-    loader.monitor(
-      transfertsService.fetchTransferts()
-        .then(setTransferts),
-    );
-  });
+  const {
+    elements: transferts,
+    currentPage,
+    totalPages,
+    isLoading,
+    handlePageChange,
+  } = useHandlePagination<TransfertResponse>(transfertsService.fetchTransferts);
 
   return (
     <RessourceLayout
@@ -34,7 +31,13 @@ export default function Transferts() {
       subTitle={messages.operations.transferts.subTitle}
     >
       <TransfertsFormModal />
-      <TransfertsTable transferts={transferts} />
+      <PaginationLayout
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      >
+        <TransfertsTable transferts={transferts} />
+      </PaginationLayout>
     </RessourceLayout>
   );
 }

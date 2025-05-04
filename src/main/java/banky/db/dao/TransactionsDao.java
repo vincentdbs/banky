@@ -13,6 +13,10 @@ import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import java.util.List;
 
+/**
+ * Data Access Object for transaction operations.
+ * Provides database access methods for transaction data with pagination support.
+ */
 @Singleton
 public class TransactionsDao extends CrudDaoQuerydsl<Transactions> {
 
@@ -21,7 +25,16 @@ public class TransactionsDao extends CrudDaoQuerydsl<Transactions> {
         super(transactionManagerQuerydsl, QTransactions.transactions);
     }
 
-    public List<TransactionResponse> fetchTransactions(Long page, Long size) {
+    /**
+     * Fetch transactions with pagination support
+     * 
+     * @param page The page number (1-based)
+     * @param size The number of items per page
+     * @return A list of transactions for the requested page
+     */
+    public List<TransactionResponse> fetchTransactions(int page, int size) {
+        int offset = (page - 1) * size; // Convert to 0-based for database query
+        
         return this.transactionManager
             .selectQuery()
             .select(
@@ -47,7 +60,7 @@ public class TransactionsDao extends CrudDaoQuerydsl<Transactions> {
             .on(QTransactions.transactions.subCategoryId.eq(QSubCategory.subCategory.id))
             .innerJoin(QCategory.category)
             .on(QSubCategory.subCategory.categoryId.eq(QCategory.category.id))
-            .offset(page * size)
+            .offset(offset)
             .limit(size)
             .orderBy(QTransactions.transactions.date.desc())
             .fetch()
@@ -71,5 +84,18 @@ public class TransactionsDao extends CrudDaoQuerydsl<Transactions> {
                 )
             )
             .toList();
+    }
+    
+    /**
+     * Count the total number of transactions in the database
+     * 
+     * @return The total count of transactions
+     */
+    public long countTransactions() {
+        return this.transactionManager
+            .selectQuery()
+            .select(QTransactions.transactions.count())
+            .from(QTransactions.transactions)
+            .fetchFirst();
     }
 }

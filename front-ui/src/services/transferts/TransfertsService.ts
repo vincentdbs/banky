@@ -1,6 +1,6 @@
 import { getGlobalInstance } from 'plume-ts-di';
 import TransfertsApi from '@api/transferts/TransfertsApi';
-import { TransfertRequest, TransfertResponse } from '@api/transferts/TransfertTypes';
+import { PaginatedTransfertsResponse, TransfertRequest, TransfertResponse } from '@api/transferts/TransfertTypes';
 import { HttpPromise } from 'simple-http-rest-client';
 
 /**
@@ -12,11 +12,15 @@ export default class TransfertsService {
   }
 
   /**
-   * Fetches all transfers between accounts
+   * Fetches transfers with pagination support
+   * 
+   * @param page The page number (1-based)
+   * @param size The number of items per page
+   * @returns A promise containing the paginated transfert response
    */
-  fetchTransferts(): HttpPromise<TransfertResponse[]> {
-    return this.transfertsApi.fetchTransferts();
-  }
+  fetchTransferts = (page: number, size: number): HttpPromise<PaginatedTransfertsResponse> => {
+    return this.transfertsApi.fetchTransferts(page, size);
+  };
 
   /**
    * Creates a new transfer between accounts

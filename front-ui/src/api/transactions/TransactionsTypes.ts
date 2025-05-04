@@ -1,3 +1,5 @@
+import { PaginatedResponse } from '@/utils/types/PaginationTypes';
+
 export type TransactionResponse = {
   id: number,
   date: string,
@@ -15,6 +17,8 @@ export type TransactionResponse = {
   side: TransactionSide,
   fromToPersonName: string,
 };
+
+export type PaginatedTransactionsResponse = PaginatedResponse<TransactionResponse>;
 
 export type TransactionRequest = {
   date: string,

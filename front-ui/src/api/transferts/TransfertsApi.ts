@@ -1,7 +1,7 @@
+import ApiHttpClient from '@api/ApiHttpClient';
 import { HttpMethod } from 'simple-http-request-builder';
 import { HttpPromise } from 'simple-http-rest-client';
-import ApiHttpClient from '@api/ApiHttpClient';
-import { TransfertRequest, TransfertResponse } from './TransfertTypes';
+import { PaginatedTransfertsResponse, TransfertRequest } from './TransfertTypes';
 
 /**
  * API service for handling transfers between accounts
@@ -13,14 +13,24 @@ export default class TransfertsApi {
   }
 
   /**
-   * Fetches all transfers
+   * Fetches transfers with pagination support
+   *
+   * @param page The page number to retrieve
+   * @param size The number of items per page
+   * @returns A paginated response containing transfers and pagination metadata
    */
-  fetchTransferts(): HttpPromise<TransfertResponse[]> {
+  fetchTransferts = (page: number, size: number): HttpPromise<PaginatedTransfertsResponse> => {
     return this
       .httpClient
-      .restRequest<TransfertResponse[]>(HttpMethod.GET, this.BASE_URL)
+      .restRequest<PaginatedTransfertsResponse>(HttpMethod.GET, this.BASE_URL)
+      .queryParams(
+        [
+          ['page', page],
+          ['size', size],
+        ],
+      )
       .execute();
-  }
+  };
 
   /**
    * Creates a new transfer between accounts
