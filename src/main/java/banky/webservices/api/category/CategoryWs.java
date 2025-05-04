@@ -98,4 +98,11 @@ public class CategoryWs {
     public List<SubCategoryNamesResponse> fetchSubCategoryNames() {
         return categoryService.fetchSubCategoryNames();
     }
+
+    @GET
+    @Path("/sub-categories")
+    @Operation(description = "Fetch all subcategories")
+    public List<SubCategoryResponse> fetchSubCategories() {
+        return categoryService.fetchSubCategories();
+    }
 }
