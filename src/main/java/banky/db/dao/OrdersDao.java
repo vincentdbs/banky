@@ -4,6 +4,8 @@ import banky.db.generated.Orders;
 import banky.db.generated.QAccounts;
 import banky.db.generated.QOrders;
 import banky.db.generated.QTicker;
+import banky.services.orders.enums.OrderSide;
+import banky.services.orders.enums.TickerCategory;
 import banky.webservices.api.orders.responses.OrderResponse;
 import com.coreoz.plume.db.querydsl.crud.CrudDaoQuerydsl;
 import com.coreoz.plume.db.querydsl.transaction.TransactionManagerQuerydsl;
@@ -72,9 +74,9 @@ public class OrdersDao extends CrudDaoQuerydsl<Orders> {
                     order.get(QOrders.orders.charges),
                     order.get(account.shortName),
                     order.get(account.color),
-                    order.get(QOrders.orders.side),
+                    OrderSide.valueOf(order.get(QOrders.orders.side)),
                     order.get(ticker.shortName),
-                    order.get(ticker.category)
+                    TickerCategory.valueOf(order.get(ticker.category))
                 )
             )
             .toList();

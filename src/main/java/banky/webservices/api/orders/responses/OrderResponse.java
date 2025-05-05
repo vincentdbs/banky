@@ -1,5 +1,7 @@
 package banky.webservices.api.orders.responses;
 
+import banky.services.orders.enums.OrderSide;
+import banky.services.orders.enums.TickerCategory;
 import banky.webservices.serializer.ThreeDecimalToStringSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -24,5 +26,5 @@ public record OrderResponse(
     String accountColor,
     OrderSide side,
     String tickerShortName,
-    String tickerCategory
+    TickerCategory tickerCategory
 ) {}
