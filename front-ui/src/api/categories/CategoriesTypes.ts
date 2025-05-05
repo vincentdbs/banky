@@ -23,3 +23,21 @@ export type CategoryRequest = {
 export type SubCategoryRequest = {
   name: string,
 };
+
+/**
+ * Pagination metadata containing information about the current page state
+ */
+export type PaginationMeta = {
+  currentPage: number,
+  totalPages: number,
+  totalElements: number,
+  size: number,
+};
+
+/**
+ * Paginated response for categories
+ */
+export type PaginatedCategoriesResponse = {
+  content: CategoryResponse[],
+  pagination: PaginationMeta,
+};
