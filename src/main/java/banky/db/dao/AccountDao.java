@@ -39,4 +39,20 @@ public class AccountDao extends CrudDaoQuerydsl<Accounts> {
             )
             .toList();
     }
+
+    /**
+     * Checks if an account has the given type
+     * @param accountId the ID of the account to check
+     * @param type the required account type
+     * @return true if the account exists and has the specified type, false otherwise
+     */
+    public boolean isAccountOfType(Long accountId, AccountType type) {
+        return transactionManager
+            .selectQuery()
+            .select(QAccounts.accounts.id)
+            .from(QAccounts.accounts)
+            .where(QAccounts.accounts.id.eq(accountId)
+                .and(QAccounts.accounts.type.eq(type.name())))
+            .fetchFirst() != null;
+    }
 }

@@ -1,4 +1,6 @@
 import { TransactionSide } from '@/api/transactions/TransactionsTypes';
+import { OrderSide } from '@/api/orders/OrderTypes';
+import { TickerCategory } from '@/api/tickers/TickerTypes';
 import {
   TransactionFields,
 } from '@components/pages/operations/transactions/form/fields/TransactionsFormFields';
@@ -48,6 +50,16 @@ const frMessages: Translations = {
     side: {
       [TransactionSide.DEBIT]: 'Dépense',
       [TransactionSide.CREDIT]: 'Gain',
+    },
+    tickerCategory: {
+      [TickerCategory.CAPITALIZING]: 'Capitalisant',
+      [TickerCategory.NON_CAPITALIZING]: 'Non capitalisant',
+      [TickerCategory.GUARANTEED]: 'Garanti',
+      [TickerCategory.BLOCKED_GUARANTEED]: 'Garanti bloqué',
+    },
+    orderSide: {
+      [OrderSide.BUY]: 'Achat',
+      [OrderSide.SELL]: 'Vente',
     },
   },
   // errors
@@ -168,6 +180,27 @@ const frMessages: Translations = {
         selectAccount: 'Sélectionner un compte',
         pickDate: 'Choisir une date',
       },
+    },
+    orders: {
+      title: 'Ordres',
+      subTitle: 'Liste des ordres de bourse',
+      table: {
+        date: 'Date',
+        name: 'Nom',
+        side: 'Type',
+        quantity: 'Quantité',
+        amount: 'Montant',
+        charges: 'Frais',
+        accountName: 'Compte',
+        tickerCategory: 'Catégorie',
+        tickerName: 'Titre',
+        buy: 'Achat',
+        sell: 'Vente',
+        noOrders: 'Aucun ordre à afficher',
+      },
+      buy: 'Achat',
+      sell: 'Vente',
+      noOrders: 'Aucun ordre à afficher',
     },
   },
   dashboard: {

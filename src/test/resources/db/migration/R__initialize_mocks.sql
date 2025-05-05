@@ -153,3 +153,27 @@ VALUES
     (105, 1, 6, 180.00, '2025-02-15'),
     (106, 1, 6, 250.00, '2025-02-25'),
     (107, 6, 1, 75.00, '2025-02-25');
+
+-- Ticker data
+INSERT INTO bky_ticker (id, name, short_name, category)
+VALUES (1, 'LVMH Moët Hennessy', 'LVMH', 'CAPITALIZING'),
+       (2, 'Total Energies', 'TTE', 'CAPITALIZING'),
+       (3, 'Air Liquide', 'AI', 'CAPITALIZING'),
+       (4, 'BNP Paribas', 'BNP', 'NON_CAPITALIZING'),
+       (5, 'Crédit Agricole', 'ACA', 'NON_CAPITALIZING'),
+       (6, 'Livret A', 'LA', 'GUARANTEED'),
+       (7, 'Assurance Vie', 'AV', 'BLOCKED_GUARANTEED');
+
+-- Orders test data
+INSERT INTO bky_orders (id, date, amount, quantity, charges, account_id, ticker_id, side)
+VALUES
+    (101, '2025-01-10', 1000.50, 5, 9.90, 11, 1, 'BUY'),
+    (102, '2025-01-15', 750.25, 10, 7.50, 11, 2, 'BUY'),
+    (103, '2025-01-20', 500.75, 8, 6.80, 11, 3, 'BUY'),
+    (104, '2025-02-05', 600.40, 3, 5.50, 11, 1, 'BUY'),
+    (105, '2025-02-15', 200.30, 2, 4.90, 12, 4, 'BUY'),
+    (106, '2025-03-01', 850.20, 12, 8.20, 12, 5, 'BUY'),
+    (107, '2025-03-15', 320.15, 4, 5.75, 11, 2, 'SELL'),
+    (108, '2025-03-20', 425.60, 6, 6.25, 12, 4, 'SELL'),
+    (109, '2025-04-01', 950.80, 10, 8.90, 11, 3, 'BUY'),
+    (110, '2025-04-10', 525.30, 5, 6.40, 12, 5, 'SELL');
