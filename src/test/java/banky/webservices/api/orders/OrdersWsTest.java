@@ -1,5 +1,6 @@
 package banky.webservices.api.orders;
 
+import banky.services.accounts.enums.AccountType;
 import banky.services.orders.OrdersService;
 import banky.services.orders.enums.OrderSide;
 import banky.services.orders.enums.TickerCategory;
@@ -7,6 +8,9 @@ import banky.webservices.api.orders.requests.OrderRequest;
 import banky.webservices.api.orders.responses.OrderResponse;
 import banky.webservices.data.pagination.PaginatedResponse;
 import banky.webservices.data.pagination.PaginationMeta;
+import banky.webservices.exceptions.BankyWsError;
+import banky.webservices.validators.AccountValidator;
+import banky.webservices.validators.AmountValidator;
 import com.coreoz.plume.jersey.errors.WsException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,6 +24,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 /**
@@ -30,6 +36,12 @@ class OrdersWsTest {
 
     @Mock
     private OrdersService ordersService;
+    
+    @Mock
+    private AccountValidator accountValidator;
+    
+    @Mock
+    private AmountValidator amountValidator;
 
     @InjectMocks
     private OrdersWs ordersWs;
@@ -274,5 +286,55 @@ class OrdersWsTest {
         // Act & Assert
         assertThatThrownBy(() -> ordersWs.createOrder(request))
             .isInstanceOf(WsException.class);
+    }
+
+    @Test
+    void createOrder_shouldThrowException_whenAmountIsNotPositive() {
+        // Arrange
+        OrderRequest request = new OrderRequest(
+            LocalDate.of(2025, 5, 1),
+            "LVMH",
+            new BigDecimal("0.00"), // Zero amount - should be rejected
+            10,
+            new BigDecimal("9.90"),
+            11L,
+            1L,
+            OrderSide.BUY
+        );
+        
+        // Configure the validator to throw an exception for non-positive amount
+        doThrow(new WsException(BankyWsError.INVALID_AMOUNT))
+            .when(amountValidator)
+            .validatePositiveAmount(request.amount());
+
+        // Act & Assert
+        assertThatThrownBy(() -> ordersWs.createOrder(request))
+            .isInstanceOf(WsException.class)
+            .matches(e -> ((WsException) e).getError().equals(BankyWsError.INVALID_AMOUNT));
+    }
+
+    @Test
+    void createOrder_shouldThrowException_whenAccountIsNotMarketType() {
+        // Arrange
+        OrderRequest request = new OrderRequest(
+            LocalDate.of(2025, 5, 1),
+            "LVMH",
+            new BigDecimal("1500.00"),
+            10,
+            new BigDecimal("9.90"),
+            1L, // Account ID that is not a MARKET account
+            1L,
+            OrderSide.BUY
+        );
+        
+        // Configure the validator to throw an exception for non-MARKET account
+        doThrow(new WsException(BankyWsError.INVALID_ACCOUNT_TYPE))
+            .when(accountValidator)
+            .validateAccountType(eq(1L), eq(AccountType.MARKET));
+
+        // Act & Assert
+        assertThatThrownBy(() -> ordersWs.createOrder(request))
+            .isInstanceOf(WsException.class)
+            .matches(e -> ((WsException) e).getError().equals(BankyWsError.INVALID_ACCOUNT_TYPE));
     }
 }

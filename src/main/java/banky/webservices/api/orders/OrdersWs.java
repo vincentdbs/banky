@@ -1,9 +1,12 @@
 package banky.webservices.api.orders;
 
+import banky.services.accounts.enums.AccountType;
 import banky.services.orders.OrdersService;
 import banky.webservices.api.orders.requests.OrderRequest;
 import banky.webservices.api.orders.responses.OrderResponse;
 import banky.webservices.data.pagination.PaginatedResponse;
+import banky.webservices.validators.AccountValidator;
+import banky.webservices.validators.AmountValidator;
 import com.coreoz.plume.jersey.errors.Validators;
 import com.coreoz.plume.jersey.security.permission.PublicApi;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,10 +36,18 @@ import static banky.webservices.data.pagination.PaginationHelper.DEFAULT_PAGE_SI
 public class OrdersWs {
 
     private final OrdersService ordersService;
+    private final AccountValidator accountValidator;
+    private final AmountValidator amountValidator;
 
     @Inject
-    private OrdersWs(OrdersService ordersService) {
+    private OrdersWs(
+        OrdersService ordersService,
+        AccountValidator accountValidator,
+        AmountValidator amountValidator
+    ) {
         this.ordersService = ordersService;
+        this.accountValidator = accountValidator;
+        this.amountValidator = amountValidator;
     }
 
     @GET
@@ -62,6 +73,12 @@ public class OrdersWs {
         Validators.checkRequired("accountId", request.accountId());
         Validators.checkRequired("tickerId", request.tickerId());
         Validators.checkRequired("side", request.side());
+        
+        // Validate that the account is a MARKET account
+        accountValidator.validateAccountType(request.accountId(), AccountType.MARKET);
+        
+        // Validate that the amount is positive
+        amountValidator.validatePositiveAmount(request.amount());
         
         return ordersService.createOrder(request);
     }

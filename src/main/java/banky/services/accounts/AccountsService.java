@@ -62,4 +62,14 @@ public class AccountsService {
         account.setId(id);
         accountDao.save(account);
     }
+
+    /**
+     * Checks if an account has the given type
+     * @param accountId the ID of the account to check
+     * @param type the required account type
+     * @return true if the account exists and has the specified type, false otherwise
+     */
+    public boolean isAccountOfType(Long accountId, AccountType type) {
+        return accountDao.isAccountOfType(accountId, type);
+    }
 }
