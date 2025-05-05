@@ -41,3 +41,11 @@ export type PaginatedCategoriesResponse = {
   content: CategoryResponse[],
   pagination: PaginationMeta,
 };
+
+/**
+ * Paginated response for subcategories
+ */
+export type PaginatedSubCategoriesResponse = {
+  content: SubCategoryResponse[],
+  pagination: PaginationMeta,
+};

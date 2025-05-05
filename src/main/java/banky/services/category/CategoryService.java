@@ -58,19 +58,32 @@ public class CategoryService {
     }
 
     /**
-     * @deprecated Use fetchPaginatedCategories instead
+     * Fetch subcategories with pagination support.
+     * 
+     * @param page The page number to retrieve (1-based)
+     * @param size The number of items per page
+     * @return A paginated response containing subcategories and pagination metadata
      */
-    @Deprecated
-    public List<CategoryResponse> fetchCategories() {
-        return categoryDao.findAll()
-            .stream()
-            .map(
-                category -> new CategoryResponse(
-                    category.getId(),
-                    category.getName()
-                )
-            )
-            .toList();
+    public PaginatedResponse<SubCategoryResponse> fetchPaginatedSubCategories(int page, int size) {
+        // Calculate total elements and pages
+        long totalElements = subCategoryDao.countSubCategories();
+        int totalPages = calculateTotalPages(totalElements, size);
+        
+        // Ensure page is within bounds
+        int adjustedPage = Math.min(Math.max(page, 1), Math.max(totalPages, 1));
+        
+        // Get subcategories for the page
+        List<SubCategoryResponse> subCategories = subCategoryDao.fetchSubCategoriesPaginated(adjustedPage, size);
+        
+        // Create pagination metadata
+        PaginationMeta paginationMeta = new PaginationMeta(
+            adjustedPage,
+            totalPages,
+            totalElements,
+            size
+        );
+        
+        return new PaginatedResponse<>(subCategories, paginationMeta);
     }
 
     public Long createCategory(CategoryRequest request) {
@@ -107,15 +120,6 @@ public class CategoryService {
 
     public List<SubCategoryNamesResponse> fetchSubCategoryNames() {
         return subCategoryDao.fetchSubCategoryNames();
-    }
-
-    /**
-     * Fetches all subcategories regardless of parent category
-     * 
-     * @return List of all subcategories with their details
-     */
-    public List<SubCategoryResponse> fetchSubCategories() {
-        return subCategoryDao.fetchSubCategories();
     }
 
     private int calculateTotalPages(long totalElements, int pageSize) {

@@ -1,9 +1,8 @@
 import CategoriesApi from '@api/categories/CategoriesApi';
 import {
-  CategoryResponse,
   PaginatedCategoriesResponse,
+  PaginatedSubCategoriesResponse,
   SubCategoryNamesResponse,
-  SubCategoryResponse,
 } from '@api/categories/CategoriesTypes';
 import { HttpPromise } from 'simple-http-rest-client';
 
@@ -33,15 +32,18 @@ export default class CategoriesService {
   };
 
   /**
-   * @deprecated Use fetchPaginatedCategories instead
+   * Fetches subcategories with pagination support
+   * 
+   * @param page The page number to retrieve (defaults to 1)
+   * @param size The number of items per page (defaults to 20)
+   * @returns A promise with a paginated response containing subcategories
    */
-  fetchCategories(): HttpPromise<CategoryResponse[]> {
-    return this.categoriesApi.fetchAllCategories();
-  }
-
-  fetchSubCategories(): HttpPromise<SubCategoryResponse[]> {
-    return this.categoriesApi.fetchSubCategories();
-  }
+  fetchPaginatedSubCategories = (
+    page: number = CategoriesService.DEFAULT_PAGE,
+    size: number = CategoriesService.DEFAULT_PAGE_SIZE,
+  ): HttpPromise<PaginatedSubCategoriesResponse> => {
+    return this.categoriesApi.fetchPaginatedSubCategories(page, size);
+  };
 
   fetchSubCategoryNames(): HttpPromise<SubCategoryNamesResponse[]> {
     return this.categoriesApi.fetchSubCategoryNames();

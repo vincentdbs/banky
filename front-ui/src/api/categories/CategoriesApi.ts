@@ -1,13 +1,15 @@
 import ApiHttpClient from '@api/ApiHttpClient';
 import {
-  CategoryResponse,
   PaginatedCategoriesResponse,
+  PaginatedSubCategoriesResponse,
   SubCategoryNamesResponse,
-  SubCategoryResponse,
 } from '@api/categories/CategoriesTypes';
 import { HttpMethod } from 'simple-http-request-builder';
 import { HttpPromise } from 'simple-http-rest-client';
 
+/**
+ * API client for interacting with category and subcategory endpoints
+ */
 export default class CategoriesApi {
   private static BASE_PATH: string = '/categories';
 
@@ -27,23 +29,27 @@ export default class CategoriesApi {
   };
 
   /**
-   * @deprecated Use fetchCategories with pagination instead
+   * Fetches subcategories with pagination
+   *
+   * @param page The page number to retrieve (1-based)
+   * @param size The number of items per page
+   * @returns A promise with a paginated response containing subcategories
    */
-  fetchAllCategories(): HttpPromise<CategoryResponse[]> {
+  fetchPaginatedSubCategories = (page: number, size: number): HttpPromise<PaginatedSubCategoriesResponse> => {
     return this.apiHttpClient
-      .restRequest<CategoryResponse[]>(HttpMethod.GET, CategoriesApi.BASE_PATH)
+      .restRequest<PaginatedSubCategoriesResponse>(HttpMethod.GET, `${CategoriesApi.BASE_PATH}/sub-categories`)
+      .queryParams(
+        [
+          ['page', page],
+          ['size', size],
+        ],
+      )
       .execute();
-  }
-
-  fetchSubCategories(): HttpPromise<SubCategoryResponse[]> {
-    return this.apiHttpClient
-      .restRequest<SubCategoryResponse[]>(HttpMethod.GET, `${CategoriesApi.BASE_PATH}/sub-categories`)
-      .execute();
-  }
+  };
 
   fetchSubCategoryNames(): HttpPromise<SubCategoryNamesResponse[]> {
     return this.apiHttpClient
-      .restRequest<SubCategoryNamesResponse[]>(HttpMethod.GET, `${CategoriesApi.BASE_PATH}/sub-categories/names`)
+      .restRequest<SubCategoryNamesResponse[]>(HttpMethod.GET, `${CategoriesApi.BASE_PATH}/sub-categories/names/all`)
       .execute();
   }
 }

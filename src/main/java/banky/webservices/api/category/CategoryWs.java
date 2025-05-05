@@ -96,7 +96,7 @@ public class CategoryWs {
     @Path("/{id}/sub-categories")
     @Operation(description = "Fetch subcategories by category id")
     public List<SubCategoryResponse> fetchSubCategoriesByCategoryId(
-        @QueryParam("id") Long id
+        @PathParam("id") Long id
     ) {
         return categoryService.fetchSubCategoriesByCategoryId(id);
     }
@@ -110,8 +110,14 @@ public class CategoryWs {
 
     @GET
     @Path("/sub-categories")
-    @Operation(description = "Fetch all subcategories")
-    public List<SubCategoryResponse> fetchSubCategories() {
-        return categoryService.fetchSubCategories();
+    @Operation(description = "Fetch subcategories with pagination")
+    public PaginatedResponse<SubCategoryResponse> fetchPaginatedSubCategories(
+        @QueryParam("page") Integer page,
+        @QueryParam("size") Integer size
+    ) {
+        int pageSize = size != null ? size : DEFAULT_PAGE_SIZE;
+        int pageNumber = page != null ? page : DEFAULT_PAGE;
+        
+        return categoryService.fetchPaginatedSubCategories(pageNumber, pageSize);
     }
 }
