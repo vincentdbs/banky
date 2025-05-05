@@ -2,6 +2,7 @@ package banky.db.dao;
 
 import banky.db.generated.QTicker;
 import banky.db.generated.Ticker;
+import banky.services.tickers.enums.TickerCategory;
 import banky.webservices.api.tickers.responses.TickerResponse;
 import com.coreoz.plume.db.querydsl.crud.CrudDaoQuerydsl;
 import com.coreoz.plume.db.querydsl.transaction.TransactionManagerQuerydsl;
@@ -50,7 +51,7 @@ public class TickerDao extends CrudDaoQuerydsl<Ticker> {
                     ticker.get(QTicker.ticker.id),
                     ticker.get(QTicker.ticker.name),
                     ticker.get(QTicker.ticker.shortName),
-                    ticker.get(QTicker.ticker.category)
+                    TickerCategory.valueOf(ticker.get(QTicker.ticker.category))
                 )
             )
             .toList();

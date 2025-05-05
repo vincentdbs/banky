@@ -53,7 +53,6 @@ class OrdersWsTest {
             new OrderResponse(
                 1L,
                 LocalDate.of(2025, 5, 1),
-                "LVMH",
                 new BigDecimal("1500.00"),
                 10,
                 new BigDecimal("9.90"),
@@ -87,7 +86,6 @@ class OrdersWsTest {
             new OrderResponse(
                 1L,
                 LocalDate.of(2025, 5, 1),
-                "LVMH",
                 new BigDecimal("1500.00"),
                 10,
                 new BigDecimal("9.90"),

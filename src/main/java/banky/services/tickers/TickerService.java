@@ -63,7 +63,7 @@ public class TickerService {
         Ticker ticker = new Ticker();
         ticker.setName(request.name());
         ticker.setShortName(request.shortName());
-        ticker.setCategory(request.category());
+        ticker.setCategory(request.category().name());
         
         return tickerDao.save(ticker).getId();
     }
