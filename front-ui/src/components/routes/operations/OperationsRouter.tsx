@@ -1,3 +1,4 @@
+import Orders from '@components/pages/operations/orders/Orders';
 import Transactions from '@components/pages/operations/transactions/Transactions';
 import Transferts from '@components/pages/operations/transferts/Transferts';
 import {
@@ -18,7 +19,7 @@ export default function OperationsRouter() {
       },
       {
         path: OPERATIONS_ORDERS,
-        element: (<p>TODO</p>),
+        element: <Orders />,
       },
       {
         path: OPERATIONS_TRANSFERT,

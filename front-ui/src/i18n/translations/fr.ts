@@ -169,6 +169,26 @@ const frMessages: Translations = {
         pickDate: 'Choisir une date',
       },
     },
+    orders: {
+      title: 'Ordres',
+      subTitle: 'Liste des ordres de bourse',
+      table: {
+        date: 'Date',
+        name: 'Nom',
+        side: 'Type',
+        quantity: 'Quantité',
+        amount: 'Montant',
+        charges: 'Frais',
+        accountName: 'Compte',
+        tickerName: 'Titre',
+        buy: 'Achat',
+        sell: 'Vente',
+        noOrders: 'Aucun ordre à afficher',
+      },
+      buy: 'Achat',
+      sell: 'Vente',
+      noOrders: 'Aucun ordre à afficher',
+    },
   },
   dashboard: {
     cards: {

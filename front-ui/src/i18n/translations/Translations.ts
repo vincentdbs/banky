@@ -3,10 +3,6 @@ import {
   TransactionFields,
 } from '@components/pages/operations/transactions/form/fields/TransactionsFormFields';
 
-export interface ErrorFunction {
-  (...args: string[]): string,
-}
-
 export type Translations = {
   title: 'Banky',
   form: {
@@ -157,6 +153,26 @@ export type Translations = {
         selectAccount: string,
         pickDate: string,
       },
+    },
+    orders: {
+      title: string,
+      subTitle: string,
+      table: {
+        date: string,
+        name: string,
+        side: string,
+        quantity: string,
+        amount: string,
+        charges: string,
+        accountName: string,
+        tickerName: string,
+        buy: string,
+        sell: string,
+        noOrders: string,
+      },
+      buy: string,
+      sell: string,
+      noOrders: string,
     },
   },
   dashboard: {
