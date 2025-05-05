@@ -2,8 +2,9 @@ import { Badge, BadgeVariant } from '@/lib/shadcn/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/lib/shadcn/table';
 import { formatToLocaleDate } from '@/utils/dates/DatesUtils';
 import { formatEuroDecimalPriceFromString } from '@/utils/number/NumberUtils';
+import { computeBadgeVariantByTickerCategory } from '@/utils/badge/BadgeUtils';
 import { OrderResponse, OrderSide } from '@api/orders/OrderTypes';
-import { TickerCategory } from '@api/tickers/TickerTypes';
+import { TickerCategory } from '@api/tickers/TickersTypes';
 import useMessages from '@i18n/hooks/messagesHook';
 import React from 'react';
 
@@ -26,24 +27,6 @@ export default function OrdersTable({ orders }: OrdersTableProps) {
         return BadgeVariant.LIGHT_RED;
       case OrderSide.SELL:
         return BadgeVariant.LIGHT_GREEN;
-      default:
-        return BadgeVariant.DEFAULT;
-    }
-  };
-
-  /**
-   * Get the appropriate badge variant for the ticker category
-   */
-  const getTickerCategoryBadgeVariant = (category: TickerCategory): BadgeVariant => {
-    switch (category) {
-      case TickerCategory.CAPITALIZING:
-        return BadgeVariant.LIGHT_RED;
-      case TickerCategory.NON_CAPITALIZING:
-        return BadgeVariant.LIGHT_BLUE;
-      case TickerCategory.GUARANTEED:
-        return BadgeVariant.LIGHT_GREEN;
-      case TickerCategory.BLOCKED_GUARANTEED:
-        return BadgeVariant.DARK_GREEN;
       default:
         return BadgeVariant.DEFAULT;
     }
@@ -84,7 +67,7 @@ export default function OrdersTable({ orders }: OrdersTableProps) {
                 </p>
               </TableCell>
               <TableCell>
-                <Badge variant={getTickerCategoryBadgeVariant(order.tickerCategory)}>
+                <Badge variant={computeBadgeVariantByTickerCategory(order.tickerCategory)}>
                   {messages.message.tickerCategory[order.tickerCategory]}
                 </Badge>
               </TableCell>

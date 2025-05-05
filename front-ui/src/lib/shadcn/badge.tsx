@@ -28,7 +28,7 @@ const badgeVariants = cva(
         [BadgeVariant.LIGHT_RED]: "bg-red-100 text-red-800 border-red-200",
         [BadgeVariant.LIGHT_GREEN]: "bg-green-100 text-green-800 border-green-200",
         [BadgeVariant.LIGHT_BLUE]: "bg-blue-100 text-blue-800 border-blue-200",
-        [BadgeVariant.DARK_GREEN]: "bg-green-100 text-green-800 border-green-200",
+        [BadgeVariant.DARK_GREEN]: "bg-emerald-600 text-white border-emerald-600",
       },
     },
     defaultVariants: {

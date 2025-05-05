@@ -3,6 +3,7 @@ import {
   PARAMETERS_ACCOUNTS,
   PARAMETERS_CATEGORY,
   PARAMETERS_SUB_CATEGORY,
+  PARAMETERS_TICKERS,
 } from '@components/Routes';
 import useMessages from '@i18n/hooks/messagesHook';
 import {
@@ -13,7 +14,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@lib/shadcn/sidebar';
-import { CreditCard, Tag, Tags } from 'lucide-react';
+import { CreditCard, Tag, Tags, BarChart3 } from 'lucide-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -46,6 +47,14 @@ export default function ParametersSidebarGroup() {
               <Link to={`${PARAMETERS}${PARAMETERS_SUB_CATEGORY}`}>
                 <Tags />
                 <span>{messages.sidebar.parameters.subCategories}</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <Link to={`${PARAMETERS}${PARAMETERS_TICKERS}`}>
+                <BarChart3 />
+                <span>{messages.sidebar.parameters.tickers}</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
