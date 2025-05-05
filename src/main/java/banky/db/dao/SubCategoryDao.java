@@ -45,7 +45,16 @@ public class SubCategoryDao extends CrudDaoQuerydsl<SubCategory> {
             .toList();
     }
 
-    public List<SubCategoryResponse> fetchSubCategories() {
+        /**
+     * Fetches subcategories with pagination support
+     * 
+     * @param page The page number (1-based)
+     * @param size The number of items per page
+     * @return A list of subcategories for the requested page
+     */
+    public List<SubCategoryResponse> fetchSubCategoriesPaginated(int page, int size) {
+        int offset = (page - 1) * size; // Convert to 0-based for database query
+        
         return transactionManager
             .selectQuery()
             .select(
@@ -57,6 +66,8 @@ public class SubCategoryDao extends CrudDaoQuerydsl<SubCategory> {
             .from(QSubCategory.subCategory)
             .innerJoin(QCategory.category)
             .on(QSubCategory.subCategory.categoryId.eq(QCategory.category.id))
+            .offset(offset)
+            .limit(size)
             .orderBy(QSubCategory.subCategory.name.asc())
             .fetch()
             .stream()
@@ -67,6 +78,19 @@ public class SubCategoryDao extends CrudDaoQuerydsl<SubCategory> {
                 tuple.get(QCategory.category.name)
             ))
             .toList();
+    }
+
+    /**
+     * Count the total number of subcategories in the database
+     * 
+     * @return The total count of subcategories
+     */
+    public long countSubCategories() {
+        return transactionManager
+            .selectQuery()
+            .select(QSubCategory.subCategory.count())
+            .from(QSubCategory.subCategory)
+            .fetchOne();
     }
 
     public List<SubCategoryNamesResponse> fetchSubCategoryNames() {

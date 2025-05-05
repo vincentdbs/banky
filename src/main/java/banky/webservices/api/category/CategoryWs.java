@@ -6,6 +6,7 @@ import banky.webservices.api.category.data.CategoryResponse;
 import banky.webservices.api.category.data.SubCategoryNamesResponse;
 import banky.webservices.api.category.data.SubCategoryRequest;
 import banky.webservices.api.category.data.SubCategoryResponse;
+import banky.webservices.data.pagination.PaginatedResponse;
 import com.coreoz.plume.jersey.errors.Validators;
 import com.coreoz.plume.jersey.security.permission.PublicApi;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,6 +34,8 @@ import java.util.List;
 public class CategoryWs {
 
     private final CategoryService categoryService;
+    private static final int DEFAULT_PAGE_SIZE = 20;
+    private static final int DEFAULT_PAGE = 1;
 
     @Inject
     private CategoryWs(CategoryService categoryService) {
@@ -47,9 +50,15 @@ public class CategoryWs {
     }
 
     @GET
-    @Operation(description = "Fetch all categories")
-    public List<CategoryResponse> fetchCategories() {
-        return categoryService.fetchCategories();
+    @Operation(description = "Fetch categories with pagination")
+    public PaginatedResponse<CategoryResponse> fetchCategories(
+        @QueryParam("page") Integer page,
+        @QueryParam("size") Integer size
+    ) {
+        int pageSize = size != null ? size : DEFAULT_PAGE_SIZE;
+        int pageNumber = page != null ? page : DEFAULT_PAGE;
+        
+        return categoryService.fetchPaginatedCategories(pageNumber, pageSize);
     }
 
     @PUT
@@ -87,7 +96,7 @@ public class CategoryWs {
     @Path("/{id}/sub-categories")
     @Operation(description = "Fetch subcategories by category id")
     public List<SubCategoryResponse> fetchSubCategoriesByCategoryId(
-        @QueryParam("id") Long id
+        @PathParam("id") Long id
     ) {
         return categoryService.fetchSubCategoriesByCategoryId(id);
     }
@@ -101,8 +110,14 @@ public class CategoryWs {
 
     @GET
     @Path("/sub-categories")
-    @Operation(description = "Fetch all subcategories")
-    public List<SubCategoryResponse> fetchSubCategories() {
-        return categoryService.fetchSubCategories();
+    @Operation(description = "Fetch subcategories with pagination")
+    public PaginatedResponse<SubCategoryResponse> fetchPaginatedSubCategories(
+        @QueryParam("page") Integer page,
+        @QueryParam("size") Integer size
+    ) {
+        int pageSize = size != null ? size : DEFAULT_PAGE_SIZE;
+        int pageNumber = page != null ? page : DEFAULT_PAGE;
+        
+        return categoryService.fetchPaginatedSubCategories(pageNumber, pageSize);
     }
 }

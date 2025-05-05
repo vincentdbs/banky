@@ -9,6 +9,8 @@ import banky.webservices.api.category.data.CategoryResponse;
 import banky.webservices.api.category.data.SubCategoryNamesResponse;
 import banky.webservices.api.category.data.SubCategoryRequest;
 import banky.webservices.api.category.data.SubCategoryResponse;
+import banky.webservices.data.pagination.PaginatedResponse;
+import banky.webservices.data.pagination.PaginationMeta;
 
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
@@ -26,16 +28,62 @@ public class CategoryService {
         this.subCategoryDao = subCategoryDao;
     }
 
-    public List<CategoryResponse> fetchCategories() {
-        return categoryDao.findAll()
-            .stream()
-            .map(
-                category -> new CategoryResponse(
-                    category.getId(),
-                    category.getName()
-                )
-            )
-            .toList();
+    /**
+     * Fetch categories with pagination support.
+     * 
+     * @param page The page number to retrieve (1-based)
+     * @param size The number of items per page
+     * @return A paginated response containing categories and pagination metadata
+     */
+    public PaginatedResponse<CategoryResponse> fetchPaginatedCategories(int page, int size) {
+        // Calculate total elements and pages
+        long totalElements = categoryDao.countCategories();
+        int totalPages = calculateTotalPages(totalElements, size);
+        
+        // Ensure page is within bounds
+        int adjustedPage = Math.min(Math.max(page, 1), Math.max(totalPages, 1));
+        
+        // Get categories for the page
+        List<CategoryResponse> categories = categoryDao.fetchCategoriesPaginated(adjustedPage, size);
+        
+        // Create pagination metadata
+        PaginationMeta paginationMeta = new PaginationMeta(
+            adjustedPage,
+            totalPages,
+            totalElements,
+            size
+        );
+        
+        return new PaginatedResponse<>(categories, paginationMeta);
+    }
+
+    /**
+     * Fetch subcategories with pagination support.
+     * 
+     * @param page The page number to retrieve (1-based)
+     * @param size The number of items per page
+     * @return A paginated response containing subcategories and pagination metadata
+     */
+    public PaginatedResponse<SubCategoryResponse> fetchPaginatedSubCategories(int page, int size) {
+        // Calculate total elements and pages
+        long totalElements = subCategoryDao.countSubCategories();
+        int totalPages = calculateTotalPages(totalElements, size);
+        
+        // Ensure page is within bounds
+        int adjustedPage = Math.min(Math.max(page, 1), Math.max(totalPages, 1));
+        
+        // Get subcategories for the page
+        List<SubCategoryResponse> subCategories = subCategoryDao.fetchSubCategoriesPaginated(adjustedPage, size);
+        
+        // Create pagination metadata
+        PaginationMeta paginationMeta = new PaginationMeta(
+            adjustedPage,
+            totalPages,
+            totalElements,
+            size
+        );
+        
+        return new PaginatedResponse<>(subCategories, paginationMeta);
     }
 
     public Long createCategory(CategoryRequest request) {
@@ -74,12 +122,7 @@ public class CategoryService {
         return subCategoryDao.fetchSubCategoryNames();
     }
 
-    /**
-     * Fetches all subcategories regardless of parent category
-     * 
-     * @return List of all subcategories with their details
-     */
-    public List<SubCategoryResponse> fetchSubCategories() {
-        return subCategoryDao.fetchSubCategories();
+    private int calculateTotalPages(long totalElements, int pageSize) {
+        return (int) Math.ceil((double) totalElements / pageSize);
     }
 }
