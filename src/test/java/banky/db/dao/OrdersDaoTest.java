@@ -3,6 +3,8 @@ package banky.db.dao;
 import banky.db.generated.Orders;
 import banky.db.generated.QOrders;
 import banky.guice.TestModule;
+import banky.services.orders.enums.OrderSide;
+import banky.services.tickers.enums.TickerCategory;
 import banky.webservices.api.orders.responses.OrderResponse;
 import com.coreoz.plume.db.querydsl.transaction.TransactionManagerQuerydsl;
 import com.coreoz.test.GuiceTest;
@@ -41,7 +43,6 @@ class OrdersDaoTest {
         for (OrderResponse order : orders) {
             assertThat(order.id()).isNotNull();
             assertThat(order.date()).isNotNull();
-            assertThat(order.name()).isNotNull();
             assertThat(order.amount()).isNotNull();
             assertThat(order.quantity()).isNotNull();
             assertThat(order.charges()).isNotNull();
@@ -61,13 +62,12 @@ class OrdersDaoTest {
             OrderResponse order = specificOrder.get();
             assertThat(order.id()).isEqualTo(101L);
             assertThat(order.accountShortName()).isEqualTo("PEA"); // PEA account
-            assertThat(order.name()).isEqualTo("LVMH Moët Hennessy");
             assertThat(order.amount()).isEqualByComparingTo(new BigDecimal("1000.50"));
             assertThat(order.quantity()).isEqualTo(5);
             assertThat(order.date()).isEqualTo(LocalDate.of(2025, 1, 10));
-            assertThat(order.side()).isEqualTo("BUY");
+            assertThat(order.side()).isEqualTo(OrderSide.BUY);
             assertThat(order.tickerShortName()).isEqualTo("LVMH");
-            assertThat(order.tickerCategory()).isEqualTo("CAPITALIZING");
+            assertThat(order.tickerCategory()).isEqualTo(TickerCategory.CAPITALIZING);
         }
     }
 

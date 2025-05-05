@@ -3,7 +3,7 @@ package banky.webservices.api.orders;
 import banky.services.accounts.enums.AccountType;
 import banky.services.orders.OrdersService;
 import banky.services.orders.enums.OrderSide;
-import banky.services.orders.enums.TickerCategory;
+import banky.services.tickers.enums.TickerCategory;
 import banky.webservices.api.orders.requests.OrderRequest;
 import banky.webservices.api.orders.responses.OrderResponse;
 import banky.webservices.data.pagination.PaginatedResponse;
@@ -53,7 +53,6 @@ class OrdersWsTest {
             new OrderResponse(
                 1L,
                 LocalDate.of(2025, 5, 1),
-                "LVMH",
                 new BigDecimal("1500.00"),
                 10,
                 new BigDecimal("9.90"),
@@ -87,7 +86,6 @@ class OrdersWsTest {
             new OrderResponse(
                 1L,
                 LocalDate.of(2025, 5, 1),
-                "LVMH",
                 new BigDecimal("1500.00"),
                 10,
                 new BigDecimal("9.90"),

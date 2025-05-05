@@ -1,6 +1,6 @@
-import { TransactionSide } from '@api/transactions/TransactionsTypes';
 import { OrderSide } from '@api/orders/OrderTypes';
-import { TickerCategory } from '@api/tickers/TickerTypes';
+import { TickerCategory } from '@api/tickers/TickersTypes';
+import { TransactionSide } from '@api/transactions/TransactionsTypes';
 import {
   TransactionFields,
 } from '@components/pages/operations/transactions/form/fields/TransactionsFormFields';
@@ -76,6 +76,7 @@ export type Translations = {
     },
     parameters: {
       title: string,
+      tickers: string,
       accounts: string,
       categories: string,
       subCategories: string,
@@ -113,6 +114,16 @@ export type Translations = {
         action: string,
       },
     },
+    tickers: {
+      title: string,
+      subTitle: string,
+      table: {
+        name: string,
+        shortName: string,
+        category: string,
+        action: string,
+      },
+    }
   },
   operations: {
     transactions: {

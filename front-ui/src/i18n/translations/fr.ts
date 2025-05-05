@@ -1,6 +1,6 @@
-import { TransactionSide } from '@/api/transactions/TransactionsTypes';
 import { OrderSide } from '@/api/orders/OrderTypes';
-import { TickerCategory } from '@/api/tickers/TickerTypes';
+import { TransactionSide } from '@/api/transactions/TransactionsTypes';
+import { TickerCategory } from '@api/tickers/TickersTypes';
 import {
   TransactionFields,
 } from '@components/pages/operations/transactions/form/fields/TransactionsFormFields';
@@ -90,6 +90,7 @@ const frMessages: Translations = {
     },
     parameters: {
       title: 'Paramètres',
+      tickers: 'Titres',
       accounts: 'Comptes',
       categories: 'Catégories',
       subCategories: 'Sous-catégories',
@@ -124,6 +125,16 @@ const frMessages: Translations = {
       table: {
         name: 'Nom',
         categoryName: 'Nom de la catégorie',
+        action: 'Action',
+      },
+    },
+    tickers: {
+      title: 'Titres',
+      subTitle: 'Configuration des titres',
+      table: {
+        name: 'Nom',
+        shortName: 'Nom court',
+        category: 'Catégorie',
         action: 'Action',
       },
     },
