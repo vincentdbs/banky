@@ -44,7 +44,6 @@ public class OrdersDao extends CrudDaoQuerydsl<Orders> {
             .select(
                 QOrders.orders.id,
                 QOrders.orders.date,
-                ticker.name,
                 QOrders.orders.amount,
                 QOrders.orders.quantity,
                 QOrders.orders.charges,
@@ -68,7 +67,6 @@ public class OrdersDao extends CrudDaoQuerydsl<Orders> {
                 order -> new OrderResponse(
                     order.get(QOrders.orders.id),
                     order.get(QOrders.orders.date),
-                    order.get(ticker.name),
                     order.get(QOrders.orders.amount),
                     order.get(QOrders.orders.quantity),
                     order.get(QOrders.orders.charges),

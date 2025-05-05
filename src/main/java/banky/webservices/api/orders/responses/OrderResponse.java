@@ -16,7 +16,6 @@ public record OrderResponse(
     @JsonSerialize(using = ToStringSerializer.class)
     Long id,
     LocalDate date,
-    String name,
     @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
     BigDecimal amount,
     Integer quantity,

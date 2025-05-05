@@ -1,4 +1,5 @@
 import { PaginatedResponse } from '@/utils/types/PaginationTypes';
+import { TickerCategory } from '@api/tickers/TickerTypes';
 
 /**
  * Side of the order (BUY or SELL)
@@ -14,15 +15,14 @@ export enum OrderSide {
 export type OrderResponse = {
   id: number,
   date: string,
-  name: string,
-  side: OrderSide,
   amount: string,
+  side: OrderSide,
   quantity: number,
   charges: string,
-  accountId: number,
-  accountName: string,
-  tickerId: number,
-  tickerName: string,
+  accountShortName: string,
+  accountColor: string,
+  tickerShortName: string,
+  tickerCategory: TickerCategory,
 };
 
 /**

@@ -1,4 +1,6 @@
 import { TransactionSide } from '@api/transactions/TransactionsTypes';
+import { OrderSide } from '@api/orders/OrderTypes';
+import { TickerCategory } from '@api/tickers/TickerTypes';
 import {
   TransactionFields,
 } from '@components/pages/operations/transactions/form/fields/TransactionsFormFields';
@@ -44,6 +46,8 @@ export type Translations = {
     unsaved_data: string,
     confirm_delete: string,
     side: Record<TransactionSide, string>,
+    tickerCategory: Record<TickerCategory, string>,
+    orderSide: Record<OrderSide, string>,
   },
   // errors
   error: {
@@ -165,6 +169,7 @@ export type Translations = {
         amount: string,
         charges: string,
         accountName: string,
+        tickerCategory: string,
         tickerName: string,
         buy: string,
         sell: string,
