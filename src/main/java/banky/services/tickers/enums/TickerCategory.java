@@ -1,4 +1,4 @@
-package banky.services.orders.enums;
+package banky.services.tickers.enums;
 
 /**
  * Enum representing the category of a ticker

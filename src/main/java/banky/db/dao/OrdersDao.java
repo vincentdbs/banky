@@ -5,7 +5,7 @@ import banky.db.generated.QAccounts;
 import banky.db.generated.QOrders;
 import banky.db.generated.QTicker;
 import banky.services.orders.enums.OrderSide;
-import banky.services.orders.enums.TickerCategory;
+import banky.services.tickers.enums.TickerCategory;
 import banky.webservices.api.orders.responses.OrderResponse;
 import com.coreoz.plume.db.querydsl.crud.CrudDaoQuerydsl;
 import com.coreoz.plume.db.querydsl.transaction.TransactionManagerQuerydsl;

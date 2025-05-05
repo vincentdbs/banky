@@ -3,7 +3,7 @@ package banky.webservices.api.orders;
 import banky.services.accounts.enums.AccountType;
 import banky.services.orders.OrdersService;
 import banky.services.orders.enums.OrderSide;
-import banky.services.orders.enums.TickerCategory;
+import banky.services.tickers.enums.TickerCategory;
 import banky.webservices.api.orders.requests.OrderRequest;
 import banky.webservices.api.orders.responses.OrderResponse;
 import banky.webservices.data.pagination.PaginatedResponse;

@@ -3,7 +3,7 @@ package banky.services.orders;
 import banky.db.dao.OrdersDao;
 import banky.db.generated.Orders;
 import banky.services.orders.enums.OrderSide;
-import banky.services.orders.enums.TickerCategory;
+import banky.services.tickers.enums.TickerCategory;
 import banky.webservices.api.orders.requests.OrderRequest;
 import banky.webservices.api.orders.responses.OrderResponse;
 import banky.webservices.data.pagination.PaginatedResponse;
