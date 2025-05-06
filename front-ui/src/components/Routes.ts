@@ -7,6 +7,9 @@ export const OPERATIONS_TRANSACTIONS: string = '/transactions';
 export const OPERATIONS_ORDERS: string = '/ordres';
 export const OPERATIONS_TRANSFERT: string = '/transfert';
 
+export const EVOLUTION: string = '/evolution';
+export const EVOLUTION_MONTHLY_BUDGET: string = '/monthly-budget';
+
 export const PARAMETERS: string = '/parameters';
 export const PARAMETERS_ACCOUNTS: string = '/accounts';
 export const PARAMETERS_CATEGORY: string = '/categories';

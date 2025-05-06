@@ -1,6 +1,7 @@
 import installAccountsServices from '@services/accounts/accounts-services-module';
 import installCategoriesServices from '@services/categories/categories-services-module';
 import installDashboardServices from '@services/dashboard/dashboard-services-module';
+import installEvolutionService from '@services/evolution/evolution-service-module';
 import installOrdersServices from '@services/orders/orders-services-module';
 import installTickersServices from '@services/tickers/tickers-services-module';
 import installTransactionsService from '@services/transactions/transactions-services-module';
@@ -18,4 +19,5 @@ export default function installServicesModule(injector: Injector) {
   installTransfertsServices(injector);
   installOrdersServices(injector);
   installTickersServices(injector);
+  installEvolutionService(injector);
 }

@@ -90,6 +90,7 @@ export type Translations = {
     evolution: {
       treasury: string,
       graph: string,
+      monthlyBudget: string,
     },
   },
   parameters: {
@@ -124,6 +125,23 @@ export type Translations = {
         action: string,
       },
     }
+  },
+  evolution: {
+    monthlyBudget: {
+      title: string,
+      subTitle: string,
+      table: {
+        category: string,
+        spent: string,
+        budgeted: string,
+        spentPercentage: string,
+        budgetedPercentage: string,
+        total: string,
+        totalWithoutSavings: string,
+        balance: string,
+        balanceWithoutSavings: string,
+      },
+    },
   },
   operations: {
     transactions: {

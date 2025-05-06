@@ -1,5 +1,7 @@
 import DashboardSidebarGroup
   from '@components/theme/sidebar/groups/dashboard/DashboardSidebarGroup';
+import EvolutionSidebarGroup 
+  from '@components/theme/sidebar/groups/evolution/EvolutionSidebarGroup';
 import OperationsSidebarGroup
   from '@components/theme/sidebar/groups/operations/OperationsSidebarGroup';
 import ParametersSidebarGroup
@@ -26,6 +28,7 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
         <SidebarContent>
           <DashboardSidebarGroup />
           <OperationsSidebarGroup />
+          <EvolutionSidebarGroup />
           <ParametersSidebarGroup />
         </SidebarContent>
         <SidebarFooter />
