@@ -1,5 +1,7 @@
 const priceRegex: RegExp = /\B(?=(\d{3})+(?!\d))/g;
 
+export const FIRST_YEAR: 2021 = 2021;
+
 export const formatDecimalPrice = (price: number, numberOfDecimals: number = 2): string => {
   if (numberOfDecimals < 0) {
     throw new Error('Number of decimals cannot be negative');
