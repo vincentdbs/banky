@@ -39,3 +39,24 @@ export const formatEuroDecimalPriceFromString = (priceString: string, numberOfDe
   
   return formatEuroDecimalPrice(numericValue, numberOfDecimals);
 };
+
+/**
+ * Formats a string percentage value into a percentage display format.
+ * Used for API responses where the value is a string without fractional part.
+ * Example: "1234" will be formatted as "12,34 %"
+ * 
+ * @param percentageString - The percentage string without fractional part (e.g. "1234" for 12.34%)
+ * @param numberOfDecimals - Number of decimal places to display (default: 2)
+ * @returns The formatted percentage string with percentage symbol
+ */
+export const formatPercentageDecimalPriceFromString = (percentageString: string, numberOfDecimals: number = 2): string => {
+  if (!percentageString) {
+    return '0,00 %';
+  }
+  
+  // Parse string to number, dividing by 10^numberOfDecimals
+  const divisor: number = Math.pow(10, numberOfDecimals);
+  const numericValue: number = parseInt(percentageString, 10) / divisor;
+  
+  return `${formatDecimalPrice(numericValue, numberOfDecimals)} %`;
+};

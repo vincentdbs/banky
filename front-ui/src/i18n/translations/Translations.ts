@@ -130,6 +130,10 @@ export type Translations = {
     monthlyBudget: {
       title: string,
       subTitle: string,
+      viewTypes: {
+        REAL: string,
+        THEORETICAL: string,
+      },
       table: {
         category: string,
         spent: string,

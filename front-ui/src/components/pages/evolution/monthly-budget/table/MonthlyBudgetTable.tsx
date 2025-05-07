@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useMessages from '@i18n/hooks/messagesHook';
 import { MonthlyBudgetCategory, MonthlyBudgetResponse } from '@api/evolution/EvolutionTypes';
 import { cn } from '@lib/shadcn/utils';
+import MonthlyBudgetControls, { MonthlyRecapType } from '../controls/MonthlyBudgetControls';
+import dayjs from 'dayjs';
+import { formatPercentageDecimalPriceFromString, formatEuroDecimalPriceFromString } from '@/utils/number/NumberUtils';
+import { Card } from '@/lib/shadcn/card';
 
 /**
  * Props for the MonthlyBudgetTable component
@@ -19,106 +23,142 @@ type MonthlyBudgetTableProps = {
  */
 export default function MonthlyBudgetTable({ monthlyBudget }: MonthlyBudgetTableProps) {
   const { messages } = useMessages();
+  const [selectedMonth, setSelectedMonth] = useState<number>(0);
+  const [selectedYear, setSelectedYear] = useState<number>(dayjs().year());
+  const [viewType, setViewType] = useState<MonthlyRecapType>(MonthlyRecapType.REAL);
 
   return (
     <div className="space-y-6">
+      <MonthlyBudgetControls
+        selectedMonth={selectedMonth}
+        setSelectedMonth={setSelectedMonth}
+        selectedYear={selectedYear}
+        setSelectedYear={setSelectedYear}
+        viewType={viewType}
+        setViewType={setViewType}
+      />
+
       <div className="rounded-md border">
         {/* Table header */}
-        <div className="grid grid-cols-5 border-b bg-background">
-          <div className="h-10 px-2 text-left align-middle font-medium text-muted-foreground w-[300px]">
+        <div className="grid grid-cols-5 border-b bg-muted">
+          <p className="h-10 px-2 flex items-center text-left font-medium text-muted-foreground w-[300px]">
             {messages.evolution.monthlyBudget.table.category}
-          </div>
-          <div className="h-10 px-2 text-right align-middle font-medium text-muted-foreground">
+          </p>
+          <p className="h-10 px-2 flex items-center justify-end font-medium text-muted-foreground">
             {messages.evolution.monthlyBudget.table.spent}
-          </div>
-          <div className="h-10 px-2 text-right align-middle font-medium text-muted-foreground">
-            {messages.evolution.monthlyBudget.table.spentPercentage}
-          </div>
-          <div className="h-10 px-2 text-right align-middle font-medium text-muted-foreground">
+          </p>
+          <p className="h-10 px-2 flex items-center justify-end font-medium text-muted-foreground">
             {messages.evolution.monthlyBudget.table.budgeted}
-          </div>
-          <div className="h-10 px-2 text-right align-middle font-medium text-muted-foreground">
+          </p>
+          <p className="h-10 px-2 flex items-center justify-end font-medium text-muted-foreground">
+            {messages.evolution.monthlyBudget.table.spentPercentage}
+          </p>
+          <p className="h-10 px-2 flex items-center justify-end font-medium text-muted-foreground">
             {messages.evolution.monthlyBudget.table.budgetedPercentage}
-          </div>
+          </p>
         </div>
 
         {/* Table body */}
         <div>
           {/* Category rows */}
-          {monthlyBudget.categories.map((category: MonthlyBudgetCategory, index: number) => (
-            <div 
-              key={index} 
-              className={cn(
-                "grid grid-cols-5 border-b transition-colors hover:bg-muted/50",
-                index === monthlyBudget.categories.length - 1 && "border-0"
-              )}
-            >
-              <div className="p-2 align-middle font-medium">{category.name}</div>
-              <div className="p-2 align-middle text-right">{category.spent}</div>
-              <div className="p-2 align-middle text-right">{category.spentPercentage}</div>
-              <div className="p-2 align-middle text-right">{category.budgeted}</div>
-              <div className="p-2 align-middle text-right">{category.budgetedPercentage}</div>
-            </div>
-          ))}
+          {monthlyBudget.categories.map((category: MonthlyBudgetCategory, index: number) => {
+            const isSpentGreaterThanBudgeted: boolean = parseInt(category.spent) > parseInt(category.budgeted);
+            const isSpentLessThanBudgeted: boolean = parseInt(category.spent) < parseInt(category.budgeted) && parseInt(category.spent) !== 0;
+            const isSpentPercentageGreaterThanBudgetedPercentage: boolean =
+              parseInt(category.spentPercentage) > parseInt(category.budgetedPercentage);
+            const isSpentPercentageLessThanBudgetedPercentage: boolean =
+              parseInt(category.spentPercentage) < parseInt(category.budgetedPercentage) && parseInt(category.spentPercentage) !== 0;
+            
+            return (
+              <div 
+                key={index} 
+                className={cn(
+                  "grid grid-cols-5 border-b transition-colors hover:bg-muted/50",
+                  index === monthlyBudget.categories.length - 1 && "border-0"
+                )}
+              >
+                <p className="p-2 flex items-center">{category.name}</p>
+                <p className={cn(
+                  "p-2 flex items-center justify-end",
+                  isSpentGreaterThanBudgeted && "text-red-500 font-bold",
+                  isSpentLessThanBudgeted && "text-green-500"
+                )}>
+                  {formatEuroDecimalPriceFromString(category.spent)}
+                </p>
+                <p className="p-2 flex items-center justify-end">
+                  {formatEuroDecimalPriceFromString(category.budgeted)}
+                </p>
+                <p className={cn(
+                  "p-2 flex items-center justify-end",
+                  isSpentPercentageGreaterThanBudgetedPercentage && "text-red-500 font-bold",
+                  isSpentPercentageLessThanBudgetedPercentage && "text-green-500"
+                )}>
+                  {formatPercentageDecimalPriceFromString(category.spentPercentage)}
+                </p>
+                <p className="p-2 flex items-center justify-end">
+                  {formatPercentageDecimalPriceFromString(category.budgetedPercentage)}
+                </p>
+              </div>
+            );
+          })}
           
           {/* Summary rows */}
           <div className="grid grid-cols-5 border-b bg-muted/50">
-            <div className="p-2 align-middle font-bold">
+            <p className="p-2 align-middle font-bold">
               {messages.evolution.monthlyBudget.table.total}
-            </div>
-            <div className="p-2 align-middle text-right font-bold">
-              {monthlyBudget.total}
-            </div>
-            <div className="p-2 align-middle text-right font-bold">
-              {monthlyBudget.spentPercentage}
-            </div>
-            <div className="p-2 align-middle text-right font-bold">
-              {monthlyBudget.budgetedTotal}
-            </div>
-            <div className="p-2 align-middle text-right font-bold">
-              {monthlyBudget.budgetedPercentage}
-            </div>
+            </p>
+            <p className="p-2 align-middle text-right font-bold">
+              {formatEuroDecimalPriceFromString(monthlyBudget.total)}
+            </p>
+            <p className="p-2 align-middle text-right font-bold">
+              {formatEuroDecimalPriceFromString(monthlyBudget.budgetedTotal)}
+            </p>
+            <p className="p-2 align-middle text-right font-bold">
+              {formatPercentageDecimalPriceFromString(monthlyBudget.spentPercentage)}
+            </p>
+            <p className="p-2 align-middle text-right font-bold">
+              {formatPercentageDecimalPriceFromString(monthlyBudget.budgetedPercentage)}
+            </p>
           </div>
           
-          <div className="grid grid-cols-5 bg-muted/50">
-            <div className="p-2 align-middle font-bold">
+          <div className="grid grid-cols-5 bg-gray-100">
+            <p className="p-2 align-middle">
               {messages.evolution.monthlyBudget.table.totalWithoutSavings}
-            </div>
-            <div className="p-2 align-middle text-right font-bold">
-              {monthlyBudget.totalWithoutSavings}
-            </div>
-            <div className="p-2 align-middle text-right font-bold">
-              {monthlyBudget.spentWithoutSavingsPercentage}
-            </div>
-            <div className="p-2 align-middle text-right font-bold">
-              {monthlyBudget.budgetedTotalWithoutSavings}
-            </div>
-            <div className="p-2 align-middle text-right font-bold">
-              {monthlyBudget.budgetedWithoutSavingsPercentage}
-            </div>
+            </p>
+            <p className="p-2 align-middle text-right">
+              {formatEuroDecimalPriceFromString(monthlyBudget.totalWithoutSavings)}
+            </p>
+            <p className="p-2 align-middle text-right">
+              {formatEuroDecimalPriceFromString(monthlyBudget.budgetedTotalWithoutSavings)}
+            </p>
+            <p className="p-2 align-middle text-right">
+              {formatPercentageDecimalPriceFromString(monthlyBudget.spentWithoutSavingsPercentage)}
+            </p>
+            <p className="p-2 align-middle text-right">
+              {formatPercentageDecimalPriceFromString(monthlyBudget.budgetedWithoutSavingsPercentage)}
+            </p>
           </div>
         </div>
       </div>
       
       {/* Balance section */}
       <div className="grid grid-cols-2 gap-4">
-        <div className="rounded-md border p-4">
-          <div className="text-lg font-semibold mb-2">
+        <Card className="py-2 px-4">
+          <p className="font-semibold">
             {messages.evolution.monthlyBudget.table.balance}
-          </div>
-          <div className="text-2xl font-bold">
-            {monthlyBudget.balance}
-          </div>
-        </div>
-        
-        <div className="rounded-md border p-4">
-          <div className="text-lg font-semibold mb-2">
+          </p>
+          <p className="font-bold">
+            {formatEuroDecimalPriceFromString(monthlyBudget.balance)}
+          </p>
+        </Card>
+        <Card className="py-2 px-4">
+          <p className="font-semibold">
             {messages.evolution.monthlyBudget.table.balanceWithoutSavings}
-          </div>
-          <div className="text-2xl font-bold">
-            {monthlyBudget.balanceWithoutSavings}
-          </div>
-        </div>
+          </p>
+          <p className="font-bold">
+            {formatEuroDecimalPriceFromString(monthlyBudget.balanceWithoutSavings)}
+          </p>
+        </Card>
       </div>
     </div>
   );

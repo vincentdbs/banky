@@ -144,12 +144,16 @@ const frMessages: Translations = {
     monthlyBudget: {
       title: 'Budget mensuel',
       subTitle: 'Suivi du budget mensuel par catégorie',
+      viewTypes: {
+        REAL: 'Réel',
+        THEORETICAL: 'Théorique',
+      },
       table: {
         category: 'Catégorie',
         spent: 'Dépensé',
         budgeted: 'Budgété',
-        spentPercentage: '% dépensé',
-        budgetedPercentage: '% budgété',
+        spentPercentage: '% Dépensé',
+        budgetedPercentage: '% Budgété',
         total: 'Total',
         totalWithoutSavings: 'Total sans épargne',
         balance: 'Solde',
