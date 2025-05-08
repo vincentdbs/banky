@@ -176,6 +176,6 @@ public class MonthlyBudgetService {
             return BigDecimal.ZERO;
         }
         return part.multiply(BigDecimal.valueOf(100))
-            .divide(total, 2, RoundingMode.HALF_UP);
+            .divide(total, 3, RoundingMode.HALF_UP);
     }
 }

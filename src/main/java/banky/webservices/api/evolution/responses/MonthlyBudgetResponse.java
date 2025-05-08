@@ -1,6 +1,6 @@
 package banky.webservices.api.evolution.responses;
 
-import banky.webservices.serializer.ThreeDecimalToStringSerializer;
+import banky.webservices.serializer.TwoDecimalToStringSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.math.BigDecimal;
@@ -12,31 +12,31 @@ import java.util.List;
  */
 public record MonthlyBudgetResponse(
     List<MonthlyBudgetCategoryResponse> categories,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal total,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal spentPercentageOfBudgeted,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal budgetedTotal,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal spentPercentageOfTotal,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal totalWithoutSavings,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal spentWithoutSavingsPercentage,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal budgetedTotalWithoutSavings,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal budgetedWithoutSavingsPercentage,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal balance,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal balanceWithoutSavings,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal orderCharges,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal savings,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal budgetedSavings
 ) {
 }

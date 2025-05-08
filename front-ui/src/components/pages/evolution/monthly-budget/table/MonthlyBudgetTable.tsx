@@ -3,6 +3,7 @@ import {
   formatEuroDecimalPriceFromString,
   formatPercentageDecimalPriceFromString,
 } from '@/utils/number/NumberUtils';
+import { PLACEHOLDER } from '@/utils/string/StringUtils';
 import { MonthlyBudgetCategory } from '@api/evolution/EvolutionTypes';
 import useHandleFetchMonthlyBudget
   from '@hooks/use-handle-fetch-monthly-budget/useHandleFetchMonthlyBudget';
@@ -31,7 +32,6 @@ export default function MonthlyBudgetTable() {
     handleUpdateMonth,
   } = useHandleFetchMonthlyBudget();
 
-  console.log(monthlyBudget);
   return (
     <div className="space-y-6">
       <MonthlyBudgetControls
@@ -124,17 +124,16 @@ export default function MonthlyBudgetTable() {
                     {messages.evolution.monthlyBudget.table.totalSavings}
                   </p>
                   <p className="p-2 align-middle text-right font-semibold">
-                    {formatEuroDecimalPriceFromString(monthlyBudget.savings || "0")}
+                    {formatEuroDecimalPriceFromString(monthlyBudget.savings)}
                   </p>
                   <p className="p-2 align-middle text-right font-semibold">
-                    {formatEuroDecimalPriceFromString(monthlyBudget.budgetedSavings || "0")}
+                    {formatEuroDecimalPriceFromString(monthlyBudget.budgetedSavings)}
                   </p>
                   <p className="p-2 align-middle text-right font-semibold">
-                    {/* Using placeholder percentages since they might not be available in the API response */}
-                    {formatPercentageDecimalPriceFromString("0")}
+                    {PLACEHOLDER}
                   </p>
                   <p className="p-2 align-middle text-right font-semibold">
-                    {formatPercentageDecimalPriceFromString("0")}
+                    {PLACEHOLDER}
                   </p>
                 </div>
 
@@ -144,16 +143,16 @@ export default function MonthlyBudgetTable() {
                     {messages.evolution.monthlyBudget.table.stockFees}
                   </p>
                   <p className="p-2 align-middle text-right font-semibold">
-                    {formatEuroDecimalPriceFromString(monthlyBudget.orderCharges || "0")}
+                    {formatEuroDecimalPriceFromString(monthlyBudget.orderCharges)}
                   </p>
                   <p className="p-2 align-middle text-right font-semibold">
-                    {formatEuroDecimalPriceFromString("0")}
+                    {PLACEHOLDER}
                   </p>
                   <p className="p-2 align-middle text-right font-semibold">
-                    {formatPercentageDecimalPriceFromString("0")}
+                    {PLACEHOLDER}
                   </p>
                   <p className="p-2 align-middle text-right font-semibold">
-                    {formatPercentageDecimalPriceFromString("0")}
+                    {PLACEHOLDER}
                   </p>
                 </div>
 

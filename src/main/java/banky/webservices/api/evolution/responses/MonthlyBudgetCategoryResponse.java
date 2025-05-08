@@ -1,6 +1,6 @@
 package banky.webservices.api.evolution.responses;
 
-import banky.webservices.serializer.ThreeDecimalToStringSerializer;
+import banky.webservices.serializer.TwoDecimalToStringSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.math.BigDecimal;
@@ -10,13 +10,13 @@ import java.math.BigDecimal;
  */
 public record MonthlyBudgetCategoryResponse(
     String name,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal spent,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal budgeted,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal spentPercentageOfBudgeted,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal spentPercentageOfTotal
 ) {
 }
