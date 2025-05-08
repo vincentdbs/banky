@@ -1,5 +1,5 @@
 import { OrderResponse } from '@api/orders/OrderTypes';
-import RessourceLayout from '@components/layout/parameters/RessourceLayout';
+import MainSection from '@components/theme/sections/MainSection';
 import useMessages from '@i18n/hooks/messagesHook';
 import OrdersService from '@services/orders/OrdersService';
 import { getGlobalInstance } from 'plume-ts-di';
@@ -23,10 +23,7 @@ export default function Orders() {
   } = useHandlePagination<OrderResponse>(ordersService.fetchOrders);
 
   return (
-    <RessourceLayout
-      title={messages.operations.orders.title}
-      subTitle={messages.operations.orders.subTitle}
-    >
+    <MainSection>
       <PaginationLayout
         currentPage={currentPage}
         totalPages={totalPages}
@@ -34,6 +31,6 @@ export default function Orders() {
       >
         <OrdersTable orders={orders} />
       </PaginationLayout>
-    </RessourceLayout>
+    </MainSection>
   );
 }

@@ -1,5 +1,5 @@
 import { TransfertResponse } from '@api/transferts/TransfertTypes';
-import RessourceLayout from '@components/layout/parameters/RessourceLayout';
+import MainSection from '@components/theme/sections/MainSection';
 import useMessages from '@i18n/hooks/messagesHook';
 import TransfertsService from '@services/transferts/TransfertsService';
 import { getGlobalInstance } from 'plume-ts-di';
@@ -25,10 +25,7 @@ export default function Transferts() {
   } = useHandlePagination<TransfertResponse>(transfertsService.fetchTransferts);
 
   return (
-    <RessourceLayout
-      title={messages.operations.transferts.title}
-      subTitle={messages.operations.transferts.subTitle}
-    >
+    <MainSection>
       <TransfertsFormModal />
       <PaginationLayout
         currentPage={currentPage}
@@ -37,6 +34,6 @@ export default function Transferts() {
       >
         <TransfertsTable transferts={transferts} />
       </PaginationLayout>
-    </RessourceLayout>
+    </MainSection>
   );
 }

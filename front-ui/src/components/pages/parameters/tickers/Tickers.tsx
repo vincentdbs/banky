@@ -1,5 +1,5 @@
 import { TickerResponse } from '@api/tickers/TickersTypes';
-import RessourceLayout from '@components/layout/parameters/RessourceLayout';
+import MainSection from '@components/theme/sections/MainSection';
 import PaginationLayout from '@components/theme/pagination/PaginationLayout';
 import useHandlePagination from '@hooks/use-handle-pagination/useHandlePagination';
 import useMessages from '@i18n/hooks/messagesHook';
@@ -24,10 +24,7 @@ export default function Tickers() {
   } = useHandlePagination<TickerResponse>(tickersService.fetchTickers);
 
   return (
-    <RessourceLayout
-      title={messages.parameters.tickers.title}
-      subTitle={messages.parameters.tickers.subTitle}
-    >
+    <MainSection>
       <PaginationLayout
         currentPage={currentPage}
         totalPages={totalPages}
@@ -35,6 +32,6 @@ export default function Tickers() {
       >
         <TickersTable tickers={tickers} />
       </PaginationLayout>
-    </RessourceLayout>
+    </MainSection>
   );
 }

@@ -1,5 +1,5 @@
 import { CategoryResponse } from '@api/categories/CategoriesTypes';
-import RessourceLayout from '@components/layout/parameters/RessourceLayout';
+import MainSection from '@components/theme/sections/MainSection';
 import PaginationLayout from '@components/theme/pagination/PaginationLayout';
 import CategoriesTable from '@components/pages/parameters/categories/table/CategoriesTable';
 import useHandlePagination from '@hooks/use-handle-pagination/useHandlePagination';
@@ -24,10 +24,7 @@ export default function Categories() {
   } = useHandlePagination<CategoryResponse>(categoriesService.fetchPaginatedCategories);
 
   return (
-    <RessourceLayout
-      title={messages.parameters.categories.title}
-      subTitle={messages.parameters.categories.subTitle}
-    >
+    <MainSection>
       <PaginationLayout
         currentPage={currentPage}
         totalPages={totalPages}
@@ -35,6 +32,6 @@ export default function Categories() {
       >
         <CategoriesTable categories={categories} />
       </PaginationLayout>
-    </RessourceLayout>
+    </MainSection>
   );
 }
