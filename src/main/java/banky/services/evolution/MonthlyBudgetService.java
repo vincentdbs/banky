@@ -34,18 +34,6 @@ public class MonthlyBudgetService {
     }
 
     /**
-     * Fetches monthly budget data including categories, totals, and balances.
-     * Uses the current month as the default time period.
-     *
-     * @return A MonthlyBudgetResponse containing the complete monthly budget data
-     */
-    public MonthlyBudgetResponse fetchMonthlyBudget() {
-        // Default to current month if no date is specified
-        LocalDate firstDayOfCurrentMonth = LocalDate.now().withDayOfMonth(1);
-        return fetchMonthlyBudget(firstDayOfCurrentMonth);
-    }
-
-    /**
      * Fetches monthly budget data for a specific month.
      * Retrieves transaction data, calculates percentages and balances.
      *

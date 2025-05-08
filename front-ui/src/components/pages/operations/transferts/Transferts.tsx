@@ -21,7 +21,6 @@ export default function Transferts() {
     elements: transferts,
     currentPage,
     totalPages,
-    isLoading,
     handlePageChange,
   } = useHandlePagination<TransfertResponse>(transfertsService.fetchTransferts);
 

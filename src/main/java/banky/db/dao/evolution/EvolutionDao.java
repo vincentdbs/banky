@@ -60,8 +60,7 @@ public class EvolutionDao {
                     .and(transactions.date.goe(firstDayOfTheMonth))
                     .and(transactions.date.loe(lastDayOfTheMonth))
             )
-            .groupBy(category.id, category.name)
-            .orderBy(category.name.asc())
+            .groupBy(category.id)
             .fetch()
             .stream()
             .map(tuple -> new SpentByCategory(

@@ -41,31 +41,19 @@ public class EvolutionWs {
     }
 
     /**
-     * Fetches the monthly budget data including categories, totals, and balances.
-     * 
-     * @return A MonthlyBudgetResponse containing the monthly budget data
-     */
-    @GET
-    @Path("/budgets/monthly")
-    @Operation(description = "Fetch the monthly budget data")
-    public MonthlyBudgetResponse fetchMonthlyBudget() {
-        return monthlyBudgetService.fetchMonthlyBudget();
-    }
-    
-    /**
      * Fetches the monthly budget data for a specific month.
      * 
      * @param date The first day of the month in format "yyyy-MM-dd"
      * @return A MonthlyBudgetResponse containing the monthly budget data
      */
     @GET
-    @Path("/budgets/monthly/by-date")
+    @Path("/budgets/monthly")
     @Operation(description = "Fetch the monthly budget data for a specific month")
     public MonthlyBudgetResponse fetchMonthlyBudgetByDate(
-        @QueryParam("date") LocalDate firstDayOfTheMonth
+        @QueryParam("date") LocalDate date
     ) {
-        Validators.checkRequired("date", firstDayOfTheMonth);
+        Validators.checkRequired("date", date);
 
-        return monthlyBudgetService.fetchMonthlyBudget(firstDayOfTheMonth);
+        return monthlyBudgetService.fetchMonthlyBudget(date);
     }
 }

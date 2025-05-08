@@ -13,9 +13,10 @@ export default class EvolutionApi {
    * 
    * @returns A promise with the monthly budget data
    */
-  fetchMonthlyBudget(): HttpPromise<MonthlyBudgetResponse> {
+  fetchMonthlyBudget(date: string): HttpPromise<MonthlyBudgetResponse> {
     return this.apiHttpClient
       .restRequest<MonthlyBudgetResponse>(HttpMethod.GET, `${EvolutionApi.BASE_PATH}/budgets/monthly`)
+      .queryParams([['date', date]])
       .execute();
   }
 }
