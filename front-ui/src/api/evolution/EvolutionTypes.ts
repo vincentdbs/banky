@@ -29,4 +29,7 @@ export type MonthlyBudgetResponse = {
   categories: MonthlyBudgetCategory[],
   balance: string,
   balanceWithoutSavings: string,
+  orderCharges: string,
+  savings: string,
+  budgetedSavings: string,
 };

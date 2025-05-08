@@ -2,6 +2,7 @@ package banky.webservices.api.evolution;
 
 import banky.services.evolution.MonthlyBudgetService;
 import banky.webservices.api.evolution.responses.MonthlyBudgetResponse;
+import com.coreoz.plume.jersey.errors.Validators;
 import com.coreoz.plume.jersey.security.permission.PublicApi;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -15,6 +16,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
+import javax.xml.validation.Validator;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -60,17 +62,10 @@ public class EvolutionWs {
     @Path("/budgets/monthly/by-date")
     @Operation(description = "Fetch the monthly budget data for a specific month")
     public MonthlyBudgetResponse fetchMonthlyBudgetByDate(
-        @Parameter(description = "First day of the month (yyyy-MM-dd)", required = true)
-        @QueryParam("date") String dateStr
+        @QueryParam("date") LocalDate firstDayOfTheMonth
     ) {
-        try {
-            LocalDate date = LocalDate.parse(dateStr, DateTimeFormatter.ISO_DATE);
-            // Ensure it's the first day of a month
-            date = date.withDayOfMonth(1);
-            return monthlyBudgetService.fetchMonthlyBudget(date);
-        } catch (DateTimeParseException e) {
-            // If the date cannot be parsed, return data for the current month
-            return monthlyBudgetService.fetchMonthlyBudget();
-        }
+        Validators.checkRequired("date", firstDayOfTheMonth);
+
+        return monthlyBudgetService.fetchMonthlyBudget(firstDayOfTheMonth);
     }
 }
