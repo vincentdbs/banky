@@ -24,6 +24,8 @@ public class QCategory extends com.querydsl.sql.RelationalPathBase<Category> {
 
     public static final QCategory category = new QCategory("bky_category");
 
+    public final NumberPath<java.math.BigDecimal> budgetedAmount = createNumber("budgetedAmount", java.math.BigDecimal.class);
+
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final StringPath name = createString("name");
@@ -58,6 +60,7 @@ public class QCategory extends com.querydsl.sql.RelationalPathBase<Category> {
     }
 
     public void addMetadata() {
+        addMetadata(budgetedAmount, ColumnMetadata.named("budgeted_amount").withIndex(3).ofType(Types.DECIMAL).withSize(15).withDigits(3).notNull());
         addMetadata(id, ColumnMetadata.named("id").withIndex(1).ofType(Types.BIGINT).withSize(19).notNull());
         addMetadata(name, ColumnMetadata.named("name").withIndex(2).ofType(Types.VARCHAR).withSize(255).notNull());
     }

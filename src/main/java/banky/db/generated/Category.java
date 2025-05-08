@@ -10,12 +10,23 @@ import com.querydsl.sql.Column;
 @Generated("com.coreoz.plume.db.querydsl.generation.IdBeanSerializer")
 public class Category extends com.coreoz.plume.db.querydsl.crud.CrudEntityQuerydsl {
 
-    @JsonSerialize(using=com.fasterxml.jackson.databind.ser.std.ToStringSerializer.class)
+    @Column("budgeted_amount")
+    private java.math.BigDecimal budgetedAmount;
+
     @Column("id")
+    @JsonSerialize(using=com.fasterxml.jackson.databind.ser.std.ToStringSerializer.class)
     private Long id;
 
     @Column("name")
     private String name;
+
+    public java.math.BigDecimal getBudgetedAmount() {
+        return budgetedAmount;
+    }
+
+    public void setBudgetedAmount(java.math.BigDecimal budgetedAmount) {
+        this.budgetedAmount = budgetedAmount;
+    }
 
     public Long getId() {
         return id;

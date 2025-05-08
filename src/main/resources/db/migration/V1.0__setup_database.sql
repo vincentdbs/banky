@@ -12,8 +12,9 @@ CREATE TABLE bky_accounts
 -- Create `category` table
 CREATE TABLE bky_category
 (
-    id   bigint(11) PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    id              bigint(11) PRIMARY KEY,
+    name            VARCHAR(255)   NOT NULL,
+    budgeted_amount DECIMAL(15, 3) NOT NULL
 );
 
 -- Create `sub_category` table
@@ -37,11 +38,11 @@ CREATE TABLE bky_ticker
 -- Create `transfert` table
 CREATE TABLE bky_transfert
 (
-    id     bigint(11) PRIMARY KEY,
-    from_account_id   bigint(11),
-    to_account_id     bigint(11),
-    amount DECIMAL(15, 3) NOT NULL,
-    date   DATE           NOT NULL,
+    id              bigint(11) PRIMARY KEY,
+    from_account_id bigint(11),
+    to_account_id   bigint(11),
+    amount          DECIMAL(15, 3) NOT NULL,
+    date            DATE           NOT NULL,
     FOREIGN KEY (from_account_id) REFERENCES bky_accounts (id),
     FOREIGN KEY (to_account_id) REFERENCES bky_accounts (id)
 );
