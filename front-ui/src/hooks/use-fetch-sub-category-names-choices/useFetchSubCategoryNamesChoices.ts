@@ -1,5 +1,5 @@
 import { SubCategoryNamesResponse } from '@api/categories/CategoriesTypes';
-import { Choice } from '@components/theme/form/select/Select';
+import { Choice } from '@components/theme/form/select/UncontrolledSelect';
 import { useOnComponentMounted } from '@lib/react-hooks-alias/ReactHooksAlias';
 import CategoriesService from '@services/categories/CategoriesService';
 import { getGlobalInstance } from 'plume-ts-di';

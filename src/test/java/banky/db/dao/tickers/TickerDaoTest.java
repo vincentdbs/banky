@@ -1,5 +1,6 @@
-package banky.db.dao;
+package banky.db.dao.tickers;
 
+import banky.db.dao.TickerDao;
 import banky.db.generated.QTicker;
 import banky.db.generated.Ticker;
 import banky.guice.TestModule;

@@ -1,12 +1,10 @@
-package banky.database.dao;
+package banky.db.dao.dashboard;
 
 import banky.db.dao.DashboardAccountsDao;
 import banky.guice.TestModule;
 import banky.webservices.api.dashboard.data.DashboardCheckingAccountResponse;
 import banky.webservices.serializer.ThreeDecimalToStringSerializer;
-import com.coreoz.plume.db.InitializeDatabase;
 import com.coreoz.test.GuiceTest;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import jakarta.inject.Inject;
 

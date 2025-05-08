@@ -1,5 +1,6 @@
-package banky.db.dao;
+package banky.db.dao.transferts;
 
+import banky.db.dao.TransfertDao;
 import banky.db.generated.QTransfert;
 import banky.db.generated.Transfert;
 import banky.guice.TestModule;
@@ -130,6 +131,86 @@ class TransfertDaoTest {
         transactionManager
             .delete(QTransfert.transfert)
             .where(QTransfert.transfert.id.eq(savedTransfert.getId()))
+            .execute();
+    }
+
+    @Test
+    void fetchSavingsAmountByMonth_shouldCalculateJanuarySavings() {
+        // Arrange - January 2025
+        LocalDate january2025 = LocalDate.of(2025, 1, 1);
+        
+        // Act
+        BigDecimal savingsAmount = transfertDao.fetchSavingsAmountByMonth(january2025);
+        
+        // Assert
+        // In January we have transfers with IDs 101, 102, 103 to Livret A (account 6)
+        // Amounts: 100.00 + 150.00 + 200.00 = 450.00
+        assertThat(savingsAmount).isEqualByComparingTo(new BigDecimal("450.00"));
+    }
+    
+    @Test
+    void fetchSavingsAmountByMonth_shouldCalculateFebruarySavings() {
+        // Arrange - February 2025
+        LocalDate february2025 = LocalDate.of(2025, 2, 1);
+        
+        // Act
+        BigDecimal savingsAmount = transfertDao.fetchSavingsAmountByMonth(february2025);
+        
+        // Assert
+        // In February we have transfers:
+        // ID 104: CA to Livret A: 120.00
+        // ID 105: CA to Livret A: 180.00
+        // ID 106: CA to Livret A: 250.00
+        // ID 107: Livret A to CA: -75.00 (this is from savings to checking, so should not be counted)
+        // Net inflows to savings: 120.00 + 180.00 + 250.00 = 550.00
+        assertThat(savingsAmount).isEqualByComparingTo(new BigDecimal("550.00"));
+    }
+    
+    @Test
+    void fetchSavingsAmountByMonth_shouldReturnZeroForMonthWithNoSavingsTransfers() {
+        // Arrange - April 2025 (no transfers in mock data)
+        LocalDate april2025 = LocalDate.of(2025, 4, 1);
+        
+        // Act
+        BigDecimal savingsAmount = transfertDao.fetchSavingsAmountByMonth(april2025);
+        
+        // Assert
+        assertThat(savingsAmount).isEqualByComparingTo(BigDecimal.ZERO);
+    }
+    
+    @Test
+    void fetchSavingsAmountByMonth_shouldOnlyCountTransfersToSavingsAccounts() {
+        // We'll add a test transfer between two checking accounts and verify it's not counted
+        // Arrange
+        LocalDate testDate = LocalDate.of(2025, 3, 1);
+        
+        // Create a transfer between two checking accounts (from CA to Fortuneo)
+        Transfert checkingTransfer = new Transfert();
+        checkingTransfer.setFromAccountId(1L); // Credit Agricole (CHECKING)
+        checkingTransfer.setToAccountId(5L);   // Fortuneo (CHECKING)
+        checkingTransfer.setAmount(new BigDecimal("300.00"));
+        checkingTransfer.setDate(testDate);
+        Transfert savedCheckingTransfer = transfertDao.save(checkingTransfer);
+        
+        // Create a transfer to a savings account for the same month
+        Transfert savingsTransfer = new Transfert();
+        savingsTransfer.setFromAccountId(1L);  // Credit Agricole (CHECKING)
+        savingsTransfer.setToAccountId(6L);    // Livret A (SAVINGS)
+        savingsTransfer.setAmount(new BigDecimal("200.00"));
+        savingsTransfer.setDate(testDate);
+        Transfert savedSavingsTransfer = transfertDao.save(savingsTransfer);
+        
+        // Act
+        BigDecimal savingsAmount = transfertDao.fetchSavingsAmountByMonth(testDate);
+        
+        // Assert
+        // Should only count the transfer to the savings account (200.00)
+        assertThat(savingsAmount).isEqualByComparingTo(new BigDecimal("200.00"));
+        
+        // Clean up test data
+        transactionManager
+            .delete(QTransfert.transfert)
+            .where(QTransfert.transfert.id.in(savedCheckingTransfer.getId(), savedSavingsTransfer.getId()))
             .execute();
     }
 }

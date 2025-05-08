@@ -19,7 +19,6 @@ export default function Orders() {
     elements: orders,
     currentPage,
     totalPages,
-    isLoading,
     handlePageChange,
   } = useHandlePagination<OrderResponse>(ordersService.fetchOrders);
 

@@ -1,6 +1,6 @@
 package banky.services.category;
 
-import banky.db.dao.CategoryDao;
+import banky.db.dao.category.CategoryDao;
 import banky.db.dao.SubCategoryDao;
 import banky.db.generated.Category;
 import banky.db.generated.SubCategory;

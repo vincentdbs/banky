@@ -1,5 +1,6 @@
-package banky.db.dao;
+package banky.db.dao.orders;
 
+import banky.db.dao.OrdersDao;
 import banky.db.generated.Orders;
 import banky.db.generated.QOrders;
 import banky.guice.TestModule;
@@ -147,5 +148,120 @@ class OrdersDaoTest {
             .delete(QOrders.orders)
             .where(QOrders.orders.id.eq(savedOrder.getId()))
             .execute();
+    }
+
+    @Test
+    void fetchChargesAmountByMonth_shouldCalculateJanuaryCharges() {
+        // Arrange - January 2025
+        LocalDate january2025 = LocalDate.of(2025, 1, 1);
+        
+        // Act
+        BigDecimal chargesAmount = ordersDao.fetchChargesAmountByMonth(january2025);
+        
+        // Assert
+        // In January we have orders with IDs 101, 102, 103
+        // Charges should be summed up from mock data
+        assertThat(chargesAmount).isGreaterThan(BigDecimal.ZERO);
+    }
+    
+    @Test
+    void fetchChargesAmountByMonth_shouldRespectMonthBoundaries() {
+        // Arrange
+        LocalDate testDate = LocalDate.of(2025, 3, 1);
+        
+        // Create an order in March
+        Orders marchOrder = new Orders();
+        marchOrder.setAccountId(11L); // PEA
+        marchOrder.setTickerId(1L);   // LVMH
+        marchOrder.setAmount(new BigDecimal("2000.00"));
+        marchOrder.setCharges(new BigDecimal("15.50"));
+        marchOrder.setQuantity(10);
+        marchOrder.setDate(testDate.plusDays(15)); // March 16, 2025
+        marchOrder.setSide("BUY");
+        Orders savedMarchOrder = ordersDao.save(marchOrder);
+        
+        // Create an order in April (should not be counted)
+        Orders aprilOrder = new Orders();
+        aprilOrder.setAccountId(11L);
+        aprilOrder.setTickerId(1L);
+        aprilOrder.setAmount(new BigDecimal("1000.00"));
+        aprilOrder.setCharges(new BigDecimal("9.90"));
+        aprilOrder.setQuantity(5);
+        aprilOrder.setDate(testDate.plusMonths(1).plusDays(5)); // April 6, 2025
+        aprilOrder.setSide("BUY");
+        Orders savedAprilOrder = ordersDao.save(aprilOrder);
+        
+        try {
+            // Act
+            BigDecimal marchCharges = ordersDao.fetchChargesAmountByMonth(testDate);
+            BigDecimal aprilCharges = ordersDao.fetchChargesAmountByMonth(testDate.plusMonths(1));
+            
+            // Assert
+            assertThat(marchCharges).isEqualByComparingTo(new BigDecimal("15.50"));
+            assertThat(aprilCharges).isEqualByComparingTo(new BigDecimal("9.90"));
+        } finally {
+            // Clean up test data
+            transactionManager
+                .delete(QOrders.orders)
+                .where(QOrders.orders.id.in(savedMarchOrder.getId(), savedAprilOrder.getId()))
+                .execute();
+        }
+    }
+    
+    @Test
+    void fetchChargesAmountByMonth_shouldReturnZeroForMonthWithNoOrders() {
+        // Arrange - December 2024 (no orders in mock data)
+        LocalDate december2024 = LocalDate.of(2024, 12, 1);
+        
+        // Act
+        BigDecimal chargesAmount = ordersDao.fetchChargesAmountByMonth(december2024);
+        
+        // Assert
+        assertThat(chargesAmount).isEqualByComparingTo(BigDecimal.ZERO);
+    }
+    
+    @Test
+    void fetchChargesAmountByMonth_shouldAccumulateMultipleOrdersInSameMonth() {
+        // Arrange
+        LocalDate testDate = LocalDate.of(2025, 5, 1);
+        BigDecimal firstCharges = new BigDecimal("12.50");
+        BigDecimal secondCharges = new BigDecimal("8.75");
+        BigDecimal expectedTotal = new BigDecimal("21.25");
+        
+        // Create first order
+        Orders firstOrder = new Orders();
+        firstOrder.setAccountId(11L);
+        firstOrder.setTickerId(1L);
+        firstOrder.setAmount(new BigDecimal("1500.00"));
+        firstOrder.setCharges(firstCharges);
+        firstOrder.setQuantity(7);
+        firstOrder.setDate(testDate.plusDays(10)); // May 11, 2025
+        firstOrder.setSide("BUY");
+        Orders savedFirstOrder = ordersDao.save(firstOrder);
+        
+        // Create second order in same month
+        Orders secondOrder = new Orders();
+        secondOrder.setAccountId(11L);
+        secondOrder.setTickerId(2L);
+        secondOrder.setAmount(new BigDecimal("900.00"));
+        secondOrder.setCharges(secondCharges);
+        secondOrder.setQuantity(3);
+        secondOrder.setDate(testDate.plusDays(20)); // May 21, 2025
+        secondOrder.setSide("BUY");
+        Orders savedSecondOrder = ordersDao.save(secondOrder);
+        
+        try {
+            // Act
+            BigDecimal totalCharges = ordersDao.fetchChargesAmountByMonth(testDate);
+            
+            // Assert
+            assertThat(totalCharges).isEqualByComparingTo(expectedTotal);
+        } finally {
+            // Clean up test data
+            transactionManager
+                .delete(QOrders.orders)
+                .where(QOrders.orders.id.in(savedFirstOrder.getId(), savedSecondOrder.getId()))
+                .execute();
+        }
     }
 }

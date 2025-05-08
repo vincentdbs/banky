@@ -1,4 +1,4 @@
-package banky.database.dao;
+package banky.db.dao.dashboard;
 
 import banky.db.dao.DashboardAccountsDao;
 import banky.guice.TestModule;

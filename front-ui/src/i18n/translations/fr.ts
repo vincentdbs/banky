@@ -104,6 +104,7 @@ const frMessages: Translations = {
     evolution: {
       treasury: 'Trésorerie',
       graph: 'Graphiques',
+      monthlyBudget: 'Budget mensuel',
     },
   },
   parameters: {
@@ -136,6 +137,29 @@ const frMessages: Translations = {
         shortName: 'Nom court',
         category: 'Catégorie',
         action: 'Action',
+      },
+    },
+  },
+  evolution: {
+    monthlyBudget: {
+      title: 'Budget mensuel',
+      subTitle: 'Suivi du budget mensuel par catégorie',
+      viewTypes: {
+        REAL: 'Réel',
+        THEORETICAL: 'Théorique',
+      },
+      table: {
+        category: 'Catégorie',
+        stockFees: 'Frais de bourse',
+        totalSavings: 'Total épargné',
+        spent: 'Dépensé',
+        budgeted: 'Budgété',
+        spentPercentage: '% dépensé/budgeté',
+        totalPercentage: '% dépensé/revenu',
+        total: 'Total',
+        totalWithoutSavings: 'Total sans épargne',
+        balance: 'Solde',
+        balanceWithoutSavings: 'Solde sans épargne',
       },
     },
   },

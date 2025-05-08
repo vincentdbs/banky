@@ -1,19 +1,19 @@
-INSERT INTO bky_category (id, name)
+INSERT INTO bky_category (id, name, budgeted_amount)
 VALUES
-    (1, 'Épargne'),
-    (2, 'Abonnement'),
-    (3, 'Logement & Charges'),
-    (4, 'Assurances'),
-    (5, 'Culture & Sport'),
-    (6, 'Voyages'),
-    (7, 'Santé & Bien-être'),
-    (8, 'Vêtements'),
-    (9, 'Divers'),
-    (10, 'Alimentaire'),
-    (11, 'Impôts & Amendes'),
-    (12, 'Revenus'),
-    (13, 'Frais Bancaires'),
-    (14, 'Voiture & Vélo')
+    (1, 'Épargne', 200),
+    (2, 'Abonnement', 200),
+    (3, 'Logement & Charges', 200),
+    (4, 'Assurances', 200),
+    (5, 'Culture & Sport', 200),
+    (6, 'Voyages', 200),
+    (7, 'Santé & Bien-être', 200),
+    (8, 'Vêtements', 200),
+    (9, 'Divers', 200),
+    (10, 'Alimentaire', 200),
+    (11, 'Impôts & Amendes', 200),
+    (12, 'Revenus', 200),
+    (13, 'Frais Bancaires', 200),
+    (14, 'Voiture & Vélo', 200)
 ON DUPLICATE KEY UPDATE name = VALUES(name);
 
 INSERT INTO bky_sub_category (id, name, category_id)
