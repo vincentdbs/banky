@@ -1,6 +1,7 @@
 import { OrderSide } from '@/api/orders/OrderTypes';
 import { TransactionSide } from '@/api/transactions/TransactionsTypes';
 import { TickerCategory } from '@api/tickers/TickersTypes';
+import { Routes } from '@components/Routes';
 import {
   TransactionFields,
 } from '@components/pages/operations/transactions/form/fields/TransactionsFormFields';
@@ -8,6 +9,48 @@ import { Translations } from './Translations';
 
 const frMessages: Translations = {
   title: 'Banky',
+  routeInfo: {
+    [Routes.DASHBOARD]: {
+      title: 'Tableau de bord',
+      description: 'Vue d\'ensemble de vos finances',
+    },
+    [Routes.OPERATIONS_TRANSACTIONS]: {
+      title: 'Transactions',
+      description: 'Gérer vos transactions financières',
+    },
+    [Routes.OPERATIONS_ORDERS]: {
+      title: 'Ordres',
+      description: 'Gérer vos ordres d\'achat et de vente',
+    },
+    [Routes.OPERATIONS_TRANSFERT]: {
+      title: 'Transferts',
+      description: 'Gérer vos transferts entre comptes',
+    },
+    [Routes.EVOLUTION_MONTHLY_BUDGET]: {
+      title: 'Budget mensuel',
+      description: 'Suivez votre budget mensuel',
+    },
+    [Routes.PARAMETERS]: {
+      title: 'Paramètres',
+      description: 'Configuration générale',
+    },
+    [Routes.PARAMETERS_ACCOUNTS]: {
+      title: 'Comptes',
+      description: 'Gérer vos comptes bancaires',
+    },
+    [Routes.PARAMETERS_CATEGORY]: {
+      title: 'Catégories',
+      description: 'Gérer vos catégories de dépenses',
+    },
+    [Routes.PARAMETERS_SUB_CATEGORY]: {
+      title: 'Sous-catégories',
+      description: 'Gérer vos sous-catégories de dépenses',
+    },
+    [Routes.PARAMETERS_TICKERS]: {
+      title: 'Titres',
+      description: 'Gérer vos titres financiers',
+    },
+  },
   form: {
     validation: {
       invalid_date: 'La date est invalide',

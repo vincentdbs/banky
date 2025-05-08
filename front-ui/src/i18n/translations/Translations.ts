@@ -1,12 +1,18 @@
 import { OrderSide } from '@api/orders/OrderTypes';
 import { TickerCategory } from '@api/tickers/TickersTypes';
 import { TransactionSide } from '@api/transactions/TransactionsTypes';
+import { Routes } from '@components/Routes';
 import {
   TransactionFields,
 } from '@components/pages/operations/transactions/form/fields/TransactionsFormFields';
 
 export type Translations = {
   title: 'Banky',
+  // Add routeInfo section for storing route titles and descriptions
+  routeInfo: Record<Routes, {
+    title: string,
+    description: string,
+  }>,
   form: {
     validation: {
       invalid_date: string,

@@ -16,3 +16,16 @@ export const PARAMETERS_CATEGORY: string = '/categories';
 export const PARAMETERS_SUB_CATEGORY: string = '/sub-categories';
 export const PARAMETERS_TICKERS: string = '/tickers';
 export const WILD_CARD: string = '*';
+
+export enum Routes {
+  DASHBOARD = '/dashboard',
+  OPERATIONS_TRANSACTIONS = '/operations/transactions',
+  OPERATIONS_ORDERS = '/operations/ordres',
+  OPERATIONS_TRANSFERT = '/operations/transfert',
+  EVOLUTION_MONTHLY_BUDGET = '/evolution/monthly-budget',
+  PARAMETERS = '/parameters',
+  PARAMETERS_ACCOUNTS = '/parameters/accounts',
+  PARAMETERS_CATEGORY = '/parameters/categories',
+  PARAMETERS_SUB_CATEGORY = '/parameters/sub-categories',
+  PARAMETERS_TICKERS = '/parameters/tickers',
+}

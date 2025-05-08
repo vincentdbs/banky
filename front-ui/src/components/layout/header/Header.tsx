@@ -1,8 +1,20 @@
 import { Separator } from '@/lib/shadcn/separator';
 import { SidebarTrigger } from '@lib/shadcn/sidebar';
 import React from 'react';
+import useGetCurrentRoute from '@hooks/use-get-current-route/useGetCurrentRoute';
+import useMessages from '@i18n/hooks/messagesHook';
 
+/**
+ * Header component that displays the current route title and description
+ * Uses the useGetCurrentRoute hook to determine the current route
+ * and displays the corresponding title and description from translations
+ */
 export default function Header() {
+  // Get the current route
+  const { currentRoute } = useGetCurrentRoute();
+  // Get translations
+  const { messages } = useMessages();
+
   return (
     <header
       className="group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 flex h-12 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear">
@@ -12,9 +24,12 @@ export default function Header() {
           orientation="vertical"
           className="mx-2 data-[orientation=vertical]:h-4"
         />
-        <h1 className="text-base font-medium">
-        {/* TODO A completer avec la page courante */}
-        </h1>
+        <div>
+          <h1 className="text-base">
+            <span className="font-medium">{messages.routeInfo[currentRoute].title}</span>
+            <span className="text-muted-foreground"> - {messages.routeInfo[currentRoute].description}</span>
+          </h1>
+        </div>
       </div>
     </header>
   );
