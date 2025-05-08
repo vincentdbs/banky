@@ -14,7 +14,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@lib/shadcn/sidebar';
-import { CreditCard, Tag, Tags, BarChart3 } from 'lucide-react';
+import {
+  CreditCard, Tag, Tags, BarChart3,
+} from 'lucide-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 

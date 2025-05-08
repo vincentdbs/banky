@@ -1,12 +1,8 @@
-import useMessages from '@/i18n/hooks/messagesHook';
 import MoneyRecapCard from '@components/theme/cards/money-recap/MoneyRecapCard';
 import React from 'react';
+import useMessages from '@/i18n/hooks/messagesHook';
 
-type MoneyRecapCardsProps = {};
-
-export default function MoneyRecapCards(
-  {}: MoneyRecapCardsProps,
-) {
+export default function MoneyRecapCards() {
   const { messages } = useMessages();
 
   return (

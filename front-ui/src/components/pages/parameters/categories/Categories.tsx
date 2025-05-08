@@ -1,9 +1,8 @@
 import { CategoryResponse } from '@api/categories/CategoriesTypes';
-import MainSection from '@components/theme/sections/MainSection';
-import PaginationLayout from '@components/theme/pagination/PaginationLayout';
 import CategoriesTable from '@components/pages/parameters/categories/table/CategoriesTable';
+import PaginationLayout from '@components/theme/pagination/PaginationLayout';
+import MainSection from '@components/theme/sections/MainSection';
 import useHandlePagination from '@hooks/use-handle-pagination/useHandlePagination';
-import useMessages from '@i18n/hooks/messagesHook';
 import CategoriesService from '@services/categories/CategoriesService';
 import { getGlobalInstance } from 'plume-ts-di';
 import React from 'react';
@@ -14,7 +13,6 @@ import React from 'react';
  */
 export default function Categories() {
   const categoriesService: CategoriesService = getGlobalInstance(CategoriesService);
-  const { messages } = useMessages();
 
   const {
     elements: categories,

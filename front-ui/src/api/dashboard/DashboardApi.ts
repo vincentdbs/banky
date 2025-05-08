@@ -20,9 +20,9 @@ export default class DashboardApi {
   fetchDashboardAccounts(): HttpPromise<DashboardAccountsResponse> {
     return this.apiHttpClient
       .restRequest<DashboardAccountsResponse>(
-        HttpMethod.GET, 
-        `${DashboardApi.BASE_PATH}/accounts`
-      )
+      HttpMethod.GET,
+      `${DashboardApi.BASE_PATH}/accounts`,
+    )
       .execute();
   }
 }

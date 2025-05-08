@@ -7,7 +7,7 @@ import { PaginatedTransfertsResponse, TransfertRequest } from './TransfertTypes'
  * API service for handling transfers between accounts
  */
 export default class TransfertsApi {
-  private readonly BASE_URL = '/transferts';
+  private readonly BASE_URL: string = '/transferts';
 
   constructor(private readonly httpClient: ApiHttpClient) {
   }
@@ -19,18 +19,16 @@ export default class TransfertsApi {
    * @param size The number of items per page
    * @returns A paginated response containing transfers and pagination metadata
    */
-  fetchTransferts = (page: number, size: number): HttpPromise<PaginatedTransfertsResponse> => {
-    return this
-      .httpClient
-      .restRequest<PaginatedTransfertsResponse>(HttpMethod.GET, this.BASE_URL)
-      .queryParams(
-        [
-          ['page', page],
-          ['size', size],
-        ],
-      )
-      .execute();
-  };
+  fetchTransferts = (page: number, size: number): HttpPromise<PaginatedTransfertsResponse> => this
+    .httpClient
+    .restRequest<PaginatedTransfertsResponse>(HttpMethod.GET, this.BASE_URL)
+    .queryParams(
+      [
+        ['page', page],
+        ['size', size],
+      ],
+    )
+    .execute();
 
   /**
    * Creates a new transfer between accounts

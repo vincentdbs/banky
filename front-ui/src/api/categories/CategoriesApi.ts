@@ -16,17 +16,15 @@ export default class CategoriesApi {
   constructor(private apiHttpClient: ApiHttpClient) {
   }
 
-  fetchCategories = (page: number, size: number): HttpPromise<PaginatedCategoriesResponse> => {
-    return this.apiHttpClient
-      .restRequest<PaginatedCategoriesResponse>(HttpMethod.GET, CategoriesApi.BASE_PATH)
-      .queryParams(
-        [
-          ['page', page],
-          ['size', size],
-        ],
-      )
-      .execute();
-  };
+  fetchCategories = (page: number, size: number): HttpPromise<PaginatedCategoriesResponse> => this.apiHttpClient
+    .restRequest<PaginatedCategoriesResponse>(HttpMethod.GET, CategoriesApi.BASE_PATH)
+    .queryParams(
+      [
+        ['page', page],
+        ['size', size],
+      ],
+    )
+    .execute();
 
   /**
    * Fetches subcategories with pagination
@@ -35,17 +33,15 @@ export default class CategoriesApi {
    * @param size The number of items per page
    * @returns A promise with a paginated response containing subcategories
    */
-  fetchPaginatedSubCategories = (page: number, size: number): HttpPromise<PaginatedSubCategoriesResponse> => {
-    return this.apiHttpClient
-      .restRequest<PaginatedSubCategoriesResponse>(HttpMethod.GET, `${CategoriesApi.BASE_PATH}/sub-categories`)
-      .queryParams(
-        [
-          ['page', page],
-          ['size', size],
-        ],
-      )
-      .execute();
-  };
+  fetchPaginatedSubCategories = (page: number, size: number): HttpPromise<PaginatedSubCategoriesResponse> => this.apiHttpClient
+    .restRequest<PaginatedSubCategoriesResponse>(HttpMethod.GET, `${CategoriesApi.BASE_PATH}/sub-categories`)
+    .queryParams(
+      [
+        ['page', page],
+        ['size', size],
+      ],
+    )
+    .execute();
 
   fetchSubCategoryNames(): HttpPromise<SubCategoryNamesResponse[]> {
     return this.apiHttpClient

@@ -7,7 +7,7 @@ import { PaginatedTickersResponse, TickerRequest } from './TickersTypes';
  * API service for handling tickers operations
  */
 export default class TickersApi {
-  private readonly BASE_URL = '/tickers';
+  private readonly BASE_URL: string = '/tickers';
 
   constructor(private readonly httpClient: ApiHttpClient) {
   }
@@ -19,18 +19,16 @@ export default class TickersApi {
    * @param size The number of items per page
    * @returns A paginated response containing tickers and pagination metadata
    */
-  fetchTickers = (page: number, size: number): HttpPromise<PaginatedTickersResponse> => {
-    return this
-      .httpClient
-      .restRequest<PaginatedTickersResponse>(HttpMethod.GET, this.BASE_URL)
-      .queryParams(
-        [
-          ['page', page],
-          ['size', size],
-        ],
-      )
-      .execute();
-  };
+  fetchTickers = (page: number, size: number): HttpPromise<PaginatedTickersResponse> => this
+    .httpClient
+    .restRequest<PaginatedTickersResponse>(HttpMethod.GET, this.BASE_URL)
+    .queryParams(
+      [
+        ['page', page],
+        ['size', size],
+      ],
+    )
+    .execute();
 
   /**
    * Creates a new ticker

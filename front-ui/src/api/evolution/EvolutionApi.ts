@@ -1,6 +1,6 @@
 import ApiHttpClient from '@api/ApiHttpClient';
 import {
-  MonthlyBudgetType
+  MonthlyBudgetType,
 } from '@components/pages/evolution/monthly-budget/controls/MonthlyBudgetControls';
 import { HttpMethod } from 'simple-http-request-builder';
 import { HttpPromise } from 'simple-http-rest-client';
@@ -13,7 +13,7 @@ export default class EvolutionApi {
 
   /**
    * Fetches the monthly budget data
-   * 
+   *
    * @returns A promise with the monthly budget data
    */
   fetchMonthlyBudget(date: string, type: MonthlyBudgetType): HttpPromise<MonthlyBudgetResponse> {

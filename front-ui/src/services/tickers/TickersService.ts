@@ -1,5 +1,5 @@
 import TickersApi from '@api/tickers/TickersApi';
-import { PaginatedTickersResponse, TickerRequest, TickerResponse } from '@api/tickers/TickersTypes';
+import { PaginatedTickersResponse, TickerRequest } from '@api/tickers/TickersTypes';
 import { HttpPromise } from 'simple-http-rest-client';
 
 /**
@@ -12,18 +12,16 @@ export default class TickersService {
 
   /**
    * Fetches tickers with pagination support
-   * 
+   *
    * @param page The page number (1-based)
    * @param size The number of items per page
    * @returns A promise containing the paginated ticker response
    */
-  fetchTickers = (page: number, size: number): HttpPromise<PaginatedTickersResponse> => {
-    return this.tickersApi.fetchTickers(page, size);
-  };
+  fetchTickers = (page: number, size: number): HttpPromise<PaginatedTickersResponse> => this.tickersApi.fetchTickers(page, size);
 
   /**
    * Creates a new ticker
-   * 
+   *
    * @param request The ticker details
    * @returns A promise containing the ID of the created ticker
    */

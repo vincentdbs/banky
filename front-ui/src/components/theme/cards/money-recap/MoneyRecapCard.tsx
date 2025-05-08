@@ -1,9 +1,10 @@
-import { formatEuroDecimalPrice } from '@/utils/number/NumberUtils';
 import { ICON_SIZE_BIG } from '@components/theme/icons/ColoredIconsWrapper';
-import useMessages from '@i18n/hooks/messagesHook';
-import { Card, CardContent, CardHeader, CardTitle } from '@lib/shadcn/card';
+import {
+  Card, CardContent, CardHeader, CardTitle,
+} from '@lib/shadcn/card';
 import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
 import React from 'react';
+import { formatEuroDecimalPrice } from '@/utils/number/NumberUtils';
 
 type MoneyRecapCardProps = {
   title: string,
@@ -20,8 +21,7 @@ export default function MoneyRecapCard(
     percentage,
   }: MoneyRecapCardProps,
 ) {
-  const { messages } = useMessages();
-  const isPositive = percentage > 0;
+  const isPositive: boolean = percentage > 0;
 
   return (
     <Card className="h-fit pb-6">

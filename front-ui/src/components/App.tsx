@@ -2,7 +2,9 @@ import AppLayout from '@components/layout/app/AppLayout';
 import Dashboard from '@components/pages/dashboard/Dashboard';
 import ErrorPage from '@components/pages/error/ErrorPage';
 import Home from '@components/pages/home/Home';
-import { DASHBOARD, EVOLUTION, OPERATIONS, PARAMETERS } from '@components/Routes';
+import {
+  DASHBOARD, EVOLUTION, OPERATIONS, PARAMETERS,
+} from '@components/Routes';
 import EvolutionRouter from '@components/routes/evolution/EvolutionRouter';
 import OperationsRouter from '@components/routes/operations/OperationsRouter';
 import ParametersRouter from '@components/routes/parameters/ParametersRouter';

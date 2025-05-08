@@ -1,4 +1,6 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@lib/shadcn/select';
+import {
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+} from '@lib/shadcn/select';
 import React from 'react';
 
 /**
@@ -20,17 +22,14 @@ export default function YearSelector(
     firstYear = 2020,
   }: YearSelectorProps,
 ) {
-
   // Generate year options (current year and specified range before/after)
-  const years = React.useMemo(() => {
-    return Array.from({ length: yearRange }, (_, i) => {
-      const year: number = firstYear + i;
-      return {
-        value: year,
-        label: year.toString(),
-      };
-    });
-  }, [yearRange]);
+  const years = React.useMemo(() => Array.from({ length: yearRange }, (_, i) => {
+    const year: number = firstYear + i;
+    return {
+      value: year,
+      label: year.toString(),
+    };
+  }), [yearRange]);
 
   return (
     <Select

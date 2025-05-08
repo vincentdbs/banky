@@ -1,9 +1,3 @@
-import { Card } from '@/lib/shadcn/card';
-import {
-  formatEuroDecimalPriceFromString,
-  formatPercentageDecimalPriceFromString,
-} from '@/utils/number/NumberUtils';
-import { PLACEHOLDER } from '@/utils/string/StringUtils';
 import { MonthlyBudgetCategory } from '@api/evolution/EvolutionTypes';
 import useHandleFetchMonthlyBudget
   from '@hooks/use-handle-fetch-monthly-budget/useHandleFetchMonthlyBudget';
@@ -11,6 +5,12 @@ import useMessages from '@i18n/hooks/messagesHook';
 import { cn } from '@lib/shadcn/utils';
 import { isNotNullish } from '@utils/types/TypesUtils';
 import React from 'react';
+import { PLACEHOLDER } from '@/utils/string/StringUtils';
+import {
+  formatEuroDecimalPriceFromString,
+  formatPercentageDecimalPriceFromString,
+} from '@/utils/number/NumberUtils';
+import { Card } from '@/lib/shadcn/card';
 import MonthlyBudgetControls from '../controls/MonthlyBudgetControls';
 
 /**
@@ -76,13 +76,13 @@ export default function MonthlyBudgetTable() {
               <div>
                 {/* Category rows */}
                 {monthlyBudget.categories.map((category: MonthlyBudgetCategory, index: number) => {
-                  const isSpentGreaterThanBudgeted: boolean = parseInt(category.spent) > parseInt(category.budgeted);
-                  const isSpentLessThanBudgeted: boolean = parseInt(category.spent) < parseInt(category.budgeted) && parseInt(category.spent) !== 0;
-                  const isSpentPercentageHigherThanTotal: boolean = 
-                    parseInt(category.spentPercentageOfBudgeted) > parseInt(category.spentPercentageOfTotal);
-                  const isSpentPercentageLowerThanTotal: boolean = 
-                    parseInt(category.spentPercentageOfBudgeted) < parseInt(category.spentPercentageOfTotal) && 
-                    parseInt(category.spentPercentageOfBudgeted) !== 0;
+                  const isSpentGreaterThanBudgeted: boolean = parseInt(category.spent, 10) > parseInt(category.budgeted, 10);
+                  const isSpentLessThanBudgeted: boolean = parseInt(category.spent, 10) < parseInt(category.budgeted, 10) && parseInt(category.spent, 10) !== 0;
+                  const isSpentPercentageHigherThanTotal: boolean = parseInt(category.spentPercentageOfBudgeted, 10)
+                    > parseInt(category.spentPercentageOfTotal, 10);
+                  const isSpentPercentageLowerThanTotal: boolean = (parseInt(category.spentPercentageOfBudgeted, 10)
+                    < parseInt(category.spentPercentageOfTotal, 10))
+                    && parseInt(category.spentPercentageOfBudgeted, 10) !== 0;
 
                   return (
                     <div

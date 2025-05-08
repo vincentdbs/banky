@@ -1,7 +1,9 @@
-import { FormField } from '@/lib/shadcn/form';
 import UncontrolledSelect, { Choice } from '@components/theme/form/select/UncontrolledSelect';
 import React from 'react';
-import { Control, ControllerRenderProps, FieldValues, Path } from 'react-hook-form';
+import {
+  Control, ControllerRenderProps, FieldValues, Path,
+} from 'react-hook-form';
+import { FormField } from '@/lib/shadcn/form';
 
 type SelectProps<T extends FieldValues> = {
   control: Control<T>,

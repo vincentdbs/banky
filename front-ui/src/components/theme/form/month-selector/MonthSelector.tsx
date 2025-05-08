@@ -1,6 +1,8 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@lib/shadcn/select';
-import React from 'react';
+import {
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+} from '@lib/shadcn/select';
 import dayjs, { Dayjs } from 'dayjs';
+import React from 'react';
 
 /**
  * MonthSelector component provides a dropdown to select a month
@@ -18,7 +20,7 @@ export default function MonthSelector(
   }: MonthSelectorProps,
 ) {
   // Generate month options
-  const months = React.useMemo(() => Array.from({ length: 12 }, (_, i: number) => {
+  const months: { value: number, label: string }[] = React.useMemo(() => Array.from({ length: 12 }, (_: unknown, i: number) => {
     const date: Dayjs = dayjs().month(i).startOf('month');
     return {
       value: i,
@@ -27,12 +29,15 @@ export default function MonthSelector(
   }), []);
 
   return (
-    <Select value={selectedMonth.toString()} onValueChange={(month: string) => setSelectedMonth(parseInt(month))}>
+    <Select
+      value={selectedMonth.toString()}
+      onValueChange={(month: string) => setSelectedMonth(parseInt(month, 10))}
+    >
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Select month" />
       </SelectTrigger>
       <SelectContent>
-        {months.map((month) => (
+        {months.map((month: { value: number, label: string }) => (
           <SelectItem key={month.value} value={month.value.toString()}>
             {month.label}
           </SelectItem>

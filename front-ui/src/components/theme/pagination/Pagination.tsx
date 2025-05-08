@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button } from '@lib/shadcn/button';
-import { ChevronFirst, ChevronLast, ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+  ChevronFirst, ChevronLast, ChevronLeft, ChevronRight,
+} from 'lucide-react';
 import useMessages from '@i18n/hooks/messagesHook';
 
 /**
@@ -19,8 +21,8 @@ export default function Pagination({
   onPageChange,
 }: PaginationProps) {
   const { messages } = useMessages();
-  const isFirstPage = currentPage <= 1;
-  const isLastPage = currentPage >= totalPages;
+  const isFirstPage: boolean = currentPage <= 1;
+  const isLastPage: boolean = currentPage >= totalPages;
 
   const handleGoToFirstPage = () => {
     if (!isFirstPage) {

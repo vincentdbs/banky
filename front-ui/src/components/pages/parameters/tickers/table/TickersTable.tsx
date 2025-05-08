@@ -1,16 +1,11 @@
-import { computeBadgeVariantByTickerCategory } from '@/utils/badge/BadgeUtils';
-import React from 'react';
-import { TickerCategory, TickerResponse } from '@api/tickers/TickersTypes';
+import { TickerResponse } from '@api/tickers/TickersTypes';
 import useMessages from '@i18n/hooks/messagesHook';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@lib/shadcn/table';
 import { Badge } from '@lib/shadcn/badge';
+import {
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
+} from '@lib/shadcn/table';
+import React from 'react';
+import { computeBadgeVariantByTickerCategory } from '@/utils/badge/BadgeUtils';
 
 type TickersTableProps = {
   tickers: TickerResponse[],

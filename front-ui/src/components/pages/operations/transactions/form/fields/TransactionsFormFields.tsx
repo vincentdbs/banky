@@ -1,5 +1,3 @@
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/lib/shadcn/form';
-import { Input } from '@/lib/shadcn/input';
 import { TransactionSide } from '@api/transactions/TransactionsTypes';
 import DatePicker from '@components/theme/form/date-picker/DatePicker';
 import FieldsGroup from '@components/theme/form/fields-group/FieldsGroup';
@@ -9,7 +7,11 @@ import { Choice } from '@components/theme/form/select/UncontrolledSelect';
 import useMessages from '@i18n/hooks/messagesHook';
 import { Dayjs } from 'dayjs';
 import React from 'react';
-import { Control } from 'react-hook-form';
+import { Control, ControllerRenderProps } from 'react-hook-form';
+import { Input } from '@/lib/shadcn/input';
+import {
+  FormControl, FormField, FormItem, FormLabel, FormMessage,
+} from '@/lib/shadcn/form';
 
 export enum TransactionFields {
   DATE = 'DATE',
@@ -33,7 +35,7 @@ export type TransactionFormType = {
   [TransactionFields.FROM_TO_PERSON]: string,
   [TransactionFields.COMMENT]?: string,
   [TransactionFields.TAG]?: string,
-}
+};
 
 type TransactionsFormFieldsType = {
   control: Control<TransactionFormType>,
@@ -56,7 +58,7 @@ export default function TransactionsFormFields(
 ) {
   const { messages } = useMessages();
 
-  const fromToLabel = side === TransactionSide.DEBIT
+  const fromToLabel: string = side === TransactionSide.DEBIT
     ? messages.operations.transactions.form.fields.to
     : messages.operations.transactions.form.fields.from;
 

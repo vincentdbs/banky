@@ -1,7 +1,7 @@
 import ApiHttpClient from '@api/ApiHttpClient';
 import { HttpMethod } from 'simple-http-request-builder';
 import { HttpPromise } from 'simple-http-rest-client';
-import { PaginatedTransactionsResponse, TransactionRequest, TransactionResponse } from './TransactionsTypes';
+import { PaginatedTransactionsResponse, TransactionRequest } from './TransactionsTypes';
 
 export default class TransactionsApi {
   private static BASE_PATH: string = '/transactions';
