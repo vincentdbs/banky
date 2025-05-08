@@ -9,6 +9,7 @@ import com.coreoz.plume.db.querydsl.transaction.TransactionManagerQuerydsl;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class EvolutionDao {
     /**
      * Fetch monthly budget data grouped by category showing spent amounts.
      * Only includes DEBIT transactions for the specified month.
+     * Categories with no transactions for the month will be included with 0 spent amount.
      *
      * @param firstDayOfTheMonth The first day of the month to fetch data for
      * @return List of monthly budget categories with spent amounts
@@ -42,30 +44,31 @@ public class EvolutionDao {
         // Calculate the last day of the month
         LocalDate lastDayOfTheMonth = firstDayOfTheMonth.plusMonths(1).minusDays(1);
 
-        // Query to fetch transactions grouped by category for the specified month
+        // Query to fetch all categories and sum transactions if they exist
         return transactionManager
             .selectQuery()
             .select(
                 category.name,
-                transactions.amount.sum().as("spent"),
+                transactions.amount.sum().coalesce(new BigDecimal(0)).as("spent"),
                 category.budgetedAmount
             )
-            .from(transactions)
-            .innerJoin(subCategory)
-            .on(transactions.subCategoryId.eq(subCategory.id))
-            .innerJoin(category)
-            .on(subCategory.categoryId.eq(category.id))
-            .where(
-                transactions.side.eq(TransactionSide.DEBIT.name())
-                    .and(transactions.date.goe(firstDayOfTheMonth))
-                    .and(transactions.date.loe(lastDayOfTheMonth))
+            .from(category)
+            .leftJoin(subCategory)
+            .on(category.id.eq(subCategory.categoryId))
+            .leftJoin(transactions)
+            .on(
+                subCategory.id.eq(transactions.subCategoryId)
+                .and(transactions.side.eq(TransactionSide.DEBIT.name()))
+                .and(transactions.date.goe(firstDayOfTheMonth))
+                .and(transactions.date.loe(lastDayOfTheMonth))
             )
             .groupBy(category.id)
+            .orderBy(category.name.asc())
             .fetch()
             .stream()
             .map(tuple -> new SpentByCategory(
                 tuple.get(category.name),
-                tuple.get(transactions.amount.sum().as("spent")),
+                tuple.get(transactions.amount.sum().coalesce(new BigDecimal(0)).as("spent")),
                 tuple.get(category.budgetedAmount)
             ))
             .toList();
