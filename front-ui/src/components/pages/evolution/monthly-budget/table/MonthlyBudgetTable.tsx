@@ -114,6 +114,45 @@ export default function MonthlyBudgetTable() {
                 })}
 
                 {/* Summary rows */}
+                {/* Total épargne row */}
+                <div className="grid grid-cols-5 border-b bg-muted/50">
+                  <p className="p-2 align-middle font-semibold">
+                    {messages.evolution.monthlyBudget.table.totalSavings}
+                  </p>
+                  <p className="p-2 align-middle text-right font-semibold">
+                    {formatEuroDecimalPriceFromString(monthlyBudget.savings || "0")}
+                  </p>
+                  <p className="p-2 align-middle text-right font-semibold">
+                    {formatEuroDecimalPriceFromString(monthlyBudget.budgetedSavings || "0")}
+                  </p>
+                  <p className="p-2 align-middle text-right font-semibold">
+                    {/* Using placeholder percentages since they might not be available in the API response */}
+                    {formatPercentageDecimalPriceFromString("0")}
+                  </p>
+                  <p className="p-2 align-middle text-right font-semibold">
+                    {formatPercentageDecimalPriceFromString("0")}
+                  </p>
+                </div>
+
+                {/* Frais bourse row */}
+                <div className="grid grid-cols-5 border-b bg-muted/50">
+                  <p className="p-2 align-middle font-semibold">
+                    {messages.evolution.monthlyBudget.table.stockFees}
+                  </p>
+                  <p className="p-2 align-middle text-right font-semibold">
+                    {formatEuroDecimalPriceFromString(monthlyBudget.orderCharges || "0")}
+                  </p>
+                  <p className="p-2 align-middle text-right font-semibold">
+                    {formatEuroDecimalPriceFromString("0")}
+                  </p>
+                  <p className="p-2 align-middle text-right font-semibold">
+                    {formatPercentageDecimalPriceFromString("0")}
+                  </p>
+                  <p className="p-2 align-middle text-right font-semibold">
+                    {formatPercentageDecimalPriceFromString("0")}
+                  </p>
+                </div>
+
                 <div className="grid grid-cols-5 border-b bg-muted/50">
                   <p className="p-2 align-middle font-bold">
                     {messages.evolution.monthlyBudget.table.total}

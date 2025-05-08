@@ -150,6 +150,8 @@ const frMessages: Translations = {
       },
       table: {
         category: 'Catégorie',
+        stockFees: 'Frais de bourse',
+        totalSavings: 'Total épargné',
         spent: 'Dépensé',
         budgeted: 'Budgété',
         spentPercentage: '% Dépensé',

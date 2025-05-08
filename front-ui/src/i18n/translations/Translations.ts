@@ -136,6 +136,8 @@ export type Translations = {
       },
       table: {
         category: string,
+        stockFees: string,
+        totalSavings: string,
         spent: string,
         budgeted: string,
         spentPercentage: string,
