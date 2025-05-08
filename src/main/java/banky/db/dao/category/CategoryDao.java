@@ -1,11 +1,15 @@
-package banky.db.dao.evolution;
+package banky.db.dao.category;
 
-import banky.db.dao.evolution.data.SpentByCategory;
+import banky.db.dao.category.data.SpentByCategory;
+import banky.db.generated.Category;
 import banky.db.generated.QCategory;
 import banky.db.generated.QSubCategory;
 import banky.db.generated.QTransactions;
 import banky.services.transactions.enums.TransactionSide;
+import banky.webservices.api.category.data.CategoryResponse;
+import com.coreoz.plume.db.querydsl.crud.CrudDaoQuerydsl;
 import com.coreoz.plume.db.querydsl.transaction.TransactionManagerQuerydsl;
+
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
@@ -13,19 +17,53 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-/**
- * Data Access Object for evolution features.
- * Provides database access methods for budget analysis, spending trends,
- * and other financial evolution data.
- */
 @Singleton
-public class EvolutionDao {
-
-    private final TransactionManagerQuerydsl transactionManager;
-
+public class CategoryDao extends CrudDaoQuerydsl<Category> {
     @Inject
-    private EvolutionDao(TransactionManagerQuerydsl transactionManager) {
-        this.transactionManager = transactionManager;
+    private CategoryDao(TransactionManagerQuerydsl transactionManagerQuerydsl) {
+        super(transactionManagerQuerydsl, QCategory.category);
+    }
+    
+    /**
+     * Count the total number of categories
+     * 
+     * @return The total number of categories
+     */
+    public long countCategories() {
+        return transactionManager
+            .selectQuery()
+            .select(QCategory.category.count())
+            .from(QCategory.category)
+            .fetchOne();
+    }
+    
+    /**
+     * Fetch categories with pagination
+     * 
+     * @param page The page number (1-based)
+     * @param pageSize The number of items per page
+     * @return List of category responses
+     */
+    public List<CategoryResponse> fetchCategoriesPaginated(int page, int pageSize) {
+        int offset = (page - 1) * pageSize;
+        
+        return transactionManager
+            .selectQuery()
+            .select(
+                QCategory.category.id,
+                QCategory.category.name
+            )
+            .from(QCategory.category)
+            .orderBy(QCategory.category.name.asc())
+            .offset(offset)
+            .limit(pageSize)
+            .fetch()
+            .stream()
+            .map(row -> new CategoryResponse(
+                row.get(QCategory.category.id),
+                row.get(QCategory.category.name)
+            ))
+            .toList();
     }
 
     /**
@@ -36,7 +74,7 @@ public class EvolutionDao {
      * @param firstDayOfTheMonth The first day of the month to fetch data for
      * @return List of monthly budget categories with spent amounts
      */
-    public List<SpentByCategory> fetchMonthlyBudget(LocalDate firstDayOfTheMonth) {
+    public List<SpentByCategory> fetchSpentByCategoryByMonth(LocalDate firstDayOfTheMonth) {
         QTransactions transactions = QTransactions.transactions;
         QCategory category = QCategory.category;
         QSubCategory subCategory = QSubCategory.subCategory;
@@ -58,9 +96,9 @@ public class EvolutionDao {
             .leftJoin(transactions)
             .on(
                 subCategory.id.eq(transactions.subCategoryId)
-                .and(transactions.side.eq(TransactionSide.DEBIT.name()))
-                .and(transactions.date.goe(firstDayOfTheMonth))
-                .and(transactions.date.loe(lastDayOfTheMonth))
+                    .and(transactions.side.eq(TransactionSide.DEBIT.name()))
+                    .and(transactions.date.goe(firstDayOfTheMonth))
+                    .and(transactions.date.loe(lastDayOfTheMonth))
             )
             .groupBy(category.id)
             .orderBy(category.name.asc())

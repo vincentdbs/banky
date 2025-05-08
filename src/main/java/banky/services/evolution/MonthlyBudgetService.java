@@ -2,8 +2,8 @@ package banky.services.evolution;
 
 import banky.db.dao.OrdersDao;
 import banky.db.dao.TransfertDao;
-import banky.db.dao.evolution.EvolutionDao;
-import banky.db.dao.evolution.data.SpentByCategory;
+import banky.db.dao.category.CategoryDao;
+import banky.db.dao.category.data.SpentByCategory;
 import banky.webservices.api.evolution.responses.MonthlyBudgetCategoryResponse;
 import banky.webservices.api.evolution.responses.MonthlyBudgetResponse;
 import jakarta.inject.Inject;
@@ -22,13 +22,13 @@ import java.util.List;
 @Singleton
 public class MonthlyBudgetService {
     private final static BigDecimal BUDGETED_SAVINGS = new BigDecimal(900);
-    private final EvolutionDao evolutionDao;
     private final TransfertDao transfertDao;
     private final OrdersDao ordersDao;
+    private final CategoryDao categoryDao;
 
     @Inject
-    private MonthlyBudgetService(EvolutionDao evolutionDao, TransfertDao transfertDao, OrdersDao ordersDao) {
-        this.evolutionDao = evolutionDao;
+    private MonthlyBudgetService(TransfertDao transfertDao, OrdersDao ordersDao, CategoryDao categoryDao) {
+        this.categoryDao = categoryDao;
         this.transfertDao = transfertDao;
         this.ordersDao = ordersDao;
     }
@@ -44,7 +44,7 @@ public class MonthlyBudgetService {
         // Ensure the date is the first day of the month
         LocalDate firstDayOfTheMonth = date.withDayOfMonth(1);
 
-        List<SpentByCategory> spentByCategories = evolutionDao.fetchMonthlyBudget(firstDayOfTheMonth);
+        List<SpentByCategory> spentByCategories = categoryDao.fetchSpentByCategoryByMonth(firstDayOfTheMonth);
 
         // Transform SpentByCategory to MonthlyBudgetCategoryResponse
         List<MonthlyBudgetCategoryResponse> categories = buildMonthlyBudgetCategoryResponseFromSpentByCategories(spentByCategories);
