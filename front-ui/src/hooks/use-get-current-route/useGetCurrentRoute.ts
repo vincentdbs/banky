@@ -16,18 +16,17 @@ export default function useGetCurrentRoute(): UseGetCurrentRoute {
 
   // Find the matching route from the Routes enum
   const route: Routes = Object.values(Routes).find((route: Routes) => {
+    console.log(pathname, route);
     // Exact match
     if (route === pathname) {
       return true;
     }
     // Match for parent routes (e.g., /operations matches /operations/transactions)
-    if (pathname.startsWith(route) && (
-      pathname === route || 
+    return pathname.startsWith(route) && (
+      pathname === route ||
       pathname.charAt(route.length) === '/'
-    )) {
-      return true;
-    }
-    return false;
+    );
+
   }) || Routes.DASHBOARD; // Default to dashboard if no match
 
   return {

@@ -23,7 +23,6 @@ export enum Routes {
   OPERATIONS_ORDERS = '/operations/ordres',
   OPERATIONS_TRANSFERT = '/operations/transfert',
   EVOLUTION_MONTHLY_BUDGET = '/evolution/monthly-budget',
-  PARAMETERS = '/parameters',
   PARAMETERS_ACCOUNTS = '/parameters/accounts',
   PARAMETERS_CATEGORY = '/parameters/categories',
   PARAMETERS_SUB_CATEGORY = '/parameters/sub-categories',
