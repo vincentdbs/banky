@@ -151,13 +151,7 @@ const frMessages: Translations = {
     },
   },
   parameters: {
-    accounts: {
-      title: 'Comptes',
-      subTitle: 'Configuration des comptes',
-    },
     categories: {
-      title: 'Categories',
-      subTitle: 'Configuration des catégories',
       table: {
         name: 'Nom',
         numberOfSubCategories: 'Nombre de sous-catégories',
@@ -165,8 +159,6 @@ const frMessages: Translations = {
       },
     },
     subCategories: {
-      title: 'Sous-catégories',
-      subTitle: 'Configuration des sous-catégories',
       table: {
         name: 'Nom',
         categoryName: 'Nom de la catégorie',
@@ -174,8 +166,6 @@ const frMessages: Translations = {
       },
     },
     tickers: {
-      title: 'Titres',
-      subTitle: 'Configuration des titres',
       table: {
         name: 'Nom',
         shortName: 'Nom court',
@@ -186,8 +176,6 @@ const frMessages: Translations = {
   },
   evolution: {
     monthlyBudget: {
-      title: 'Budget mensuel',
-      subTitle: 'Suivi du budget mensuel par catégorie',
       viewTypes: {
         REAL: 'Réel',
         THEORETICAL: 'Théorique',
@@ -209,8 +197,6 @@ const frMessages: Translations = {
   },
   operations: {
     transactions: {
-      title: 'Transactions',
-      subTitle: 'Liste des transactions',
       table: {
         date: 'Date',
         amount: 'Montant',
@@ -222,7 +208,6 @@ const frMessages: Translations = {
         action: 'Action',
       },
       form: {
-        title: 'Transaction',
         description: 'Ajout d\'une transaction',
         fields: {
           from: 'De',
@@ -240,8 +225,6 @@ const frMessages: Translations = {
       },
     },
     transferts: {
-      title: 'Transferts',
-      subTitle: 'Liste des transferts entre comptes',
       table: {
         date: 'Date',
         amount: 'Montant',
@@ -261,8 +244,6 @@ const frMessages: Translations = {
       },
     },
     orders: {
-      title: 'Ordres',
-      subTitle: 'Liste des ordres de bourse',
       table: {
         date: 'Date',
         name: 'Nom',

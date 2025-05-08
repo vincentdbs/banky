@@ -1,5 +1,5 @@
 import { SubCategoryResponse } from '@api/categories/CategoriesTypes';
-import RessourceLayout from '@components/layout/parameters/RessourceLayout';
+import MainSection from '@components/theme/sections/MainSection';
 import useMessages from '@i18n/hooks/messagesHook';
 import CategoriesService from '@services/categories/CategoriesService';
 import { getGlobalInstance } from 'plume-ts-di';
@@ -24,10 +24,7 @@ export default function SubCategories() {
   } = useHandlePagination<SubCategoryResponse>(categoriesService.fetchPaginatedSubCategories);
 
   return (
-    <RessourceLayout
-      title={messages.parameters.subCategories.title}
-      subTitle={messages.parameters.subCategories.subTitle}
-    >
+    <MainSection>
       <PaginationLayout
         currentPage={currentPage}
         totalPages={totalPages}
@@ -35,6 +32,6 @@ export default function SubCategories() {
       >
         <SubCategoriesTable subCategories={subCategories} />
       </PaginationLayout>
-    </RessourceLayout>
+    </MainSection>
   );
 }

@@ -1,5 +1,5 @@
 import { TransactionResponse } from '@api/transactions/TransactionsTypes';
-import RessourceLayout from '@components/layout/parameters/RessourceLayout';
+import MainSection from '@components/theme/sections/MainSection';
 import TransactionsFormModal
   from '@components/pages/operations/transactions/modal/TransactionsFormModal';
 import TransactionsTable from '@components/pages/operations/transactions/table/TransactionsTable';
@@ -26,10 +26,7 @@ export default function Transactions() {
   } = useHandlePagination<TransactionResponse>(transactionsService.fetchTransactions);
 
   return (
-    <RessourceLayout
-      title={messages.operations.transactions.title}
-      subTitle={messages.operations.transactions.subTitle}
-    >
+    <MainSection>
       <TransactionsFormModal />
       <PaginationLayout
         currentPage={currentPage}
@@ -38,6 +35,6 @@ export default function Transactions() {
       >
         <TransactionsTable transactions={transactions} />
       </PaginationLayout>
-    </RessourceLayout>
+    </MainSection>
   );
 }

@@ -100,13 +100,7 @@ export type Translations = {
     },
   },
   parameters: {
-    accounts: {
-      title: string,
-      subTitle: string,
-    },
     categories: {
-      title: string,
-      subTitle: string,
       table: {
         name: string,
         numberOfSubCategories: string,
@@ -114,8 +108,6 @@ export type Translations = {
       },
     },
     subCategories: {
-      title: string,
-      subTitle: string,
       table: {
         name: string,
         categoryName: string,
@@ -123,8 +115,6 @@ export type Translations = {
       },
     },
     tickers: {
-      title: string,
-      subTitle: string,
       table: {
         name: string,
         shortName: string,
@@ -135,8 +125,6 @@ export type Translations = {
   },
   evolution: {
     monthlyBudget: {
-      title: string,
-      subTitle: string,
       viewTypes: {
         REAL: string,
         THEORETICAL: string,
@@ -158,8 +146,6 @@ export type Translations = {
   },
   operations: {
     transactions: {
-      title: string,
-      subTitle: string,
       table: {
         date: string,
         amount: string,
@@ -171,7 +157,6 @@ export type Translations = {
         action: string,
       },
       form: {
-        title: string,
         description: string,
         fields: Record<TransactionFields, string> & {
           from: string,
@@ -180,8 +165,6 @@ export type Translations = {
       },
     },
     transferts: {
-      title: string,
-      subTitle: string,
       table: {
         date: string,
         amount: string,
@@ -201,8 +184,6 @@ export type Translations = {
       },
     },
     orders: {
-      title: string,
-      subTitle: string,
       table: {
         date: string,
         name: string,
