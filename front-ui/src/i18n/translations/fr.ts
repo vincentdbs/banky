@@ -117,6 +117,7 @@ const frMessages: Translations = {
       subTitle: 'Configuration des catégories',
       table: {
         name: 'Nom',
+        numberOfSubCategories: 'Nombre de sous-catégories',
         action: 'Action',
       },
     },

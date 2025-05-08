@@ -39,6 +39,11 @@ public class CategoriesTest {
 
         // All categories should be returned since there are only 14 (less than page size)
         assertEquals(14, response.content().size());
+        
+        // Verify that numberOfSubCategories is populated for all categories
+        for (CategoryResponse category : response.content()) {
+            assertNotNull(category.numberOfSubCategories());
+        }
     }
 
     @Test
@@ -59,16 +64,31 @@ public class CategoriesTest {
 
         // First page should have exactly the page size number of items
         assertEquals(pageSize, response.content().size());
+        
+        // Verify that numberOfSubCategories is populated for all categories
+        for (CategoryResponse category : response.content()) {
+            assertNotNull(category.numberOfSubCategories());
+        }
 
         // Test second page
         PaginatedResponse<CategoryResponse> secondPageResponse = categoryService.fetchPaginatedCategories(2, pageSize);
         assertEquals(2, secondPageResponse.pagination().currentPage());
         assertEquals(pageSize, secondPageResponse.content().size());
+        
+        // Verify numberOfSubCategories on second page
+        for (CategoryResponse category : secondPageResponse.content()) {
+            assertNotNull(category.numberOfSubCategories());
+        }
 
         // Test last page
         PaginatedResponse<CategoryResponse> lastPageResponse = categoryService.fetchPaginatedCategories(3, pageSize);
         assertEquals(3, lastPageResponse.pagination().currentPage());
         assertEquals(4, lastPageResponse.content().size()); // 14 - 5 - 5 = 4 remaining items
+        
+        // Verify numberOfSubCategories on last page
+        for (CategoryResponse category : lastPageResponse.content()) {
+            assertNotNull(category.numberOfSubCategories());
+        }
     }
 
     @Test

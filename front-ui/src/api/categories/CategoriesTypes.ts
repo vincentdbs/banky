@@ -1,6 +1,7 @@
 export type CategoryResponse = {
   id: string,
   name: string,
+  numberOfSubCategories: number,
 };
 
 export type SubCategoryResponse = {

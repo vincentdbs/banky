@@ -73,4 +73,31 @@ class CategoryDaoTest {
             assertThat(category.budgeted()).isEqualByComparingTo(new BigDecimal("200"));
         }
     }
+
+    @Test
+    void testFetchCategoriesPaginated__shouldIncludeSubCategoryCounts() {
+        // Fetch the first page of categories
+        List<banky.webservices.api.category.data.CategoryResponse> categories = categoryDao.fetchCategoriesPaginated(1, 20);
+        
+        // Verify that we have categories
+        assertThat(categories).isNotEmpty();
+        
+        // Verify that each category has a numberOfSubCategories value
+        for (banky.webservices.api.category.data.CategoryResponse category : categories) {
+            assertThat(category.numberOfSubCategories()).isNotNull();
+            
+            // For test data verification, we can check specific categories based on known test data
+            if ("Divers".equals(category.name())) {
+                // "Divers" should have subcategories in test data
+                assertThat(category.numberOfSubCategories()).isGreaterThan(0);
+            }
+        }
+        
+        // Also test with a smaller page size
+        List<banky.webservices.api.category.data.CategoryResponse> smallerPageCategories = categoryDao.fetchCategoriesPaginated(1, 5);
+        assertThat(smallerPageCategories).hasSize(5);
+        for (banky.webservices.api.category.data.CategoryResponse category : smallerPageCategories) {
+            assertThat(category.numberOfSubCategories()).isNotNull();
+        }
+    }
 }

@@ -46,14 +46,19 @@ public class CategoryDao extends CrudDaoQuerydsl<Category> {
      */
     public List<CategoryResponse> fetchCategoriesPaginated(int page, int pageSize) {
         int offset = (page - 1) * pageSize;
+        QSubCategory subCategory = QSubCategory.subCategory;
         
         return transactionManager
             .selectQuery()
             .select(
                 QCategory.category.id,
-                QCategory.category.name
+                QCategory.category.name,
+                subCategory.count().intValue().as("numberOfSubCategories")
             )
             .from(QCategory.category)
+            .leftJoin(subCategory)
+            .on(QCategory.category.id.eq(subCategory.categoryId))
+            .groupBy(QCategory.category.id)
             .orderBy(QCategory.category.name.asc())
             .offset(offset)
             .limit(pageSize)
@@ -61,7 +66,8 @@ public class CategoryDao extends CrudDaoQuerydsl<Category> {
             .stream()
             .map(row -> new CategoryResponse(
                 row.get(QCategory.category.id),
-                row.get(QCategory.category.name)
+                row.get(QCategory.category.name),
+                row.get(subCategory.count().intValue().as("numberOfSubCategories"))
             ))
             .toList();
     }

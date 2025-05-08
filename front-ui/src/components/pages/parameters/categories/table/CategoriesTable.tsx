@@ -18,8 +18,11 @@ export default function CategoriesTable({ categories }: CategoriesTableProps) {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead >
+          <TableHead>
             {messages.parameters.categories.table.name}
+          </TableHead>
+          <TableHead className="text-right">
+            {messages.parameters.categories.table.numberOfSubCategories}
           </TableHead>
           <TableHead className="text-right">
             {messages.parameters.categories.table.action}
@@ -31,6 +34,7 @@ export default function CategoriesTable({ categories }: CategoriesTableProps) {
           categories.map((category: CategoryResponse) => (
             <TableRow key={category.id}>
               <TableCell>{category.name}</TableCell>
+              <TableCell className="text-right">{category.numberOfSubCategories}</TableCell>
               <TableCell className="text-right">
                 <Button type="button" variant="outline">
                   <Pencil />
