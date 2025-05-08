@@ -3,12 +3,16 @@ package banky.db.dao;
 import banky.db.generated.QAccounts;
 import banky.db.generated.QTransfert;
 import banky.db.generated.Transfert;
+import banky.services.accounts.enums.AccountType;
 import banky.webservices.api.transfert.responses.TransfertResponse;
 import com.coreoz.plume.db.querydsl.crud.CrudDaoQuerydsl;
 import com.coreoz.plume.db.querydsl.transaction.TransactionManagerQuerydsl;
+import com.querydsl.core.types.dsl.Expressions;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -85,5 +89,35 @@ public class TransfertDao extends CrudDaoQuerydsl<Transfert> {
             .select(QTransfert.transfert.count())
             .from(QTransfert.transfert)
             .fetchOne();
+    }
+
+    /**
+     * Calculates the total amount transferred to savings accounts (MARKET or SAVINGS type) 
+     * during a specific month
+     * 
+     * @param firstDayOfTheMonth The first day of the month to calculate transfers for
+     * @return The total amount transferred to savings accounts during the specified month
+     */
+    public BigDecimal fetchSavingsAmountByMonth(LocalDate firstDayOfTheMonth) {
+        LocalDate lastDayOfTheMonth = firstDayOfTheMonth.plusMonths(1).minusDays(1);
+        
+        QAccounts toAccount = new QAccounts("to_account");
+        
+        BigDecimal result = this.transactionManager
+            .selectQuery()
+            .select(QTransfert.transfert.amount.sum())
+            .from(QTransfert.transfert)
+            .innerJoin(toAccount)
+            .on(QTransfert.transfert.toAccountId.eq(toAccount.id))
+            .where(
+                QTransfert.transfert.date.between(firstDayOfTheMonth, lastDayOfTheMonth)
+                .and(
+                    toAccount.type.eq(AccountType.SAVINGS.name())
+                    .or(toAccount.type.eq(AccountType.MARKET.name()))
+                )
+            )
+            .fetchOne();
+            
+        return result != null ? result : BigDecimal.ZERO;
     }
 }
