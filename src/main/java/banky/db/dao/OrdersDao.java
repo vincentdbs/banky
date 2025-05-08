@@ -12,6 +12,8 @@ import com.coreoz.plume.db.querydsl.transaction.TransactionManagerQuerydsl;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -91,5 +93,27 @@ public class OrdersDao extends CrudDaoQuerydsl<Orders> {
             .select(QOrders.orders.count())
             .from(QOrders.orders)
             .fetchOne();
+    }
+
+    /**
+     * Calculate the total charges amount for all orders in a specific month
+     * 
+     * @param firstDayOfTheMonth The first day of the month to calculate charges for
+     * @return The sum of all charges in the specified month, or zero if no orders exist
+     */
+    public BigDecimal fetchChargesAmountByMonth(LocalDate firstDayOfTheMonth) {
+        // Calculate the last day of the month
+        LocalDate lastDayOfTheMonth = firstDayOfTheMonth.plusMonths(1).minusDays(1);
+        
+        BigDecimal sum = this.transactionManager
+            .selectQuery()
+            .select(QOrders.orders.charges.sum())
+            .from(QOrders.orders)
+            .where(QOrders.orders.date.goe(firstDayOfTheMonth)
+                .and(QOrders.orders.date.loe(lastDayOfTheMonth)))
+            .fetchOne();
+            
+        // Return 0 if there are no orders in the specified month
+        return sum == null ? BigDecimal.ZERO : sum;
     }
 }
