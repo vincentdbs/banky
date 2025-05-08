@@ -1,5 +1,6 @@
-package banky.db.dao;
+package banky.db.dao.transferts;
 
+import banky.db.dao.TransfertDao;
 import banky.db.generated.QTransfert;
 import banky.db.generated.Transfert;
 import banky.guice.TestModule;

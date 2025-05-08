@@ -1,5 +1,6 @@
-package banky.db.dao;
+package banky.db.dao.orders;
 
+import banky.db.dao.OrdersDao;
 import banky.db.generated.Orders;
 import banky.db.generated.QOrders;
 import banky.guice.TestModule;
