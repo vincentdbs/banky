@@ -10,8 +10,8 @@ export type MonthlyBudgetCategory = {
   name: string,
   spent: string,
   budgeted: string,
-  spentPercentage: string,
-  budgetedPercentage: string,
+  spentPercentageOfBudgeted: string,
+  spentPercentageOfTotal: string,
 };
 
 /**
@@ -20,8 +20,8 @@ export type MonthlyBudgetCategory = {
 export type MonthlyBudgetResponse = {
   total: string,
   budgetedTotal: string,
-  spentPercentage: string,
-  budgetedPercentage: string,
+  spentPercentageOfBudgeted: string,
+  spentPercentageOfTotal: string,
   totalWithoutSavings: string,
   budgetedTotalWithoutSavings: string,
   spentWithoutSavingsPercentage: string,

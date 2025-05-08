@@ -3,14 +3,17 @@ package banky.db.dao;
 import banky.db.generated.QAccounts;
 import banky.db.generated.QCategory;
 import banky.db.generated.QSubCategory;
-import banky.db.generated.Transactions;
 import banky.db.generated.QTransactions;
+import banky.db.generated.Transactions;
 import banky.services.transactions.enums.TransactionSide;
 import banky.webservices.api.transactions.responses.TransactionResponse;
 import com.coreoz.plume.db.querydsl.crud.CrudDaoQuerydsl;
 import com.coreoz.plume.db.querydsl.transaction.TransactionManagerQuerydsl;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -27,14 +30,14 @@ public class TransactionsDao extends CrudDaoQuerydsl<Transactions> {
 
     /**
      * Fetch transactions with pagination support
-     * 
+     *
      * @param page The page number (1-based)
      * @param size The number of items per page
      * @return A list of transactions for the requested page
      */
     public List<TransactionResponse> fetchTransactions(int page, int size) {
         int offset = (page - 1) * size; // Convert to 0-based for database query
-        
+
         return this.transactionManager
             .selectQuery()
             .select(
@@ -85,10 +88,10 @@ public class TransactionsDao extends CrudDaoQuerydsl<Transactions> {
             )
             .toList();
     }
-    
+
     /**
      * Count the total number of transactions in the database
-     * 
+     *
      * @return The total count of transactions
      */
     public long countTransactions() {
@@ -96,6 +99,29 @@ public class TransactionsDao extends CrudDaoQuerydsl<Transactions> {
             .selectQuery()
             .select(QTransactions.transactions.count())
             .from(QTransactions.transactions)
+            .fetchFirst();
+    }
+
+    /**
+     * Fetch sum of all CREDIT transactions for a specific month
+     * @param firstDayOfTheMonth The first day of the month to fetch data for
+     * @return The sum of all CREDIT transactions in the specified month, or zero if none exist
+     */
+    public BigDecimal fetchIncomeByMonth(LocalDate firstDayOfTheMonth) {
+        QTransactions transactions = QTransactions.transactions;
+
+        // Calculate the last day of the month
+        LocalDate lastDayOfTheMonth = firstDayOfTheMonth.plusMonths(1).minusDays(1);
+
+        return transactionManager
+            .selectQuery()
+            .select(transactions.amount.sum().coalesce(new BigDecimal(0)))
+            .from(transactions)
+            .where(
+                transactions.side.eq(TransactionSide.CREDIT.name())
+                    .and(transactions.date.goe(firstDayOfTheMonth))
+                    .and(transactions.date.loe(lastDayOfTheMonth))
+            )
             .fetchFirst();
     }
 }

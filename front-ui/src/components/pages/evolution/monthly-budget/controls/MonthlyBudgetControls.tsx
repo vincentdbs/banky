@@ -9,9 +9,9 @@ import React from 'react';
 /**
  * Enum for the type of monthly budget view
  */
-export enum MonthlyRecapType {
-  REAL = 'REAL',
+export enum MonthlyBudgetType {
   THEORETICAL = 'THEORETICAL',
+  REAL = 'REAL',
 }
 
 /**
@@ -22,8 +22,8 @@ type MonthlyBudgetControlsProps = {
   setSelectedMonth: (month: number) => void,
   selectedYear: number,
   setSelectedYear: (year: number) => void,
-  viewType: MonthlyRecapType,
-  setViewType: (viewType: MonthlyRecapType) => void,
+  viewType: MonthlyBudgetType,
+  setViewType: (viewType: MonthlyBudgetType) => void,
 };
 
 /**
@@ -45,9 +45,9 @@ export default function MonthlyBudgetControls(
   // Toggle handler for the view type switch
   const handleToggleViewType = React.useCallback(() => {
     setViewType(
-      viewType === MonthlyRecapType.REAL
-        ? MonthlyRecapType.THEORETICAL
-        : MonthlyRecapType.REAL,
+      viewType === MonthlyBudgetType.REAL
+        ? MonthlyBudgetType.THEORETICAL
+        : MonthlyBudgetType.REAL,
     );
   }, [viewType, setViewType]);
 
@@ -66,9 +66,9 @@ export default function MonthlyBudgetControls(
         />
       </div>
       <LabelledToggle
-        unCheckedLabel={messages.evolution.monthlyBudget.viewTypes[MonthlyRecapType.REAL]}
-        checkedLabel={messages.evolution.monthlyBudget.viewTypes[MonthlyRecapType.THEORETICAL]}
-        checked={viewType === MonthlyRecapType.THEORETICAL}
+        unCheckedLabel={messages.evolution.monthlyBudget.viewTypes[MonthlyBudgetType.REAL]}
+        checkedLabel={messages.evolution.monthlyBudget.viewTypes[MonthlyBudgetType.THEORETICAL]}
+        checked={viewType === MonthlyBudgetType.THEORETICAL}
         onToggle={handleToggleViewType}
       />
     </div>

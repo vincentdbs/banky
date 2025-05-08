@@ -15,8 +15,8 @@ public record MonthlyBudgetCategoryResponse(
     @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
     BigDecimal budgeted,
     @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
-    BigDecimal spentPercentage,
+    BigDecimal spentPercentageOfBudgeted,
     @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
-    BigDecimal budgetedPercentage
+    BigDecimal spentPercentageOfTotal
 ) {
 }

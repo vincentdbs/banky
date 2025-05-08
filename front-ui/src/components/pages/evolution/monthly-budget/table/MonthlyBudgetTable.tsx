@@ -4,12 +4,13 @@ import {
   formatPercentageDecimalPriceFromString,
 } from '@/utils/number/NumberUtils';
 import { MonthlyBudgetCategory } from '@api/evolution/EvolutionTypes';
-import useHandleFetchMonthlyBudget from '@hooks/use-handle-fetch-monthly-budget/useHandleFetchMonthlyBudget';
+import useHandleFetchMonthlyBudget
+  from '@hooks/use-handle-fetch-monthly-budget/useHandleFetchMonthlyBudget';
 import useMessages from '@i18n/hooks/messagesHook';
 import { cn } from '@lib/shadcn/utils';
 import { isNotNullish } from '@utils/types/TypesUtils';
-import React, { useState } from 'react';
-import MonthlyBudgetControls, { MonthlyRecapType } from '../controls/MonthlyBudgetControls';
+import React from 'react';
+import MonthlyBudgetControls from '../controls/MonthlyBudgetControls';
 
 /**
  * MonthlyBudgetTable component displays the monthly budget data in a structured table
@@ -18,17 +19,19 @@ import MonthlyBudgetControls, { MonthlyRecapType } from '../controls/MonthlyBudg
  */
 export default function MonthlyBudgetTable() {
   const { messages } = useMessages();
-  const [viewType, setViewType] = useState<MonthlyRecapType>(MonthlyRecapType.REAL);
 
   // Use our custom hook to handle fetching monthly budget data
   const {
     currentYear,
     currentMonth,
     monthlyBudget,
+    monthlyBudgetType,
+    updateMonthlyBudgetType,
     handleUpdateYear,
     handleUpdateMonth,
   } = useHandleFetchMonthlyBudget();
 
+  console.log(monthlyBudget);
   return (
     <div className="space-y-6">
       <MonthlyBudgetControls
@@ -36,8 +39,8 @@ export default function MonthlyBudgetTable() {
         setSelectedMonth={handleUpdateMonth}
         selectedYear={currentYear}
         setSelectedYear={handleUpdateYear}
-        viewType={viewType}
-        setViewType={setViewType}
+        viewType={monthlyBudgetType}
+        setViewType={updateMonthlyBudgetType}
       />
 
       {
@@ -65,7 +68,7 @@ export default function MonthlyBudgetTable() {
                 </p>
                 <p
                   className="h-10 px-2 flex items-center justify-end font-medium text-muted-foreground">
-                  {messages.evolution.monthlyBudget.table.budgetedPercentage}
+                  {messages.evolution.monthlyBudget.table.totalPercentage}
                 </p>
               </div>
 
@@ -75,10 +78,11 @@ export default function MonthlyBudgetTable() {
                 {monthlyBudget.categories.map((category: MonthlyBudgetCategory, index: number) => {
                   const isSpentGreaterThanBudgeted: boolean = parseInt(category.spent) > parseInt(category.budgeted);
                   const isSpentLessThanBudgeted: boolean = parseInt(category.spent) < parseInt(category.budgeted) && parseInt(category.spent) !== 0;
-                  const isSpentPercentageGreaterThanBudgetedPercentage: boolean =
-                    parseInt(category.spentPercentage) > parseInt(category.budgetedPercentage);
-                  const isSpentPercentageLessThanBudgetedPercentage: boolean =
-                    parseInt(category.spentPercentage) < parseInt(category.budgetedPercentage) && parseInt(category.spentPercentage) !== 0;
+                  const isSpentPercentageHigherThanTotal: boolean = 
+                    parseInt(category.spentPercentageOfBudgeted) > parseInt(category.spentPercentageOfTotal);
+                  const isSpentPercentageLowerThanTotal: boolean = 
+                    parseInt(category.spentPercentageOfBudgeted) < parseInt(category.spentPercentageOfTotal) && 
+                    parseInt(category.spentPercentageOfBudgeted) !== 0;
 
                   return (
                     <div
@@ -101,13 +105,13 @@ export default function MonthlyBudgetTable() {
                       </p>
                       <p className={cn(
                         'p-2 flex items-center justify-end',
-                        isSpentPercentageGreaterThanBudgetedPercentage && 'text-red-500 font-bold',
-                        isSpentPercentageLessThanBudgetedPercentage && 'text-green-500',
+                        isSpentPercentageHigherThanTotal && 'text-red-500 font-bold',
+                        isSpentPercentageLowerThanTotal && 'text-green-500',
                       )}>
-                        {formatPercentageDecimalPriceFromString(category.spentPercentage)}
+                        {formatPercentageDecimalPriceFromString(category.spentPercentageOfBudgeted)}
                       </p>
                       <p className="p-2 flex items-center justify-end">
-                        {formatPercentageDecimalPriceFromString(category.budgetedPercentage)}
+                        {formatPercentageDecimalPriceFromString(category.spentPercentageOfTotal)}
                       </p>
                     </div>
                   );
@@ -164,10 +168,10 @@ export default function MonthlyBudgetTable() {
                     {formatEuroDecimalPriceFromString(monthlyBudget.budgetedTotal)}
                   </p>
                   <p className="p-2 align-middle text-right font-bold">
-                    {formatPercentageDecimalPriceFromString(monthlyBudget.spentPercentage)}
+                    {formatPercentageDecimalPriceFromString(monthlyBudget.spentPercentageOfBudgeted)}
                   </p>
                   <p className="p-2 align-middle text-right font-bold">
-                    {formatPercentageDecimalPriceFromString(monthlyBudget.budgetedPercentage)}
+                    {formatPercentageDecimalPriceFromString(monthlyBudget.spentPercentageOfTotal)}
                   </p>
                 </div>
 

@@ -1,9 +1,11 @@
 package banky.services.evolution;
 
 import banky.db.dao.OrdersDao;
+import banky.db.dao.TransactionsDao;
 import banky.db.dao.TransfertDao;
 import banky.db.dao.category.CategoryDao;
 import banky.db.dao.category.data.SpentByCategory;
+import banky.services.evolution.data.MonthlyBudgetType;
 import banky.webservices.api.evolution.responses.MonthlyBudgetCategoryResponse;
 import banky.webservices.api.evolution.responses.MonthlyBudgetResponse;
 import jakarta.inject.Inject;
@@ -22,12 +24,21 @@ import java.util.List;
 @Singleton
 public class MonthlyBudgetService {
     private final static BigDecimal BUDGETED_SAVINGS = new BigDecimal(900);
+    private final static BigDecimal THEORETICAL_INCOME = new BigDecimal(2400);
+
+    private final TransactionsDao transactionsDao;
     private final TransfertDao transfertDao;
     private final OrdersDao ordersDao;
     private final CategoryDao categoryDao;
 
     @Inject
-    private MonthlyBudgetService(TransfertDao transfertDao, OrdersDao ordersDao, CategoryDao categoryDao) {
+    private MonthlyBudgetService(
+        TransactionsDao transactionsDao,
+        TransfertDao transfertDao,
+        OrdersDao ordersDao,
+        CategoryDao categoryDao
+    ) {
+        this.transactionsDao = transactionsDao;
         this.categoryDao = categoryDao;
         this.transfertDao = transfertDao;
         this.ordersDao = ordersDao;
@@ -38,16 +49,21 @@ public class MonthlyBudgetService {
      * Retrieves transaction data, calculates percentages and balances.
      *
      * @param date The date correspond to the month to fetch data for
+     * @param type The type of monthly budget to fetch (e.g., actual, theoretical)
      * @return A MonthlyBudgetResponse containing the complete monthly budget data
      */
-    public MonthlyBudgetResponse fetchMonthlyBudget(LocalDate date) {
+    public MonthlyBudgetResponse fetchMonthlyBudget(LocalDate date, MonthlyBudgetType type) {
         // Ensure the date is the first day of the month
         LocalDate firstDayOfTheMonth = date.withDayOfMonth(1);
+
+        BigDecimal income = MonthlyBudgetType.THEORETICAL.equals(type)
+            ? THEORETICAL_INCOME
+            : transactionsDao.fetchIncomeByMonth(firstDayOfTheMonth);
 
         List<SpentByCategory> spentByCategories = categoryDao.fetchSpentByCategoryByMonth(firstDayOfTheMonth);
 
         // Transform SpentByCategory to MonthlyBudgetCategoryResponse
-        List<MonthlyBudgetCategoryResponse> categories = buildMonthlyBudgetCategoryResponseFromSpentByCategories(spentByCategories);
+        List<MonthlyBudgetCategoryResponse> categories = buildMonthlyBudgetCategoryResponseFromSpentByCategories(spentByCategories, income);
 
         // Order charges
         BigDecimal orderChargesTotal = ordersDao.fetchChargesAmountByMonth(firstDayOfTheMonth);
@@ -65,9 +81,9 @@ public class MonthlyBudgetService {
 
         // Calculate percentages
         BigDecimal spentWithoutSavingsPercentage = calculatePercentage(totalWithoutSavings, budgetedTotalWithoutSavings);
-        BigDecimal spentPercentage = calculatePercentage(total, budgetedTotal);
-        BigDecimal budgetedWithoutSavingsPercentage = calculateSumOfBudgetedPercentage(categories);
-        BigDecimal budgetedPercentage = BigDecimal.valueOf(100);
+        BigDecimal spentPercentageOfBudgeted = calculatePercentage(total, budgetedTotal);
+        BigDecimal budgetedWithoutSavingsPercentage = calculatePercentage(calculateSumOfBudgetedPercentage(categories), budgetedTotal);
+        BigDecimal spentPercentageOfTotal = calculatePercentage(budgetedTotal, income);
 
         // Calculate balances
         BigDecimal balance = budgetedTotalWithoutSavings.subtract(totalWithoutSavings);
@@ -76,9 +92,9 @@ public class MonthlyBudgetService {
         return new MonthlyBudgetResponse(
             categories,
             total,
-            spentPercentage,
+            spentPercentageOfBudgeted,
             budgetedTotal,
-            budgetedPercentage,
+            spentPercentageOfTotal,
             totalWithoutSavings,
             spentWithoutSavingsPercentage,
             budgetedTotalWithoutSavings,
@@ -97,12 +113,15 @@ public class MonthlyBudgetService {
      * @param spentByCategories List of SpentByCategory
      * @return List of transformed MonthlyBudgetCategoryResponse
      */
-    private List<MonthlyBudgetCategoryResponse> buildMonthlyBudgetCategoryResponseFromSpentByCategories(List<SpentByCategory> spentByCategories) {
+    private List<MonthlyBudgetCategoryResponse> buildMonthlyBudgetCategoryResponseFromSpentByCategories(
+        List<SpentByCategory> spentByCategories,
+        BigDecimal income
+    ) {
         return spentByCategories.stream()
             .map(category -> {
                 // Calculate percentages
                 BigDecimal spentPercentage = calculatePercentage(category.spent(), category.budgeted());
-                BigDecimal budgetedPercentage = BigDecimal.valueOf(100);
+                BigDecimal budgetedPercentage = calculatePercentage(category.spent(), income);
 
                 return new MonthlyBudgetCategoryResponse(
                     category.name(),
@@ -141,7 +160,7 @@ public class MonthlyBudgetService {
 
     private BigDecimal calculateSumOfBudgetedPercentage(List<MonthlyBudgetCategoryResponse> categories) {
         return categories.stream()
-            .map(MonthlyBudgetCategoryResponse::budgetedPercentage)
+            .map(MonthlyBudgetCategoryResponse::spentPercentageOfTotal)
             .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 

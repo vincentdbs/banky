@@ -1,6 +1,7 @@
 package banky.webservices.api.evolution;
 
 import banky.services.evolution.MonthlyBudgetService;
+import banky.services.evolution.data.MonthlyBudgetType;
 import banky.webservices.api.evolution.responses.MonthlyBudgetResponse;
 import com.coreoz.plume.jersey.errors.Validators;
 import com.coreoz.plume.jersey.security.permission.PublicApi;
@@ -50,10 +51,12 @@ public class EvolutionWs {
     @Path("/budgets/monthly")
     @Operation(description = "Fetch the monthly budget data for a specific month")
     public MonthlyBudgetResponse fetchMonthlyBudgetByDate(
-        @QueryParam("date") LocalDate date
+        @QueryParam("date") LocalDate date,
+        @QueryParam("type") MonthlyBudgetType type
     ) {
         Validators.checkRequired("date", date);
+        Validators.checkRequired("type", type);
 
-        return monthlyBudgetService.fetchMonthlyBudget(date);
+        return monthlyBudgetService.fetchMonthlyBudget(date, type);
     }
 }

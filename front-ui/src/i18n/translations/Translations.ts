@@ -141,7 +141,7 @@ export type Translations = {
         spent: string,
         budgeted: string,
         spentPercentage: string,
-        budgetedPercentage: string,
+        totalPercentage: string,
         total: string,
         totalWithoutSavings: string,
         balance: string,
