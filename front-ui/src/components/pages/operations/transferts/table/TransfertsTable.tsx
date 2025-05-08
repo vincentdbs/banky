@@ -1,12 +1,9 @@
-import React from 'react';
 import { TransfertResponse } from '@api/transferts/TransfertTypes';
 import useMessages from '@i18n/hooks/messagesHook';
 import { Button } from '@lib/shadcn/button';
 import { Pencil } from 'lucide-react';
-import {
-  formatEuroDecimalPrice,
-  formatEuroDecimalPriceFromString,
-} from '@/utils/number/NumberUtils';
+import React from 'react';
+import { formatEuroDecimalPriceFromString } from '@/utils/number/NumberUtils';
 import { formatToLocalDateOrPlaceholder } from '@/utils/dates/DatesUtils';
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
@@ -66,8 +63,8 @@ export default function TransfertsTable({ transferts, onEditTransfert }: Transfe
               </TableCell>
               <TableCell className="text-right">
                 {onEditTransfert && (
-                  <Button 
-                    type="button" 
+                  <Button
+                    type="button"
                     variant="outline"
                     onClick={() => onEditTransfert(transfert)}
                   >

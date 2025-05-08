@@ -1,6 +1,14 @@
 'use client';
 
-import useMessages from '@/i18n/hooks/messagesHook';
+import { Button } from '@lib/shadcn/button';
+import {
+  Card, CardContent, CardHeader, CardTitle,
+} from '@lib/shadcn/card';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React from 'react';
+import {
+  Bar, BarChart, CartesianGrid, XAxis,
+} from 'recharts';
 import {
   ChartConfig,
   ChartContainer,
@@ -9,17 +17,13 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/lib/shadcn/chart';
-import { Button } from '@lib/shadcn/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@lib/shadcn/card';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import React from 'react';
-import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
+import useMessages from '@/i18n/hooks/messagesHook';
 
 const xAxisKey = 'month';
 
 type ChartData = {
-  month: number;
-  color: string;
+  month: number,
+  color: string,
   [key: string]: number | string,
 };
 
@@ -35,7 +39,7 @@ const chartConfig: Record<string, any> = {
   test: {
     label: 'Test',
     color: '#00ff00',
-  }
+  },
 } satisfies ChartConfig;
 
 type AllAccountChartsProps = {
@@ -80,10 +84,9 @@ export function AllAccountCharts({ data }: AllAccountChartsProps) {
               tickLine={false}
               tickMargin={10}
               axisLine={false}
-              tickFormatter={(value) => {
-                return value;
+              tickFormatter={(value) => value
                 // return  value.slice(0, data.length);
-              }}
+              }
             />
             <ChartTooltip content={<ChartTooltipContent hideLabel />} />
             <ChartLegend content={<ChartLegendContent />} />
@@ -107,24 +110,24 @@ cd
                   })
               }
             </>
-            {/*<Bar*/}
-            {/*  dataKey="desktop"*/}
-            {/*  stackId="a"*/}
-            {/*  fill="var(--color-desktop)"*/}
-            {/*  radius={[0, 0, 4, 4]}*/}
-            {/*/>*/}
-            {/*<Bar*/}
-            {/*  dataKey="mobile"*/}
-            {/*  stackId="a"*/}
-            {/*  fill="var(--color-mobile)"*/}
-            {/*  radius={[4, 4, 0, 0]}*/}
-            {/*/>*/}
-            {/*<Bar*/}
-            {/*  dataKey="mobile"*/}
-            {/*  stackId="a"*/}
-            {/*  fill="var(--color-mobile)"*/}
-            {/*  radius={[4, 4, 0, 0]}*/}
-            {/*/>*/}
+            {/* <Bar */}
+            {/*  dataKey="desktop" */}
+            {/*  stackId="a" */}
+            {/*  fill="var(--color-desktop)" */}
+            {/*  radius={[0, 0, 4, 4]} */}
+            {/* /> */}
+            {/* <Bar */}
+            {/*  dataKey="mobile" */}
+            {/*  stackId="a" */}
+            {/*  fill="var(--color-mobile)" */}
+            {/*  radius={[4, 4, 0, 0]} */}
+            {/* /> */}
+            {/* <Bar */}
+            {/*  dataKey="mobile" */}
+            {/*  stackId="a" */}
+            {/*  fill="var(--color-mobile)" */}
+            {/*  radius={[4, 4, 0, 0]} */}
+            {/* /> */}
           </BarChart>
         </ChartContainer>
       </CardContent>

@@ -1,8 +1,8 @@
-import { PaginatedResponse } from '@/utils/types/PaginationTypes';
 import useLoader, { LoaderState } from '@lib/plume-http-react-hook-loader/promiseLoaderHook';
 import { useOnComponentMounted } from '@lib/react-hooks-alias/ReactHooksAlias';
 import { useState } from 'react';
 import { HttpPromise } from 'simple-http-rest-client';
+import { PaginatedResponse } from '@/utils/types/PaginationTypes';
 
 /**
  * A hook that handles pagination state and data fetching.
@@ -15,8 +15,8 @@ import { HttpPromise } from 'simple-http-rest-client';
 export default function useHandlePagination<T>(
   fetchElements: (page: number, size: number) => HttpPromise<PaginatedResponse<T>>,
 ) {
-  const defaultPage = 1;
-  const defaultSize = 20;
+  const defaultPage: number = 1;
+  const defaultSize: number = 20;
 
   const loader: LoaderState = useLoader();
   const [elements, setElements] = useState<T[]>([]);

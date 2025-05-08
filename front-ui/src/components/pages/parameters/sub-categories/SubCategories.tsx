@@ -1,12 +1,11 @@
 import { SubCategoryResponse } from '@api/categories/CategoriesTypes';
+import PaginationLayout from '@components/theme/pagination/PaginationLayout';
 import MainSection from '@components/theme/sections/MainSection';
-import useMessages from '@i18n/hooks/messagesHook';
+import useHandlePagination from '@hooks/use-handle-pagination/useHandlePagination';
 import CategoriesService from '@services/categories/CategoriesService';
 import { getGlobalInstance } from 'plume-ts-di';
 import React from 'react';
 import SubCategoriesTable from './table/SubCategoriesTable';
-import PaginationLayout from '@components/theme/pagination/PaginationLayout';
-import useHandlePagination from '@hooks/use-handle-pagination/useHandlePagination';
 
 /**
  * SubCategories page component that displays a list of subcategories
@@ -14,7 +13,6 @@ import useHandlePagination from '@hooks/use-handle-pagination/useHandlePaginatio
  */
 export default function SubCategories() {
   const categoriesService: CategoriesService = getGlobalInstance(CategoriesService);
-  const { messages } = useMessages();
 
   const {
     elements: subCategories,

@@ -1,10 +1,17 @@
 import { AccountType } from '@api/accounts/AccountsTypes';
-import { DashboardAccountsResponse } from '@api/dashboard/DashboardTypes';
+import {
+  DashboardAccountsResponse,
+  DashboardCheckingAccountResponse,
+  DashboardMarketAccountResponse,
+  DashboardSavingAccountResponse,
+} from '@api/dashboard/DashboardTypes';
 import MoneyRecapAccount from '@components/pages/dashboard/accounts/account/MoneyRecapAccount';
 import useMessages from '@i18n/hooks/messagesHook';
 import useLoader, { LoaderState } from '@lib/plume-http-react-hook-loader/promiseLoaderHook';
 import { useOnComponentMounted } from '@lib/react-hooks-alias/ReactHooksAlias';
-import { Card, CardContent, CardHeader, CardTitle } from '@lib/shadcn/card';
+import {
+  Card, CardContent, CardHeader, CardTitle,
+} from '@lib/shadcn/card';
 import DashboardService from '@services/dashboard/DashboardService';
 import { getGlobalInstance } from 'plume-ts-di';
 import React, { useState } from 'react';
@@ -37,9 +44,10 @@ export default function MoneyRecapAccounts() {
       <CardContent className="flex flex-col items-start gap-2">
         {dashboardAccountsLoader.isLoaded && accounts && (
           <>
+            {/* TODO à traduire */}
             <p>Comptes</p>
             {
-              accounts.checkingAccounts.map(account => (
+              accounts.checkingAccounts.map((account: DashboardCheckingAccountResponse) => (
                 <MoneyRecapAccount
                   key={account.id}
                   color={account.colorCode}
@@ -57,9 +65,10 @@ export default function MoneyRecapAccounts() {
       <CardContent className="flex flex-col items-start gap-2">
         {dashboardAccountsLoader.isLoaded && accounts && (
           <>
+            {/* TODO à traduire */}
             <p>Éparnes</p>
             {
-              accounts.savingsAccounts.map(account => (
+              accounts.savingsAccounts.map((account: DashboardSavingAccountResponse) => (
                 <MoneyRecapAccount
                   key={account.id}
                   color={account.colorCode}
@@ -77,9 +86,10 @@ export default function MoneyRecapAccounts() {
       <CardContent className="flex flex-col items-start gap-2">
         {dashboardAccountsLoader.isLoaded && accounts && (
           <>
+            {/* TODO à traduire */}
             <p>Bourse</p>
             {
-              accounts.marketAccounts.map(account => (
+              accounts.marketAccounts.map((account: DashboardMarketAccountResponse) => (
                 <MoneyRecapAccount
                   key={account.id}
                   color={account.colorCode}

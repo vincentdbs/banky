@@ -1,11 +1,10 @@
 import { TransactionResponse } from '@api/transactions/TransactionsTypes';
-import MainSection from '@components/theme/sections/MainSection';
 import TransactionsFormModal
   from '@components/pages/operations/transactions/modal/TransactionsFormModal';
 import TransactionsTable from '@components/pages/operations/transactions/table/TransactionsTable';
 import PaginationLayout from '@components/theme/pagination/PaginationLayout';
+import MainSection from '@components/theme/sections/MainSection';
 import useHandlePagination from '@hooks/use-handle-pagination/useHandlePagination';
-import useMessages from '@i18n/hooks/messagesHook';
 import TransactionsService from '@services/transactions/TransactionsService';
 import { getGlobalInstance } from 'plume-ts-di';
 import React from 'react';
@@ -16,7 +15,6 @@ import React from 'react';
  */
 export default function Transactions() {
   const transactionsService: TransactionsService = getGlobalInstance(TransactionsService);
-  const { messages } = useMessages();
 
   const {
     elements: transactions,

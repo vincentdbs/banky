@@ -2,12 +2,12 @@ import dayjs from 'dayjs';
 import React from 'react';
 import { useForm, UseFormReturn } from 'react-hook-form';
 import { getGlobalInstance } from 'plume-ts-di';
+import useMessages from '@i18n/hooks/messagesHook';
+import TransfertsService from '@services/transferts/TransfertsService';
 import { Form } from '@/lib/shadcn/form';
 import { Button } from '@/lib/shadcn/button';
-import useMessages from '@i18n/hooks/messagesHook';
 import useFetchAccountNamesChoices from '@/hooks/use-fetch-account-names-choices/useFetchAccountNamesChoices';
 import { formatToIsoDate } from '@/utils/dates/DatesUtils';
-import TransfertsService from '@services/transferts/TransfertsService';
 import TransfertsFormFields, { TransfertFields, TransfertFormType } from './fields/TransfertsFormFields';
 
 type TransfertsFormProps = {
@@ -56,9 +56,9 @@ export default function TransfertsForm({ onSuccess }: TransfertsFormProps) {
           setFromAccountValue={(value: string) => form.setValue(TransfertFields.FROM_ACCOUNT, value)}
           setToAccountValue={(value: string) => form.setValue(TransfertFields.TO_ACCOUNT, value)}
         />
-        <Button 
-          disabled={!form.formState.isValid} 
-          className="w-full" 
+        <Button
+          disabled={!form.formState.isValid}
+          className="w-full"
           type="submit"
         >
           {messages.action.save}

@@ -1,10 +1,10 @@
-import { FIRST_YEAR } from '@/utils/number/NumberUtils';
 import MonthSelector from '@components/theme/form/month-selector/MonthSelector';
 import YearSelector from '@components/theme/form/year-selector/YearSelector';
 import LabelledToggle from '@components/theme/labelled-toggle/LabelledToggle';
 import useMessages from '@i18n/hooks/messagesHook';
 import dayjs from 'dayjs';
-import React from 'react';
+import React, { useCallback } from 'react';
+import { FIRST_YEAR } from '@/utils/number/NumberUtils';
 
 /**
  * Enum for the type of monthly budget view
@@ -38,12 +38,12 @@ export default function MonthlyBudgetControls(
     setSelectedYear,
     viewType,
     setViewType,
-  }: MonthlyBudgetControlsProps
+  }: MonthlyBudgetControlsProps,
 ) {
   const { messages } = useMessages();
 
   // Toggle handler for the view type switch
-  const handleToggleViewType = React.useCallback(() => {
+  const handleToggleViewType: () => void = useCallback(() => {
     setViewType(
       viewType === MonthlyBudgetType.REAL
         ? MonthlyBudgetType.THEORETICAL
@@ -62,7 +62,7 @@ export default function MonthlyBudgetControls(
           selectedYear={selectedYear}
           setSelectedYear={setSelectedYear}
           firstYear={FIRST_YEAR}
-          yearRange={dayjs().year() - FIRST_YEAR +1}
+          yearRange={dayjs().year() - FIRST_YEAR + 1}
         />
       </div>
       <LabelledToggle

@@ -10,15 +10,15 @@ import { getGlobalInstance } from 'plume-ts-di';
 import { useState } from 'react';
 
 type UseHandleFetchMonthlyBudget = {
-  currentYear: number;
-  currentMonth: number;
-  monthlyBudget: MonthlyBudgetResponse | null;
-  monthlyBudgetType: MonthlyBudgetType;
-  updateMonthlyBudgetType: (type: MonthlyBudgetType) => void;
-  handleUpdateYear: (year: number) => void;
-  handleUpdateMonth: (month: number) => void;
-  isLoading: boolean;
-}
+  currentYear: number,
+  currentMonth: number,
+  monthlyBudget: MonthlyBudgetResponse | null,
+  monthlyBudgetType: MonthlyBudgetType,
+  updateMonthlyBudgetType: (type: MonthlyBudgetType) => void,
+  handleUpdateYear: (year: number) => void,
+  handleUpdateMonth: (month: number) => void,
+  isLoading: boolean,
+};
 
 /**
  * Hook for handling monthly budget data fetching and state management

@@ -1,13 +1,12 @@
 import { TransfertResponse } from '@api/transferts/TransfertTypes';
+import PaginationLayout from '@components/theme/pagination/PaginationLayout';
 import MainSection from '@components/theme/sections/MainSection';
-import useMessages from '@i18n/hooks/messagesHook';
+import useHandlePagination from '@hooks/use-handle-pagination/useHandlePagination';
 import TransfertsService from '@services/transferts/TransfertsService';
 import { getGlobalInstance } from 'plume-ts-di';
 import React from 'react';
 import TransfertsFormModal from './modal/TransfertsFormModal';
 import TransfertsTable from './table/TransfertsTable';
-import PaginationLayout from '@components/theme/pagination/PaginationLayout';
-import useHandlePagination from '@hooks/use-handle-pagination/useHandlePagination';
 
 /**
  * Transferts page component that displays a list of transferts between accounts
@@ -15,7 +14,6 @@ import useHandlePagination from '@hooks/use-handle-pagination/useHandlePaginatio
  */
 export default function Transferts() {
   const transfertsService: TransfertsService = getGlobalInstance(TransfertsService);
-  const { messages, httpError } = useMessages();
 
   const {
     elements: transferts,

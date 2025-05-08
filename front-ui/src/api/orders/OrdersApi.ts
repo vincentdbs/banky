@@ -13,7 +13,7 @@ export default class OrdersApi {
 
   /**
    * Fetches orders with pagination support
-   * 
+   *
    * @param page The page number to retrieve
    * @param size The number of items per page
    * @returns A paginated response containing orders and pagination metadata
@@ -32,7 +32,7 @@ export default class OrdersApi {
 
   /**
    * Creates a new market order
-   * 
+   *
    * @param request The order request details
    * @returns A promise containing the ID of the created order
    */

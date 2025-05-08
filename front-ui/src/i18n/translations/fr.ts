@@ -1,10 +1,10 @@
-import { OrderSide } from '@/api/orders/OrderTypes';
-import { TransactionSide } from '@/api/transactions/TransactionsTypes';
 import { TickerCategory } from '@api/tickers/TickersTypes';
 import { Routes } from '@components/Routes';
 import {
   TransactionFields,
 } from '@components/pages/operations/transactions/form/fields/TransactionsFormFields';
+import { TransactionSide } from '@/api/transactions/TransactionsTypes';
+import { OrderSide } from '@/api/orders/OrderTypes';
 import { Translations } from './Translations';
 
 const frMessages: Translations = {

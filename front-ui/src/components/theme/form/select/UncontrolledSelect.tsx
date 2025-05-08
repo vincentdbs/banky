@@ -1,3 +1,6 @@
+import useMessages from '@i18n/hooks/messagesHook';
+import { Check, ChevronsUpDown } from 'lucide-react';
+import React from 'react';
 import { Button } from '@/lib/shadcn/button';
 import {
   Command,
@@ -7,19 +10,18 @@ import {
   CommandItem,
   CommandList,
 } from '@/lib/shadcn/command';
-import { FormControl, FormItem, FormLabel, FormMessage } from '@/lib/shadcn/form';
+import {
+  FormControl, FormItem, FormLabel, FormMessage,
+} from '@/lib/shadcn/form';
 import { Popover, PopoverContent, PopoverTrigger } from '@/lib/shadcn/popover';
 import { cn } from '@/lib/shadcn/utils';
-import useMessages from '@i18n/hooks/messagesHook';
-import { Check, ChevronsUpDown } from 'lucide-react';
-import React from 'react';
 
 export type Choice = {
   value: string,
   label: string,
 };
 
-type UncontrolledSelect = {
+type UncontrolledSelectProps = {
   label: string,
   choices: Choice[],
   value?: string,
@@ -32,7 +34,7 @@ export default function UncontrolledSelect(
     label,
     value,
     setValue,
-  }: UncontrolledSelect,
+  }: UncontrolledSelectProps,
 ) {
   const { messages } = useMessages();
 

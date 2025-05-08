@@ -1,1 +1,1 @@
-export const PLACEHOLDER: string = '...'
+export const PLACEHOLDER: string = '...';

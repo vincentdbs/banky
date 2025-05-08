@@ -121,7 +121,7 @@ export type Translations = {
         category: string,
         action: string,
       },
-    }
+    },
   },
   evolution: {
     monthlyBudget: {
@@ -209,6 +209,6 @@ export type Translations = {
     },
     charts: {
       title: string,
-    }
-  }
+    },
+  },
 };

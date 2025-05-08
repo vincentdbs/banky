@@ -1,12 +1,13 @@
-import { Badge, BadgeVariant } from '@/lib/shadcn/badge';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/lib/shadcn/table';
-import { formatToLocaleDate } from '@/utils/dates/DatesUtils';
-import { formatEuroDecimalPriceFromString } from '@/utils/number/NumberUtils';
-import { computeBadgeVariantByTickerCategory } from '@/utils/badge/BadgeUtils';
 import { OrderResponse, OrderSide } from '@api/orders/OrderTypes';
-import { TickerCategory } from '@api/tickers/TickersTypes';
 import useMessages from '@i18n/hooks/messagesHook';
 import React from 'react';
+import { Badge, BadgeVariant } from '@/lib/shadcn/badge';
+import {
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
+} from '@/lib/shadcn/table';
+import { computeBadgeVariantByTickerCategory } from '@/utils/badge/BadgeUtils';
+import { formatToLocaleDate } from '@/utils/dates/DatesUtils';
+import { formatEuroDecimalPriceFromString } from '@/utils/number/NumberUtils';
 
 type OrdersTableProps = {
   orders: OrderResponse[],

@@ -1,10 +1,10 @@
 import EvolutionApi from '@api/evolution/EvolutionApi';
 import { MonthlyBudgetResponse } from '@api/evolution/EvolutionTypes';
 import {
-  MonthlyBudgetType
+  MonthlyBudgetType,
 } from '@components/pages/evolution/monthly-budget/controls/MonthlyBudgetControls';
 import { formatToIsoDate } from '@utils/dates/DatesUtils';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { HttpPromise } from 'simple-http-rest-client';
 
 /**
@@ -21,7 +21,7 @@ export default class EvolutionService {
    * @returns A promise with the monthly budget data
    */
   fetchMonthlyBudget(year: number, month: number, type: MonthlyBudgetType): HttpPromise<MonthlyBudgetResponse> {
-    const date = dayjs().year(year).month(month).startOf('month');
+    const date: Dayjs = dayjs().year(year).month(month).startOf('month');
     return this.evolutionApi.fetchMonthlyBudget(formatToIsoDate(date), type);
   }
 }

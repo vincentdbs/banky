@@ -1,8 +1,7 @@
 import { TickerResponse } from '@api/tickers/TickersTypes';
-import MainSection from '@components/theme/sections/MainSection';
 import PaginationLayout from '@components/theme/pagination/PaginationLayout';
+import MainSection from '@components/theme/sections/MainSection';
 import useHandlePagination from '@hooks/use-handle-pagination/useHandlePagination';
-import useMessages from '@i18n/hooks/messagesHook';
 import TickersService from '@services/tickers/TickersService';
 import { getGlobalInstance } from 'plume-ts-di';
 import React from 'react';
@@ -14,7 +13,6 @@ import TickersTable from './table/TickersTable';
  */
 export default function Tickers() {
   const tickersService: TickersService = getGlobalInstance(TickersService);
-  const { messages } = useMessages();
 
   const {
     elements: tickers,

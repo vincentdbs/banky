@@ -1,11 +1,10 @@
 import { OrderResponse } from '@api/orders/OrderTypes';
+import PaginationLayout from '@components/theme/pagination/PaginationLayout';
 import MainSection from '@components/theme/sections/MainSection';
-import useMessages from '@i18n/hooks/messagesHook';
+import useHandlePagination from '@hooks/use-handle-pagination/useHandlePagination';
 import OrdersService from '@services/orders/OrdersService';
 import { getGlobalInstance } from 'plume-ts-di';
 import React from 'react';
-import PaginationLayout from '@components/theme/pagination/PaginationLayout';
-import useHandlePagination from '@hooks/use-handle-pagination/useHandlePagination';
 import OrdersTable from './table/OrdersTable';
 
 /**
@@ -13,7 +12,6 @@ import OrdersTable from './table/OrdersTable';
  */
 export default function Orders() {
   const ordersService: OrdersService = getGlobalInstance(OrdersService);
-  const { messages } = useMessages();
 
   const {
     elements: orders,

@@ -1,5 +1,5 @@
-import { PaginatedResponse } from '@/utils/types/PaginationTypes';
 import { TickerCategory } from '@api/tickers/TickersTypes';
+import { PaginatedResponse } from '@/utils/types/PaginationTypes';
 
 /**
  * Side of the order (BUY or SELL)
