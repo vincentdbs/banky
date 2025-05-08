@@ -1,9 +1,10 @@
 package banky.webservices.api.evolution;
 
-import banky.services.evolution.EvolutionService;
+import banky.services.evolution.MonthlyBudgetService;
 import banky.webservices.api.evolution.responses.MonthlyBudgetResponse;
 import com.coreoz.plume.jersey.security.permission.PublicApi;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
@@ -11,7 +12,12 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * REST API endpoints for evolution features, including monthly budget data.
@@ -25,11 +31,11 @@ import jakarta.ws.rs.core.MediaType;
 @Singleton
 public class EvolutionWs {
 
-    private final EvolutionService evolutionService;
+    private final MonthlyBudgetService monthlyBudgetService;
 
     @Inject
-    private EvolutionWs(EvolutionService evolutionService) {
-        this.evolutionService = evolutionService;
+    private EvolutionWs(MonthlyBudgetService monthlyBudgetService) {
+        this.monthlyBudgetService = monthlyBudgetService;
     }
 
     /**
@@ -41,6 +47,30 @@ public class EvolutionWs {
     @Path("/budgets/monthly")
     @Operation(description = "Fetch the monthly budget data")
     public MonthlyBudgetResponse fetchMonthlyBudget() {
-        return evolutionService.fetchMonthlyBudget();
+        return monthlyBudgetService.fetchMonthlyBudget();
+    }
+    
+    /**
+     * Fetches the monthly budget data for a specific month.
+     * 
+     * @param date The first day of the month in format "yyyy-MM-dd"
+     * @return A MonthlyBudgetResponse containing the monthly budget data
+     */
+    @GET
+    @Path("/budgets/monthly/by-date")
+    @Operation(description = "Fetch the monthly budget data for a specific month")
+    public MonthlyBudgetResponse fetchMonthlyBudgetByDate(
+        @Parameter(description = "First day of the month (yyyy-MM-dd)", required = true)
+        @QueryParam("date") String dateStr
+    ) {
+        try {
+            LocalDate date = LocalDate.parse(dateStr, DateTimeFormatter.ISO_DATE);
+            // Ensure it's the first day of a month
+            date = date.withDayOfMonth(1);
+            return monthlyBudgetService.fetchMonthlyBudget(date);
+        } catch (DateTimeParseException e) {
+            // If the date cannot be parsed, return data for the current month
+            return monthlyBudgetService.fetchMonthlyBudget();
+        }
     }
 }
