@@ -9,7 +9,6 @@ import com.coreoz.plume.db.querydsl.transaction.TransactionManagerQuerydsl;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -39,16 +38,17 @@ public class EvolutionDao {
         QTransactions transactions = QTransactions.transactions;
         QCategory category = QCategory.category;
         QSubCategory subCategory = QSubCategory.subCategory;
-        
+
         // Calculate the last day of the month
         LocalDate lastDayOfTheMonth = firstDayOfTheMonth.plusMonths(1).minusDays(1);
-        
+
         // Query to fetch transactions grouped by category for the specified month
         return transactionManager
             .selectQuery()
             .select(
                 category.name,
-                transactions.amount.sum().as("spent")
+                transactions.amount.sum().as("spent"),
+                category.budgetedAmount
             )
             .from(transactions)
             .innerJoin(subCategory)
@@ -57,22 +57,18 @@ public class EvolutionDao {
             .on(subCategory.categoryId.eq(category.id))
             .where(
                 transactions.side.eq(TransactionSide.DEBIT.name())
-                .and(transactions.date.goe(firstDayOfTheMonth))
-                .and(transactions.date.loe(lastDayOfTheMonth))
+                    .and(transactions.date.goe(firstDayOfTheMonth))
+                    .and(transactions.date.loe(lastDayOfTheMonth))
             )
             .groupBy(category.id, category.name)
             .orderBy(category.name.asc())
             .fetch()
             .stream()
-            .map(tuple -> {
-                String categoryName = tuple.get(category.name);
-                BigDecimal spent = tuple.get(transactions.amount.sum().as("spent"));
-                
-                return new SpentByCategory(
-                    categoryName,
-                    spent
-                );
-            })
+            .map(tuple -> new SpentByCategory(
+                tuple.get(category.name),
+                tuple.get(transactions.amount.sum().as("spent")),
+                tuple.get(category.budgetedAmount)
+            ))
             .toList();
     }
 }

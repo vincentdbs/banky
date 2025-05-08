@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public record SpentByCategory(
     String name,
-    BigDecimal spent
+    BigDecimal spent,
+    BigDecimal budgeted
 ) {
 }

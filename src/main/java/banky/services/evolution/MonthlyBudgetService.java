@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Service that provides monthly budget data analysis.
@@ -48,15 +47,22 @@ public class MonthlyBudgetService {
      * @return A MonthlyBudgetResponse containing the complete monthly budget data
      */
     public MonthlyBudgetResponse fetchMonthlyBudget(LocalDate firstDayOfTheMonth) {
-        List<SpentByCategory> categories = evolutionDao.fetchMonthlyBudget(firstDayOfTheMonth);
+        List<SpentByCategory> spentByCategories = evolutionDao.fetchMonthlyBudget(firstDayOfTheMonth);
+        
+        // Transform SpentByCategory to MonthlyBudgetCategoryResponse
+        List<MonthlyBudgetCategoryResponse> categories = buildMonthlyBudgetCategoryResponseFromSpentByCategories(spentByCategories);
         
         // Calculate totals and percentages
-        BigDecimal total = calculateTotal(categories);
+        BigDecimal total = calculateTotalSpent(spentByCategories);
         BigDecimal budgetedTotal = calculateBudgetedTotal(categories);
         
         // Calculate totals without savings (filter out savings category)
         List<MonthlyBudgetCategoryResponse> categoriesWithoutSavings = filterOutSavingsCategory(categories);
-        BigDecimal totalWithoutSavings = calculateTotal(categoriesWithoutSavings);
+        BigDecimal totalWithoutSavings = calculateTotalSpent(
+            spentByCategories.stream()
+                .filter(category -> !category.name().toLowerCase().contains("savings"))
+                .toList()
+        );
         BigDecimal budgetedTotalWithoutSavings = calculateBudgetedTotal(categoriesWithoutSavings);
         
         // Calculate percentages
@@ -83,16 +89,40 @@ public class MonthlyBudgetService {
             balanceWithoutSavings
         );
     }
+
+    /**
+     * Transforms a list of SpentByCategory to MonthlyBudgetCategoryResponse.
+     *
+     * @param spentByCategories List of SpentByCategory
+     * @return List of transformed MonthlyBudgetCategoryResponse
+     */
+    private List<MonthlyBudgetCategoryResponse> buildMonthlyBudgetCategoryResponseFromSpentByCategories(List<SpentByCategory> spentByCategories) {
+        return spentByCategories.stream()
+            .map(category -> {
+                // Calculate percentages
+                BigDecimal spentPercentage = calculatePercentage(category.spent(), category.budgeted());
+                BigDecimal budgetedPercentage = BigDecimal.valueOf(100);
+                
+                return new MonthlyBudgetCategoryResponse(
+                    category.name(),
+                    category.spent(),
+                    category.budgeted(),
+                    spentPercentage,
+                    budgetedPercentage
+                );
+            })
+            .toList();
+    }
     
     /**
      * Calculates the total spent amount from all categories.
      *
-     * @param categories List of budget categories with spent amounts
+     * @param categories List of SpentByCategory with spent amounts
      * @return The total spent amount
      */
-    private BigDecimal calculateTotal(List<MonthlyBudgetCategoryResponse> categories) {
+    private BigDecimal calculateTotalSpent(List<SpentByCategory> categories) {
         return categories.stream()
-            .map(MonthlyBudgetCategoryResponse::spent)
+            .map(SpentByCategory::spent)
             .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
     
