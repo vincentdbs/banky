@@ -14,12 +14,12 @@ import java.util.Map;
  * Provides methods to fetch and aggregate treasury data over time periods.
  */
 @Singleton
-public class EvolutionService {
+public class TreasuryService {
     
     private final EvolutionDao evolutionDao;
     
     @Inject
-    private EvolutionService(EvolutionDao evolutionDao) {
+    private TreasuryService(EvolutionDao evolutionDao) {
         this.evolutionDao = evolutionDao;
     }
     

@@ -1,6 +1,6 @@
 package banky.webservices.api.evolution;
 
-import banky.services.evolution.EvolutionService;
+import banky.services.evolution.TreasuryService;
 import banky.webservices.api.evolution.responses.AnnualTotalResponse;
 import banky.webservices.exceptions.BankyWsError;
 import banky.services.evolution.MonthlyBudgetService;
@@ -21,10 +21,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
-import javax.xml.validation.Validator;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Web service providing API endpoints to retrieve treasury evolution data.
@@ -39,15 +36,15 @@ import java.time.format.DateTimeParseException;
 @Singleton
 public class EvolutionWs {
 
-    private final EvolutionService evolutionService;
+    private final TreasuryService treasuryService;
     private final MonthlyBudgetService monthlyBudgetService;
 
     @Inject
     private EvolutionWs(
-        EvolutionService evolutionService,
+        TreasuryService treasuryService,
         MonthlyBudgetService monthlyBudgetService
     ) {
-        this.evolutionService = evolutionService;
+        this.treasuryService = treasuryService;
         this.monthlyBudgetService = monthlyBudgetService;
     }
 
@@ -78,7 +75,7 @@ public class EvolutionWs {
         }
 
         // Fetch and return evolution totals
-        return evolutionService.fetchEvolutionTotals(startDate, numberOfMonths);
+        return treasuryService.fetchEvolutionTotals(startDate, numberOfMonths);
     }
 
     /**
