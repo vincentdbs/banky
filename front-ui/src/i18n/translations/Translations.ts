@@ -5,6 +5,7 @@ import { Routes } from '@components/Routes';
 import {
   TransactionFields,
 } from '@components/pages/operations/transactions/form/fields/TransactionsFormFields';
+import { TransfertFields } from '@components/pages/operations/transferts/form/fields/TransfertsFormFields';
 
 export type Translations = {
   title: 'Banky',
@@ -176,12 +177,7 @@ export type Translations = {
       form: {
         title: string,
         description: string,
-        fromAccount: string,
-        toAccount: string,
-        amount: string,
-        date: string,
-        selectAccount: string,
-        pickDate: string,
+        fields: Record<TransfertFields, string>,
       },
     },
     orders: {

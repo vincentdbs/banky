@@ -1,10 +1,13 @@
+import { OrderSide } from '@/api/orders/OrderTypes';
+import { TransactionSide } from '@/api/transactions/TransactionsTypes';
 import { TickerCategory } from '@api/tickers/TickersTypes';
-import { Routes } from '@components/Routes';
 import {
   TransactionFields,
 } from '@components/pages/operations/transactions/form/fields/TransactionsFormFields';
-import { TransactionSide } from '@/api/transactions/TransactionsTypes';
-import { OrderSide } from '@/api/orders/OrderTypes';
+import {
+  TransfertFields,
+} from '@components/pages/operations/transferts/form/fields/TransfertsFormFields';
+import { Routes } from '@components/Routes';
 import { Translations } from './Translations';
 
 const frMessages: Translations = {
@@ -29,10 +32,6 @@ const frMessages: Translations = {
     [Routes.ROUTE_EVOLUTION_MONTHLY_BUDGET]: {
       title: 'Budget mensuel',
       description: 'Suivez votre budget mensuel',
-    },
-    [Routes.PARAMETERS]: {
-      title: 'Paramètres',
-      description: 'Configuration générale',
     },
     [Routes.ROUTE_PARAMETERS_ACCOUNTS]: {
       title: 'Comptes',
@@ -236,12 +235,12 @@ const frMessages: Translations = {
       form: {
         title: 'Transfert',
         description: 'Ajout d\'un transfert entre comptes',
-        fromAccount: 'Source',
-        toAccount: 'Destination',
-        amount: 'Montant',
-        date: 'Date',
-        selectAccount: 'Sélectionner un compte',
-        pickDate: 'Choisir une date',
+        fields: {
+          [TransfertFields.FROM_ACCOUNT]: 'Compte source',
+          [TransfertFields.TO_ACCOUNT]: 'Compte destination',
+          [TransfertFields.AMOUNT]: 'Montant',
+          [TransfertFields.DATE]: 'Date',
+        },
       },
     },
     orders: {
