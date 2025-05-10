@@ -34,6 +34,10 @@ const frMessages: Translations = {
       title: 'Budget mensuel',
       description: 'Suivez votre budget mensuel',
     },
+    [Routes.ROUTE_EVOLUTION_ANNUAL]: {
+      title: 'Évolution annuelle',
+      description: 'Suivez l\'évolution de vos finances sur l\'année',
+    },
     [Routes.ROUTE_PARAMETERS_ACCOUNTS]: {
       title: 'Comptes',
       description: 'Gérer vos comptes bancaires',
@@ -196,6 +200,20 @@ const frMessages: Translations = {
         balanceWithoutSavings: 'Solde sans épargne',
       },
     },
+    annual: {
+      subTotal: 'Sous-total',
+      recap: 'Récapitulatif',
+      amount: 'Montant',
+      shortName: 'Identifiant',
+      name: 'Compte',
+      total: 'Total',
+      gainLoss: 'Gain/Perte',
+      percentage: '%',
+      interest: 'Intérêts',
+      checking: 'Comptes courants',
+      savings: 'Épargnes',
+      market: 'Investissements',
+    },
   },
   operations: {
     transactions: {
@@ -210,7 +228,7 @@ const frMessages: Translations = {
         action: 'Action',
       },
       form: {
-        title: 'Création',
+        title: 'Création d\'une transaction',
         description: 'Ajout d\'une transaction',
         fields: {
           from: 'De',
@@ -286,22 +304,6 @@ const frMessages: Translations = {
     charts: {
       title: 'Évolution total par mois',
     }
-  },
-  evolution: {
-    annual: {
-      subTotal: 'Sous-total',
-      recap: 'Récapitulatif',
-      amount: 'Montant',
-      shortName: 'Identifiant',
-      name: 'Compte',
-      total: 'Total',
-      gainLoss: 'Gain/Perte',
-      percentage: '%',
-      interest: 'Intérêts',
-      checking: 'Comptes courants',
-      savings: 'Épargnes',
-      market: 'Investissements',
-    },
   },
 } as const;
 
