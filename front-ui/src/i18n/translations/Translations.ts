@@ -145,6 +145,20 @@ export type Translations = {
         balanceWithoutSavings: string,
       },
     },
+    annual: {
+      recap: string,
+      subTotal: string,
+      amount: string,
+      shortName: string,
+      name: string,
+      total: string,
+      gainLoss: string,
+      percentage: string,
+      interest: string,
+      checking: string,
+      savings: string,
+      market: string,
+    },
   },
   operations: {
     transactions: {
@@ -159,6 +173,7 @@ export type Translations = {
         action: string,
       },
       form: {
+        title: string,
         description: string,
         fields: Record<TransactionFields, string> & {
           from: string,
@@ -212,21 +227,5 @@ export type Translations = {
     charts: {
       title: string,
     }
-  },
-  evolution: {
-    annual: {
-      recap: string,
-      subTotal: string,
-      amount: string,
-      shortName: string,
-      name: string,
-      total: string,
-      gainLoss: string,
-      percentage: string,
-      interest: string,
-      checking: string,
-      savings: string,
-      market: string,
-    },
   },
 };

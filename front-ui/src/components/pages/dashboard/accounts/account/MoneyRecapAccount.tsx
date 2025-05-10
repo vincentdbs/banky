@@ -1,11 +1,9 @@
+import { formatEuroDecimalPriceFromString } from '@/utils/number/NumberUtils';
+import { isNotNullish } from '@/utils/types/TypesUtils';
 import { AccountType } from '@api/accounts/AccountsTypes';
-import { formatEuroDecimalPriceFromString } from '@utils/number/NumberUtils';
-import { isNotNullish } from '@utils/types/TypesUtils';
 import AccountTypeLogo from '@components/theme/icons/account-type/AccountTypeIcon';
 import ColoredIconsWrapper from '@components/theme/icons/ColoredIconsWrapper';
 import React from 'react';
-import { isNotNullish } from '@/utils/types/TypesUtils';
-import { formatEuroDecimalPriceFromString } from '@/utils/number/NumberUtils';
 
 type MoneyRecapAccountProps = {
   color: string,

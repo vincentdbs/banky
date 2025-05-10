@@ -40,8 +40,3 @@ if (!rootElement) {
 createRoot(rootElement).render(reactApp);
 
 logger.info(`Application started in ${Date.now() - currentMillis}ms`);
-export { YearSummary } from '@api/evolution/TreasuryEvolutionTypes';
-export { AnnualTotal } from '@api/evolution/TreasuryEvolutionTypes';
-export { TotalByAccountAndMonth } from '@api/evolution/TreasuryEvolutionTypes';
-export { TotalByCategory } from '@api/evolution/TreasuryEvolutionTypes';
-export { TotalByAccount } from '@api/evolution/TreasuryEvolutionTypes';
