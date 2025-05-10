@@ -25,7 +25,7 @@ export default function useGetCurrentRoute(): UseGetCurrentRoute {
       pathname === route
       || pathname.charAt(route.length) === '/'
     );
-  }) || Routes.DASHBOARD; // Default to dashboard if no match
+  }) || Routes.ROUTE_DASHBOARD; // Default to dashboard if no match
 
   return {
     currentRoute,

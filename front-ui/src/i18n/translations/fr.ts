@@ -10,23 +10,23 @@ import { Translations } from './Translations';
 const frMessages: Translations = {
   title: 'Banky',
   routeInfo: {
-    [Routes.DASHBOARD]: {
+    [Routes.ROUTE_DASHBOARD]: {
       title: 'Tableau de bord',
       description: 'Vue d\'ensemble de vos finances',
     },
-    [Routes.OPERATIONS_TRANSACTIONS]: {
+    [Routes.ROUTE_OPERATIONS_TRANSACTIONS]: {
       title: 'Transactions',
       description: 'Gérer vos transactions financières',
     },
-    [Routes.OPERATIONS_ORDERS]: {
+    [Routes.ROUTE_OPERATIONS_ORDERS]: {
       title: 'Ordres',
       description: 'Gérer vos ordres d\'achat et de vente',
     },
-    [Routes.OPERATIONS_TRANSFERT]: {
+    [Routes.ROUTE_OPERATIONS_TRANSFERT]: {
       title: 'Transferts',
       description: 'Gérer vos transferts entre comptes',
     },
-    [Routes.EVOLUTION_MONTHLY_BUDGET]: {
+    [Routes.ROUTE_EVOLUTION_MONTHLY_BUDGET]: {
       title: 'Budget mensuel',
       description: 'Suivez votre budget mensuel',
     },
@@ -34,19 +34,19 @@ const frMessages: Translations = {
       title: 'Paramètres',
       description: 'Configuration générale',
     },
-    [Routes.PARAMETERS_ACCOUNTS]: {
+    [Routes.ROUTE_PARAMETERS_ACCOUNTS]: {
       title: 'Comptes',
       description: 'Gérer vos comptes bancaires',
     },
-    [Routes.PARAMETERS_CATEGORY]: {
+    [Routes.ROUTE_PARAMETERS_CATEGORY]: {
       title: 'Catégories',
       description: 'Gérer vos catégories de dépenses',
     },
-    [Routes.PARAMETERS_SUB_CATEGORY]: {
+    [Routes.ROUTE_PARAMETERS_SUB_CATEGORY]: {
       title: 'Sous-catégories',
       description: 'Gérer vos sous-catégories de dépenses',
     },
-    [Routes.PARAMETERS_TICKERS]: {
+    [Routes.ROUTE_PARAMETERS_TICKERS]: {
       title: 'Titres',
       description: 'Gérer vos titres financiers',
     },
