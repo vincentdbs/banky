@@ -1,3 +1,5 @@
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/lib/shadcn/form';
+import { Input } from '@/lib/shadcn/input';
 import { TransactionSide } from '@api/transactions/TransactionsTypes';
 import DatePicker from '@components/theme/form/date-picker/DatePicker';
 import FieldsGroup from '@components/theme/form/fields-group/FieldsGroup';
@@ -7,11 +9,7 @@ import { Choice } from '@components/theme/form/select/UncontrolledSelect';
 import useMessages from '@i18n/hooks/messagesHook';
 import { Dayjs } from 'dayjs';
 import React from 'react';
-import { Control, ControllerRenderProps } from 'react-hook-form';
-import { Input } from '@/lib/shadcn/input';
-import {
-  FormControl, FormField, FormItem, FormLabel, FormMessage,
-} from '@/lib/shadcn/form';
+import { Control } from 'react-hook-form';
 
 export enum TransactionFields {
   DATE = 'DATE',
@@ -41,8 +39,6 @@ type TransactionsFormFieldsType = {
   control: Control<TransactionFormType>,
   accountsChoices: Choice[],
   subCategoryChoices: Choice[],
-  setAccountValue: (value: string) => void,
-  setSubCategoryValue: (value: string) => void,
   side: TransactionSide,
 };
 
@@ -50,8 +46,6 @@ export default function TransactionsFormFields(
   {
     control,
     accountsChoices,
-    setAccountValue,
-    setSubCategoryValue,
     subCategoryChoices,
     side,
   }: TransactionsFormFieldsType,
@@ -98,7 +92,6 @@ export default function TransactionsFormFields(
           name={TransactionFields.ACCOUNT}
           label={messages.operations.transactions.form.fields[TransactionFields.ACCOUNT]}
           choices={accountsChoices}
-          setValue={setAccountValue}
         />
         <NumberInput
           control={control}
@@ -114,7 +107,6 @@ export default function TransactionsFormFields(
         name={TransactionFields.SUBCATEGORY}
         label={messages.operations.transactions.form.fields[TransactionFields.SUBCATEGORY]}
         choices={subCategoryChoices}
-        setValue={setSubCategoryValue}
       />
       <FormField
         control={control}

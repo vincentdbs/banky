@@ -10,7 +10,6 @@ type SelectProps<T extends FieldValues> = {
   name: Path<T>,
   label: string,
   choices: Choice[],
-  setValue: (value: string) => void,
 };
 
 export default function Select<T extends FieldValues>(
@@ -19,7 +18,6 @@ export default function Select<T extends FieldValues>(
     name,
     choices,
     label,
-    setValue,
   }: SelectProps<T>,
 ) {
   return (
@@ -30,7 +28,7 @@ export default function Select<T extends FieldValues>(
         <UncontrolledSelect
           label={label}
           choices={choices}
-          setValue={setValue}
+          setValue={field.onChange}
           value={field.value}
         />
       )}

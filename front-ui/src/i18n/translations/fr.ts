@@ -208,6 +208,7 @@ const frMessages: Translations = {
         action: 'Action',
       },
       form: {
+        title: 'Création',
         description: 'Ajout d\'une transaction',
         fields: {
           from: 'De',

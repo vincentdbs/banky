@@ -1,28 +1,28 @@
-import React, { PropsWithChildren } from 'react';
-import { Button } from '@/lib/shadcn/button';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/lib/shadcn/dialog';
+import React, { PropsWithChildren } from 'react';
 
-export type ModalProps = {
+type ModalProps = {
   title: string,
   description: string,
-  openModalLabel: string,
+  isOpen: boolean,
 };
 
-export default function Modal({
-  children, openModalLabel, title, description,
-}: PropsWithChildren<ModalProps>) {
+export default function Modal(
+  {
+    children,
+    title,
+    description,
+    isOpen,
+  }: PropsWithChildren<ModalProps>,
+) {
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">{openModalLabel}</Button>
-      </DialogTrigger>
+    <Dialog open={isOpen}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
