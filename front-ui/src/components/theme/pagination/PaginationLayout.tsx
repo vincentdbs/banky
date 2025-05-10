@@ -1,3 +1,4 @@
+import { Button } from '@/lib/shadcn/button';
 import React, { PropsWithChildren } from 'react';
 import Pagination from './Pagination';
 
@@ -9,6 +10,10 @@ type PaginationLayoutProps = PropsWithChildren<{
   currentPage: number,
   totalPages: number,
   onPageChange: (page: number) => void,
+  actionButton?: {
+    onClick: () => void,
+    label: string,
+  },
 }>;
 
 export default function PaginationLayout(
@@ -17,16 +22,30 @@ export default function PaginationLayout(
     currentPage,
     totalPages,
     onPageChange,
+    actionButton,
   }: PaginationLayoutProps,
 ) {
   return (
-    <div>
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={onPageChange}
-      />
+    <>
+      <div className="flex justify-between">
+        {
+          actionButton
+          && (
+            <Button
+              type="button"
+              onClick={actionButton.onClick}
+            >
+              {actionButton.label}
+            </Button>
+          )
+        }
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={onPageChange}
+        />
+      </div>
       {children}
-    </div>
+    </>
   );
 }

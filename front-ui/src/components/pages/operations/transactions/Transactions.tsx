@@ -5,7 +5,7 @@ import TransactionsTable from '@components/pages/operations/transactions/table/T
 import PaginationLayout from '@components/theme/pagination/PaginationLayout';
 import MainSection from '@components/theme/sections/MainSection';
 import useHandlePagination from '@hooks/use-handle-pagination/useHandlePagination';
-import { Button } from '@lib/shadcn/button';
+import useMessages from '@i18n/hooks/messagesHook';
 import TransactionsService from '@services/transactions/TransactionsService';
 import { getGlobalInstance } from 'plume-ts-di';
 import React, { useState } from 'react';
@@ -16,6 +16,8 @@ import React, { useState } from 'react';
  */
 export default function Transactions() {
   const transactionsService: TransactionsService = getGlobalInstance(TransactionsService);
+
+  const { messages } = useMessages();
 
   const [isModalDisplayed, setModalDisplayed] = useState(false);
 
@@ -28,9 +30,6 @@ export default function Transactions() {
 
   return (
     <MainSection>
-      <Button type="button" onClick={() => {
-        setModalDisplayed(true);
-      }}>Ajouter</Button>
       <TransactionsFormModal
         isOpen={isModalDisplayed}
         onCancel={() => setModalDisplayed(false)}
@@ -39,6 +38,10 @@ export default function Transactions() {
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={handlePageChange}
+        actionButton={{
+          onClick: () => setModalDisplayed(true),
+          label: messages.action.add,
+        }}
       >
         <TransactionsTable transactions={transactions} />
       </PaginationLayout>

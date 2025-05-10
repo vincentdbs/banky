@@ -49,7 +49,7 @@ export default function Pagination({
   };
 
   return (
-    <div className="flex items-center justify-end space-x-2 py-4">
+    <div className="flex items-center justify-end space-x-2">
       <Button
         variant="outline"
         size="icon"
