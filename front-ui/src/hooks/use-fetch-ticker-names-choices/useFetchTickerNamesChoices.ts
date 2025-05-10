@@ -1,4 +1,4 @@
-import { TickerResponse } from '@api/tickers/TickersTypes';
+import { TickerNameResponse } from '@api/tickers/TickersTypes';
 import { Choice } from '@components/theme/form/select/UncontrolledSelect';
 import { useOnComponentMounted } from '@lib/react-hooks-alias/ReactHooksAlias';
 import TickersService from '@services/tickers/TickersService';
@@ -19,9 +19,9 @@ export default function useFetchTickerNamesChoices(): UseFetchTickerNamesChoices
   const [tickerNameChoices, setTickerNameChoices] = useState<Choice[]>([]);
 
   useOnComponentMounted(() => {
-    tickersService.fetchTickers(1, 100)
-      .then((response) => setTickerNameChoices(
-        response.content.map((ticker: TickerResponse) => (
+    tickersService.fetchTickerNames()
+      .then((response: TickerNameResponse[]) => setTickerNameChoices(
+        response.map((ticker: TickerNameResponse) => (
           {
             label: ticker.shortName,
             value: ticker.id,

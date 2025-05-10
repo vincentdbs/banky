@@ -3,6 +3,7 @@ package banky.db.dao;
 import banky.db.generated.QTicker;
 import banky.db.generated.Ticker;
 import banky.services.tickers.enums.TickerCategory;
+import banky.webservices.api.tickers.responses.TickerNameResponse;
 import banky.webservices.api.tickers.responses.TickerResponse;
 import com.coreoz.plume.db.querydsl.crud.CrudDaoQuerydsl;
 import com.coreoz.plume.db.querydsl.transaction.TransactionManagerQuerydsl;
@@ -10,6 +11,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Data Access Object for ticker operations providing methods to interact with the ticker table
@@ -68,5 +70,25 @@ public class TickerDao extends CrudDaoQuerydsl<Ticker> {
             .select(QTicker.ticker.count())
             .from(QTicker.ticker)
             .fetchOne();
+    }
+
+    /**
+     * Fetches a simplified list of ticker names and IDs for use in dropdown lists
+     *
+     * @return List of ticker ID and shortName pairs
+     */
+    public List<TickerNameResponse> fetchTickerNames() {
+        return this.transactionManager
+            .selectQuery()
+            .select(QTicker.ticker.id, QTicker.ticker.shortName)
+            .from(QTicker.ticker)
+            .orderBy(QTicker.ticker.shortName.asc())
+            .fetch()
+            .stream()
+            .map(row -> new TickerNameResponse(
+                row.get(QTicker.ticker.id),
+                row.get(QTicker.ticker.shortName)
+            ))
+            .collect(Collectors.toList());
     }
 }

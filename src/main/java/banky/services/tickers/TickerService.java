@@ -4,6 +4,7 @@ import banky.db.dao.TickerDao;
 import banky.db.generated.Ticker;
 import banky.webservices.api.tickers.requests.TickerRequest;
 import banky.webservices.api.tickers.responses.TickerResponse;
+import banky.webservices.api.tickers.responses.TickerNameResponse;
 import banky.webservices.data.pagination.PaginatedResponse;
 import banky.webservices.data.pagination.PaginationMeta;
 import jakarta.inject.Inject;
@@ -51,6 +52,15 @@ public class TickerService {
         );
         
         return new PaginatedResponse<>(tickers, paginationMeta);
+    }
+
+    /**
+     * Fetches a simplified list of ticker names and IDs for use in dropdown lists
+     *
+     * @return List of ticker ID and shortName pairs
+     */
+    public List<TickerNameResponse> fetchTickerNames() {
+        return tickerDao.fetchTickerNames();
     }
 
     /**

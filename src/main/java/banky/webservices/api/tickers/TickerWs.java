@@ -3,6 +3,7 @@ package banky.webservices.api.tickers;
 import banky.services.tickers.TickerService;
 import banky.webservices.api.tickers.requests.TickerRequest;
 import banky.webservices.api.tickers.responses.TickerResponse;
+import banky.webservices.api.tickers.responses.TickerNameResponse;
 import banky.webservices.data.pagination.PaginatedResponse;
 import com.coreoz.plume.jersey.errors.Validators;
 import com.coreoz.plume.jersey.security.permission.PublicApi;
@@ -17,6 +18,8 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
+
+import java.util.List;
 
 /**
  * REST API endpoints for managing tickers
@@ -48,6 +51,13 @@ public class TickerWs {
         int pageNumber = page != null ? page : DEFAULT_PAGE;
         
         return tickerService.fetchPaginatedTickers(pageNumber, pageSize);
+    }
+
+    @GET
+    @Path("/names")
+    @Operation(description = "Fetch only ticker ids and names for use in dropdowns")
+    public List<TickerNameResponse> fetchTickerNames() {
+        return tickerService.fetchTickerNames();
     }
 
     @POST

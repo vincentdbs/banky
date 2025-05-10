@@ -17,6 +17,14 @@ export type TickerResponse = {
   category: TickerCategory,
 };
 
+/**
+ * Simplified ticker response containing only ID and name for dropdown lists
+ */
+export type TickerNameResponse = {
+  id: string,
+  shortName: string,
+};
+
 export type TickerRequest = {
   name: string,
   shortName: string,
