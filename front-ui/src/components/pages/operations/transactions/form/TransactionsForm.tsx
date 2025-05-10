@@ -3,7 +3,7 @@ import useFetchAccountNamesChoices
 import useFetchSubCategoryNamesChoices
   from '@/hooks/use-fetch-sub-category-names-choices/useFetchSubCategoryNamesChoices';
 import { TransactionSide } from '@api/transactions/TransactionsTypes';
-import TabsTest from '@components/theme/tabs/Tabs';
+import Tabs from '@components/theme/tabs/Tabs';
 import useMessages from '@i18n/hooks/messagesHook';
 import React from 'react';
 import { Control } from 'react-hook-form';
@@ -28,7 +28,7 @@ export default function TransactionsFormProps(
 
   return (
     <>
-      <TabsTest
+      <Tabs
         leftLabel={messages.message.side[TransactionSide.DEBIT]}
         rightLabel={messages.message.side[TransactionSide.CREDIT]}
         onClickLeft={() => setSide(TransactionSide.DEBIT)}

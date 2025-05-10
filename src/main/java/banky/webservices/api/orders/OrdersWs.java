@@ -66,7 +66,6 @@ public class OrdersWs {
     @Operation(description = "Create a new order")
     public long createOrder(OrderRequest request) {
         Validators.checkRequired("date", request.date());
-        Validators.checkRequired("name", request.name());
         Validators.checkRequired("amount", request.amount());
         Validators.checkRequired("quantity", request.quantity());
         Validators.checkRequired("charges", request.charges());

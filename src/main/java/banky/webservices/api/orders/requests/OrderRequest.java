@@ -12,7 +12,6 @@ import java.time.LocalDate;
  */
 public record OrderRequest(
     LocalDate date,
-    String name,
     @JsonDeserialize(using = ThreeDecimalDeserializer.class)
     BigDecimal amount,
     Integer quantity,

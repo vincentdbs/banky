@@ -1,3 +1,4 @@
+import { OrderFields } from '@components/pages/operations/orders/form/fields/OrdersFormFields';
 import { OrderSide } from '@/api/orders/OrderTypes';
 import { TransactionSide } from '@/api/transactions/TransactionsTypes';
 import { TickerCategory } from '@api/tickers/TickersTypes';
@@ -257,6 +258,19 @@ const frMessages: Translations = {
         buy: 'Achat',
         sell: 'Vente',
         noOrders: 'Aucun ordre à afficher',
+      },
+      form: {
+        title: 'Ordre',
+        description: 'Ajout d\'un ordre de bourse',
+        fields: {
+          [OrderFields.DATE]: 'Date',
+          [OrderFields.ACCOUNT]: 'Compte',
+          [OrderFields.TICKER]: 'Titre',
+          [OrderFields.SIDE]: 'Type',
+          [OrderFields.AMOUNT]: 'Montant',
+          [OrderFields.QUANTITY]: 'Quantité',
+          [OrderFields.CHARGES]: 'Frais',
+        },
       },
       buy: 'Achat',
       sell: 'Vente',

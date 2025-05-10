@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 
-type TabsTestProps = {
+type TabsProps = {
   leftLabel: string,
   rightLabel: string,
   onClickLeft: () => void,
   onClickRight: () => void,
 };
 
-export default function TabsTest(
+export default function Tabs(
   {
     leftLabel,
     rightLabel,
     onClickLeft,
     onClickRight,
-  }: TabsTestProps,
+  }: TabsProps,
 ) {
   const [isLeftActive, setIsLeftActive] = useState<boolean>(true);
 

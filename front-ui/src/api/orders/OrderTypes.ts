@@ -30,7 +30,6 @@ export type OrderResponse = {
  */
 export type OrderRequest = {
   date: string,
-  name: string,
   side: OrderSide,
   amount: string,
   quantity: number,
