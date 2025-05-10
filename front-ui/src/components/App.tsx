@@ -30,16 +30,16 @@ export default function App() {
           element: <Dashboard />,
         },
         {
+          path: `${EVOLUTION}/*`,
+          element: <EvolutionRouter />,
+        },
+        {
           path: `${OPERATIONS}/*`,
           element: <OperationsRouter />,
         },
         {
           path: `${PARAMETERS}/*`,
           element: <ParametersRouter />,
-        },
-        {
-          path: `${EVOLUTION}/*`,
-          element: <EvolutionRouter />,
         },
       ],
     },

@@ -4,8 +4,8 @@ import useMessages from '@i18n/hooks/messagesHook';
 import { Button } from '@lib/shadcn/button';
 import { Pencil } from 'lucide-react';
 import React from 'react';
-import { formatEuroDecimalPrice } from '@/utils/number/NumberUtils';
-import { formatToLocalDateOrPlaceholder } from '@/utils/dates/DatesUtils';
+import { formatEuroDecimalPrice } from '@utils/number/NumberUtils';
+import { formatToLocalDateOrPlaceholder } from '@utils/dates/DatesUtils';
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/lib/shadcn/table';

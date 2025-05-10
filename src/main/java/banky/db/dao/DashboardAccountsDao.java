@@ -4,14 +4,11 @@ import banky.db.generated.QAccounts;
 import banky.db.generated.QTransactions;
 import banky.db.generated.QTransfert;
 import banky.services.accounts.enums.AccountType;
-import banky.services.transactions.enums.TransactionSide;
 import banky.webservices.api.dashboard.data.DashboardCheckingAccountResponse;
 import banky.webservices.api.dashboard.data.DashboardMarketAccountResponse;
 import banky.webservices.api.dashboard.data.DashboardSavingAccountResponse;
 import com.coreoz.plume.db.querydsl.transaction.TransactionManagerQuerydsl;
 import com.querydsl.core.types.Projections;
-import com.querydsl.core.types.dsl.NumberExpression;
-import com.querydsl.sql.SQLQuery;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
@@ -23,13 +20,11 @@ import java.util.List;
  * Handles database queries to retrieve specialized data for different account types to be displayed on the dashboard.
  */
 @Singleton
-public class DashboardAccountsDao {
-
-    private final TransactionManagerQuerydsl transactionManager;
+public class DashboardAccountsDao extends TotalByAccountDao {
 
     @Inject
     private DashboardAccountsDao(TransactionManagerQuerydsl transactionManager) {
-        this.transactionManager = transactionManager;
+        super(transactionManager);
     }
 
     /**
@@ -143,63 +138,5 @@ public class DashboardAccountsDao {
             .where(accounts.type.eq(AccountType.MARKET.name()))
             .groupBy(accounts.id)
             .fetch();
-    }
-
-    private SQLQuery<BigDecimal> totalCreditTransactionsQuery(QTransactions transactions, QAccounts accounts) {
-        // Add CREDIT transactions
-        return transactionManager
-            .selectQuery()
-            .select(transactions.amount.sum().coalesce(BigDecimal.ZERO))
-            .from(transactions)
-            .where(
-                transactions.side.eq(TransactionSide.CREDIT.name())
-                    .and(transactions.accountId.eq(accounts.id))
-            );
-    }
-
-    private SQLQuery<BigDecimal> totalDebitTransactionsQuery(QTransactions transactions, QAccounts accounts) {
-        // Add DEBIT transactions
-        return transactionManager
-            .selectQuery()
-            .select(transactions.amount.sum().coalesce(BigDecimal.ZERO))
-            .from(transactions)
-            .where(
-                transactions.side.eq(TransactionSide.DEBIT.name())
-                    .and(transactions.accountId.eq(accounts.id))
-            );
-    }
-
-    private SQLQuery<BigDecimal> totalInBankCreditTransactionsQuery(QTransactions transactions, QAccounts accounts) {
-        return totalCreditTransactionsQuery(transactions, accounts)
-            .where(transactions.inBankDate.isNotNull());
-    }
-
-    private SQLQuery<BigDecimal> totalInBankDebitTransactionsQuery(QTransactions transactions, QAccounts accounts) {
-        return totalDebitTransactionsQuery(transactions, accounts)
-            .where(transactions.inBankDate.isNotNull());
-    }
-
-    private SQLQuery<BigDecimal> totalTransfersInQuery(QTransfert transferts, QAccounts accounts) {
-        return transactionManager
-            .selectQuery()
-            .select(transferts.amount.sum().coalesce(BigDecimal.ZERO))
-            .from(transferts)
-            .where(transferts.toAccountId.eq(accounts.id));
-    }
-
-    private SQLQuery<BigDecimal> totalTransfersOutQuery(QTransfert transferts, QAccounts accounts) {
-        return transactionManager
-            .selectQuery()
-            .select(transferts.amount.sum().coalesce(BigDecimal.ZERO))
-            .from(transferts)
-            .where(transferts.fromAccountId.eq(accounts.id));
-    }
-
-    private NumberExpression<BigDecimal> totalAccountAmountExpression(QTransactions transactions, QTransfert transferts, QAccounts accounts) {
-        return accounts.initialAmount
-            .add(totalCreditTransactionsQuery(transactions, accounts))
-            .subtract(totalDebitTransactionsQuery(transactions, accounts))
-            .add(totalTransfersInQuery(transferts, accounts))
-            .subtract(totalTransfersOutQuery(transferts, accounts));
     }
 }

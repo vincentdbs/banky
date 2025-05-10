@@ -9,6 +9,7 @@ export const OPERATIONS_TRANSFERT: string = '/transfert';
 
 export const EVOLUTION: string = '/evolution';
 export const EVOLUTION_MONTHLY_BUDGET: string = '/monthly-budget';
+export const EVOLUTION_ANNUAL: string = '/annual';
 
 export const PARAMETERS: string = '/parameters';
 export const PARAMETERS_ACCOUNTS: string = '/accounts';
@@ -23,6 +24,7 @@ export enum Routes {
   ROUTE_OPERATIONS_ORDERS = '/operations/ordres',
   ROUTE_OPERATIONS_TRANSFERT = '/operations/transfert',
   ROUTE_EVOLUTION_MONTHLY_BUDGET = '/evolution/monthly-budget',
+  ROUTE_EVOLUTION_ANNUAL = '/evolution/annual',
   ROUTE_PARAMETERS_ACCOUNTS = '/parameters/accounts',
   ROUTE_PARAMETERS_CATEGORY = '/parameters/categories',
   ROUTE_PARAMETERS_SUB_CATEGORY = '/parameters/sub-categories',
