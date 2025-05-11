@@ -1,5 +1,5 @@
 import AccountsApi from '@api/accounts/AccountsApi';
-import { AccountNamesResponse, AccountRequest, AccountResponse } from '@api/accounts/AccountsTypes';
+import { AccountNamesResponse, AccountRequest, AccountResponse, AccountType } from '@api/accounts/AccountsTypes';
 import { HttpPromise } from 'simple-http-rest-client';
 
 export default class AccountsService {
@@ -11,8 +11,8 @@ export default class AccountsService {
     return this.accountsApi.fetchAccounts();
   }
 
-  fetchAccountNames(): HttpPromise<AccountNamesResponse[]> {
-    return this.accountsApi.fetchAccountNames();
+  fetchAccountNames(accountTypes?: AccountType[]): HttpPromise<AccountNamesResponse[]> {
+    return this.accountsApi.fetchAccountNames(accountTypes);
   }
 
   createAccount(request: AccountRequest): HttpPromise<number> {

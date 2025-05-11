@@ -38,8 +38,8 @@ public class AccountsService {
             .toList();
     }
 
-    public List<AccountNamesResponse> fetchAccountNames(AccountType type) {
-        return accountDao.fetchAccountNames(type);
+    public List<AccountNamesResponse> fetchAccountNames(List<AccountType> types) {
+        return accountDao.fetchAccountNames(types);
     }
 
     public Long createAccount(AccountRequest request) {

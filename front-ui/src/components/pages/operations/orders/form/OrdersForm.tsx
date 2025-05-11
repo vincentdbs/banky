@@ -2,6 +2,7 @@ import useFetchAccountNamesChoices
   from '@/hooks/use-fetch-account-names-choices/useFetchAccountNamesChoices';
 import useFetchTickerNamesChoices
   from '@/hooks/use-fetch-ticker-names-choices/useFetchTickerNamesChoices';
+import { AccountType } from '@api/accounts/AccountsTypes';
 import { OrderSide } from '@api/orders/OrderTypes';
 import Tabs from '@components/theme/tabs/Tabs';
 import React from 'react';
@@ -20,7 +21,7 @@ type OrdersFormProps = {
 export default function OrdersForm({ control, setSide }: OrdersFormProps) {
   const { messages } = useMessages();
 
-  const { choices: accountsChoices } = useFetchAccountNamesChoices();
+  const { choices: accountsChoices } = useFetchAccountNamesChoices([AccountType.MARKET]);
   const { choices: tickersChoices } = useFetchTickerNamesChoices();
 
   return (
