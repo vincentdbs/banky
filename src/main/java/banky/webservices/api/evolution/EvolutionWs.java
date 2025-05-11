@@ -56,7 +56,7 @@ public class EvolutionWs {
      * @return AnnualTotalResponse containing monthly totals and account breakdowns
      */
     @GET
-    @Path("/totals")
+    @Path("/treasury")
     @Operation(description = "Retrieve treasury evolution totals for a specified date range")
     public AnnualTotalResponse fetchEvolutionTotals(
         @Parameter(description = "Start date (first month to include, day is ignored)", required = true)

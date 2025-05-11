@@ -1,0 +1,9 @@
+@baseUrl = http://localhost:8080/api
+
+### Fetch treasury evolution totals
+GET {{baseUrl}}/evolutions/treasury?startDate=2025-01-01&numberOfMonths=2
+Content-Type: application/json
+
+### Fetch monthly budget data
+GET {{baseUrl}}/evolutions/budgets/monthly?date=2025-01-01&type=INCOME
+Content-Type: application/json
