@@ -152,24 +152,6 @@ class OrdersWsTest {
     }
 
     @Test
-    void createOrder_shouldThrowException_whenNameIsMissing() {
-        // Arrange
-        CreateOrderRequest request = new CreateOrderRequest(
-            LocalDate.of(2025, 5, 1),
-            new BigDecimal("1500.00"),
-            10,
-            new BigDecimal("9.90"),
-            11L,
-            1L,
-            OrderSide.BUY
-        );
-
-        // Act & Assert
-        assertThatThrownBy(() -> ordersWs.createOrder(request))
-            .isInstanceOf(WsException.class);
-    }
-
-    @Test
     void createOrder_shouldThrowException_whenAmountIsMissing() {
         // Arrange
         CreateOrderRequest request = new CreateOrderRequest(

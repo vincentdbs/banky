@@ -1,4 +1,5 @@
 import { TransactionSide } from '@api/transactions/TransactionsTypes';
+import { CreateTransfertRequest } from '@api/transferts/TransfertTypes';
 import {
   TransactionFields,
 } from '@components/pages/operations/transactions/form/fields/TransactionsFormFields';
@@ -12,6 +13,7 @@ import SubmitFormModal from '@components/theme/modal/SubmitFormModal';
 import useMessages from '@i18n/hooks/messagesHook';
 import TransfertsService from '@services/transferts/TransfertsService';
 import { formatToIsoDate } from '@utils/dates/DatesUtils';
+import { twoDecimalNumberToString } from '@utils/number/NumberUtils';
 import dayjs from 'dayjs';
 import { getGlobalInstance } from 'plume-ts-di';
 import React from 'react';
@@ -40,10 +42,10 @@ export default function TransfertsFormModal({ isOpen, onCancel }: TransfertsForm
   });
 
   function onSubmit(values: TransfertFormType) {
-    const transfertData = {
+    const transfertData: CreateTransfertRequest = {
       fromAccountId: values[TransfertFields.FROM_ACCOUNT],
       toAccountId: values[TransfertFields.TO_ACCOUNT],
-      amount: values[TransfertFields.AMOUNT],
+      amount: twoDecimalNumberToString(values[TransfertFields.AMOUNT]),
       date: formatToIsoDate(values[TransfertFields.DATE]),
     };
 

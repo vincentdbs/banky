@@ -1,7 +1,7 @@
 package banky.webservices.api.transfert;
 
 import banky.services.transfert.TransfertService;
-import banky.webservices.api.transfert.requests.TransfertRequest;
+import banky.webservices.api.transfert.requests.CreateTransfertRequest;
 import banky.webservices.api.transfert.responses.TransfertResponse;
 import banky.webservices.data.pagination.PaginatedResponse;
 import banky.webservices.data.pagination.PaginationMeta;
@@ -97,7 +97,7 @@ class TransfertWsTest {
     @Test
     void createTransfert_shouldReturnNewId_whenRequestIsValid() {
         // Arrange
-        TransfertRequest request = new TransfertRequest(
+        CreateTransfertRequest request = new CreateTransfertRequest(
             10L,
             20L,
             new BigDecimal("100.00"),
@@ -115,7 +115,7 @@ class TransfertWsTest {
     @Test
     void createTransfert_shouldThrowException_whenFromAccountIdIsMissing() {
         // Arrange
-        TransfertRequest request = new TransfertRequest(
+        CreateTransfertRequest request = new CreateTransfertRequest(
             null, 20L, new BigDecimal("100.00"), LocalDate.of(2025, 5, 1)
         );
 
@@ -127,7 +127,7 @@ class TransfertWsTest {
     @Test
     void createTransfert_shouldThrowException_whenToAccountIdIsMissing() {
         // Arrange
-        TransfertRequest request = new TransfertRequest(
+        CreateTransfertRequest request = new CreateTransfertRequest(
             10L, null, new BigDecimal("100.00"), LocalDate.of(2025, 5, 1)
         );
 
@@ -139,7 +139,7 @@ class TransfertWsTest {
     @Test
     void createTransfert_shouldThrowException_whenAmountIsMissing() {
         // Arrange
-        TransfertRequest request = new TransfertRequest(
+        CreateTransfertRequest request = new CreateTransfertRequest(
             10L, 20L, null, LocalDate.of(2025, 5, 1)
         );
 
@@ -151,7 +151,7 @@ class TransfertWsTest {
     @Test
     void createTransfert_shouldThrowException_whenDateIsMissing() {
         // Arrange
-        TransfertRequest request = new TransfertRequest(
+        CreateTransfertRequest request = new CreateTransfertRequest(
             10L, 20L, new BigDecimal("100.00"), null
         );
 

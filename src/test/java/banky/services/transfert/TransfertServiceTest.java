@@ -2,7 +2,7 @@ package banky.services.transfert;
 
 import banky.db.dao.TransfertDao;
 import banky.db.generated.Transfert;
-import banky.webservices.api.transfert.requests.TransfertRequest;
+import banky.webservices.api.transfert.requests.CreateTransfertRequest;
 import banky.webservices.api.transfert.responses.TransfertResponse;
 import banky.webservices.data.pagination.PaginatedResponse;
 import org.junit.jupiter.api.Test;
@@ -65,7 +65,7 @@ class TransfertServiceTest {
     @Test
     void createTransfert_shouldSaveTransfertAndReturnId() {
         // Arrange
-        TransfertRequest request = new TransfertRequest(
+        CreateTransfertRequest request = new CreateTransfertRequest(
             10L, 20L, new BigDecimal("100.00"), LocalDate.of(2025, 5, 1)
         );
 

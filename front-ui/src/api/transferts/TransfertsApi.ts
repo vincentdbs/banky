@@ -1,7 +1,7 @@
 import ApiHttpClient from '@api/ApiHttpClient';
 import { HttpMethod } from 'simple-http-request-builder';
 import { HttpPromise } from 'simple-http-rest-client';
-import { PaginatedTransfertsResponse, TransfertRequest } from './TransfertTypes';
+import { PaginatedTransfertsResponse, CreateTransfertRequest } from './TransfertTypes';
 
 /**
  * API service for handling transfers between accounts
@@ -33,7 +33,7 @@ export default class TransfertsApi {
   /**
    * Creates a new transfer between accounts
    */
-  createTransfert(request: TransfertRequest): HttpPromise<number> {
+  createTransfert(request: CreateTransfertRequest): HttpPromise<number> {
     return this
       .httpClient
       .restRequest<number>(HttpMethod.POST, this.BASE_URL)
