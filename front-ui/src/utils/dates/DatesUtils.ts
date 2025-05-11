@@ -8,10 +8,6 @@ export const formatToLocalDateOrPlaceholder = (date?: Dayjs | string): string =>
   date ? formatToLocaleDate(date) : '-'
 );
 
-export const computeFirstDayOfTheYear = (year: number): Dayjs => {
-  return dayjs(`${year}-01-01`);
-}
+export const computeFirstDayOfTheYear = (year: number): Dayjs => dayjs(`${year}-01-01`);
 
-export const getMonthName = (month: string): string => {
-  return dayjs(month).format('MMMM');
-}
+export const getMonthName = (month: string): string => dayjs(month).format('MMMM');

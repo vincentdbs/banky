@@ -27,13 +27,14 @@ export default function useHandleEvolutionPagination(initialYear: number) {
   const computeNumberOfMonthsToDisplay = (width: number): number => {
     if (width < 1200) {
       return 1;
-    } else if (width < 1600) {
-      return 2;
-    } else if (width < 2000) {
-      return 3;
-    } else {
-      return 4;
     }
+    if (width < 1600) {
+      return 2;
+    }
+    if (width < 2000) {
+      return 3;
+    }
+    return 4;
   };
 
   // Handle responsive layout
@@ -60,11 +61,9 @@ export default function useHandleEvolutionPagination(initialYear: number) {
 
   // Create an array of month dates for the display period
   const updateMonthDates = (firstMonth: Dayjs, numberOfMonths: number): void => {
-    const newMonths: string[] = Array.from({ length: numberOfMonths }, (_, i: number) => {
-      return dayjs(firstMonth)
-        .add(i, 'month')
-        .format('YYYY-MM-DD');
-    });
+    const newMonths: string[] = Array.from({ length: numberOfMonths }, (_: unknown, i: number) => dayjs(firstMonth)
+      .add(i, 'month')
+      .format('YYYY-MM-DD'));
     setMonthsDates(newMonths);
   };
 
@@ -96,17 +95,16 @@ export default function useHandleEvolutionPagination(initialYear: number) {
   };
 
   // Calculate if it's the first period (can't go back further)
-  const isFirstPeriod = (): boolean => {
+  const isFirstPeriod = (): boolean => (
     // This is an example logic, adjust as needed
-    return currentMonth.year() < FIRST_YEAR;
-  };
+    currentMonth.year() < FIRST_YEAR
+  );
 
   // Calculate if it's the last period (can't go forward further)
-  const isLastPeriod = (): boolean => {
-    // Can't navigate to future months
-    return currentMonth.year() >= dayjs().year()
-      && currentMonth.month() >= dayjs().month();
-  };
+  const isLastPeriod = (): boolean => (   // Can't navigate to future months
+    currentMonth.year() >= dayjs().year()
+    && currentMonth.month() >= dayjs().month()
+  );
 
   return {
     annualTotal,

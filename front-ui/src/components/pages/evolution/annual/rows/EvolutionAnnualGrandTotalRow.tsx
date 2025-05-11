@@ -1,8 +1,7 @@
 import { AnnualTotal } from '@api/evolution/TreasuryEvolutionTypes';
 import useMessages from '@i18n/hooks/messagesHook';
 import {
-  formatCurrency, formatEuroDecimalPriceFromString,
-  formatPercentage,
+  formatEuroDecimalPriceFromString,
   formatPercentageDecimalPriceFromString,
 } from '@utils/number/NumberUtils';
 import React from 'react';
@@ -32,13 +31,13 @@ export default function EvolutionAnnualGrandTotalRow(
 
       {/* Monthly grand totals */}
       {
-        monthDates.map((monthDate) => {
+        monthDates.map((monthDate: string) => {
             const monthData = annualTotal[monthDate];
 
             // Default values if no data exists for this month
-            const total = monthData?.total ?? "0";
-            const gainLoss = monthData?.gainLoss ?? "0";
-            const gainLossPercentage = monthData?.gainLossPercentage ?? "0";
+            const total = monthData?.total ?? '0';
+            const gainLoss = monthData?.gainLoss ?? '0';
+            const gainLossPercentage = monthData?.gainLossPercentage ?? '0';
 
             return (
               <React.Fragment key={`grand-total-${monthDate}`}>

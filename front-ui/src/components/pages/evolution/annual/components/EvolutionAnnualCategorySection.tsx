@@ -21,16 +21,16 @@ export default function EvolutionAnnualCategorySection(
     category,
     monthDates,
     annualTotal,
-  }: EvolutionAnnualCategorySectionProps
+  }: EvolutionAnnualCategorySectionProps,
 ) {
   // Get accounts for this category from all months
   const accountsMap = new Map<string, TotalByAccount>();
 
   // Collect unique accounts across all months for this category
-  monthDates.forEach(monthDate => {
+  monthDates.forEach((monthDate) => {
     const monthData = annualTotal[monthDate];
     if (monthData && monthData.totalByCategory[category]) {
-      monthData.totalByCategory[category].totalByAccount.forEach(account => {
+      monthData.totalByCategory[category].totalByAccount.forEach((account) => {
         if (!accountsMap.has(account.id)) {
           accountsMap.set(account.id, account);
         }

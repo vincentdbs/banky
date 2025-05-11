@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import { CalendarIcon } from 'lucide-react';
 import React from 'react';
 import { Control, FieldValues, Path } from 'react-hook-form';
+import { formatToLocaleDate } from '@utils/dates/DatesUtils';
 import { Button } from '@/lib/shadcn/button';
 import { Calendar } from '@/lib/shadcn/calendar';
 import {
@@ -9,7 +10,6 @@ import {
 } from '@/lib/shadcn/form';
 import { Popover, PopoverContent, PopoverTrigger } from '@/lib/shadcn/popover';
 import { cn } from '@/lib/shadcn/utils';
-import { formatToLocaleDate } from '@utils/dates/DatesUtils';
 
 type DatePickerProps<T extends FieldValues> = {
   control: Control<T>,

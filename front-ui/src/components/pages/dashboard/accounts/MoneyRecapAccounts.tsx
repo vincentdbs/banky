@@ -9,7 +9,9 @@ import MoneyRecapAccount from '@components/pages/dashboard/accounts/account/Mone
 import useMessages from '@i18n/hooks/messagesHook';
 import useLoader, { LoaderState } from '@lib/plume-http-react-hook-loader/promiseLoaderHook';
 import { useOnComponentMounted } from '@lib/react-hooks-alias/ReactHooksAlias';
-import { Card, CardContent, CardHeader, CardTitle } from '@lib/shadcn/card';
+import {
+  Card, CardContent, CardHeader, CardTitle,
+} from '@lib/shadcn/card';
 import DashboardService from '@services/dashboard/DashboardService';
 import { getGlobalInstance } from 'plume-ts-di';
 import React, { useState } from 'react';

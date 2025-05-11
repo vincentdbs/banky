@@ -26,7 +26,7 @@ export default function CategorySubtotalRow(
     category,
     monthDates,
     annualTotal,
-  }: CategorySubtotalRowProps
+  }: CategorySubtotalRowProps,
 ) {
   const { messages } = useMessages();
 
@@ -43,9 +43,9 @@ export default function CategorySubtotalRow(
         const totalByCategory: TotalByCategory = totalByAccountAndMonth?.totalByCategory?.[category];
 
         // Default values if no data exists for this month
-        const total: string = totalByCategory?.total ?? "0";
-        const gainLoss: string = totalByCategory?.gainLoss ?? "0";
-        const gainLossPercentage: string = totalByCategory?.gainLossPercentage ?? "0";
+        const total: string = totalByCategory?.total ?? '0';
+        const gainLoss: string = totalByCategory?.gainLoss ?? '0';
+        const gainLossPercentage: string = totalByCategory?.gainLossPercentage ?? '0';
 
         return (
           <React.Fragment key={`${category}-subtotal-${monthDate}`}>

@@ -228,6 +228,6 @@ export type Translations = {
     },
     charts: {
       title: string,
-    }
+    },
   },
 };

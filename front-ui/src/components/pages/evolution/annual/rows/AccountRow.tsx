@@ -22,7 +22,7 @@ export default function AccountRow(
     accountType,
     monthDates,
     annualTotal,
-  }: AccountRowProps
+  }: AccountRowProps,
 ) {
   return (
     <>

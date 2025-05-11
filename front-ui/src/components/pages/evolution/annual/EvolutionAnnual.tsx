@@ -38,7 +38,7 @@ export default function EvolutionAnnual() {
         isFirstPeriod={isFirstPeriod}
         isLastPeriod={isLastPeriod}
       />
-      
+
       <div className="w-full rounded-md border text-sm grid overflow-auto">
         {
           !isLoading && isNotNullish(annualTotal)

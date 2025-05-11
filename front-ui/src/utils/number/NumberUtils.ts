@@ -57,27 +57,23 @@ export const formatEuroDecimalPriceFromString = (priceString: string, numberOfDe
  * @param amount - The amount to format
  * @returns The formatted currency string
  */
-export const formatCurrency = (amount: number): string => {
-  return new Intl.NumberFormat('fr-FR', {
-    style: 'currency',
-    currency: 'EUR',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  }).format(amount);
-};
+export const formatCurrency = (amount: number): string => new Intl.NumberFormat('fr-FR', {
+  style: 'currency',
+  currency: 'EUR',
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+}).format(amount);
 
 /**
  * Formats a number as a percentage string using the French locale
  * @param percentage - The percentage value to format (0.01 = 1%)
  * @returns The formatted percentage string
  */
-export const formatPercentage = (percentage: number): string => {
-  return new Intl.NumberFormat('fr-FR', {
-    style: 'percent',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  }).format(percentage / 100);
-};
+export const formatPercentage = (percentage: number): string => new Intl.NumberFormat('fr-FR', {
+  style: 'percent',
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+}).format(percentage / 100);
 
 /**
  * Formats a string percentage value into a percentage display format.

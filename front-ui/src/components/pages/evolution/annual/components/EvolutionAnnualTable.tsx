@@ -4,11 +4,11 @@
 import { AccountType } from '@api/accounts/AccountsTypes';
 import { AnnualTotal } from '@api/evolution/TreasuryEvolutionTypes';
 import React from 'react';
+import dayjs from 'dayjs';
 import EvolutionAnnualCategorySection from './EvolutionAnnualCategorySection';
 import EvolutionAnnualColumnsHeaderRow from '../header/EvolutionAnnualColumnsHeaderRow';
 import EvolutionAnnualGrandTotalRow from '../rows/EvolutionAnnualGrandTotalRow';
 import EvolutionAnnualHeader from '../header/EvolutionAnnualHeader';
-import dayjs from 'dayjs';
 
 type EvolutionAnnualTableProps = {
   year: number,

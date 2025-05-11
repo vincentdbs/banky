@@ -26,7 +26,7 @@ export default class EvolutionApi {
 
   /**
    * Fetches treasury evolution totals for a specific date range
-   * 
+   *
    * @param startDate The first month to include (in format YYYY-MM-DD)
    * @param numberOfMonths The number of months to fetch from the start date
    * @returns A promise with the treasury evolution data

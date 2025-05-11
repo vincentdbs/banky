@@ -8,8 +8,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@lib/shadcn/sidebar';
-import { TrendingUpDownIcon } from 'lucide-react';
-import { BarChart } from 'lucide-react';
+import { TrendingUpDownIcon, BarChart } from 'lucide-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 

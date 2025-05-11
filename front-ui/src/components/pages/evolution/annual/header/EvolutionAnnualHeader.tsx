@@ -1,5 +1,5 @@
-import { getMonthName } from '@/utils/dates/DatesUtils';
 import React from 'react';
+import { getMonthName } from '@/utils/dates/DatesUtils';
 
 type EvolutionAnnualHeaderProps = {
   year: number,

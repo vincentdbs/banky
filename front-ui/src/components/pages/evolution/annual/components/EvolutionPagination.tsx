@@ -29,11 +29,11 @@ export default function EvolutionPagination({
   const formatDateRange = (): string => {
     const startMonth: string = currentDate.format('MMMM YYYY');
     const endMonth: string = currentDate.add(monthsToDisplay - 1, 'month').format('MMMM YYYY');
-    
+
     if (startMonth === endMonth) {
       return startMonth;
     }
-    
+
     return `${startMonth} - ${endMonth}`;
   };
 

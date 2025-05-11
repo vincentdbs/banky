@@ -29,21 +29,21 @@ export default function MonthlyAccountBlock(
     monthDate,
     accountType,
     annualTotal,
-  }: MonthlyAccountBlockProps
+  }: MonthlyAccountBlockProps,
 ) {
   const totalByAccountAndMonth: TotalByAccountAndMonth = annualTotal[monthDate];
   let accountData: TotalByAccount | undefined;
 
   if (totalByAccountAndMonth && totalByAccountAndMonth.totalByCategory[accountType]) {
     accountData = totalByAccountAndMonth.totalByCategory[accountType].totalByAccount.find(
-      acc => acc.id === accountId,
+      (acc) => acc.id === accountId,
     );
   }
 
   // Default values if no data exists for this month
-  const total: string = accountData?.total ?? "0";
-  const gainLoss: string = accountData?.gainLoss ?? "0";
-  const gainLossPercentage: string = accountData?.gainLossPercentage ?? "0";
+  const total: string = accountData?.total ?? '0';
+  const gainLoss: string = accountData?.gainLoss ?? '0';
+  const gainLossPercentage: string = accountData?.gainLossPercentage ?? '0';
 
   return (
     <>

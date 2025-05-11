@@ -303,7 +303,7 @@ const frMessages: Translations = {
     },
     charts: {
       title: 'Évolution total par mois',
-    }
+    },
   },
 } as const;
 
