@@ -1,10 +1,10 @@
 import { ICON_SIZE_BIG } from '@components/theme/icons/ColoredIconsWrapper';
+import { formatEuroDecimalPrice } from '@utils/number/NumberUtils';
 import {
   Card, CardContent, CardHeader, CardTitle,
 } from '@lib/shadcn/card';
 import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
 import React from 'react';
-import { formatEuroDecimalPrice } from '@/utils/number/NumberUtils';
 
 type MoneyRecapCardProps = {
   title: string,

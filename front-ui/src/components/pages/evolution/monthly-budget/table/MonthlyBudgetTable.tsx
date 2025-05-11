@@ -77,7 +77,8 @@ export default function MonthlyBudgetTable() {
                 {/* Category rows */}
                 {monthlyBudget.categories.map((category: MonthlyBudgetCategory, index: number) => {
                   const isSpentGreaterThanBudgeted: boolean = parseInt(category.spent, 10) > parseInt(category.budgeted, 10);
-                  const isSpentLessThanBudgeted: boolean = parseInt(category.spent, 10) < parseInt(category.budgeted, 10) && parseInt(category.spent, 10) !== 0;
+                  const isSpentLessThanBudgeted: boolean = (parseInt(category.spent, 10) < parseInt(category.budgeted, 10))
+                    && parseInt(category.spent, 10) !== 0;
                   const isSpentPercentageHigherThanTotal: boolean = parseInt(category.spentPercentageOfBudgeted, 10)
                     > parseInt(category.spentPercentageOfTotal, 10);
                   const isSpentPercentageLowerThanTotal: boolean = (parseInt(category.spentPercentageOfBudgeted, 10)

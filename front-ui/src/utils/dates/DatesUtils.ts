@@ -7,3 +7,7 @@ export const formatToIsoDate = (date: Dayjs | string): string => dayjs(date).for
 export const formatToLocalDateOrPlaceholder = (date?: Dayjs | string): string => (
   date ? formatToLocaleDate(date) : '-'
 );
+
+export const computeFirstDayOfTheYear = (year: number): Dayjs => dayjs(`${year}-01-01`);
+
+export const getMonthName = (month: string): string => dayjs(month).format('MMMM');

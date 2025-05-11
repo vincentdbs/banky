@@ -95,9 +95,7 @@ export function AllAccountCharts({ data }: AllAccountChartsProps) {
                 Object
                   .entries(data[0])
                   .filter(([key]) => key !== xAxisKey)
-                  .map(([key, value], index) => {
-                    console.log(value);
-                    return (
+                  .map(([key, value], index) => (
                       <Bar
                         key={key}
                         dataKey={key}
@@ -106,8 +104,7 @@ cd
                         fill={`var(--color-${value})`}
                         radius={computeRadius(index, numberDataByBar)}
                       />
-                    );
-                  })
+                  ))
               }
             </>
             {/* <Bar */}

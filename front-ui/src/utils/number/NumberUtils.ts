@@ -2,6 +2,12 @@ const priceRegex: RegExp = /\B(?=(\d{3})+(?!\d))/g;
 
 export const FIRST_YEAR: 2021 = 2021;
 
+/**
+ * Formats a number as a decimal price with the specified number of decimal places
+ * @param price - The price to format
+ * @param numberOfDecimals - Number of decimal places to display (default: 2)
+ * @returns The formatted price string
+ */
 export const formatDecimalPrice = (price: number, numberOfDecimals: number = 2): string => {
   if (numberOfDecimals < 0) {
     throw new Error('Number of decimals cannot be negative');
@@ -15,6 +21,12 @@ export const formatDecimalPrice = (price: number, numberOfDecimals: number = 2):
   return decimalPart !== undefined ? `${integerPart},${decimalPart}` : integerPart;
 };
 
+/**
+ * Formats a number as a Euro price with the specified number of decimal places
+ * @param price - The price to format
+ * @param numberOfDecimals - Number of decimal places to display (default: 2)
+ * @returns The formatted price string with Euro symbol
+ */
 export const formatEuroDecimalPrice = (price: number, numberOfDecimals: number = 2): string => (
   `${formatDecimalPrice(price, numberOfDecimals)} €`
 );
@@ -64,3 +76,15 @@ export const formatPercentageDecimalPriceFromString = (percentageString: string,
 export const threeDecimalNumberToString = (number: number): string => `${number * 1000}`;
 
 export const twoDecimalNumberToString = (number: number): string => `${number * 100}`;
+
+export const computeColorClass = (value: string | number): string => {
+  const parsedValue: number = typeof value === 'string' ? parseInt(value, 10) : value;
+
+  if (parsedValue < 0) {
+    return 'text-red-600';
+  } if (parsedValue > 0) {
+    return 'text-green-600';
+  }
+
+  return '';
+};
