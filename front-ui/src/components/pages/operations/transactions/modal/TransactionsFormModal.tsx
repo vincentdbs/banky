@@ -7,6 +7,7 @@ import SubmitFormModal from '@components/theme/modal/SubmitFormModal';
 import useMessages from '@i18n/hooks/messagesHook';
 import TransactionsService from '@services/transactions/TransactionsService';
 import { formatToIsoDate } from '@utils/dates/DatesUtils';
+import { twoDecimalNumberToString } from '@utils/number/NumberUtils';
 import { getGlobalInstance } from 'plume-ts-di';
 import React from 'react';
 import { useForm, UseFormReturn } from 'react-hook-form';
@@ -44,7 +45,7 @@ export default function TransactionsFormModal({ onCancel, isOpen }: Transactions
       .createTransaction(
         {
           accountId: values[TransactionFields.ACCOUNT],
-          amount: values[TransactionFields.AMOUNT],
+          amount: twoDecimalNumberToString(values[TransactionFields.AMOUNT]),
           comment: values[TransactionFields.COMMENT],
           date: formatToIsoDate(values[TransactionFields.DATE]),
           inBankDate:

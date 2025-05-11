@@ -1,7 +1,7 @@
 import ApiHttpClient from '@api/ApiHttpClient';
 import { HttpMethod } from 'simple-http-request-builder';
 import { HttpPromise } from 'simple-http-rest-client';
-import { PaginatedTransactionsResponse, TransactionRequest } from './TransactionsTypes';
+import { PaginatedTransactionsResponse, CreateTransactionRequest } from './TransactionsTypes';
 
 export default class TransactionsApi {
   private static BASE_PATH: string = '/transactions';
@@ -20,14 +20,14 @@ export default class TransactionsApi {
       .execute();
   }
 
-  createTransaction(request: TransactionRequest): HttpPromise<number> {
+  createTransaction(request: CreateTransactionRequest): HttpPromise<number> {
     return this.apiHttpClient
       .restRequest<number>(HttpMethod.POST, TransactionsApi.BASE_PATH)
       .jsonBody(request)
       .execute();
   }
 
-  updateTransaction(id: string, request: TransactionRequest): HttpPromise<void> {
+  updateTransaction(id: string, request: CreateTransactionRequest): HttpPromise<void> {
     return this.apiHttpClient
       .restRequest<void>(HttpMethod.PUT, `${TransactionsApi.BASE_PATH}/${id}`)
       .jsonBody(request)

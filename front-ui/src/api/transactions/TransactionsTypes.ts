@@ -20,10 +20,10 @@ export type TransactionResponse = {
 
 export type PaginatedTransactionsResponse = PaginatedResponse<TransactionResponse>;
 
-export type TransactionRequest = {
+export type CreateTransactionRequest = {
   date: string,
   inBankDate?: string,
-  amount: number,
+  amount: string,
   accountId: string,
   fromToPersonName: string,
   subCategoryId: string,

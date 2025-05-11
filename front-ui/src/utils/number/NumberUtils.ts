@@ -64,3 +64,7 @@ export const formatPercentageDecimalPriceFromString = (percentageString: string,
 export const threeDecimalNumberToString = (number: number): string => {
   return `${number * 1000}`
 }
+
+export const twoDecimalNumberToString = (number: number): string => {
+  return `${number * 100}`
+}
