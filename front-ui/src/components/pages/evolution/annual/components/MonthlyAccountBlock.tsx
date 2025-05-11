@@ -7,10 +7,7 @@ import {
   TotalByAccount,
   TotalByAccountAndMonth,
 } from '@api/evolution/TreasuryEvolutionTypes';
-import {
-  formatEuroDecimalPriceFromString,
-  formatPercentageDecimalPriceFromString,
-} from '@utils/number/NumberUtils';
+import AmountCell from '@components/theme/table/cells/number/AmountCell';
 import React from 'react';
 
 type MonthlyAccountBlockProps = {
@@ -36,7 +33,7 @@ export default function MonthlyAccountBlock(
 
   if (totalByAccountAndMonth && totalByAccountAndMonth.totalByCategory[accountType]) {
     accountData = totalByAccountAndMonth.totalByCategory[accountType].totalByAccount.find(
-      (acc) => acc.id === accountId,
+      (totalByAccount: TotalByAccount) => totalByAccount.id === accountId,
     );
   }
 
@@ -47,17 +44,9 @@ export default function MonthlyAccountBlock(
 
   return (
     <>
-      <div className={`p-3 text-right border-b border-r ${parseInt(total) < 0 ? 'text-red-600' : ''}`}>
-        {formatEuroDecimalPriceFromString(total)}
-      </div>
-      <div
-        className={`p-3 text-right border-b border-r ${parseInt(gainLoss) < 0 ? 'text-red-600' : parseInt(gainLoss) > 0 ? 'text-green-600' : ''}`}>
-        {formatEuroDecimalPriceFromString(gainLoss)}
-      </div>
-      <div
-        className={`p-3 text-right border-b border-r ${parseInt(gainLossPercentage) < 0 ? 'text-red-600' : parseInt(gainLossPercentage) > 0 ? 'text-green-600' : ''}`}>
-        {formatPercentageDecimalPriceFromString(gainLossPercentage)}
-      </div>
+      <AmountCell amount={total} />
+      <AmountCell amount={gainLoss} />
+      <AmountCell type="percentage" amount={gainLossPercentage} />
     </>
   );
 }

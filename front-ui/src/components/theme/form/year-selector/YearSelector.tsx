@@ -29,12 +29,12 @@ export default function YearSelector(
       value: year,
       label: year.toString(),
     };
-  }), [yearRange]);
+  }), [yearRange, firstYear]);
 
   return (
     <Select
       value={selectedYear.toString()}
-      onValueChange={(year: string) => setSelectedYear(parseInt(year))}
+      onValueChange={(year: string) => setSelectedYear(parseInt(year, 10))}
     >
       <SelectTrigger className="w-[120px]">
         <SelectValue placeholder="Select year" />

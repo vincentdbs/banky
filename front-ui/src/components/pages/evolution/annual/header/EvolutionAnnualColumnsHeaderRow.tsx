@@ -1,5 +1,6 @@
 import useMessages from '@i18n/hooks/messagesHook';
 import React from 'react';
+import HeaderCell from '@components/theme/table/cells/header/HeaderCell';
 
 type EvolutionAnnualColumnsTitlesRowProps = {
   monthDates: string[],
@@ -13,23 +14,23 @@ export default function EvolutionAnnualColumnsHeaderRow({ monthDates }: Evolutio
 
   return (
     <>
-      <div className="bg-slate-50 p-3 font-medium border-b border-r">
+      <HeaderCell>
         {messages.evolution.annual.shortName}
-      </div>
-      <div className="bg-slate-50 p-3 font-medium border-b border-r">
+      </HeaderCell>
+      <HeaderCell>
         {messages.evolution.annual.name}
-      </div>
+      </HeaderCell>
       {monthDates.map((date: string) => (
         <React.Fragment key={`titles-${date}`}>
-          <div className="bg-slate-50 p-3 font-medium text-center border-b border-r">
+          <HeaderCell align="center">
             {messages.evolution.annual.amount}
-          </div>
-          <div className="bg-slate-50 p-3 font-medium text-center border-b border-r">
+          </HeaderCell>
+          <HeaderCell align="center">
             {messages.evolution.annual.gainLoss}
-          </div>
-          <div className="bg-slate-50 p-3 font-medium text-center border-b border-r">
+          </HeaderCell>
+          <HeaderCell align="center">
             {messages.evolution.annual.percentage}
-          </div>
+          </HeaderCell>
         </React.Fragment>
       ))}
     </>

@@ -53,29 +53,6 @@ export const formatEuroDecimalPriceFromString = (priceString: string, numberOfDe
 };
 
 /**
- * Formats a number as a currency string using the French locale and Euro currency
- * @param amount - The amount to format
- * @returns The formatted currency string
- */
-export const formatCurrency = (amount: number): string => new Intl.NumberFormat('fr-FR', {
-  style: 'currency',
-  currency: 'EUR',
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-}).format(amount);
-
-/**
- * Formats a number as a percentage string using the French locale
- * @param percentage - The percentage value to format (0.01 = 1%)
- * @returns The formatted percentage string
- */
-export const formatPercentage = (percentage: number): string => new Intl.NumberFormat('fr-FR', {
-  style: 'percent',
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-}).format(percentage / 100);
-
-/**
  * Formats a string percentage value into a percentage display format.
  * Used for API responses where the value is a string without fractional part.
  * Example: "1234" will be formatted as "12,34 %"
@@ -99,3 +76,15 @@ export const formatPercentageDecimalPriceFromString = (percentageString: string,
 export const threeDecimalNumberToString = (number: number): string => `${number * 1000}`;
 
 export const twoDecimalNumberToString = (number: number): string => `${number * 100}`;
+
+export const computeColorClass = (value: string | number): string => {
+  const parsedValue: number = typeof value === 'string' ? parseInt(value, 10) : value;
+
+  if (parsedValue < 0) {
+    return 'text-red-600';
+  } if (parsedValue > 0) {
+    return 'text-green-600';
+  }
+
+  return '';
+};

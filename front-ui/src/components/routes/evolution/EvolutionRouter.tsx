@@ -13,7 +13,7 @@ export default function EvolutionRouter() {
     [
       {
         path: EVOLUTION_ANNUAL,
-        element: <EvolutionAnnual year={2025} />,
+        element: <EvolutionAnnual />,
       },
       {
         path: EVOLUTION_MONTHLY_BUDGET,

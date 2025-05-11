@@ -2,7 +2,11 @@
  * Component for displaying a category section with accounts and subtotal
  */
 import { AccountType } from '@api/accounts/AccountsTypes';
-import { AnnualTotal, TotalByAccount } from '@api/evolution/TreasuryEvolutionTypes';
+import {
+  AnnualTotal,
+  TotalByAccount,
+  TotalByAccountAndMonth,
+} from '@api/evolution/TreasuryEvolutionTypes';
 import React from 'react';
 import AccountRow from '../rows/AccountRow';
 import CategorySubtotalRow from '../rows/CategorySubtotalRow';
@@ -24,13 +28,13 @@ export default function EvolutionAnnualCategorySection(
   }: EvolutionAnnualCategorySectionProps,
 ) {
   // Get accounts for this category from all months
-  const accountsMap = new Map<string, TotalByAccount>();
+  const accountsMap: Map<string, TotalByAccount> = new Map<string, TotalByAccount>();
 
   // Collect unique accounts across all months for this category
-  monthDates.forEach((monthDate) => {
-    const monthData = annualTotal[monthDate];
+  monthDates.forEach((monthDate: string) => {
+    const monthData: TotalByAccountAndMonth = annualTotal[monthDate];
     if (monthData && monthData.totalByCategory[category]) {
-      monthData.totalByCategory[category].totalByAccount.forEach((account) => {
+      monthData.totalByCategory[category].totalByAccount.forEach((account: TotalByAccount) => {
         if (!accountsMap.has(account.id)) {
           accountsMap.set(account.id, account);
         }
@@ -38,7 +42,7 @@ export default function EvolutionAnnualCategorySection(
     }
   });
 
-  const accounts = Array.from(accountsMap.values());
+  const accounts: TotalByAccount[] = Array.from(accountsMap.values());
 
   return (
     <>

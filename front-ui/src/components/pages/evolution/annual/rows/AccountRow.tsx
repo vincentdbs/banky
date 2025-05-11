@@ -4,6 +4,7 @@
 import { AccountType } from '@api/accounts/AccountsTypes';
 import { AnnualTotal, TotalByAccount } from '@api/evolution/TreasuryEvolutionTypes';
 import React from 'react';
+import BaseCell from '@components/theme/table/cells/base/BaseCell';
 import MonthlyAccountBlock from '../components/MonthlyAccountBlock';
 
 type AccountRowProps = {
@@ -27,11 +28,11 @@ export default function AccountRow(
   return (
     <>
       {/* Account short name and full name */}
-      <div className="p-3 border-b border-r">{account.shortName}</div>
-      <div className="p-3 border-b border-r">{account.name}</div>
+      <BaseCell>{account.shortName}</BaseCell>
+      <BaseCell>{account.name}</BaseCell>
 
       {/* Monthly data for this account */}
-      {monthDates.map((monthDate) => (
+      {monthDates.map((monthDate: string) => (
         <MonthlyAccountBlock
           key={`${account.id}-${monthDate}`}
           accountId={account.id}

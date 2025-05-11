@@ -1,9 +1,7 @@
-import { AnnualTotal } from '@api/evolution/TreasuryEvolutionTypes';
+import { AnnualTotal, TotalByAccountAndMonth } from '@api/evolution/TreasuryEvolutionTypes';
+import TernaryHeaderAmountCell from '@components/theme/table/cells/header/TernaryHeaderAmountCell';
+import TernaryHeaderCell from '@components/theme/table/cells/header/TernaryHeaderCell';
 import useMessages from '@i18n/hooks/messagesHook';
-import {
-  formatEuroDecimalPriceFromString,
-  formatPercentageDecimalPriceFromString,
-} from '@utils/number/NumberUtils';
 import React from 'react';
 
 type GrandTotalProps = {
@@ -25,38 +23,32 @@ export default function EvolutionAnnualGrandTotalRow(
   return (
     <>
       {/* Grand total row */}
-      <div className="col-span-2 p-3 font-bold bg-slate-200 border-b border-r">
+      <TernaryHeaderCell className="col-span-2">
         {messages.evolution.annual.total}
-      </div>
+      </TernaryHeaderCell>
 
       {/* Monthly grand totals */}
       {
         monthDates.map((monthDate: string) => {
-            const monthData = annualTotal[monthDate];
+          const monthData: TotalByAccountAndMonth = annualTotal[monthDate];
 
-            // Default values if no data exists for this month
-            const total = monthData?.total ?? '0';
-            const gainLoss = monthData?.gainLoss ?? '0';
-            const gainLossPercentage = monthData?.gainLossPercentage ?? '0';
+          // Default values if no data exists for this month
+          const total: string = monthData?.total ?? '0';
+          const gainLoss: string = monthData?.gainLoss ?? '0';
+          const gainLossPercentage: string = monthData?.gainLossPercentage ?? '0';
 
-            return (
-              <React.Fragment key={`grand-total-${monthDate}`}>
-                <div
-                  className={`p-3 text-right font-bold bg-slate-200 border-b border-r ${parseInt(total) < 0 ? 'text-red-600' : ''}`}>
-                  {formatEuroDecimalPriceFromString(total)}
-                </div>
-                <div
-                  className={`p-3 text-right font-bold bg-slate-200 border-b border-r ${parseInt(gainLoss) < 0 ? 'text-red-600' : parseInt(gainLoss) > 0 ? 'text-green-600' : ''}`}>
-                  {formatEuroDecimalPriceFromString(gainLoss)}
-                </div>
-                <div
-                  className={`p-3 text-right font-bold bg-slate-200 border-b border-r ${parseInt(gainLossPercentage) < 0 ? 'text-red-600' : parseInt(gainLossPercentage) > 0 ? 'text-green-600' : ''}`}>
-                  {formatPercentageDecimalPriceFromString(gainLossPercentage)}
-                </div>
-              </React.Fragment>
-            );
-          },
-        )}
+          return (
+            <React.Fragment key={`grand-total-${monthDate}`}>
+              <TernaryHeaderAmountCell align="right" amount={total} />
+              <TernaryHeaderAmountCell align="right" amount={gainLoss} />
+              <TernaryHeaderAmountCell
+                align="right" type="percentage"
+                amount={gainLossPercentage}
+              />
+            </React.Fragment>
+          );
+        })
+      }
     </>
   );
 }

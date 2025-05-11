@@ -1,5 +1,6 @@
+import { getMonthName } from '@utils/dates/DatesUtils';
 import React from 'react';
-import { getMonthName } from '@/utils/dates/DatesUtils';
+import HeaderCell from '@components/theme/table/cells/header/HeaderCell';
 
 type EvolutionAnnualHeaderProps = {
   year: number,
@@ -12,15 +13,14 @@ type EvolutionAnnualHeaderProps = {
 export default function EvolutionAnnualHeader({ year, monthDates }: EvolutionAnnualHeaderProps) {
   return (
     <>
-      <div className="col-span-2 bg-slate-50 p-3 font-medium border-b border-r">{year}</div>
+      <HeaderCell className="col-span-2">
+        {year}
+      </HeaderCell>
       {
         monthDates.map((date: string) => (
-          <div
-            key={`month-${date}`}
-            className="col-span-3 bg-slate-50 p-3 font-medium text-center border-b border-r capitalize"
-          >
+          <HeaderCell key={date} align="center" className="col-span-3 capitalize">
             {getMonthName(date)}
-          </div>
+          </HeaderCell>
         ))
       }
     </>

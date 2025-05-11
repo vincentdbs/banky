@@ -24,6 +24,25 @@ export default function useHandleEvolutionPagination(initialYear: number) {
   const [monthsToDisplay, setMonthsToDisplay] = useState<number>(4);
   const [monthDates, setMonthsDates] = useState<string[]>([]);
 
+  // Create an array of month dates for the display period
+  const updateMonthDates = (firstMonth: Dayjs, numberOfMonths: number): void => {
+    const newMonths: string[] = Array.from({ length: numberOfMonths }, (_: unknown, i: number) => dayjs(firstMonth)
+      .add(i, 'month')
+      .format('YYYY-MM-DD'));
+    setMonthsDates(newMonths);
+  };
+
+  // Fetch treasury data from API
+  const fetchTreasuryData = (startDate: Dayjs, numberOfMonths: number): void => {
+    loader.monitor(
+      evolutionService
+        .fetchTreasuryEvolution(startDate, numberOfMonths)
+        .then((data: AnnualTotal) => {
+          setAnnualTotal(data);
+        }),
+    );
+  };
+
   const computeNumberOfMonthsToDisplay = (width: number): number => {
     if (width < 1200) {
       return 1;
@@ -59,25 +78,6 @@ export default function useHandleEvolutionPagination(initialYear: number) {
     updateMonthDates(currentMonth, monthsToDisplay);
   }, [monthsToDisplay]);
 
-  // Create an array of month dates for the display period
-  const updateMonthDates = (firstMonth: Dayjs, numberOfMonths: number): void => {
-    const newMonths: string[] = Array.from({ length: numberOfMonths }, (_: unknown, i: number) => dayjs(firstMonth)
-      .add(i, 'month')
-      .format('YYYY-MM-DD'));
-    setMonthsDates(newMonths);
-  };
-
-  // Fetch treasury data from API
-  const fetchTreasuryData = (startDate: Dayjs, numberOfMonths: number): void => {
-    loader.monitor(
-      evolutionService
-        .fetchTreasuryEvolution(startDate, numberOfMonths)
-        .then((data: AnnualTotal) => {
-          setAnnualTotal(data);
-        }),
-    );
-  };
-
   // Go to previous period
   const goToPreviousPeriod = (): void => {
     const nextFirstMonth: Dayjs = currentMonth.subtract(monthsToDisplay, 'month');
@@ -101,7 +101,7 @@ export default function useHandleEvolutionPagination(initialYear: number) {
   );
 
   // Calculate if it's the last period (can't go forward further)
-  const isLastPeriod = (): boolean => (   // Can't navigate to future months
+  const isLastPeriod = (): boolean => ( // Can't navigate to future months
     currentMonth.year() >= dayjs().year()
     && currentMonth.month() >= dayjs().month()
   );

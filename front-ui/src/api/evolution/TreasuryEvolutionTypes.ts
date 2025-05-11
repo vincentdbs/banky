@@ -20,7 +20,7 @@ export type TotalByAccountAndMonth = {
   total: string,
   gainLoss: string,
   gainLossPercentage: string,
-  totalByCategory: Record<AccountType, TotalByCategory>, // string is the banking account type (CHECKING, SAVINGS, MARKET)
+  totalByCategory: Record<AccountType, TotalByCategory>,
 };
 
 export type AnnualTotal = Record<string, TotalByAccountAndMonth>; // string is a local date (YYYY-MM-DD) of the first day of the month for the year
