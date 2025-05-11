@@ -16,7 +16,7 @@ import TransactionsForm from '../form/TransactionsForm';
 type TransactionsFormModalProps = {
   isOpen: boolean,
   onCancel: () => void,
-}
+};
 
 export default function TransactionsFormModal({ onCancel, isOpen }: TransactionsFormModalProps) {
   const transactionsService: TransactionsService = getGlobalInstance(TransactionsService);

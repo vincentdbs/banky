@@ -1,5 +1,3 @@
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/lib/shadcn/form';
-import { Input } from '@/lib/shadcn/input';
 import { TransactionSide } from '@api/transactions/TransactionsTypes';
 import DatePicker from '@components/theme/form/date-picker/DatePicker';
 import FieldsGroup from '@components/theme/form/fields-group/FieldsGroup';
@@ -10,6 +8,10 @@ import useMessages from '@i18n/hooks/messagesHook';
 import { Dayjs } from 'dayjs';
 import React from 'react';
 import { Control } from 'react-hook-form';
+import { Input } from '@/lib/shadcn/input';
+import {
+  FormControl, FormField, FormItem, FormLabel, FormMessage,
+} from '@/lib/shadcn/form';
 
 export enum TransactionFields {
   DATE = 'DATE',

@@ -5,9 +5,9 @@ import useMessages from '@i18n/hooks/messagesHook';
 import TransfertsService from '@services/transferts/TransfertsService';
 import { getGlobalInstance } from 'plume-ts-di';
 import React, { useState } from 'react';
+import { TransfertResponse } from '@api/transferts/TransfertTypes';
 import TransfertsFormModal from './modal/TransfertsFormModal';
 import TransfertsTable from './table/TransfertsTable';
-import { TransfertResponse } from '@api/transferts/TransfertTypes';
 
 /**
  * Transferts page component that displays a list of transferts between accounts

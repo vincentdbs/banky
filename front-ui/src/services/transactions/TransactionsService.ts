@@ -1,5 +1,8 @@
 import TransactionsApi from '@api/transactions/TransactionsApi';
-import { PaginatedTransactionsResponse, CreateTransactionRequest, TransactionResponse } from '@api/transactions/TransactionsTypes';
+import {
+  CreateTransactionRequest,
+  PaginatedTransactionsResponse,
+} from '@api/transactions/TransactionsTypes';
 import { HttpPromise } from 'simple-http-rest-client';
 
 /**

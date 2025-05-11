@@ -1,7 +1,7 @@
-import useFetchAccountNamesChoices
-  from '@/hooks/use-fetch-account-names-choices/useFetchAccountNamesChoices';
 import React from 'react';
 import { Control } from 'react-hook-form';
+import useFetchAccountNamesChoices
+  from '@/hooks/use-fetch-account-names-choices/useFetchAccountNamesChoices';
 import TransfertsFormFields, { TransfertFormType } from './fields/TransfertsFormFields';
 
 type TransfertsFormProps = {

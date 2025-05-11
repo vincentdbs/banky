@@ -40,7 +40,7 @@ export default function OrdersFormModal({ isOpen, onCancel }: OrdersFormModalPro
   function onSubmit(values: OrderFormType) {
     const orderRequest: CreateOrderRequest = {
       date: formatToIsoDate(values[OrderFields.DATE]),
-      side: side,
+      side,
       amount: threeDecimalNumberToString(values[OrderFields.AMOUNT]),
       quantity: values[OrderFields.QUANTITY],
       charges: threeDecimalNumberToString(values[OrderFields.CHARGES]),

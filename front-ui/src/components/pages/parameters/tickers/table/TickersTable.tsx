@@ -27,7 +27,7 @@ export default function TickersTable({ tickers }: TickersTableProps) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {tickers.map((ticker) => (
+        {tickers.map((ticker: TickerResponse) => (
           <TableRow key={ticker.id}>
             <TableCell>{ticker.name}</TableCell>
             <TableCell>{ticker.shortName}</TableCell>

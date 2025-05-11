@@ -21,7 +21,7 @@ export default class TickersService {
 
   /**
    * Fetches only ticker IDs and names for use in dropdown components
-   * 
+   *
    * @returns A promise containing a list of ticker names with their IDs
    */
   fetchTickerNames = (): HttpPromise<TickerNameResponse[]> => this.tickersApi.fetchTickerNames();

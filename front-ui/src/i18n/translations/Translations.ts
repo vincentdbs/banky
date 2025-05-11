@@ -159,7 +159,7 @@ export type Translations = {
         action: string,
       },
       form: {
-        title: string
+        title: string,
         description: string,
         fields: Record<TransactionFields, string> & {
           from: string,

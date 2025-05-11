@@ -1,5 +1,7 @@
 import AccountsApi from '@api/accounts/AccountsApi';
-import { AccountNamesResponse, AccountRequest, AccountResponse, AccountType } from '@api/accounts/AccountsTypes';
+import {
+  AccountNamesResponse, AccountRequest, AccountResponse, AccountType,
+} from '@api/accounts/AccountsTypes';
 import { HttpPromise } from 'simple-http-rest-client';
 
 export default class AccountsService {

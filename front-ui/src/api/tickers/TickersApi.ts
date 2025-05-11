@@ -32,7 +32,7 @@ export default class TickersApi {
 
   /**
    * Fetches only ticker IDs and names for use in dropdown components
-   * 
+   *
    * @returns A list of ticker names with their IDs
    */
   fetchTickerNames = (): HttpPromise<TickerNameResponse[]> => this

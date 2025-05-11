@@ -1,6 +1,4 @@
 import { OrderFields } from '@components/pages/operations/orders/form/fields/OrdersFormFields';
-import { OrderSide } from '@/api/orders/OrderTypes';
-import { TransactionSide } from '@/api/transactions/TransactionsTypes';
 import { TickerCategory } from '@api/tickers/TickersTypes';
 import {
   TransactionFields,
@@ -9,6 +7,8 @@ import {
   TransfertFields,
 } from '@components/pages/operations/transferts/form/fields/TransfertsFormFields';
 import { Routes } from '@components/Routes';
+import { TransactionSide } from '@/api/transactions/TransactionsTypes';
+import { OrderSide } from '@/api/orders/OrderTypes';
 import { Translations } from './Translations';
 
 const frMessages: Translations = {

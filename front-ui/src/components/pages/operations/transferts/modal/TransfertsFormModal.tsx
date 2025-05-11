@@ -1,9 +1,4 @@
-import { TransactionSide } from '@api/transactions/TransactionsTypes';
 import { CreateTransfertRequest } from '@api/transferts/TransfertTypes';
-import {
-  TransactionFields,
-} from '@components/pages/operations/transactions/form/fields/TransactionsFormFields';
-import TransactionsForm from '@components/pages/operations/transactions/form/TransactionsForm';
 import {
   TransfertFields,
   TransfertFormType,
@@ -50,7 +45,7 @@ export default function TransfertsFormModal({ isOpen, onCancel }: TransfertsForm
     };
 
     transfertsService.createTransfert(transfertData).then(() => {
-      onCancel()
+      onCancel();
     });
   }
 

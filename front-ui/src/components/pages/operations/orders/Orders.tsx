@@ -16,7 +16,7 @@ import OrdersTable from './table/OrdersTable';
 export default function Orders() {
   const ordersService: OrdersService = getGlobalInstance(OrdersService);
   const { messages } = useMessages();
-  
+
   const [isModalDisplayed, setModalDisplayed] = useState(false);
 
   const {

@@ -1,9 +1,9 @@
-import { Button } from '@/lib/shadcn/button';
 import Modal from '@components/theme/modal/Modal';
 import useMessages from '@i18n/hooks/messagesHook';
 import { Form } from '@lib/shadcn/form';
 import React, { ComponentProps, PropsWithChildren } from 'react';
 import { FieldValues, UseFormReturn } from 'react-hook-form';
+import { Button } from '@/lib/shadcn/button';
 
 type SubmitFormModalProps<T extends FieldValues> = PropsWithChildren<{
   onCancel: () => void,

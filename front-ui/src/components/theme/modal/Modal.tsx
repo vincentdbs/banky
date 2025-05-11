@@ -1,3 +1,4 @@
+import React, { PropsWithChildren } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -5,7 +6,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/lib/shadcn/dialog';
-import React, { PropsWithChildren } from 'react';
 
 type ModalProps = {
   title: string,
