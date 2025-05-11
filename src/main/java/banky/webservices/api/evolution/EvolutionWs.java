@@ -1,6 +1,9 @@
 package banky.webservices.api.evolution;
 
+import banky.services.evolution.AmountByAccountService;
 import banky.services.evolution.TreasuryService;
+import banky.webservices.api.evolution.responses.AccountMonthlyTotalsResponse;
+import banky.webservices.api.evolution.responses.AmountByAccountResponse;
 import banky.webservices.api.evolution.responses.TotalByAccountAndMonthResponse;
 import banky.webservices.exceptions.BankyWsError;
 import banky.services.evolution.MonthlyBudgetService;
@@ -22,6 +25,7 @@ import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -39,14 +43,17 @@ public class EvolutionWs {
 
     private final TreasuryService treasuryService;
     private final MonthlyBudgetService monthlyBudgetService;
+    private final AmountByAccountService amountByAccountService;
 
     @Inject
     private EvolutionWs(
         TreasuryService treasuryService,
-        MonthlyBudgetService monthlyBudgetService
+        MonthlyBudgetService monthlyBudgetService,
+        AmountByAccountService amountByAccountService
     ) {
         this.treasuryService = treasuryService;
         this.monthlyBudgetService = monthlyBudgetService;
+        this.amountByAccountService = amountByAccountService;
     }
 
     /**
@@ -96,5 +103,25 @@ public class EvolutionWs {
         Validators.checkRequired("type", type);
 
         return monthlyBudgetService.fetchMonthlyBudget(date, type);
+    }
+
+    /**
+     * Retrieves account monthly totals for the specified year and two preceding years.
+     *
+     * @param year The year for which to retrieve account totals
+     * @return A response containing monthly account totals
+     */
+    @GET
+    @Path("/accounts/yearly-totals")
+    @Operation(description = "Retrieve account monthly totals for the specified year and two preceding years")
+    public Map<LocalDate, List<AmountByAccountResponse>> fetchAccountMonthlyTotals(
+        @Parameter(description = "The year for which to retrieve account totals", required = true)
+        @QueryParam("year") Integer year
+    ) {
+        // Validate parameters
+        Validators.checkRequired("year", year);
+        
+        // Fetch and return monthly account totals
+        return amountByAccountService.fetchAccountTotalsByYear(year);
     }
 }

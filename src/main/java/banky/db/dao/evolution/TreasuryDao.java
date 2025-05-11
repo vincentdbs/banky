@@ -1,7 +1,8 @@
 package banky.db.dao.evolution;
 
+import banky.db.BankyTransactionManager;
+import banky.db.dao.accounts.data.AccountMonthlyTotal;
 import banky.db.dao.evolution.data.AccountMonthlyEvolution;
-import com.coreoz.plume.db.querydsl.transaction.TransactionManagerQuerydsl;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -23,11 +24,11 @@ import java.util.List;
 @Singleton
 public class TreasuryDao {
 
-    private final TransactionManagerQuerydsl transactionManagerQuerydsl;
+    private final BankyTransactionManager transactionManager;
 
     @Inject
-    private TreasuryDao(TransactionManagerQuerydsl transactionManager) {
-        this.transactionManagerQuerydsl = transactionManager;
+    private TreasuryDao(BankyTransactionManager transactionManager) {
+        this.transactionManager = transactionManager;
     }
 
     /**
@@ -48,7 +49,7 @@ public class TreasuryDao {
         String sql = "{CALL get_account_monthly_evolution(?, ?)}";
         List<AccountMonthlyEvolution> results = new ArrayList<>();
 
-        try (Connection connection = transactionManagerQuerydsl.dataSource().getConnection();
+        try (Connection connection = transactionManager.dataSource().getConnection();
              PreparedStatement stmt = connection.prepareCall(sql)) {
             
             stmt.setDate(1, java.sql.Date.valueOf(startDate));
@@ -74,5 +75,26 @@ public class TreasuryDao {
             logger.error("Error executing get_account_monthly_evolution function", exception);
             return Collections.emptyList();
         }
+    }
+
+    /**
+     * Fetches account monthly totals for the specified year and the two preceding years.
+     *
+     * @param year The year for which to fetch monthly account totals
+     * @return A list of AccountMonthlyTotal objects containing account balances by month
+     */
+    public List<AccountMonthlyTotal> fetchAccountMonthlyTotalsByYear(int year) {
+        String procedureCall = "{CALL get_account_monthly_totals_by_year(?)}";
+        
+        return transactionManager.executeStoredProcedure(
+            procedureCall,
+            stmt -> stmt.setInt(1, year),
+            rs -> new AccountMonthlyTotal(
+                // Parse month from the string format (yyyy-MM)
+                LocalDate.parse(rs.getString("month")),
+                rs.getString("name"),
+                rs.getBigDecimal("total")
+            )
+        );
     }
 }
