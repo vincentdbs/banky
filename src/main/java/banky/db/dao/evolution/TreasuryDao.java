@@ -33,8 +33,8 @@ public class TreasuryDao {
 
     /**
      * Fetches monthly account evolution data for the specified period.
-     * 
-     * @param startDate The start date of the period to analyze
+     *
+     * @param startDate      The start date of the period to analyze
      * @param numberOfMonths The number of months to include in the analysis
      * @return A list of AccountMonthlyEvolution records containing account balances and gain/loss by month
      */
@@ -42,19 +42,19 @@ public class TreasuryDao {
         if (startDate == null || numberOfMonths <= 0) {
             return Collections.emptyList();
         }
-        
+
         // Calculate end date based on start date and number of months
         LocalDate endDate = startDate.plusMonths(numberOfMonths).minusDays(1);
-        
+
         String sql = "{CALL get_account_monthly_evolution(?, ?)}";
         List<AccountMonthlyEvolution> results = new ArrayList<>();
 
         try (Connection connection = transactionManager.dataSource().getConnection();
              PreparedStatement stmt = connection.prepareCall(sql)) {
-            
+
             stmt.setDate(1, java.sql.Date.valueOf(startDate));
             stmt.setDate(2, java.sql.Date.valueOf(endDate));
-            
+
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     AccountMonthlyEvolution evolution = new AccountMonthlyEvolution(
@@ -69,7 +69,7 @@ public class TreasuryDao {
                     results.add(evolution);
                 }
             }
-            
+
             return results;
         } catch (SQLException exception) {
             logger.error("Error executing get_account_monthly_evolution function", exception);
@@ -85,7 +85,7 @@ public class TreasuryDao {
      */
     public List<AccountMonthlyTotal> fetchAccountMonthlyTotalsByYear(int year) {
         String procedureCall = "{CALL get_account_monthly_totals_by_year(?)}";
-        
+
         return transactionManager.executeStoredProcedure(
             procedureCall,
             stmt -> stmt.setInt(1, year),

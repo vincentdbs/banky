@@ -101,6 +101,7 @@ export type Translations = {
       graph: string,
       monthlyBudget: string,
       annual: string,
+      yearlyTotals: string,
     },
   },
   parameters: {
@@ -160,6 +161,10 @@ export type Translations = {
       checking: string,
       savings: string,
       market: string,
+    },
+    yearlyTotals: {
+      title: string,
+      selectYear: string,
     },
   },
   operations: {

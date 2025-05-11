@@ -1,7 +1,9 @@
 package banky.webservices.api.evolution.responses;
 
 import banky.webservices.serializer.TwoDecimalDeserializer;
+import banky.webservices.serializer.TwoDecimalToStringSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.math.BigDecimal;
 
@@ -11,7 +13,7 @@ import java.math.BigDecimal;
  */
 public record AmountByAccountResponse(
     String accountName,
-    @JsonDeserialize(using = TwoDecimalDeserializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal total
 ) {
 }

@@ -6,6 +6,7 @@ import { HttpMethod } from 'simple-http-request-builder';
 import { HttpPromise } from 'simple-http-rest-client';
 import { MonthlyBudgetResponse } from './EvolutionTypes';
 import { AnnualTotal } from './TreasuryEvolutionTypes';
+import { YearlyAccountTotalsResponse } from './YearlyAccountTotalsTypes';
 
 export default class EvolutionApi {
   private static BASE_PATH: string = '/evolutions';
@@ -35,6 +36,19 @@ export default class EvolutionApi {
     return this.apiHttpClient
       .restRequest<AnnualTotal>(HttpMethod.GET, `${EvolutionApi.BASE_PATH}/treasury`)
       .queryParams([['startDate', startDate], ['numberOfMonths', numberOfMonths]])
+      .execute();
+  }
+
+  /**
+   * Fetches account monthly totals for a specified year and two preceding years
+   *
+   * @param year The year for which to retrieve account totals
+   * @returns A promise with the yearly account totals data mapped by date
+   */
+  fetchYearlyAccountTotals(year: number): HttpPromise<YearlyAccountTotalsResponse> {
+    return this.apiHttpClient
+      .restRequest<YearlyAccountTotalsResponse>(HttpMethod.GET, `${EvolutionApi.BASE_PATH}/accounts/yearly-totals`)
+      .queryParams([['year', year.toString()]])
       .execute();
   }
 }

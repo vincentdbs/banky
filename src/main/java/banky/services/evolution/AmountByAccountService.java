@@ -22,10 +22,9 @@ import java.util.stream.Collectors;
 public class AmountByAccountService {
 
     private final TreasuryDao treasuryDao;
-    private static final DateTimeFormatter MONTH_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM");
 
     @Inject
-    public AmountByAccountService(TreasuryDao treasuryDao) {
+    private AmountByAccountService(TreasuryDao treasuryDao) {
         this.treasuryDao = treasuryDao;
     }
 
@@ -38,12 +37,16 @@ public class AmountByAccountService {
     public Map<LocalDate, List<AmountByAccountResponse>> fetchAccountTotalsByYear(int year) {
         List<AccountMonthlyTotal> monthlyTotals = treasuryDao.fetchAccountMonthlyTotalsByYear(year);
 
-        // Group by month
+        // Group by month and map to response objects
         return monthlyTotals
             .stream()
             .collect(
                 Collectors.groupingBy(
-                    AccountMonthlyTotal::month
+                    AccountMonthlyTotal::month,
+                    Collectors.mapping(
+                        total -> new AmountByAccountResponse(total.accountName(), total.total()),
+                        Collectors.toList()
+                    )
                 )
             );
     }
