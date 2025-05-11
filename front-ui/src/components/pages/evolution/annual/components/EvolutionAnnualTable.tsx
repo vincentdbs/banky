@@ -26,7 +26,7 @@ export default function EvolutionAnnualTable(
   }: EvolutionAnnualTableProps,
 ) {
   return (
-    <div className="grid grid-cols-[120px_180px_repeat(36,minmax(100px,1fr))]">
+    <div className="grid grid-cols-[80px_150px_repeat(36,minmax(120px,1fr))]">
       {/* Header row with year and months */}
       <EvolutionAnnualHeader year={year} monthDates={monthDates} />
       {/* Column titles row */}

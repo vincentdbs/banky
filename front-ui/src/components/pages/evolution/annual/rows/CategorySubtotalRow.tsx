@@ -5,7 +5,11 @@ import {
   TotalByCategory,
 } from '@api/evolution/TreasuryEvolutionTypes';
 import useMessages from '@i18n/hooks/messagesHook';
-import { formatCurrency, formatPercentage } from '@utils/number/NumberUtils';
+import {
+  formatCurrency,
+  formatEuroDecimalPriceFromString,
+  formatPercentage,
+} from '@utils/number/NumberUtils';
 import React from 'react';
 
 type CategorySubtotalRowProps = {
@@ -39,23 +43,24 @@ export default function CategorySubtotalRow(
         const totalByCategory: TotalByCategory = totalByAccountAndMonth.totalByCategory[category];
 
         // Default values if no data exists for this month
-        const total: number = totalByCategory?.total ?? 0;
-        const gainLoss: number = totalByCategory?.gainLoss ?? 0;
-        const gainLossPercentage: number = totalByCategory?.gainLossPercentage ?? 0;
+        const total: string = totalByCategory?.total ?? "0";
+        const gainLoss: string = totalByCategory?.gainLoss ?? "0";
+        const gainLossPercentage: string = totalByCategory?.gainLossPercentage ?? "0";
 
         return (
           <React.Fragment key={`${category}-subtotal-${monthDate}`}>
             <div
-              className={`p-3 text-right font-medium bg-slate-100 border-b border-r ${total < 0 ? 'text-red-600' : ''}`}>
-              {formatCurrency(total)}
+              className={`p-3 text-right font-medium bg-slate-100 border-b border-r ${parseInt(total) < 0 ? 'text-red-600' : ''}`}>
+              {formatEuroDecimalPriceFromString(total, 3)}
             </div>
             <div
-              className={`p-3 text-right font-medium bg-slate-100 border-b border-r ${gainLoss < 0 ? 'text-red-600' : gainLoss > 0 ? 'text-green-600' : ''}`}>
-              {formatCurrency(gainLoss)}
+              className={`p-3 text-right font-medium bg-slate-100 border-b border-r ${parseInt(gainLoss) < 0 ? 'text-red-600' : parseInt(gainLoss) > 0 ? 'text-green-600' : ''}`}
+            >
+              {formatEuroDecimalPriceFromString(gainLoss, 3)}
             </div>
             <div
-              className={`p-3 text-right font-medium bg-slate-100 border-b border-r ${gainLossPercentage < 0 ? 'text-red-600' : gainLossPercentage > 0 ? 'text-green-600' : ''}`}>
-              {formatPercentage(gainLossPercentage)}
+              className={`p-3 text-right font-medium bg-slate-100 border-b border-r ${parseInt(gainLossPercentage) < 0 ? 'text-red-600' : parseInt(gainLossPercentage) > 0 ? 'text-green-600' : ''}`}>
+              {formatEuroDecimalPriceFromString(gainLossPercentage, 3)}
             </div>
           </React.Fragment>
         );

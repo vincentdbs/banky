@@ -4,22 +4,22 @@ export type TotalByAccount = {
   id: string,
   shortName: string,
   name: string,
-  total: number,
-  gainLoss: number,
-  gainLossPercentage: number,
+  total: string,
+  gainLoss: string,
+  gainLossPercentage: string,
 };
 
 export type TotalByCategory = {
-  total: number,
-  gainLoss: number,
-  gainLossPercentage: number,
+  total: string,
+  gainLoss: string,
+  gainLossPercentage: string,
   totalByAccount: TotalByAccount[],
 };
 
 export type TotalByAccountAndMonth = {
-  total: number,
-  gainLoss: number,
-  gainLossPercentage: number,
+  total: string,
+  gainLoss: string,
+  gainLossPercentage: string,
   totalByCategory: Record<AccountType, TotalByCategory>, // string is the banking account type (CHECKING, SAVINGS, MARKET)
 };
 

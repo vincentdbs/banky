@@ -204,7 +204,7 @@ const frMessages: Translations = {
       subTotal: 'Sous-total',
       recap: 'Récapitulatif',
       amount: 'Montant',
-      shortName: 'Identifiant',
+      shortName: 'ID',
       name: 'Compte',
       total: 'Total',
       gainLoss: 'Gain/Perte',

@@ -7,7 +7,10 @@ import {
   TotalByAccount,
   TotalByAccountAndMonth,
 } from '@api/evolution/TreasuryEvolutionTypes';
-import { formatCurrency, formatPercentage } from '@utils/number/NumberUtils';
+import {
+  formatEuroDecimalPriceFromString,
+  formatPercentageDecimalPriceFromString,
+} from '@utils/number/NumberUtils';
 import React from 'react';
 
 type MonthlyAccountBlockProps = {
@@ -38,22 +41,22 @@ export default function MonthlyAccountBlock(
   }
 
   // Default values if no data exists for this month
-  const total: number = accountData?.total ?? 0;
-  const gainLoss: number = accountData?.gainLoss ?? 0;
-  const gainLossPercentage: number = accountData?.gainLossPercentage ?? 0;
+  const total: string = accountData?.total ?? "0";
+  const gainLoss: string = accountData?.gainLoss ?? "0";
+  const gainLossPercentage: string = accountData?.gainLossPercentage ?? "0";
 
   return (
     <>
-      <div className={`p-3 text-right border-b border-r ${total < 0 ? 'text-red-600' : ''}`}>
-        {formatCurrency(total)}
+      <div className={`p-3 text-right border-b border-r ${parseInt(total) < 0 ? 'text-red-600' : ''}`}>
+        {formatEuroDecimalPriceFromString(total, 3)}
       </div>
       <div
-        className={`p-3 text-right border-b border-r ${gainLoss < 0 ? 'text-red-600' : gainLoss > 0 ? 'text-green-600' : ''}`}>
-        {formatCurrency(gainLoss)}
+        className={`p-3 text-right border-b border-r ${parseInt(gainLoss) < 0 ? 'text-red-600' : parseInt(gainLoss) > 0 ? 'text-green-600' : ''}`}>
+        {formatEuroDecimalPriceFromString(gainLoss, 3)}
       </div>
       <div
-        className={`p-3 text-right border-b border-r ${gainLossPercentage < 0 ? 'text-red-600' : gainLossPercentage > 0 ? 'text-green-600' : ''}`}>
-        {formatPercentage(gainLossPercentage)}
+        className={`p-3 text-right border-b border-r ${parseInt(gainLossPercentage) < 0 ? 'text-red-600' : parseInt(gainLossPercentage) > 0 ? 'text-green-600' : ''}`}>
+        {formatPercentageDecimalPriceFromString(gainLossPercentage)}
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 package banky.webservices.api.evolution;
 
 import banky.services.evolution.TreasuryService;
-import banky.webservices.api.evolution.responses.AnnualTotalResponse;
+import banky.webservices.api.evolution.responses.TotalByAccountAndMonthResponse;
 import banky.webservices.exceptions.BankyWsError;
 import banky.services.evolution.MonthlyBudgetService;
 import banky.services.evolution.data.MonthlyBudgetType;
@@ -22,6 +22,7 @@ import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 /**
  * Web service providing API endpoints to retrieve treasury evolution data.
@@ -58,7 +59,7 @@ public class EvolutionWs {
     @GET
     @Path("/treasury")
     @Operation(description = "Retrieve treasury evolution totals for a specified date range")
-    public AnnualTotalResponse fetchEvolutionTotals(
+    public Map<String, TotalByAccountAndMonthResponse> fetchEvolutionTotals(
         @Parameter(description = "Start date (first month to include, day is ignored)", required = true)
         @QueryParam("startDate") LocalDate startDate,
         @Parameter(description = "Number of months to fetch from the start date", required = true)
