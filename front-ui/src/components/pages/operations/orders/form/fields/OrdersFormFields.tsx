@@ -73,7 +73,7 @@ export default function OrdersFormFields(
           control={control}
           name={OrderFields.AMOUNT}
           label={messages.operations.orders.form.fields[OrderFields.AMOUNT]}
-          step={0.01}
+          step={0.001}
           min={0}
           displayEuro
         />
@@ -89,7 +89,7 @@ export default function OrdersFormFields(
         control={control}
         name={OrderFields.CHARGES}
         label={messages.operations.orders.form.fields[OrderFields.CHARGES]}
-        step={0.01}
+        step={0.001}
         min={0}
         displayEuro
       />

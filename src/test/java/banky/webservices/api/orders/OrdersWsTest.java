@@ -4,7 +4,7 @@ import banky.services.accounts.enums.AccountType;
 import banky.services.orders.OrdersService;
 import banky.services.orders.enums.OrderSide;
 import banky.services.tickers.enums.TickerCategory;
-import banky.webservices.api.orders.requests.OrderRequest;
+import banky.webservices.api.orders.requests.CreateOrderRequest;
 import banky.webservices.api.orders.responses.OrderResponse;
 import banky.webservices.data.pagination.PaginatedResponse;
 import banky.webservices.data.pagination.PaginationMeta;
@@ -115,9 +115,8 @@ class OrdersWsTest {
     @Test
     void createOrder_shouldReturnNewId_whenRequestIsValid() {
         // Arrange
-        OrderRequest request = new OrderRequest(
+        CreateOrderRequest request = new CreateOrderRequest(
             LocalDate.of(2025, 5, 1),
-            "LVMH",
             new BigDecimal("1500.00"),
             10,
             new BigDecimal("9.90"),
@@ -137,9 +136,8 @@ class OrdersWsTest {
     @Test
     void createOrder_shouldThrowException_whenDateIsMissing() {
         // Arrange
-        OrderRequest request = new OrderRequest(
+        CreateOrderRequest request = new CreateOrderRequest(
             null,
-            "LVMH",
             new BigDecimal("1500.00"),
             10,
             new BigDecimal("9.90"),
@@ -156,9 +154,8 @@ class OrdersWsTest {
     @Test
     void createOrder_shouldThrowException_whenNameIsMissing() {
         // Arrange
-        OrderRequest request = new OrderRequest(
+        CreateOrderRequest request = new CreateOrderRequest(
             LocalDate.of(2025, 5, 1),
-            null,
             new BigDecimal("1500.00"),
             10,
             new BigDecimal("9.90"),
@@ -175,9 +172,8 @@ class OrdersWsTest {
     @Test
     void createOrder_shouldThrowException_whenAmountIsMissing() {
         // Arrange
-        OrderRequest request = new OrderRequest(
+        CreateOrderRequest request = new CreateOrderRequest(
             LocalDate.of(2025, 5, 1),
-            "LVMH",
             null,
             10,
             new BigDecimal("9.90"),
@@ -194,9 +190,8 @@ class OrdersWsTest {
     @Test
     void createOrder_shouldThrowException_whenQuantityIsMissing() {
         // Arrange
-        OrderRequest request = new OrderRequest(
+        CreateOrderRequest request = new CreateOrderRequest(
             LocalDate.of(2025, 5, 1),
-            "LVMH",
             new BigDecimal("1500.00"),
             null,
             new BigDecimal("9.90"),
@@ -213,9 +208,8 @@ class OrdersWsTest {
     @Test
     void createOrder_shouldThrowException_whenChargesIsMissing() {
         // Arrange
-        OrderRequest request = new OrderRequest(
+        CreateOrderRequest request = new CreateOrderRequest(
             LocalDate.of(2025, 5, 1),
-            "LVMH",
             new BigDecimal("1500.00"),
             10,
             null,
@@ -232,9 +226,8 @@ class OrdersWsTest {
     @Test
     void createOrder_shouldThrowException_whenAccountIdIsMissing() {
         // Arrange
-        OrderRequest request = new OrderRequest(
+        CreateOrderRequest request = new CreateOrderRequest(
             LocalDate.of(2025, 5, 1),
-            "LVMH",
             new BigDecimal("1500.00"),
             10,
             new BigDecimal("9.90"),
@@ -251,9 +244,8 @@ class OrdersWsTest {
     @Test
     void createOrder_shouldThrowException_whenTickerIdIsMissing() {
         // Arrange
-        OrderRequest request = new OrderRequest(
+        CreateOrderRequest request = new CreateOrderRequest(
             LocalDate.of(2025, 5, 1),
-            "LVMH",
             new BigDecimal("1500.00"),
             10,
             new BigDecimal("9.90"),
@@ -270,9 +262,8 @@ class OrdersWsTest {
     @Test
     void createOrder_shouldThrowException_whenSideIsMissing() {
         // Arrange
-        OrderRequest request = new OrderRequest(
+        CreateOrderRequest request = new CreateOrderRequest(
             LocalDate.of(2025, 5, 1),
-            "LVMH",
             new BigDecimal("1500.00"),
             10,
             new BigDecimal("9.90"),
@@ -289,9 +280,8 @@ class OrdersWsTest {
     @Test
     void createOrder_shouldThrowException_whenAmountIsNotPositive() {
         // Arrange
-        OrderRequest request = new OrderRequest(
+        CreateOrderRequest request = new CreateOrderRequest(
             LocalDate.of(2025, 5, 1),
-            "LVMH",
             new BigDecimal("0.00"), // Zero amount - should be rejected
             10,
             new BigDecimal("9.90"),
@@ -314,9 +304,8 @@ class OrdersWsTest {
     @Test
     void createOrder_shouldThrowException_whenAccountIsNotMarketType() {
         // Arrange
-        OrderRequest request = new OrderRequest(
+        CreateOrderRequest request = new CreateOrderRequest(
             LocalDate.of(2025, 5, 1),
-            "LVMH",
             new BigDecimal("1500.00"),
             10,
             new BigDecimal("9.90"),

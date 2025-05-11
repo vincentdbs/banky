@@ -10,7 +10,7 @@ import java.time.LocalDate;
 /**
  * Request object for creating a new order
  */
-public record OrderRequest(
+public record CreateOrderRequest(
     LocalDate date,
     @JsonDeserialize(using = ThreeDecimalDeserializer.class)
     BigDecimal amount,

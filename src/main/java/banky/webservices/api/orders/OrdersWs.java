@@ -2,7 +2,7 @@ package banky.webservices.api.orders;
 
 import banky.services.accounts.enums.AccountType;
 import banky.services.orders.OrdersService;
-import banky.webservices.api.orders.requests.OrderRequest;
+import banky.webservices.api.orders.requests.CreateOrderRequest;
 import banky.webservices.api.orders.responses.OrderResponse;
 import banky.webservices.data.pagination.PaginatedResponse;
 import banky.webservices.validators.AccountValidator;
@@ -64,7 +64,7 @@ public class OrdersWs {
 
     @POST
     @Operation(description = "Create a new order")
-    public long createOrder(OrderRequest request) {
+    public long createOrder(CreateOrderRequest request) {
         Validators.checkRequired("date", request.date());
         Validators.checkRequired("amount", request.amount());
         Validators.checkRequired("quantity", request.quantity());

@@ -1,5 +1,5 @@
 import OrdersApi from '@api/orders/OrdersApi';
-import { OrderRequest, PaginatedOrdersResponse } from '@api/orders/OrderTypes';
+import { CreateOrderRequest, PaginatedOrdersResponse } from '@api/orders/OrderTypes';
 import { HttpPromise } from 'simple-http-rest-client';
 
 /**
@@ -24,7 +24,7 @@ export default class OrdersService {
    * @param request The order details
    * @returns A promise containing the ID of the created order
    */
-  createOrder(request: OrderRequest): HttpPromise<number> {
+  createOrder(request: CreateOrderRequest): HttpPromise<number> {
     return this.ordersApi.createOrder(request);
   }
 }

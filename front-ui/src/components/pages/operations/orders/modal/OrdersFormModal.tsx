@@ -1,10 +1,11 @@
-import { OrderSide } from '@api/orders/OrderTypes';
+import { CreateOrderRequest, OrderSide } from '@api/orders/OrderTypes';
 import { OrderFields, OrderFormType } from '@components/pages/operations/orders/form/fields/OrdersFormFields';
 import OrdersForm from '@components/pages/operations/orders/form/OrdersForm';
 import SubmitFormModal from '@components/theme/modal/SubmitFormModal';
 import useMessages from '@i18n/hooks/messagesHook';
 import OrdersService from '@services/orders/OrdersService';
 import { formatToIsoDate } from '@utils/dates/DatesUtils';
+import { threeDecimalNumberToString } from '@utils/number/NumberUtils';
 import dayjs from 'dayjs';
 import { getGlobalInstance } from 'plume-ts-di';
 import React, { useState } from 'react';
@@ -37,17 +38,17 @@ export default function OrdersFormModal({ isOpen, onCancel }: OrdersFormModalPro
   });
 
   function onSubmit(values: OrderFormType) {
-    const orderData = {
+    const orderRequest: CreateOrderRequest = {
       date: formatToIsoDate(values[OrderFields.DATE]),
       side: side,
-      amount: values[OrderFields.AMOUNT],
+      amount: threeDecimalNumberToString(values[OrderFields.AMOUNT]),
       quantity: values[OrderFields.QUANTITY],
-      charges: values[OrderFields.CHARGES],
+      charges: threeDecimalNumberToString(values[OrderFields.CHARGES]),
       accountId: values[OrderFields.ACCOUNT],
       tickerId: values[OrderFields.TICKER],
     };
 
-    ordersService.createOrder(orderData).then(() => {
+    ordersService.createOrder(orderRequest).then(() => {
       form.reset();
       onCancel();
     });
@@ -64,7 +65,6 @@ export default function OrdersFormModal({ isOpen, onCancel }: OrdersFormModalPro
     >
       <OrdersForm
         control={form.control}
-        currentSide={side}
         setSide={setSide}
       />
     </SubmitFormModal>

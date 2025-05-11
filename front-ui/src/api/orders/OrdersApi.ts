@@ -1,7 +1,7 @@
 import ApiHttpClient from '@api/ApiHttpClient';
 import { HttpMethod } from 'simple-http-request-builder';
 import { HttpPromise } from 'simple-http-rest-client';
-import { OrderRequest, PaginatedOrdersResponse } from './OrderTypes';
+import { CreateOrderRequest, PaginatedOrdersResponse } from './OrderTypes';
 
 /**
  * API service for handling market orders
@@ -36,7 +36,7 @@ export default class OrdersApi {
    * @param request The order request details
    * @returns A promise containing the ID of the created order
    */
-  createOrder(request: OrderRequest): HttpPromise<number> {
+  createOrder(request: CreateOrderRequest): HttpPromise<number> {
     return this.apiHttpClient
       .restRequest<number>(HttpMethod.POST, OrdersApi.BASE_PATH)
       .jsonBody(request)

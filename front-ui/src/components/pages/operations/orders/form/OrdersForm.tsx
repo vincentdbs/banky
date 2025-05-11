@@ -11,14 +11,13 @@ import useMessages from '@i18n/hooks/messagesHook';
 
 type OrdersFormProps = {
   control: Control<OrderFormType>,
-  currentSide: OrderSide,
   setSide: (side: OrderSide) => void,
 };
 
 /**
  * Form for creating a market order
  */
-export default function OrdersForm({ control, currentSide, setSide }: OrdersFormProps) {
+export default function OrdersForm({ control, setSide }: OrdersFormProps) {
   const { messages } = useMessages();
 
   const { choices: accountsChoices } = useFetchAccountNamesChoices();
@@ -36,8 +35,6 @@ export default function OrdersForm({ control, currentSide, setSide }: OrdersForm
         control={control}
         accountsChoices={accountsChoices}
         tickersChoices={tickersChoices}
-        side={currentSide}
-        setSide={setSide}
       />
     </>
   );

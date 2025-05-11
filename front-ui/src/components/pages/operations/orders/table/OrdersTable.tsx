@@ -59,9 +59,9 @@ export default function OrdersTable({ orders }: OrdersTableProps) {
               </TableCell>
               <TableCell className="text-right">{order.quantity}</TableCell>
               <TableCell
-                className="text-right">{formatEuroDecimalPriceFromString(order.amount)}</TableCell>
+                className="text-right">{formatEuroDecimalPriceFromString(order.amount, 3)}</TableCell>
               <TableCell
-                className="text-right">{formatEuroDecimalPriceFromString(order.charges)}</TableCell>
+                className="text-right">{formatEuroDecimalPriceFromString(order.charges, 3)}</TableCell>
               <TableCell>
                 <p className="font-bold" style={{ color: `#${order.accountColor}` }}>
                   {order.accountShortName}
