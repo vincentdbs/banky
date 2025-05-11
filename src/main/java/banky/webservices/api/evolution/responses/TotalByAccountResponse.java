@@ -1,6 +1,6 @@
 package banky.webservices.api.evolution.responses;
 
-import banky.webservices.serializer.ThreeDecimalToStringSerializer;
+import banky.webservices.serializer.TwoDecimalToStringSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.math.BigDecimal;
@@ -13,10 +13,10 @@ public record TotalByAccountResponse(
     String id,
     String shortName,
     String name,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal total,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal gainLoss,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal gainLossPercentage
 ) {}

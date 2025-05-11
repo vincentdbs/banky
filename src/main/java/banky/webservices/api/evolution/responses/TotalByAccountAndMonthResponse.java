@@ -1,8 +1,7 @@
 package banky.webservices.api.evolution.responses;
 
 import banky.services.accounts.enums.AccountType;
-import banky.webservices.serializer.ThreeDecimalToStringSerializer;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import banky.webservices.serializer.TwoDecimalToStringSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.math.BigDecimal;
@@ -13,11 +12,11 @@ import java.util.Map;
  * Corresponds to the TotalByAccountAndMonth type in the frontend
  */
 public record TotalByAccountAndMonthResponse(
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal total,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal gainLoss,
-    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
+    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
     BigDecimal gainLossPercentage,
     Map<AccountType, TotalByCategoryResponse> totalByCategory
 ) {}

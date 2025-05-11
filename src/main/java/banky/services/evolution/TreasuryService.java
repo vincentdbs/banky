@@ -1,6 +1,6 @@
 package banky.services.evolution;
 
-import banky.db.dao.evolution.TreasuryBisDao;
+import banky.db.dao.evolution.TreasuryDao;
 import banky.db.dao.evolution.data.AccountMonthlyEvolution;
 import banky.services.accounts.enums.AccountType;
 import banky.webservices.api.evolution.responses.TotalByAccountAndMonthResponse;
@@ -25,11 +25,11 @@ import java.util.stream.Collectors;
 @Singleton
 public class TreasuryService {
 
-    private final TreasuryBisDao treasuryBisDao;
+    private final TreasuryDao treasuryDao;
 
     @Inject
-    private TreasuryService(TreasuryBisDao treasuryBisDao) {
-        this.treasuryBisDao = treasuryBisDao;
+    private TreasuryService(TreasuryDao treasuryDao) {
+        this.treasuryDao = treasuryDao;
     }
 
     /**
@@ -44,7 +44,7 @@ public class TreasuryService {
         LocalDate firstDayOfTheMonth = startDate.withDayOfMonth(1);
 
         // Fetch the data from the DAO
-        List<AccountMonthlyEvolution> accountsMonthlyEvolution = treasuryBisDao.fetchAccountsTotalsByMonth(
+        List<AccountMonthlyEvolution> accountsMonthlyEvolution = treasuryDao.fetchAccountsTotalsByMonth(
             firstDayOfTheMonth,
             numberOfMonths
         );

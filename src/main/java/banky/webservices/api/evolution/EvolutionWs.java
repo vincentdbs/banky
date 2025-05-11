@@ -54,7 +54,7 @@ public class EvolutionWs {
      *
      * @param startDate      The first month to include in the results (day is ignored)
      * @param numberOfMonths The number of months to fetch from the start date
-     * @return AnnualTotalResponse containing monthly totals and account breakdowns
+     * @return A map of total accounts amounts by month
      */
     @GET
     @Path("/treasury")

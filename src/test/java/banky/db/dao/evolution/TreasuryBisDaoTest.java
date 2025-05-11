@@ -37,7 +37,7 @@ public class TreasuryBisDaoTest {
     private ResultSet resultSet;
     
     @InjectMocks
-    private TreasuryBisDao treasuryBisDao;
+    private TreasuryDao treasuryBisDao;
     
     @Test
     public void fetchEvolutionTotals_should_return_empty_list_when_startDate_is_null() {
