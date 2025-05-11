@@ -48,11 +48,11 @@ export default function MonthlyAccountBlock(
   return (
     <>
       <div className={`p-3 text-right border-b border-r ${parseInt(total) < 0 ? 'text-red-600' : ''}`}>
-        {formatEuroDecimalPriceFromString(total, 3)}
+        {formatEuroDecimalPriceFromString(total)}
       </div>
       <div
         className={`p-3 text-right border-b border-r ${parseInt(gainLoss) < 0 ? 'text-red-600' : parseInt(gainLoss) > 0 ? 'text-green-600' : ''}`}>
-        {formatEuroDecimalPriceFromString(gainLoss, 3)}
+        {formatEuroDecimalPriceFromString(gainLoss)}
       </div>
       <div
         className={`p-3 text-right border-b border-r ${parseInt(gainLossPercentage) < 0 ? 'text-red-600' : parseInt(gainLossPercentage) > 0 ? 'text-green-600' : ''}`}>

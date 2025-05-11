@@ -29,13 +29,11 @@ export default class EvolutionService {
   /**
    * Fetches treasury evolution totals for a specific date range
    *
-   * @param selectedYear The year to fetch data for
+   * @param startDate The first month to include
    * @param numberOfMonths The number of months to fetch from the start date
    * @returns A promise with the treasury evolution data
    */
-  fetchTreasuryEvolution(selectedYear: number, numberOfMonths: number): HttpPromise<AnnualTotal> {
-    const startDate: Dayjs = dayjs(`${selectedYear}-01-01`);
-
-    return this.evolutionApi.fetchTreasuryEvolution(formatToIsoDate(startDate), numberOfMonths)
+  fetchTreasuryEvolution(startDate: Dayjs, numberOfMonths: number): HttpPromise<AnnualTotal> {
+    return this.evolutionApi.fetchTreasuryEvolution(formatToIsoDate(startDate), numberOfMonths);
   }
 }
