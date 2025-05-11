@@ -1,5 +1,8 @@
 import TransactionsApi from '@api/transactions/TransactionsApi';
-import { PaginatedTransactionsResponse, TransactionRequest, TransactionResponse } from '@api/transactions/TransactionsTypes';
+import {
+  CreateTransactionRequest,
+  PaginatedTransactionsResponse,
+} from '@api/transactions/TransactionsTypes';
 import { HttpPromise } from 'simple-http-rest-client';
 
 /**
@@ -19,11 +22,11 @@ export default class TransactionsService {
    */
   fetchTransactions = (page: number, size: number): HttpPromise<PaginatedTransactionsResponse> => this.transactionsApi.fetchTransactions(page, size);
 
-  createTransaction(request: TransactionRequest): HttpPromise<number> {
+  createTransaction(request: CreateTransactionRequest): HttpPromise<number> {
     return this.transactionsApi.createTransaction(request);
   }
 
-  updateTransaction(id: string, request: TransactionRequest): HttpPromise<void> {
+  updateTransaction(id: string, request: CreateTransactionRequest): HttpPromise<void> {
     return this.transactionsApi.updateTransaction(id, request);
   }
 }

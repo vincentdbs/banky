@@ -28,15 +28,14 @@ export type OrderResponse = {
 /**
  * Represents the request payload for creating a new order
  */
-export type OrderRequest = {
+export type CreateOrderRequest = {
   date: string,
-  name: string,
   side: OrderSide,
   amount: string,
   quantity: number,
   charges: string,
-  accountId: number,
-  tickerId: number,
+  accountId: string,
+  tickerId: string,
 };
 
 /**

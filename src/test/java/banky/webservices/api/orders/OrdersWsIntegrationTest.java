@@ -2,7 +2,7 @@ package banky.webservices.api.orders;
 
 import banky.guice.TestModule;
 import banky.services.orders.enums.OrderSide;
-import banky.webservices.api.orders.requests.OrderRequest;
+import banky.webservices.api.orders.requests.CreateOrderRequest;
 import banky.webservices.api.orders.responses.OrderResponse;
 import banky.webservices.data.pagination.PaginatedResponse;
 import com.coreoz.test.GuiceTest;
@@ -22,9 +22,8 @@ class OrdersWsIntegrationTest {
 
     @Inject
     private OrdersWs ordersWs;
-    private final OrderRequest testOrderRequest = new OrderRequest(
+    private final CreateOrderRequest testCreateOrderRequest = new CreateOrderRequest(
         LocalDate.of(2025, 5, 15),
-        "Test Order",
         new BigDecimal("500.00"),
         5,
         new BigDecimal("5.50"),
@@ -66,7 +65,7 @@ class OrdersWsIntegrationTest {
     @Test
     void createOrder_shouldReturnValidId() {
         // Act
-        Long orderId = ordersWs.createOrder(testOrderRequest);
+        Long orderId = ordersWs.createOrder(testCreateOrderRequest);
 
         // Assert  
         assertThat(orderId).isNotNull();

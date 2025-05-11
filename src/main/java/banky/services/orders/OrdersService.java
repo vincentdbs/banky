@@ -2,7 +2,7 @@ package banky.services.orders;
 
 import banky.db.dao.OrdersDao;
 import banky.db.generated.Orders;
-import banky.webservices.api.orders.requests.OrderRequest;
+import banky.webservices.api.orders.requests.CreateOrderRequest;
 import banky.webservices.api.orders.responses.OrderResponse;
 import banky.webservices.data.pagination.PaginatedResponse;
 import banky.webservices.data.pagination.PaginationMeta;
@@ -61,7 +61,7 @@ public class OrdersService {
      * @param request The order details including date, name, amount, quantity, charges, accountId, and tickerId
      * @return The ID of the newly created order
      */
-    public Long createOrder(OrderRequest request) {
+    public Long createOrder(CreateOrderRequest request) {
         Orders order = new Orders();
         
         order.setDate(request.date());

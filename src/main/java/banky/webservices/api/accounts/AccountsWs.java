@@ -48,9 +48,9 @@ public class AccountsWs {
     @Path("/names")
     @Operation(description = "Fetch all accounts names")
     public List<AccountNamesResponse> fetchAccountNames(
-        @QueryParam("type") AccountType type
+        @QueryParam("type") List<AccountType> types
     ) {
-        return categoryService.fetchAccountNames(type);
+        return categoryService.fetchAccountNames(types);
     }
 
     @POST

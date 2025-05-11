@@ -2,7 +2,7 @@ package banky.webservices.api.transactions;
 
 import banky.services.transactions.TransactionsService;
 import banky.webservices.data.pagination.PaginatedResponse;
-import banky.webservices.api.transactions.requests.TransactionRequest;
+import banky.webservices.api.transactions.requests.CreateTransactionRequest;
 import banky.webservices.api.transactions.responses.TransactionResponse;
 import com.coreoz.plume.jersey.errors.Validators;
 import com.coreoz.plume.jersey.security.permission.PublicApi;
@@ -50,7 +50,7 @@ public class TransactionsWs {
 
     @POST
     @Operation(description = "Create a new transaction")
-    public long createTransaction(TransactionRequest request) {
+    public long createTransaction(CreateTransactionRequest request) {
         Validators.checkRequired("date", request.date());
         Validators.checkRequired("amount", request.amount());
         Validators.checkRequired("accountId", request.accountId());

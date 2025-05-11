@@ -2,7 +2,7 @@ package banky.services.transfert;
 
 import banky.db.dao.TransfertDao;
 import banky.db.generated.Transfert;
-import banky.webservices.api.transfert.requests.TransfertRequest;
+import banky.webservices.api.transfert.requests.CreateTransfertRequest;
 import banky.webservices.api.transfert.responses.TransfertResponse;
 import banky.webservices.data.pagination.PaginatedResponse;
 import banky.webservices.data.pagination.PaginationMeta;
@@ -59,7 +59,7 @@ public class TransfertService {
      * @param request The transfer details including source account, destination account, amount and date
      * @return The ID of the newly created transfer
      */
-    public Long createTransfert(TransfertRequest request) {
+    public Long createTransfert(CreateTransfertRequest request) {
         Transfert transfert = new Transfert();
         transfert.setFromAccountId(request.fromAccountId());
         transfert.setToAccountId(request.toAccountId());

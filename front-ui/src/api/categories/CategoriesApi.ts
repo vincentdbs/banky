@@ -45,7 +45,7 @@ export default class CategoriesApi {
 
   fetchSubCategoryNames(): HttpPromise<SubCategoryNamesResponse[]> {
     return this.apiHttpClient
-      .restRequest<SubCategoryNamesResponse[]>(HttpMethod.GET, `${CategoriesApi.BASE_PATH}/sub-categories/names/all`)
+      .restRequest<SubCategoryNamesResponse[]>(HttpMethod.GET, `${CategoriesApi.BASE_PATH}/sub-categories/names`)
       .execute();
   }
 }

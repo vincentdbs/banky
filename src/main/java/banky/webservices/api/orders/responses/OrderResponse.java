@@ -17,10 +17,10 @@ public record OrderResponse(
     @JsonSerialize(using = ToStringSerializer.class)
     Long id,
     LocalDate date,
-    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
+    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
     BigDecimal amount,
     Integer quantity,
-    @JsonSerialize(using = TwoDecimalToStringSerializer.class)
+    @JsonSerialize(using = ThreeDecimalToStringSerializer.class)
     BigDecimal charges,
     String accountShortName,
     String accountColor,

@@ -6,6 +6,7 @@ import banky.services.accounts.enums.AccountType;
 import banky.webservices.api.accounts.data.AccountNamesResponse;
 import com.coreoz.plume.db.querydsl.crud.CrudDaoQuerydsl;
 import com.coreoz.plume.db.querydsl.transaction.TransactionManagerQuerydsl;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.Expressions;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
@@ -19,11 +20,25 @@ public class AccountDao extends CrudDaoQuerydsl<Accounts> {
         super(transactionManagerQuerydsl, QAccounts.accounts);
     }
 
-    public List<AccountNamesResponse> fetchAccountNames(AccountType type) {
-        var predicate = Expressions.asBoolean(true).isTrue();
-        if (type != null) {
-            predicate = QAccounts.accounts.type.eq(type.name());
+    public List<AccountNamesResponse> fetchAccountNames(List<AccountType> types) {
+        BooleanExpression predicate = Expressions.asBoolean(true).isTrue();
+        
+        if (types != null && !types.isEmpty()) {
+            BooleanExpression typesPredicate = null;
+            
+            for (AccountType type : types) {
+                if (typesPredicate == null) {
+                    typesPredicate = QAccounts.accounts.type.eq(type.name());
+                } else {
+                    typesPredicate = typesPredicate.or(QAccounts.accounts.type.eq(type.name()));
+                }
+            }
+            
+            if (typesPredicate != null) {
+                predicate = predicate.and(typesPredicate);
+            }
         }
+        
         return transactionManager
             .selectQuery()
             .select(QAccounts.accounts.id, QAccounts.accounts.name)

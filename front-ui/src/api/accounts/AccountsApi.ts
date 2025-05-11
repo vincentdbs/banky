@@ -1,12 +1,18 @@
+import {
+  AccountNamesResponse,
+  AccountRequest,
+  AccountResponse,
+  AccountType,
+} from '@api/accounts/AccountsTypes';
 import ApiHttpClient from '@api/ApiHttpClient';
-import { AccountResponse, AccountRequest, AccountNamesResponse } from '@api/accounts/AccountsTypes';
-import { HttpMethod } from 'simple-http-request-builder';
+import { HttpMethod, HttpQueryParam } from 'simple-http-request-builder';
 import { HttpPromise } from 'simple-http-rest-client';
 
 export default class AccountsApi {
   private static BASE_PATH: string = '/accounts';
 
-  constructor(private apiHttpClient: ApiHttpClient) {}
+  constructor(private apiHttpClient: ApiHttpClient) {
+  }
 
   fetchAccounts(): HttpPromise<AccountResponse[]> {
     return this.apiHttpClient
@@ -14,9 +20,16 @@ export default class AccountsApi {
       .execute();
   }
 
-  fetchAccountNames(): HttpPromise<AccountNamesResponse[]> {
+  fetchAccountNames(accountTypes: AccountType[] = []): HttpPromise<AccountNamesResponse[]> {
+    const queryParams: HttpQueryParam[] = [];
+
+    for (const type of accountTypes) {
+      queryParams.push(['type', type]);
+    }
+
     return this.apiHttpClient
       .restRequest<AccountNamesResponse[]>(HttpMethod.GET, `${AccountsApi.BASE_PATH}/names`)
+      .queryParams(queryParams)
       .execute();
   }
 

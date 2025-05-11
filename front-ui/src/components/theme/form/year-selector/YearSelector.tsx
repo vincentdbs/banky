@@ -23,7 +23,7 @@ export default function YearSelector(
   }: YearSelectorProps,
 ) {
   // Generate year options (current year and specified range before/after)
-  const years = React.useMemo(() => Array.from({ length: yearRange }, (_, i) => {
+  const years = React.useMemo(() => Array.from({ length: yearRange }, (_: unknown, i: number) => {
     const year: number = firstYear + i;
     return {
       value: year,

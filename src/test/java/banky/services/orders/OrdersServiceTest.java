@@ -4,7 +4,7 @@ import banky.db.dao.OrdersDao;
 import banky.db.generated.Orders;
 import banky.services.orders.enums.OrderSide;
 import banky.services.tickers.enums.TickerCategory;
-import banky.webservices.api.orders.requests.OrderRequest;
+import banky.webservices.api.orders.requests.CreateOrderRequest;
 import banky.webservices.api.orders.responses.OrderResponse;
 import banky.webservices.data.pagination.PaginatedResponse;
 import org.junit.jupiter.api.Test;
@@ -68,9 +68,8 @@ class OrdersServiceTest {
     @Test
     void createOrder_shouldSaveOrderAndReturnId() {
         // Arrange
-        OrderRequest request = new OrderRequest(
+        CreateOrderRequest request = new CreateOrderRequest(
             LocalDate.of(2025, 5, 1),
-            "LVMH",
             new BigDecimal("1500.00"),
             10,
             new BigDecimal("9.90"),

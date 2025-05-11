@@ -1,7 +1,7 @@
 package banky.webservices.api.transfert;
 
 import banky.services.transfert.TransfertService;
-import banky.webservices.api.transfert.requests.TransfertRequest;
+import banky.webservices.api.transfert.requests.CreateTransfertRequest;
 import banky.webservices.api.transfert.responses.TransfertResponse;
 import banky.webservices.data.pagination.PaginatedResponse;
 import com.coreoz.plume.jersey.errors.Validators;
@@ -52,7 +52,7 @@ public class TransfertWs {
 
     @POST
     @Operation(description = "Create a new transfer between accounts")
-    public long createTransfert(TransfertRequest request) {
+    public long createTransfert(CreateTransfertRequest request) {
         Validators.checkRequired("fromAccountId", request.fromAccountId());
         Validators.checkRequired("toAccountId", request.toAccountId());
         Validators.checkRequired("amount", request.amount());

@@ -1,7 +1,7 @@
 package banky.webservices.api.transfert;
 
 import banky.guice.TestModule;
-import banky.webservices.api.transfert.requests.TransfertRequest;
+import banky.webservices.api.transfert.requests.CreateTransfertRequest;
 import banky.webservices.api.transfert.responses.TransfertResponse;
 import banky.webservices.data.pagination.PaginatedResponse;
 import com.coreoz.test.GuiceTest;
@@ -21,7 +21,7 @@ class TransfertWsIntegrationTest {
 
     @Inject
     private TransfertWs transfertWs;
-    private final TransfertRequest testTransfertRequest = new TransfertRequest(
+    private final CreateTransfertRequest testCreateTransfertRequest = new CreateTransfertRequest(
         1L, 2L, new BigDecimal("100.00"), LocalDate.of(2025, 1, 15)
     );
 
@@ -58,7 +58,7 @@ class TransfertWsIntegrationTest {
     @Test
     void createTransfert_shouldReturnValidId() {
         // Act
-        Long transfertId = transfertWs.createTransfert(testTransfertRequest);
+        Long transfertId = transfertWs.createTransfert(testCreateTransfertRequest);
 
         // Assert  
         assertThat(transfertId).isNotNull();

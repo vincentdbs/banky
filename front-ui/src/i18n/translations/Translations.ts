@@ -2,9 +2,11 @@ import { OrderSide } from '@api/orders/OrderTypes';
 import { TickerCategory } from '@api/tickers/TickersTypes';
 import { TransactionSide } from '@api/transactions/TransactionsTypes';
 import { Routes } from '@components/Routes';
+import { OrderFields } from '@components/pages/operations/orders/form/fields/OrdersFormFields';
 import {
   TransactionFields,
 } from '@components/pages/operations/transactions/form/fields/TransactionsFormFields';
+import { TransfertFields } from '@components/pages/operations/transferts/form/fields/TransfertsFormFields';
 
 export type Translations = {
   title: 'Banky',
@@ -157,6 +159,7 @@ export type Translations = {
         action: string,
       },
       form: {
+        title: string,
         description: string,
         fields: Record<TransactionFields, string> & {
           from: string,
@@ -175,12 +178,7 @@ export type Translations = {
       form: {
         title: string,
         description: string,
-        fromAccount: string,
-        toAccount: string,
-        amount: string,
-        date: string,
-        selectAccount: string,
-        pickDate: string,
+        fields: Record<TransfertFields, string>,
       },
     },
     orders: {
@@ -197,6 +195,11 @@ export type Translations = {
         buy: string,
         sell: string,
         noOrders: string,
+      },
+      form: {
+        title: string,
+        description: string,
+        fields: Record<OrderFields, string>,
       },
       buy: string,
       sell: string,

@@ -1,8 +1,12 @@
+import { OrderFields } from '@components/pages/operations/orders/form/fields/OrdersFormFields';
 import { TickerCategory } from '@api/tickers/TickersTypes';
-import { Routes } from '@components/Routes';
 import {
   TransactionFields,
 } from '@components/pages/operations/transactions/form/fields/TransactionsFormFields';
+import {
+  TransfertFields,
+} from '@components/pages/operations/transferts/form/fields/TransfertsFormFields';
+import { Routes } from '@components/Routes';
 import { TransactionSide } from '@/api/transactions/TransactionsTypes';
 import { OrderSide } from '@/api/orders/OrderTypes';
 import { Translations } from './Translations';
@@ -29,10 +33,6 @@ const frMessages: Translations = {
     [Routes.ROUTE_EVOLUTION_MONTHLY_BUDGET]: {
       title: 'Budget mensuel',
       description: 'Suivez votre budget mensuel',
-    },
-    [Routes.PARAMETERS]: {
-      title: 'Paramètres',
-      description: 'Configuration générale',
     },
     [Routes.ROUTE_PARAMETERS_ACCOUNTS]: {
       title: 'Comptes',
@@ -208,6 +208,7 @@ const frMessages: Translations = {
         action: 'Action',
       },
       form: {
+        title: 'Création',
         description: 'Ajout d\'une transaction',
         fields: {
           from: 'De',
@@ -235,12 +236,12 @@ const frMessages: Translations = {
       form: {
         title: 'Transfert',
         description: 'Ajout d\'un transfert entre comptes',
-        fromAccount: 'Source',
-        toAccount: 'Destination',
-        amount: 'Montant',
-        date: 'Date',
-        selectAccount: 'Sélectionner un compte',
-        pickDate: 'Choisir une date',
+        fields: {
+          [TransfertFields.FROM_ACCOUNT]: 'Compte source',
+          [TransfertFields.TO_ACCOUNT]: 'Compte destination',
+          [TransfertFields.AMOUNT]: 'Montant',
+          [TransfertFields.DATE]: 'Date',
+        },
       },
     },
     orders: {
@@ -257,6 +258,19 @@ const frMessages: Translations = {
         buy: 'Achat',
         sell: 'Vente',
         noOrders: 'Aucun ordre à afficher',
+      },
+      form: {
+        title: 'Ordre',
+        description: 'Ajout d\'un ordre de bourse',
+        fields: {
+          [OrderFields.DATE]: 'Date',
+          [OrderFields.ACCOUNT]: 'Compte',
+          [OrderFields.TICKER]: 'Titre',
+          [OrderFields.SIDE]: 'Type',
+          [OrderFields.AMOUNT]: 'Montant',
+          [OrderFields.QUANTITY]: 'Quantité',
+          [OrderFields.CHARGES]: 'Frais',
+        },
       },
       buy: 'Achat',
       sell: 'Vente',

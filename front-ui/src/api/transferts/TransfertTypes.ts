@@ -15,10 +15,10 @@ export type TransfertResponse = {
   date: string,
 };
 
-export type TransfertRequest = {
+export type CreateTransfertRequest = {
   fromAccountId: string,
   toAccountId: string,
-  amount: number,
+  amount: string,
   date: string,
 };
 

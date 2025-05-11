@@ -1,7 +1,7 @@
 import ApiHttpClient from '@api/ApiHttpClient';
 import { HttpMethod } from 'simple-http-request-builder';
 import { HttpPromise } from 'simple-http-rest-client';
-import { PaginatedTickersResponse, TickerRequest } from './TickersTypes';
+import { PaginatedTickersResponse, TickerNameResponse, TickerRequest } from './TickersTypes';
 
 /**
  * API service for handling tickers operations
@@ -28,6 +28,16 @@ export default class TickersApi {
         ['size', size],
       ],
     )
+    .execute();
+
+  /**
+   * Fetches only ticker IDs and names for use in dropdown components
+   *
+   * @returns A list of ticker names with their IDs
+   */
+  fetchTickerNames = (): HttpPromise<TickerNameResponse[]> => this
+    .httpClient
+    .restRequest<TickerNameResponse[]>(HttpMethod.GET, `${this.BASE_URL}/names`)
     .execute();
 
   /**

@@ -19,7 +19,7 @@ import {
 } from '@/lib/shadcn/chart';
 import useMessages from '@/i18n/hooks/messagesHook';
 
-const xAxisKey = 'month';
+const xAxisKey: string = 'month';
 
 type ChartData = {
   month: number,

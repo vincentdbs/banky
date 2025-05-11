@@ -1,5 +1,5 @@
 import TransfertsApi from '@api/transferts/TransfertsApi';
-import { PaginatedTransfertsResponse, TransfertRequest } from '@api/transferts/TransfertTypes';
+import { PaginatedTransfertsResponse, CreateTransfertRequest } from '@api/transferts/TransfertTypes';
 import { HttpPromise } from 'simple-http-rest-client';
 
 /**
@@ -22,7 +22,7 @@ export default class TransfertsService {
   /**
    * Creates a new transfer between accounts
    */
-  createTransfert(request: TransfertRequest): HttpPromise<number> {
+  createTransfert(request: CreateTransfertRequest): HttpPromise<number> {
     return this.transfertsApi.createTransfert(request);
   }
 }

@@ -1,5 +1,5 @@
-import { Routes } from '@/components/Routes';
 import { useLocation } from 'react-router-dom';
+import { Routes } from '@/components/Routes';
 
 /**
  * Hook that determines the current route from the URL pathname

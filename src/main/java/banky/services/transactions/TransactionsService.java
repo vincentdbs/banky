@@ -4,7 +4,7 @@ import banky.db.dao.TransactionsDao;
 import banky.db.generated.Transactions;
 import banky.webservices.data.pagination.PaginatedResponse;
 import banky.webservices.data.pagination.PaginationMeta;
-import banky.webservices.api.transactions.requests.TransactionRequest;
+import banky.webservices.api.transactions.requests.CreateTransactionRequest;
 import banky.webservices.api.transactions.responses.TransactionResponse;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
@@ -55,7 +55,7 @@ public class TransactionsService {
         return new PaginatedResponse<>(transactions, paginationMeta);
     }
 
-    public Long createTransaction(TransactionRequest request) {
+    public Long createTransaction(CreateTransactionRequest request) {
         Transactions transaction = new Transactions();
         transaction.setDate(request.date());
         transaction.setInBankDate(request.inBankDate());

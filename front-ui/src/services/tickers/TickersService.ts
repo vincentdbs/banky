@@ -1,5 +1,5 @@
 import TickersApi from '@api/tickers/TickersApi';
-import { PaginatedTickersResponse, TickerRequest } from '@api/tickers/TickersTypes';
+import { PaginatedTickersResponse, TickerNameResponse, TickerRequest } from '@api/tickers/TickersTypes';
 import { HttpPromise } from 'simple-http-rest-client';
 
 /**
@@ -18,6 +18,13 @@ export default class TickersService {
    * @returns A promise containing the paginated ticker response
    */
   fetchTickers = (page: number, size: number): HttpPromise<PaginatedTickersResponse> => this.tickersApi.fetchTickers(page, size);
+
+  /**
+   * Fetches only ticker IDs and names for use in dropdown components
+   *
+   * @returns A promise containing a list of ticker names with their IDs
+   */
+  fetchTickerNames = (): HttpPromise<TickerNameResponse[]> => this.tickersApi.fetchTickerNames();
 
   /**
    * Creates a new ticker
