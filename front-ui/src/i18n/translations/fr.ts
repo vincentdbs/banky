@@ -38,6 +38,10 @@ const frMessages: Translations = {
       title: 'Évolution annuelle',
       description: 'Suivez l\'évolution de vos finances sur l\'année',
     },
+    [Routes.ROUTE_EVOLUTION_YEARLY_TOTALS]: {
+      title: 'Totaux annuels par compte',
+      description: 'Visualisez les totaux mensuels de vos comptes sur plusieurs années',
+    },
     [Routes.ROUTE_PARAMETERS_ACCOUNTS]: {
       title: 'Comptes',
       description: 'Gérer vos comptes bancaires',
@@ -87,6 +91,7 @@ const frMessages: Translations = {
   label: {
     creation_date: 'Date de création',
     loading: 'Chargement...',
+    checking: 'Courant',
   },
   // common messages
   message: {
@@ -154,6 +159,7 @@ const frMessages: Translations = {
       graph: 'Graphiques',
       monthlyBudget: 'Budget mensuel',
       annual: 'Récapitulatif annuel',
+      yearlyTotals: 'Totaux annuels',
     },
   },
   parameters: {
@@ -213,6 +219,10 @@ const frMessages: Translations = {
       checking: 'Comptes courants',
       savings: 'Épargnes',
       market: 'Investissements',
+    },
+    yearlyTotals: {
+      title: 'Totaux annuels par compte',
+      selectYear: 'Sélectionner une année',
     },
   },
   operations: {

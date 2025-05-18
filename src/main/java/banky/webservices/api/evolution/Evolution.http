@@ -7,3 +7,7 @@ Content-Type: application/json
 ### Fetch monthly budget data
 GET {{baseUrl}}/evolutions/budgets/monthly?date=2025-01-01&type=INCOME
 Content-Type: application/json
+
+### Fetch account monthly totals by year
+GET {{baseUrl}}/evolutions/accounts/yearly-totals?year=2025
+Content-Type: application/json

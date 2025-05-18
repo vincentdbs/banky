@@ -1,4 +1,6 @@
-import { EVOLUTION, EVOLUTION_ANNUAL, EVOLUTION_MONTHLY_BUDGET } from '@components/Routes';
+import {
+  EVOLUTION, EVOLUTION_ANNUAL, EVOLUTION_MONTHLY_BUDGET, EVOLUTION_YEARLY_TOTALS,
+} from '@components/Routes';
 import useMessages from '@i18n/hooks/messagesHook';
 import {
   SidebarGroup,
@@ -8,7 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@lib/shadcn/sidebar';
-import { TrendingUpDownIcon, BarChart } from 'lucide-react';
+import { TrendingUpDownIcon, BarChart, CalendarIcon } from 'lucide-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -37,6 +39,14 @@ export default function EvolutionSidebarGroup() {
               <Link to={`${EVOLUTION}${EVOLUTION_MONTHLY_BUDGET}`}>
                 <BarChart />
                 <span>{messages.sidebar.evolution.monthlyBudget}</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <Link to={`${EVOLUTION}${EVOLUTION_YEARLY_TOTALS}`}>
+                <CalendarIcon />
+                <span>{messages.sidebar.evolution.yearlyTotals}</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

@@ -1,6 +1,7 @@
 import EvolutionApi from '@api/evolution/EvolutionApi';
 import { MonthlyBudgetResponse } from '@api/evolution/EvolutionTypes';
 import { AnnualTotal } from '@api/evolution/TreasuryEvolutionTypes';
+import { YearlyAccountTotalsResponse } from '@api/evolution/YearlyAccountTotalsTypes';
 import {
   MonthlyBudgetType,
 } from '@components/pages/evolution/monthly-budget/controls/MonthlyBudgetControls';
@@ -35,5 +36,15 @@ export default class EvolutionService {
    */
   fetchTreasuryEvolution(startDate: Dayjs, numberOfMonths: number): HttpPromise<AnnualTotal> {
     return this.evolutionApi.fetchTreasuryEvolution(formatToIsoDate(startDate), numberOfMonths);
+  }
+
+  /**
+   * Fetches account monthly totals for a specified year and two preceding years
+   *
+   * @param year The year for which to retrieve account totals
+   * @returns A promise with the yearly account totals data mapped by date
+   */
+  fetchYearlyAccountTotals(year: number): HttpPromise<YearlyAccountTotalsResponse> {
+    return this.evolutionApi.fetchYearlyAccountTotals(year);
   }
 }

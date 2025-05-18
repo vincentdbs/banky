@@ -1,6 +1,6 @@
 const priceRegex: RegExp = /\B(?=(\d{3})+(?!\d))/g;
 
-export const FIRST_YEAR: 2021 = 2021;
+export const FIRST_YEAR: 2020 = 2020;
 
 /**
  * Formats a number as a decimal price with the specified number of decimal places

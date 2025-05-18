@@ -1,7 +1,10 @@
 package banky.db.dao.evolution;
 
+import banky.db.BankyTransactionManager;
+import banky.db.dao.evolution.data.AccountMonthlyTotal;
 import banky.db.dao.evolution.data.AccountMonthlyEvolution;
-import com.coreoz.plume.db.querydsl.transaction.TransactionManagerQuerydsl;
+import banky.services.accounts.enums.AccountType;
+import jakarta.annotation.Nullable;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -22,18 +25,18 @@ import java.util.List;
 @Slf4j
 @Singleton
 public class TreasuryDao {
-
-    private final TransactionManagerQuerydsl transactionManagerQuerydsl;
+    private static final int DEFAULT_YEARS = 1;
+    private final BankyTransactionManager transactionManager;
 
     @Inject
-    private TreasuryDao(TransactionManagerQuerydsl transactionManager) {
-        this.transactionManagerQuerydsl = transactionManager;
+    private TreasuryDao(BankyTransactionManager transactionManager) {
+        this.transactionManager = transactionManager;
     }
 
     /**
      * Fetches monthly account evolution data for the specified period.
-     * 
-     * @param startDate The start date of the period to analyze
+     *
+     * @param startDate      The start date of the period to analyze
      * @param numberOfMonths The number of months to include in the analysis
      * @return A list of AccountMonthlyEvolution records containing account balances and gain/loss by month
      */
@@ -41,19 +44,19 @@ public class TreasuryDao {
         if (startDate == null || numberOfMonths <= 0) {
             return Collections.emptyList();
         }
-        
+
         // Calculate end date based on start date and number of months
         LocalDate endDate = startDate.plusMonths(numberOfMonths).minusDays(1);
-        
+
         String sql = "{CALL get_account_monthly_evolution(?, ?)}";
         List<AccountMonthlyEvolution> results = new ArrayList<>();
 
-        try (Connection connection = transactionManagerQuerydsl.dataSource().getConnection();
+        try (Connection connection = transactionManager.dataSource().getConnection();
              PreparedStatement stmt = connection.prepareCall(sql)) {
-            
+
             stmt.setDate(1, java.sql.Date.valueOf(startDate));
             stmt.setDate(2, java.sql.Date.valueOf(endDate));
-            
+
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     AccountMonthlyEvolution evolution = new AccountMonthlyEvolution(
@@ -68,11 +71,47 @@ public class TreasuryDao {
                     results.add(evolution);
                 }
             }
-            
+
             return results;
         } catch (SQLException exception) {
             logger.error("Error executing get_account_monthly_evolution function", exception);
             return Collections.emptyList();
         }
+    }
+
+    /**
+     * Fetches account monthly totals for the specified year.
+     *
+     * @param year The year for which to fetch monthly account totals
+     * @return A list of AccountMonthlyTotal objects containing account balances by month
+     */
+    public List<AccountMonthlyTotal> fetchAccountMonthlyTotalsByYear(int year) {
+        return fetchAccountMonthlyTotalsByYear(year, null);
+    }
+
+    /**
+     * Fetches account monthly totals for the specified year and the two preceding years.
+     *
+     * @param year The year for which to fetch monthly account totals
+     * @return A list of AccountMonthlyTotal objects containing account balances by month
+     */
+    public List<AccountMonthlyTotal> fetchAccountMonthlyTotalsByYear(int year, @Nullable Integer numberOfYears) {
+        String procedureCall = "{CALL compute_account_monthly_totals_by_year(?, ?)}";
+        int numberOfYearsToFetch = numberOfYears != null &&  numberOfYears > 0 ? numberOfYears : DEFAULT_YEARS;
+
+        return transactionManager.executeStoredProcedure(
+            procedureCall,
+            stmt -> {
+                stmt.setInt(1, year);
+                stmt.setInt(2, numberOfYearsToFetch);
+            },
+            rs -> new AccountMonthlyTotal(
+                // Parse month from the string format (yyyy-MM)
+                LocalDate.parse(rs.getString("month")),
+                rs.getString("name"),
+                AccountType.valueOf(rs.getString("type")),
+                rs.getBigDecimal("total")
+            )
+        );
     }
 }
