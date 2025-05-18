@@ -57,77 +57,77 @@ function computeRadius(index: number, length: number): [number, number, number, 
 }
 
 export function AllAccountCharts({ data }: AllAccountChartsProps) {
-  const { messages } = useMessages();
-  const numberDataByBar: number = Object.keys(data[0]).filter((key: string) => key !== xAxisKey).length;
-
-  return (
-    <Card className="col-span-4 h-full">
-      <CardHeader>
-        <CardTitle className="flex items-center justify-between">
-          <p>{messages.dashboard.charts.title}</p>
-          <div className="space-x-1">
-            <Button variant="outline" type="button">
-              <ChevronLeft />
-            </Button>
-            <Button type="button" variant="outline">
-              <ChevronRight />
-            </Button>
-          </div>
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
-          <BarChart accessibilityLayer data={data}>
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="month"
-              tickLine={false}
-              tickMargin={10}
-              axisLine={false}
-              tickFormatter={(value) => value
-                // return  value.slice(0, data.length);
-              }
-            />
-            <ChartTooltip content={<ChartTooltipContent hideLabel />} />
-            <ChartLegend content={<ChartLegendContent />} />
-            <>
-              {
-                Object
-                  .entries(data[0])
-                  .filter(([key]) => key !== xAxisKey)
-                  .map(([key, value], index) => (
-                      <Bar
-                        key={key}
-                        dataKey={key}
-                        stackId="a"
-cd
-                        fill={`var(--color-${value})`}
-                        radius={computeRadius(index, numberDataByBar)}
-                      />
-                  ))
-              }
-            </>
-            {/* <Bar */}
-            {/*  dataKey="desktop" */}
-            {/*  stackId="a" */}
-            {/*  fill="var(--color-desktop)" */}
-            {/*  radius={[0, 0, 4, 4]} */}
-            {/* /> */}
-            {/* <Bar */}
-            {/*  dataKey="mobile" */}
-            {/*  stackId="a" */}
-            {/*  fill="var(--color-mobile)" */}
-            {/*  radius={[4, 4, 0, 0]} */}
-            {/* /> */}
-            {/* <Bar */}
-            {/*  dataKey="mobile" */}
-            {/*  stackId="a" */}
-            {/*  fill="var(--color-mobile)" */}
-            {/*  radius={[4, 4, 0, 0]} */}
-            {/* /> */}
-          </BarChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
-  );
+//   const { messages } = useMessages();
+//   const numberDataByBar: number = Object.keys(data[0]).filter((key: string) => key !== xAxisKey).length;
+//
+//   return (
+//     <Card className="col-span-4 h-full">
+//       <CardHeader>
+//         <CardTitle className="flex items-center justify-between">
+//           <p>{messages.dashboard.charts.title}</p>
+//           <div className="space-x-1">
+//             <Button variant="outline" type="button">
+//               <ChevronLeft />
+//             </Button>
+//             <Button type="button" variant="outline">
+//               <ChevronRight />
+//             </Button>
+//           </div>
+//         </CardTitle>
+//       </CardHeader>
+//       <CardContent>
+//         <ChartContainer config={chartConfig}>
+//           <BarChart accessibilityLayer data={data}>
+//             <CartesianGrid vertical={false} />
+//             <XAxis
+//               dataKey="month"
+//               tickLine={false}
+//               tickMargin={10}
+//               axisLine={false}
+//               tickFormatter={(value) => value
+//                 // return  value.slice(0, data.length);
+//               }
+//             />
+//             <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+//             <ChartLegend content={<ChartLegendContent />} />
+//             <>
+//               {
+//                 Object
+//                   .entries(data[0])
+//                   .filter(([key]) => key !== xAxisKey)
+//                   .map(([key, value], index) => (
+//                       <Bar
+//                         key={key}
+//                         dataKey={key}
+//                         stackId="a"
+// cd
+//                         fill={`var(--color-${value})`}
+//                         radius={computeRadius(index, numberDataByBar)}
+//                       />
+//                   ))
+//               }
+//             </>
+//             {/* <Bar */}
+//             {/*  dataKey="desktop" */}
+//             {/*  stackId="a" */}
+//             {/*  fill="var(--color-desktop)" */}
+//             {/*  radius={[0, 0, 4, 4]} */}
+//             {/* /> */}
+//             {/* <Bar */}
+//             {/*  dataKey="mobile" */}
+//             {/*  stackId="a" */}
+//             {/*  fill="var(--color-mobile)" */}
+//             {/*  radius={[4, 4, 0, 0]} */}
+//             {/* /> */}
+//             {/* <Bar */}
+//             {/*  dataKey="mobile" */}
+//             {/*  stackId="a" */}
+//             {/*  fill="var(--color-mobile)" */}
+//             {/*  radius={[4, 4, 0, 0]} */}
+//             {/* /> */}
+//           </BarChart>
+//         </ChartContainer>
+//       </CardContent>
+//     </Card>
+//   );
 }

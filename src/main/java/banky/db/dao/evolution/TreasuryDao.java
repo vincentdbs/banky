@@ -1,8 +1,10 @@
 package banky.db.dao.evolution;
 
 import banky.db.BankyTransactionManager;
-import banky.db.dao.accounts.data.AccountMonthlyTotal;
+import banky.db.dao.evolution.data.AccountMonthlyTotal;
 import banky.db.dao.evolution.data.AccountMonthlyEvolution;
+import banky.services.accounts.enums.AccountType;
+import jakarta.annotation.Nullable;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +25,7 @@ import java.util.List;
 @Slf4j
 @Singleton
 public class TreasuryDao {
-
+    private static final int DEFAULT_YEARS = 1;
     private final BankyTransactionManager transactionManager;
 
     @Inject
@@ -78,21 +80,36 @@ public class TreasuryDao {
     }
 
     /**
-     * Fetches account monthly totals for the specified year and the two preceding years.
+     * Fetches account monthly totals for the specified year.
      *
      * @param year The year for which to fetch monthly account totals
      * @return A list of AccountMonthlyTotal objects containing account balances by month
      */
     public List<AccountMonthlyTotal> fetchAccountMonthlyTotalsByYear(int year) {
-        String procedureCall = "{CALL get_account_monthly_totals_by_year(?)}";
+        return fetchAccountMonthlyTotalsByYear(year, null);
+    }
+
+    /**
+     * Fetches account monthly totals for the specified year and the two preceding years.
+     *
+     * @param year The year for which to fetch monthly account totals
+     * @return A list of AccountMonthlyTotal objects containing account balances by month
+     */
+    public List<AccountMonthlyTotal> fetchAccountMonthlyTotalsByYear(int year, @Nullable Integer numberOfYears) {
+        String procedureCall = "{CALL compute_account_monthly_totals_by_year(?, ?)}";
+        int numberOfYearsToFetch = numberOfYears != null &&  numberOfYears > 0 ? numberOfYears : DEFAULT_YEARS;
 
         return transactionManager.executeStoredProcedure(
             procedureCall,
-            stmt -> stmt.setInt(1, year),
+            stmt -> {
+                stmt.setInt(1, year);
+                stmt.setInt(2, numberOfYearsToFetch);
+            },
             rs -> new AccountMonthlyTotal(
                 // Parse month from the string format (yyyy-MM)
                 LocalDate.parse(rs.getString("month")),
                 rs.getString("name"),
+                AccountType.valueOf(rs.getString("type")),
                 rs.getBigDecimal("total")
             )
         );

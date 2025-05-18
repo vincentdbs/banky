@@ -91,6 +91,7 @@ const frMessages: Translations = {
   label: {
     creation_date: 'Date de création',
     loading: 'Chargement...',
+    checking: 'Courant',
   },
   // common messages
   message: {

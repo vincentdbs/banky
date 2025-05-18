@@ -47,6 +47,7 @@ export type Translations = {
   label: {
     creation_date: string,
     loading: string,
+    checking: string,
   },
   // common messages
   message: {

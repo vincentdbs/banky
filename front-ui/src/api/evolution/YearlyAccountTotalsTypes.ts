@@ -1,9 +1,12 @@
+import { AccountType } from '@api/accounts/AccountsTypes';
+
 /**
  * Amount by account data returned by the API
  */
 export type AmountByAccountResponse = {
   accountName: string,
-  amount: string,
+  accountType: AccountType,
+  total: string,
 };
 
 /**
