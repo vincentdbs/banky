@@ -1,4 +1,3 @@
-import SidebarHeader from '@/components/theme/sidebar/header/SidebarHeader';
 import Header from '@components/layout/header/Header';
 import DashboardSidebarGroup
   from '@components/theme/sidebar/groups/dashboard/DashboardSidebarGroup';
@@ -8,8 +7,11 @@ import OperationsSidebarGroup
   from '@components/theme/sidebar/groups/operations/OperationsSidebarGroup';
 import ParametersSidebarGroup
   from '@components/theme/sidebar/groups/parameters/ParametersSidebarGroup';
-import { Sidebar, SidebarContent, SidebarFooter, SidebarProvider } from '@lib/shadcn/sidebar';
+import {
+  Sidebar, SidebarContent, SidebarFooter, SidebarProvider,
+} from '@lib/shadcn/sidebar';
 import React, { ReactNode } from 'react';
+import SidebarHeader from '@/components/theme/sidebar/header/SidebarHeader';
 
 export type SidebarLayoutProps = {
   children: ReactNode,

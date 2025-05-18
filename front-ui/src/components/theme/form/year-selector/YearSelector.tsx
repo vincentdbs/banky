@@ -1,6 +1,7 @@
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from '@lib/shadcn/select';
+import { FIRST_YEAR } from '@utils/number/NumberUtils';
 import React from 'react';
 
 /**
@@ -14,16 +15,21 @@ type YearSelectorProps = {
   firstYear?: number,
 };
 
+type Option = {
+  value: number,
+  label: string,
+};
+
 export default function YearSelector(
   {
     selectedYear,
     setSelectedYear,
     yearRange = 2,
-    firstYear = 2020,
+    firstYear = FIRST_YEAR,
   }: YearSelectorProps,
 ) {
   // Generate year options (current year and specified range before/after)
-  const years = React.useMemo(() => Array.from({ length: yearRange }, (_: unknown, i: number) => {
+  const years: Option[] = React.useMemo(() => Array.from({ length: yearRange }, (_: unknown, i: number) => {
     const year: number = firstYear + i;
     return {
       value: year,
@@ -40,7 +46,7 @@ export default function YearSelector(
         <SelectValue placeholder="Select year" />
       </SelectTrigger>
       <SelectContent>
-        {years.map((year) => (
+        {years.map((year: Option) => (
           <SelectItem key={year.value} value={year.value.toString()}>
             {year.label}
           </SelectItem>

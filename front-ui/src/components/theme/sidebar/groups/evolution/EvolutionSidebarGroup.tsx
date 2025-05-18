@@ -1,4 +1,6 @@
-import { EVOLUTION, EVOLUTION_ANNUAL, EVOLUTION_MONTHLY_BUDGET, EVOLUTION_YEARLY_TOTALS } from '@components/Routes';
+import {
+  EVOLUTION, EVOLUTION_ANNUAL, EVOLUTION_MONTHLY_BUDGET, EVOLUTION_YEARLY_TOTALS,
+} from '@components/Routes';
 import useMessages from '@i18n/hooks/messagesHook';
 import {
   SidebarGroup,
