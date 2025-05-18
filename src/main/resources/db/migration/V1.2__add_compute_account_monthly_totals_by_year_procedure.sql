@@ -69,7 +69,7 @@ BEGIN
             FROM MonthlySnapshots monthly_snapshot
         )
     -- Return month, account name, account color, account type and total amount
-    SELECT 
+    SELECT
         DATE_FORMAT(account_total.snapshot_month, '%Y-%m-01') AS month,
         account_total.account_name AS name,
         account_total.account_type AS type,
