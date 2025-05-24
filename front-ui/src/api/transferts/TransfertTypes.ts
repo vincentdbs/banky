@@ -4,11 +4,11 @@ import { PaginatedResponse } from '@/utils/types/PaginationTypes';
  * Types for transfert API interactions
  */
 export type TransfertResponse = {
-  id: number,
-  fromAccountId: number,
+  id: string,
+  fromAccountId: string,
   fromAccountName: string,
   fromAccountColor: string,
-  toAccountId: number,
+  toAccountId: string,
   toAccountName: string,
   toAccountColor: string,
   amount: string, // 123.465 => 123465

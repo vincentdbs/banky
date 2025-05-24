@@ -69,6 +69,30 @@ public class TransfertService {
         return transfertDao.save(transfert).getId();
     }
     
+    /**
+     * Deletes a transfert from the database
+     *
+     * @param transfertId The ID of the transfert to delete
+     */
+    public void deleteTransfert(long transfertId) {
+        transfertDao.delete(transfertId);
+    }
+    
+    /**
+     * Updates an existing transfert with the provided data.
+     * 
+     * @param transfert The transfert entity to update
+     * @param request The updated transfert data
+     */
+    public void updateTransfert(Transfert transfert, CreateTransfertRequest request) {
+        transfert.setDate(request.date());
+        transfert.setAmount(request.amount());
+        transfert.setFromAccountId(request.fromAccountId());
+        transfert.setToAccountId(request.toAccountId());
+        
+        transfertDao.save(transfert);
+    }
+    
     private int calculateTotalPages(long totalElements, int pageSize) {
         return (int) Math.ceil((double) totalElements / pageSize);
     }

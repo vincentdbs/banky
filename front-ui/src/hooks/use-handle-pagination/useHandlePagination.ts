@@ -43,11 +43,17 @@ export default function useHandlePagination<T>(
     fetchPagedData(page);
   };
 
+  // Function to refresh data for the current page
+  const refresh = () => {
+    fetchPagedData(currentPage);
+  };
+
   return {
     elements,
     currentPage,
     totalPages,
     isLoading: loader.isLoading,
     handlePageChange,
+    refresh,
   };
 }

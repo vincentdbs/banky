@@ -13,21 +13,29 @@ import dayjs from 'dayjs';
 import { getGlobalInstance } from 'plume-ts-di';
 import React from 'react';
 import { useForm, UseFormReturn } from 'react-hook-form';
+import { HttpPromise } from 'simple-http-rest-client';
 
 type TransfertsFormModalProps = {
   isOpen: boolean,
   onCancel: () => void,
+  defaultValues?: TransfertFormType,
+  onSubmit?: (values: TransfertFormType) => HttpPromise<void>,
 };
 
 /**
- * Modal containing a form for creating a transfert between accounts
+ * Modal containing a form for creating or editing a transfert between accounts
  */
-export default function TransfertsFormModal({ isOpen, onCancel }: TransfertsFormModalProps) {
+export default function TransfertsFormModal({
+  isOpen,
+  onCancel,
+  defaultValues,
+  onSubmit: externalOnSubmit,
+}: TransfertsFormModalProps) {
   const transfertsService: TransfertsService = getGlobalInstance(TransfertsService);
   const { messages } = useMessages();
 
   const form: UseFormReturn<TransfertFormType> = useForm<TransfertFormType>({
-    defaultValues: {
+    defaultValues: defaultValues ?? {
       [TransfertFields.FROM_ACCOUNT]: '',
       [TransfertFields.TO_ACCOUNT]: '',
       [TransfertFields.AMOUNT]: 0,
@@ -44,9 +52,17 @@ export default function TransfertsFormModal({ isOpen, onCancel }: TransfertsForm
       date: formatToIsoDate(values[TransfertFields.DATE]),
     };
 
-    transfertsService.createTransfert(transfertData).then(() => {
-      onCancel();
-    });
+    if (externalOnSubmit) {
+      externalOnSubmit(values).then(() => {
+        form.reset();
+        onCancel();
+      });
+    } else {
+      transfertsService.createTransfert(transfertData).then(() => {
+        form.reset();
+        onCancel();
+      });
+    }
   }
 
   return (

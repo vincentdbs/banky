@@ -116,4 +116,19 @@ public class OrdersDao extends CrudDaoQuerydsl<Orders> {
         // Return 0 if there are no orders in the specified month
         return sum == null ? BigDecimal.ZERO : sum;
     }
+
+    /**
+     * Check if an order exists in the database
+     * 
+     * @param orderId The ID of the order to check
+     * @return true if the order exists, false otherwise
+     */
+    public boolean orderExists(Long orderId) {
+        return this.transactionManager
+            .selectQuery()
+            .select(QOrders.orders.count())
+            .from(QOrders.orders)
+            .where(QOrders.orders.id.eq(orderId))
+            .fetchOne() > 0;
+    }
 }

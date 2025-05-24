@@ -25,4 +25,25 @@ export default class TransfertsService {
   createTransfert(request: CreateTransfertRequest): HttpPromise<number> {
     return this.transfertsApi.createTransfert(request);
   }
+
+  /**
+   * Updates an existing transfert with new data
+   *
+   * @param transfertId The ID of the transfert to update
+   * @param request The updated transfert data
+   * @returns A promise that resolves when the update is complete
+   */
+  updateTransfert(transfertId: string, request: CreateTransfertRequest): HttpPromise<void> {
+    return this.transfertsApi.updateTransfert(transfertId, request);
+  }
+
+  /**
+   * Deletes a transfert by its ID
+   *
+   * @param transfertId The ID of the transfert to delete
+   * @returns A promise that resolves when the deletion is complete
+   */
+  deleteTransfert(transfertId: string): HttpPromise<void> {
+    return this.transfertsApi.deleteTransfert(transfertId);
+  }
 }

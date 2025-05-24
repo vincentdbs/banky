@@ -74,4 +74,32 @@ public class OrdersService {
 
         return ordersDao.save(order).getId();
     }
+
+    /**
+     * Updates an existing order
+     *
+     * @param order The order to update
+     * @param request The updated order details
+     */
+    public void updateOrder(Orders order, CreateOrderRequest request) {
+
+        order.setDate(request.date());
+        order.setAmount(request.amount());
+        order.setQuantity(request.quantity());
+        order.setCharges(request.charges());
+        order.setAccountId(request.accountId());
+        order.setTickerId(request.tickerId());
+        order.setSide(request.side().toString());
+
+        ordersDao.save(order);
+    }
+
+    /**
+     * Deletes an order by its ID
+     *
+     * @param orderId The ID of the order to delete
+     */
+    public void deleteOrder(Long orderId) {
+        ordersDao.delete(orderId);
+    }
 }

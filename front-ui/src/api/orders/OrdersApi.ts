@@ -42,4 +42,30 @@ export default class OrdersApi {
       .jsonBody(request)
       .execute();
   }
+
+  /**
+   * Updates an existing order
+   *
+   * @param id The ID of the order to update
+   * @param request The order update details
+   * @returns A promise that resolves when the order is updated
+   */
+  updateOrder(id: string, request: CreateOrderRequest): HttpPromise<void> {
+    return this.apiHttpClient
+      .restRequest<void>(HttpMethod.PUT, `${OrdersApi.BASE_PATH}/${id}`)
+      .jsonBody(request)
+      .execute();
+  }
+
+  /**
+   * Deletes an order by its ID
+   *
+   * @param id The ID of the order to delete
+   * @returns A promise that resolves when the order is deleted
+   */
+  deleteOrder(id: string): HttpPromise<void> {
+    return this.apiHttpClient
+      .restRequest<void>(HttpMethod.DELETE, `${OrdersApi.BASE_PATH}/${id}`)
+      .execute();
+  }
 }

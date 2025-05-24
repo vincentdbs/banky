@@ -26,6 +26,10 @@ export default function Transferts() {
     handlePageChange,
   } = useHandlePagination<TransfertResponse>(transfertsService.fetchTransferts);
 
+  const onSuccessTransfertDeleted = () => {
+    handlePageChange(currentPage);
+  };
+
   return (
     <MainSection>
       <TransfertsFormModal
@@ -41,7 +45,7 @@ export default function Transferts() {
           label: messages.action.add,
         }}
       >
-        <TransfertsTable transferts={transferts} />
+        <TransfertsTable onTransfertDeleted={onSuccessTransfertDeleted} transferts={transferts} />
       </PaginationLayout>
     </MainSection>
   );
