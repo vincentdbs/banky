@@ -209,6 +209,10 @@ export type Translations = {
         description: string,
         fields: Record<TransfertFields, string>,
       },
+      delete: {
+        confirmTitle: string,
+        confirmDescription: string,
+      },
     },
     orders: {
       table: {
@@ -221,14 +225,16 @@ export type Translations = {
         accountName: string,
         tickerCategory: string,
         tickerName: string,
-        buy: string,
-        sell: string,
-        noOrders: string,
+        actions: string,
       },
       form: {
         title: string,
         description: string,
         fields: Record<OrderFields, string>,
+      },
+      delete: {
+        confirmTitle: string,
+        confirmDescription: string,
       },
       buy: string,
       sell: string,

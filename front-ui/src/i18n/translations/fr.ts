@@ -280,6 +280,10 @@ const frMessages: Translations = {
           [TransfertFields.DATE]: 'Date',
         },
       },
+      delete: {
+        confirmTitle: 'Confirmer la suppression',
+        confirmDescription: 'Êtes-vous sûr de vouloir supprimer ce transfert ? Cette action est irréversible.',
+      },
     },
     orders: {
       table: {

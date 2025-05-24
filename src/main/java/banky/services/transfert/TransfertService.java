@@ -69,6 +69,15 @@ public class TransfertService {
         return transfertDao.save(transfert).getId();
     }
     
+    /**
+     * Deletes a transfert from the database
+     *
+     * @param transfertId The ID of the transfert to delete
+     */
+    public void deleteTransfert(long transfertId) {
+        transfertDao.delete(transfertId);
+    }
+    
     private int calculateTotalPages(long totalElements, int pageSize) {
         return (int) Math.ceil((double) totalElements / pageSize);
     }

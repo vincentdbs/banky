@@ -40,4 +40,17 @@ export default class TransfertsApi {
       .jsonBody(request)
       .execute();
   }
+
+  /**
+   * Deletes a transfert by its ID
+   *
+   * @param transfertId The ID of the transfert to delete
+   * @returns A promise that resolves when the deletion is complete
+   */
+  deleteTransfert(transfertId: string): HttpPromise<void> {
+    return this
+      .httpClient
+      .restRequest<void>(HttpMethod.DELETE, `${this.BASE_URL}/${transfertId}`)
+      .execute();
+  }
 }

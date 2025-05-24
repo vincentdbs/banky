@@ -13,9 +13,11 @@ import java.time.LocalDate;
 public record TransfertResponse(
     @JsonSerialize(using = ToStringSerializer.class)
     Long id,
+    @JsonSerialize(using = ToStringSerializer.class)
     Long fromAccountId,
     String fromAccountName,
     String fromAccountColor,
+    @JsonSerialize(using = ToStringSerializer.class)
     Long toAccountId,
     String toAccountName,
     String toAccountColor,
