@@ -2,89 +2,124 @@ import { TransactionResponse } from '@api/transactions/TransactionsTypes';
 import TransactionsSideIcon from '@components/theme/icons/transactions-side/TransactionSideIcon';
 import useMessages from '@i18n/hooks/messagesHook';
 import { Button } from '@lib/shadcn/button';
-import { Pencil } from 'lucide-react';
-import React from 'react';
-import { formatEuroDecimalPrice } from '@utils/number/NumberUtils';
 import { formatToLocalDateOrPlaceholder } from '@utils/dates/DatesUtils';
+import { formatEuroDecimalPrice } from '@utils/number/NumberUtils';
+import { isNotNullish } from '@utils/types/TypesUtils';
+import { Pencil } from 'lucide-react';
+import React, { useState } from 'react';
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/lib/shadcn/table';
+import UpdateTransactionFormModal from '../modal/UpdateTransactionFormModal';
 
 type CategoriesTableProps = {
   transactions: TransactionResponse[],
 };
 
-export default function TransactionsTable({ transactions }: CategoriesTableProps) {
+export default function TransactionsTable(
+  {
+    transactions,
+  }: CategoriesTableProps,
+) {
   const { messages } = useMessages();
 
+  // State for managing the edit modal
+  const [transactionToEdit, setTransactionToEdit] = useState<TransactionResponse | null>(null);
+
+  // Handler for edit button click
+  const handleEditClick = (transaction: TransactionResponse) => {
+    setTransactionToEdit(transaction);
+  };
+
+  // Handler for modal close
+  const handleModalClose = () => {
+    setTransactionToEdit(null);
+  };
+
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="w-[150px]">
-            {messages.operations.transactions.table.date}
-          </TableHead>
-          <TableHead className="w-[70px]">
-            {messages.operations.transactions.table.amount}
-          </TableHead>
-          <TableHead>
-            {messages.operations.transactions.table.accountName}
-          </TableHead>
-          <TableHead>
-            {messages.operations.transactions.table.fromToPersonName}
-          </TableHead>
-          <TableHead>
-            {messages.operations.transactions.table.subCategoryName}
-          </TableHead>
-          <TableHead>
-            {messages.operations.transactions.table.comment}
-          </TableHead>
-          <TableHead>
-            {messages.operations.transactions.table.tag}
-          </TableHead>
-          <TableHead className="text-right">
-            {messages.operations.transactions.table.action}
-          </TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {
-          transactions.map((transaction: TransactionResponse) => (
-            <TableRow key={transaction.id}>
-              <TableCell>
-                <div className={'flex items-center gap-2'}>
-                  <TransactionsSideIcon side={transaction.side} />
-                  <div>
-                    <p>
-                      {formatToLocalDateOrPlaceholder(transaction.date)}
-                    </p>
-                    <p className="text-muted-foreground text-xs">
-                      {formatToLocalDateOrPlaceholder(transaction.inBankDate)}
-                    </p>
+    <>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[150px]">
+              {messages.operations.transactions.table.date}
+            </TableHead>
+            <TableHead className="w-[70px]">
+              {messages.operations.transactions.table.amount}
+            </TableHead>
+            <TableHead>
+              {messages.operations.transactions.table.accountName}
+            </TableHead>
+            <TableHead>
+              {messages.operations.transactions.table.fromToPersonName}
+            </TableHead>
+            <TableHead>
+              {messages.operations.transactions.table.subCategoryName}
+            </TableHead>
+            <TableHead>
+              {messages.operations.transactions.table.comment}
+            </TableHead>
+            <TableHead>
+              {messages.operations.transactions.table.tag}
+            </TableHead>
+            <TableHead className="text-right">
+              {messages.operations.transactions.table.action}
+            </TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {
+            transactions.map((transaction: TransactionResponse) => (
+              <TableRow key={transaction.id}>
+                <TableCell>
+                  <div className={'flex items-center gap-2'}>
+                    <TransactionsSideIcon side={transaction.side} />
+                    <div>
+                      <p>
+                        {formatToLocalDateOrPlaceholder(transaction.date)}
+                      </p>
+                      <p className="text-muted-foreground text-xs">
+                        {formatToLocalDateOrPlaceholder(transaction.inBankDate)}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </TableCell>
-              <TableCell className={'text-right'}>
-                {formatEuroDecimalPrice(transaction.amount)}
-              </TableCell>
-              <TableCell>
-                <p className="font-bold" style={{ color: `#${transaction.accountColor}` }}>
-                  {transaction.accountName}
-                </p>
-              </TableCell>
-              <TableCell>{transaction.fromToPersonName}</TableCell>
-              <TableCell>{transaction.subCategoryName}</TableCell>
-              <TableCell>{transaction.comment}</TableCell>
-              <TableCell>{transaction.tag}</TableCell>
-              <TableCell className="text-right">
-                <Button type="button" variant="outline">
-                  <Pencil />
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))
-        }
-      </TableBody>
-    </Table>
+                </TableCell>
+                <TableCell className={'text-right'}>
+                  {formatEuroDecimalPrice(transaction.amount)}
+                </TableCell>
+                <TableCell>
+                  <p className="font-bold" style={{ color: `#${transaction.accountColor}` }}>
+                    {transaction.accountName}
+                  </p>
+                </TableCell>
+                <TableCell>{transaction.fromToPersonName}</TableCell>
+                <TableCell>{transaction.subCategoryName}</TableCell>
+                <TableCell>{transaction.comment}</TableCell>
+                <TableCell>{transaction.tag}</TableCell>
+                <TableCell className="text-right">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => handleEditClick(transaction)}
+                  >
+                    <Pencil />
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))
+          }
+        </TableBody>
+      </Table>
+      {
+        isNotNullish(transactionToEdit)
+        && (
+          <UpdateTransactionFormModal
+            isOpen={isNotNullish(transactionToEdit)}
+            onCancel={handleModalClose}
+            transaction={transactionToEdit}
+          />
+        )
+      }
+    </>
   );
 }

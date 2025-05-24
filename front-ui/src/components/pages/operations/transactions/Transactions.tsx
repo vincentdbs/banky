@@ -1,6 +1,6 @@
 import { TransactionResponse } from '@api/transactions/TransactionsTypes';
-import TransactionsFormModal
-  from '@components/pages/operations/transactions/modal/TransactionsFormModal';
+import CreateTransactionFormModal
+  from '@components/pages/operations/transactions/modal/CreateTransactionFormModal';
 import TransactionsTable from '@components/pages/operations/transactions/table/TransactionsTable';
 import PaginationLayout from '@components/theme/pagination/PaginationLayout';
 import MainSection from '@components/theme/sections/MainSection';
@@ -30,7 +30,7 @@ export default function Transactions() {
 
   return (
     <MainSection>
-      <TransactionsFormModal
+      <CreateTransactionFormModal
         isOpen={isModalDisplayed}
         onCancel={() => setModalDisplayed(false)}
       />

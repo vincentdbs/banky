@@ -1,16 +1,16 @@
 import { PaginatedResponse } from '@/utils/types/PaginationTypes';
 
 export type TransactionResponse = {
-  id: number,
+  id: string,
   date: string,
   inBankDate?: string,
   amount: number,
-  accountId: number,
+  accountId: string,
   accountName: string,
   accountColor: string,
   categoryId: number,
   categoryName: string,
-  subCategoryId: number,
+  subCategoryId: string,
   subCategoryName: string,
   comment?: string,
   tag?: string,

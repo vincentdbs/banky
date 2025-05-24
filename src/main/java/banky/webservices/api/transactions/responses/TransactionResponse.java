@@ -14,10 +14,13 @@ public record TransactionResponse(
     LocalDate date,
     @Nullable LocalDate inBankDate,
     BigDecimal amount,
+    @JsonSerialize(using = ToStringSerializer.class)
     Long accountId,
     String accountName,
     String accountColor,
+    @JsonSerialize(using = ToStringSerializer.class)
     Long categoryId,
+    @JsonSerialize(using = ToStringSerializer.class)
     Long subCategoryId,
     String subCategoryName,
     @Nullable String comment,

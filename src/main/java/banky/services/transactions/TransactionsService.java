@@ -6,6 +6,7 @@ import banky.webservices.data.pagination.PaginatedResponse;
 import banky.webservices.data.pagination.PaginationMeta;
 import banky.webservices.api.transactions.requests.CreateTransactionRequest;
 import banky.webservices.api.transactions.responses.TransactionResponse;
+import banky.webservices.validators.TransactionValidator;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
@@ -20,10 +21,12 @@ import static banky.webservices.data.pagination.PaginationHelper.calculateTotalP
 @Singleton
 public class TransactionsService {
     private final TransactionsDao transactionsDao;
+    private final TransactionValidator transactionValidator;
 
     @Inject
-    private TransactionsService(TransactionsDao transactionsDao) {
+    private TransactionsService(TransactionsDao transactionsDao, TransactionValidator transactionValidator) {
         this.transactionsDao = transactionsDao;
+        this.transactionValidator = transactionValidator;
     }
 
     /**
@@ -67,5 +70,27 @@ public class TransactionsService {
         transaction.setTag(request.tag());
         transaction.setSide(request.side().toString());
         return transactionsDao.save(transaction).getId();
+    }
+    
+    /**
+     * Updates an existing transaction with the provided data.
+     * 
+     * @param id The ID of the transaction to update
+     * @param request The updated transaction data
+     * @throws jakarta.ws.rs.NotFoundException if the transaction does not exist
+     */
+    public void updateTransaction(Transactions transaction, CreateTransactionRequest request) {
+        // Update the transaction with new values
+        transaction.setDate(request.date());
+        transaction.setInBankDate(request.inBankDate());
+        transaction.setAmount(request.amount());
+        transaction.setAccountId(request.accountId());
+        transaction.setFromToPersonName(request.fromToPersonName());
+        transaction.setSubCategoryId(request.subCategoryId());
+        transaction.setComment(request.comment());
+        transaction.setTag(request.tag());
+        transaction.setSide(request.side().toString());
+        
+        transactionsDao.save(transaction);
     }
 }
