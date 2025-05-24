@@ -27,6 +27,17 @@ export default class TransfertsService {
   }
 
   /**
+   * Updates an existing transfert with new data
+   *
+   * @param transfertId The ID of the transfert to update
+   * @param request The updated transfert data
+   * @returns A promise that resolves when the update is complete
+   */
+  updateTransfert(transfertId: string, request: CreateTransfertRequest): HttpPromise<void> {
+    return this.transfertsApi.updateTransfert(transfertId, request);
+  }
+
+  /**
    * Deletes a transfert by its ID
    *
    * @param transfertId The ID of the transfert to delete

@@ -1,17 +1,19 @@
-import ConfirmationModal from '@/components/theme/modal/ConfirmationModal';
-import { Badge, BadgeVariant } from '@/lib/shadcn/badge';
-import { Button } from '@/lib/shadcn/button';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/lib/shadcn/table';
-import OrdersService from '@/services/orders/OrdersService';
-import { computeBadgeVariantByTickerCategory } from '@/utils/badge/BadgeUtils';
-import { formatToLocaleDate } from '@/utils/dates/DatesUtils';
-import { formatEuroDecimalPriceFromString } from '@/utils/number/NumberUtils';
-import { isNotNullish } from '@/utils/types/TypesUtils';
 import { OrderResponse, OrderSide } from '@api/orders/OrderTypes';
 import useMessages from '@i18n/hooks/messagesHook';
 import { Pencil, Trash2 } from 'lucide-react';
 import { getGlobalInstance } from 'plume-ts-di';
 import React, { useState } from 'react';
+import ConfirmationModal from '@/components/theme/modal/ConfirmationModal';
+import { Badge, BadgeVariant } from '@/lib/shadcn/badge';
+import { Button } from '@/lib/shadcn/button';
+import {
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
+} from '@/lib/shadcn/table';
+import OrdersService from '@/services/orders/OrdersService';
+import { computeBadgeVariantByTickerCategory } from '@/utils/badge/BadgeUtils';
+import { formatToLocaleDate } from '@/utils/dates/DatesUtils';
+import { formatEuroDecimalPriceFromString } from '@/utils/number/NumberUtils';
+import { isNotNullish } from '@/utils/types/TypesUtils';
 
 type OrdersTableProps = {
   orders: OrderResponse[],

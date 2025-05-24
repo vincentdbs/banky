@@ -1,4 +1,5 @@
 import { TransfertResponse } from '@api/transferts/TransfertTypes';
+import UpdateTransfertFormModal from '@components/pages/operations/transferts/modal/UpdateTransfertFormModal';
 import useMessages from '@i18n/hooks/messagesHook';
 import { Button } from '@lib/shadcn/button';
 import { isNotNullish } from '@utils/types/TypesUtils';
@@ -32,8 +33,22 @@ export default function TransfertsTable(
   const { messages } = useMessages();
   const transfertsService: TransfertsService = getGlobalInstance(TransfertsService);
 
+  // State for tracking which transfert is being edited
+  const [transfertToEdit, setTransfertToEdit] = useState<TransfertResponse | null>(null);
+
   // State for deletion confirmation
   const [transfertToDelete, setTransfertToDelete] = useState<TransfertResponse | null>(null);
+
+  // Handle edit click
+  const handleEditClick = (transfert: TransfertResponse) => {
+    setTransfertToEdit(transfert);
+  };
+
+  // Handle modal close
+  const handleModalClose = () => {
+    setTransfertToEdit(null);
+    onTransfertDeleted(); // Refresh the list after edit
+  };
 
   // Handle delete click
   const handleDeleteClick = (transfert: TransfertResponse) => {
@@ -101,15 +116,13 @@ export default function TransfertsTable(
                 </TableCell>
                 <TableCell className="text-right">
                   <div className="flex justify-end space-x-2">
-                    {onEditTransfert && (
-                      <Button
-                        type="button"
-                        variant="outline"
-                        onClick={() => onEditTransfert(transfert)}
-                      >
-                        <Pencil />
-                      </Button>
-                    )}
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => handleEditClick(transfert)}
+                    >
+                      <Pencil />
+                    </Button>
                     <Button
                       type="button"
                       variant="outline"
@@ -125,6 +138,15 @@ export default function TransfertsTable(
           }
         </TableBody>
       </Table>
+
+      {/* Edit Modal */}
+      {isNotNullish(transfertToEdit) && (
+        <UpdateTransfertFormModal
+          isOpen={isNotNullish(transfertToEdit)}
+          onCancel={handleModalClose}
+          transfert={transfertToEdit}
+        />
+      )}
 
       {/* Confirmation Modal */}
       <ConfirmationModal

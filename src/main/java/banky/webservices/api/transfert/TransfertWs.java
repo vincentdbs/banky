@@ -1,5 +1,6 @@
 package banky.webservices.api.transfert;
 
+import banky.db.generated.Transfert;
 import banky.services.transfert.TransfertService;
 import banky.webservices.api.transfert.requests.CreateTransfertRequest;
 import banky.webservices.api.transfert.responses.TransfertResponse;
@@ -16,6 +17,7 @@ import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -74,5 +76,24 @@ public class TransfertWs {
         transfertsValidator.checkTransfertExists(transfertId);
 
         transfertService.deleteTransfert(transfertId);
+    }
+    
+    @PUT
+    @Path("/{id}")
+    @Operation(description = "Update an existing transfert")
+    public void updateTransfert(
+        @PathParam("id") long id,
+        CreateTransfertRequest request
+    ) {
+        // Validate that the transfert exists before proceeding
+        Transfert transfert = transfertsValidator.checkTransfertExists(id);
+
+        // Validate required fields
+        Validators.checkRequired("date", request.date());
+        Validators.checkRequired("amount", request.amount());
+        Validators.checkRequired("fromAccountId", request.fromAccountId());
+        Validators.checkRequired("toAccountId", request.toAccountId());
+
+        transfertService.updateTransfert(transfert, request);
     }
 }

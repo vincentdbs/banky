@@ -42,6 +42,21 @@ export default class TransfertsApi {
   }
 
   /**
+   * Updates an existing transfert with new data
+   *
+   * @param transfertId The ID of the transfert to update
+   * @param request The updated transfert data
+   * @returns A promise that resolves when the update is complete
+   */
+  updateTransfert(transfertId: string, request: CreateTransfertRequest): HttpPromise<void> {
+    return this
+      .httpClient
+      .restRequest<void>(HttpMethod.PUT, `${this.BASE_URL}/${transfertId}`)
+      .jsonBody(request)
+      .execute();
+  }
+
+  /**
    * Deletes a transfert by its ID
    *
    * @param transfertId The ID of the transfert to delete

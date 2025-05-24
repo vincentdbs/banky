@@ -27,8 +27,8 @@ export default function Orders() {
   } = useHandlePagination<OrderResponse>(ordersService.fetchOrders);
 
   const handleOrderDeleted = () => {
-    handlePageChange(currentPage)
-  }
+    handlePageChange(currentPage);
+  };
 
   return (
     <MainSection>
