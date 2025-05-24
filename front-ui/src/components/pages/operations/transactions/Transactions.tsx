@@ -28,6 +28,10 @@ export default function Transactions() {
     handlePageChange,
   } = useHandlePagination<TransactionResponse>(transactionsService.fetchTransactions);
 
+  const onSuccessTransactionDeleted = () => {
+    handlePageChange(currentPage);
+  };
+
   return (
     <MainSection>
       <CreateTransactionFormModal
@@ -43,7 +47,10 @@ export default function Transactions() {
           label: messages.action.add,
         }}
       >
-        <TransactionsTable transactions={transactions} />
+        <TransactionsTable
+          transactions={transactions}
+          onTransactionDeleted={onSuccessTransactionDeleted}
+        />
       </PaginationLayout>
     </MainSection>
   );

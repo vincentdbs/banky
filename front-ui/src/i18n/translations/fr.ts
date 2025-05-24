@@ -79,6 +79,7 @@ const frMessages: Translations = {
     back: 'Retour',
     cancel: 'Annuler',
     save: 'Enregistrer',
+    validate: 'Valider',
     delete: 'Supprimer',
     search: 'Rechercher',
     add: 'Ajouter',
@@ -253,6 +254,12 @@ const frMessages: Translations = {
           [TransactionFields.COMMENT]: 'Commentaire',
           [TransactionFields.TAG]: 'Tag',
         },
+      },
+      deleteModal: {
+        title: 'Supprimer la transaction',
+        description: 'Êtes-vous sûr de vouloir supprimer cette transaction ?',
+        confirmButton: 'Supprimer',
+        cancelButton: 'Annuler',
       },
     },
     transferts: {

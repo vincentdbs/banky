@@ -93,4 +93,13 @@ public class TransactionsService {
         
         transactionsDao.save(transaction);
     }
+    
+    /**
+     * Deletes a transaction from the database
+     *
+     * @param transactionId The transaction id to delete
+     */
+    public void deleteTransaction(Long transactionId) {
+        transactionsDao.delete(transactionId);
+    }
 }
