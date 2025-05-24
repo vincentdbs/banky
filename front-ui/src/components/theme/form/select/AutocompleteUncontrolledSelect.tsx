@@ -21,20 +21,20 @@ export type Choice = {
   label: string,
 };
 
-type UncontrolledSelectProps = {
+type AutocompleteUncontrolledSelectProps = {
   label: string,
   choices: Choice[],
   value?: string,
   setValue: (value: string) => void,
 };
 
-export default function UncontrolledSelect(
+export default function AutocompleteUncontrolledSelect(
   {
     choices,
     label,
     value,
     setValue,
-  }: UncontrolledSelectProps,
+  }: AutocompleteUncontrolledSelectProps,
 ) {
   const { messages } = useMessages();
 

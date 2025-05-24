@@ -1,31 +1,31 @@
-import UncontrolledSelect, { Choice } from '@components/theme/form/select/UncontrolledSelect';
+import AutocompleteUncontrolledSelect, { Choice } from '@components/theme/form/select/AutocompleteUncontrolledSelect';
 import React from 'react';
 import {
   Control, ControllerRenderProps, FieldValues, Path,
 } from 'react-hook-form';
 import { FormField } from '@/lib/shadcn/form';
 
-type SelectProps<T extends FieldValues> = {
+type AutocompleteSelectProps<T extends FieldValues> = {
   control: Control<T>,
   name: Path<T>,
   label: string,
   choices: Choice[],
 };
 
-export default function Select<T extends FieldValues>(
+export default function AutocompleteSelect<T extends FieldValues>(
   {
     control,
     name,
     choices,
     label,
-  }: SelectProps<T>,
+  }: AutocompleteSelectProps<T>,
 ) {
   return (
     <FormField
       control={control}
       name={name}
       render={({ field }: { field: ControllerRenderProps<T> }) => (
-        <UncontrolledSelect
+        <AutocompleteUncontrolledSelect
           label={label}
           choices={choices}
           setValue={field.onChange}

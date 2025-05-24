@@ -2,8 +2,8 @@ import { TransactionSide } from '@api/transactions/TransactionsTypes';
 import DatePicker from '@components/theme/form/date-picker/DatePicker';
 import FieldsGroup from '@components/theme/form/fields-group/FieldsGroup';
 import NumberInput from '@components/theme/form/number-input/NumberInput';
-import Select from '@components/theme/form/select/Select';
-import { Choice } from '@components/theme/form/select/UncontrolledSelect';
+import AutocompleteSelect from '@components/theme/form/select/AutocompleteSelect';
+import { Choice } from '@components/theme/form/select/AutocompleteUncontrolledSelect';
 import useMessages from '@i18n/hooks/messagesHook';
 import { Dayjs } from 'dayjs';
 import React from 'react';
@@ -89,7 +89,7 @@ export default function TransactionsFormFields(
         />
       </FieldsGroup>
       <FieldsGroup>
-        <Select
+        <AutocompleteSelect
           control={control}
           name={TransactionFields.ACCOUNT}
           label={messages.operations.transactions.form.fields[TransactionFields.ACCOUNT]}
@@ -104,7 +104,7 @@ export default function TransactionsFormFields(
           displayEuro
         />
       </FieldsGroup>
-      <Select
+      <AutocompleteSelect
         control={control}
         name={TransactionFields.SUBCATEGORY}
         label={messages.operations.transactions.form.fields[TransactionFields.SUBCATEGORY]}

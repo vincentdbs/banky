@@ -1,5 +1,5 @@
 import { TickerNameResponse } from '@api/tickers/TickersTypes';
-import { Choice } from '@components/theme/form/select/UncontrolledSelect';
+import { Choice } from '@components/theme/form/select/AutocompleteUncontrolledSelect';
 import { useOnComponentMounted } from '@lib/react-hooks-alias/ReactHooksAlias';
 import TickersService from '@services/tickers/TickersService';
 import { getGlobalInstance } from 'plume-ts-di';

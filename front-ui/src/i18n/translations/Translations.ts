@@ -35,6 +35,7 @@ export type Translations = {
     back: string,
     cancel: string,
     save: string,
+    validate: string,
     delete: string,
     search: string,
     add: string,
@@ -187,6 +188,12 @@ export type Translations = {
           from: string,
           to: string,
         },
+      },
+      deleteModal: {
+        title: string,
+        description: string,
+        confirmButton: string,
+        cancelButton: string,
       },
     },
     transferts: {

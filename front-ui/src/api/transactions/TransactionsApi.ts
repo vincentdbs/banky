@@ -33,4 +33,10 @@ export default class TransactionsApi {
       .jsonBody(request)
       .execute();
   }
+
+  deleteTransaction(id: string): HttpPromise<void> {
+    return this.apiHttpClient
+      .restRequest<void>(HttpMethod.DELETE, `${TransactionsApi.BASE_PATH}/${id}`)
+      .execute();
+  }
 }

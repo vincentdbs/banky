@@ -2,8 +2,8 @@ import { OrderSide } from '@api/orders/OrderTypes';
 import DatePicker from '@components/theme/form/date-picker/DatePicker';
 import FieldsGroup from '@components/theme/form/fields-group/FieldsGroup';
 import NumberInput from '@components/theme/form/number-input/NumberInput';
-import Select from '@components/theme/form/select/Select';
-import { Choice } from '@components/theme/form/select/UncontrolledSelect';
+import AutocompleteSelect from '@components/theme/form/select/AutocompleteSelect';
+import { Choice } from '@components/theme/form/select/AutocompleteUncontrolledSelect';
 import useMessages from '@i18n/hooks/messagesHook';
 import { Dayjs } from 'dayjs';
 import React from 'react';
@@ -55,13 +55,13 @@ export default function OrdersFormFields(
         label={messages.operations.orders.form.fields[OrderFields.DATE]}
       />
       <FieldsGroup>
-        <Select
+        <AutocompleteSelect
           control={control}
           name={OrderFields.ACCOUNT}
           label={messages.operations.orders.form.fields[OrderFields.ACCOUNT]}
           choices={accountsChoices}
         />
-        <Select
+        <AutocompleteSelect
           control={control}
           name={OrderFields.TICKER}
           label={messages.operations.orders.form.fields[OrderFields.TICKER]}

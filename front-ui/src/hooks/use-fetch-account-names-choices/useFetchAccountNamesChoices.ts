@@ -1,5 +1,5 @@
 import { AccountNamesResponse, AccountType } from '@api/accounts/AccountsTypes';
-import { Choice } from '@components/theme/form/select/UncontrolledSelect';
+import { Choice } from '@components/theme/form/select/AutocompleteUncontrolledSelect';
 import { useOnComponentMounted } from '@lib/react-hooks-alias/ReactHooksAlias';
 import AccountsService from '@services/accounts/AccountsService';
 import { getGlobalInstance } from 'plume-ts-di';

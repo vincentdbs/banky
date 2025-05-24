@@ -29,4 +29,14 @@ export default class TransactionsService {
   updateTransaction(id: string, request: CreateTransactionRequest): HttpPromise<void> {
     return this.transactionsApi.updateTransaction(id, request);
   }
+
+  /**
+   * Delete a transaction by its ID
+   *
+   * @param id The ID of the transaction to delete
+   * @returns A promise that resolves when the transaction is deleted
+   */
+  deleteTransaction(id: string): HttpPromise<void> {
+    return this.transactionsApi.deleteTransaction(id);
+  }
 }
