@@ -13,7 +13,7 @@ export enum OrderSide {
  * Represents an order response from the API
  */
 export type OrderResponse = {
-  id: number,
+  id: string,
   date: string,
   amount: string,
   side: OrderSide,

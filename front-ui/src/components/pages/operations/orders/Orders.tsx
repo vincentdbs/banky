@@ -26,6 +26,10 @@ export default function Orders() {
     handlePageChange,
   } = useHandlePagination<OrderResponse>(ordersService.fetchOrders);
 
+  const handleOrderDeleted = () => {
+    handlePageChange(currentPage)
+  }
+
   return (
     <MainSection>
       <OrdersFormModal
@@ -41,7 +45,7 @@ export default function Orders() {
           label: messages.action.add,
         }}
       >
-        <OrdersTable orders={orders} />
+        <OrdersTable orders={orders} onOrderDeleted={handleOrderDeleted} />
       </PaginationLayout>
     </MainSection>
   );

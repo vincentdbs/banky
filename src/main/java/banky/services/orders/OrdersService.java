@@ -74,4 +74,13 @@ public class OrdersService {
 
         return ordersDao.save(order).getId();
     }
+
+    /**
+     * Deletes an order by its ID
+     *
+     * @param orderId The ID of the order to delete
+     */
+    public void deleteOrder(Long orderId) {
+        ordersDao.delete(orderId);
+    }
 }

@@ -27,4 +27,14 @@ export default class OrdersService {
   createOrder(request: CreateOrderRequest): HttpPromise<number> {
     return this.ordersApi.createOrder(request);
   }
+
+  /**
+   * Deletes an order by its ID
+   *
+   * @param id The ID of the order to delete
+   * @returns A promise that resolves when the order is deleted
+   */
+  deleteOrder(id: string): HttpPromise<void> {
+    return this.ordersApi.deleteOrder(id);
+  }
 }

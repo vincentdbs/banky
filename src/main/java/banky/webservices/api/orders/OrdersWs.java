@@ -7,6 +7,7 @@ import banky.webservices.api.orders.responses.OrderResponse;
 import banky.webservices.data.pagination.PaginatedResponse;
 import banky.webservices.validators.AccountValidator;
 import banky.webservices.validators.AmountValidator;
+import banky.webservices.validators.OrdersValidator;
 import com.coreoz.plume.jersey.errors.Validators;
 import com.coreoz.plume.jersey.security.permission.PublicApi;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,9 +15,11 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
@@ -38,16 +41,19 @@ public class OrdersWs {
     private final OrdersService ordersService;
     private final AccountValidator accountValidator;
     private final AmountValidator amountValidator;
+    private final OrdersValidator ordersValidator;
 
     @Inject
     private OrdersWs(
         OrdersService ordersService,
         AccountValidator accountValidator,
-        AmountValidator amountValidator
+        AmountValidator amountValidator,
+        OrdersValidator ordersValidator
     ) {
         this.ordersService = ordersService;
         this.accountValidator = accountValidator;
         this.amountValidator = amountValidator;
+        this.ordersValidator = ordersValidator;
     }
 
     @GET
@@ -80,5 +86,16 @@ public class OrdersWs {
         amountValidator.validatePositiveAmount(request.amount());
         
         return ordersService.createOrder(request);
+    }
+
+    @DELETE
+    @Path("/{orderId}")
+    @Operation(description = "Delete an order by its ID")
+    public void deleteOrder(@PathParam("orderId") long orderId) {
+        // Validate that the order exists
+        ordersValidator.checkOrderExists(orderId);
+        
+        // Delete the order
+        ordersService.deleteOrder(orderId);
     }
 }

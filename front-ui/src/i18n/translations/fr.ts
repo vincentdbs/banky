@@ -282,7 +282,7 @@ const frMessages: Translations = {
       },
       delete: {
         confirmTitle: 'Confirmer la suppression',
-        confirmDescription: 'Êtes-vous sûr de vouloir supprimer ce transfert ? Cette action est irréversible.',
+        confirmDescription: 'Êtes-vous sûr de vouloir supprimer ce transfert ?',
       },
     },
     orders: {
@@ -296,9 +296,7 @@ const frMessages: Translations = {
         accountName: 'Compte',
         tickerCategory: 'Catégorie',
         tickerName: 'Titre',
-        buy: 'Achat',
-        sell: 'Vente',
-        noOrders: 'Aucun ordre à afficher',
+        actions: 'Actions',
       },
       form: {
         title: 'Ordre',
@@ -313,9 +311,10 @@ const frMessages: Translations = {
           [OrderFields.CHARGES]: 'Frais',
         },
       },
-      buy: 'Achat',
-      sell: 'Vente',
-      noOrders: 'Aucun ordre à afficher',
+      delete: {
+        confirmTitle: 'Supprimer l\'ordre',
+        confirmDescription: 'Êtes-vous sûr de vouloir supprimer cet ordre ? Cette action est irréversible.',
+      },
     },
   },
   dashboard: {

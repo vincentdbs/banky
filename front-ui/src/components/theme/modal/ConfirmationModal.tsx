@@ -42,13 +42,6 @@ export default function ConfirmationModal(
   return (
     <Dialog
       open={isOpen}
-      // onOpenChange={
-      //   (open: boolean) => {
-      //     if (!open) {
-      //       onCancel();
-      //     }
-      //   }
-      // }
     >
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
