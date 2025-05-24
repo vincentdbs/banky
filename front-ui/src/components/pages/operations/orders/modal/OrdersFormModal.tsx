@@ -10,22 +10,34 @@ import dayjs from 'dayjs';
 import { getGlobalInstance } from 'plume-ts-di';
 import React, { useState } from 'react';
 import { useForm, UseFormReturn } from 'react-hook-form';
+import { HttpPromise } from 'simple-http-rest-client';
 
 type OrdersFormModalProps = {
   isOpen: boolean,
   onCancel: () => void,
+  defaultValues?: OrderFormType,
+  onSubmit?: (values: OrderFormType) => HttpPromise<void>,
+  onSubmitSucceeded?: () => void,
 };
 
 /**
- * Modal containing a form for creating a market order
+ * Modal containing a form for creating or editing a market order
  */
-export default function OrdersFormModal({ isOpen, onCancel }: OrdersFormModalProps) {
+export default function OrdersFormModal({ 
+  isOpen, 
+  onCancel, 
+  defaultValues, 
+  onSubmit: externalOnSubmit,
+  onSubmitSucceeded,
+}: OrdersFormModalProps) {
   const ordersService: OrdersService = getGlobalInstance(OrdersService);
   const { messages } = useMessages();
-  const [side, setSide] = useState<OrderSide>(OrderSide.BUY);
+  const [side, setSide] = useState<OrderSide>(
+    defaultValues?.[OrderFields.SIDE] || OrderSide.BUY
+  );
 
   const form: UseFormReturn<OrderFormType> = useForm<OrderFormType>({
-    defaultValues: {
+    defaultValues: defaultValues ?? {
       [OrderFields.ACCOUNT]: '',
       [OrderFields.TICKER]: '',
       [OrderFields.AMOUNT]: 0,
@@ -37,25 +49,38 @@ export default function OrdersFormModal({ isOpen, onCancel }: OrdersFormModalPro
     mode: 'all',
   });
 
-  function onSubmit(values: OrderFormType) {
+  function onSubmit(values: OrderFormType): HttpPromise<void> {
     const orderRequest: CreateOrderRequest = {
-      date: formatToIsoDate(values[OrderFields.DATE]),
-      side,
+      accountId: values[OrderFields.ACCOUNT],
+      tickerId: values[OrderFields.TICKER],
       amount: threeDecimalNumberToString(values[OrderFields.AMOUNT]),
       quantity: values[OrderFields.QUANTITY],
       charges: threeDecimalNumberToString(values[OrderFields.CHARGES]),
-      accountId: values[OrderFields.ACCOUNT],
-      tickerId: values[OrderFields.TICKER],
+      date: formatToIsoDate(values[OrderFields.DATE]),
+      side: values[OrderFields.SIDE],
     };
 
-    ordersService.createOrder(orderRequest).then(() => {
-      form.reset();
-      onCancel();
-    });
+    const promiseToMonitor = externalOnSubmit
+      ? externalOnSubmit(values)
+      : ordersService.createOrder(orderRequest);
+
+    return promiseToMonitor
+      .then(() => {
+        form.reset();
+        onCancel();
+        if (onSubmitSucceeded) {
+          onSubmitSucceeded();
+        }
+      })
+      .catch((error: Error) => {
+        // eslint-disable-next-line no-console
+        console.error("Order submission failed", error);
+        throw error;
+      });
   }
 
   return (
-    <SubmitFormModal
+    <SubmitFormModal<OrderFormType>
       form={form}
       onSubmit={onSubmit}
       isOpen={isOpen}

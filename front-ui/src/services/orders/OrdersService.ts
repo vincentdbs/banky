@@ -29,6 +29,17 @@ export default class OrdersService {
   }
 
   /**
+   * Updates an existing order
+   *
+   * @param id The ID of the order to update
+   * @param request The updated order details
+   * @returns A promise that resolves when the order is updated
+   */
+  updateOrder(id: string, request: CreateOrderRequest): HttpPromise<void> {
+    return this.ordersApi.updateOrder(id, request);
+  }
+
+  /**
    * Deletes an order by its ID
    *
    * @param id The ID of the order to delete

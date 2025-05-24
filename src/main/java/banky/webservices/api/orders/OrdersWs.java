@@ -1,5 +1,6 @@
 package banky.webservices.api.orders;
 
+import banky.db.generated.Orders;
 import banky.services.accounts.enums.AccountType;
 import banky.services.orders.OrdersService;
 import banky.webservices.api.orders.requests.CreateOrderRequest;
@@ -18,6 +19,7 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -86,6 +88,30 @@ public class OrdersWs {
         amountValidator.validatePositiveAmount(request.amount());
         
         return ordersService.createOrder(request);
+    }
+
+    @PUT
+    @Path("/{orderId}")
+    @Operation(description = "Update an existing order")
+    public void updateOrder(@PathParam("orderId") long orderId, CreateOrderRequest request) {
+        // Validate that the order exists
+        Orders order = ordersValidator.checkOrderExists(orderId);
+
+        Validators.checkRequired("date", request.date());
+        Validators.checkRequired("amount", request.amount());
+        Validators.checkRequired("quantity", request.quantity());
+        Validators.checkRequired("charges", request.charges());
+        Validators.checkRequired("accountId", request.accountId());
+        Validators.checkRequired("tickerId", request.tickerId());
+        Validators.checkRequired("side", request.side());
+
+        // Validate that the account is a MARKET account
+        accountValidator.validateAccountType(request.accountId(), AccountType.MARKET);
+
+        // Validate that the amount is positive
+        amountValidator.validatePositiveAmount(request.amount());
+
+        ordersService.updateOrder(order, request);
     }
 
     @DELETE
